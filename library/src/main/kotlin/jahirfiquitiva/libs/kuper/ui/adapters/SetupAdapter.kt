@@ -25,7 +25,6 @@ import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import jahirfiquitiva.libs.frames.ui.adapters.viewholders.SectionedHeaderViewHolder
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kuper.R
-import jahirfiquitiva.libs.kuper.ui.adapters.viewholders.KuperViewHolder
 import jahirfiquitiva.libs.kuper.ui.adapters.viewholders.SetupViewHolder
 import java.lang.ref.WeakReference
 
@@ -47,18 +46,21 @@ class SetupAdapter(private val context:WeakReference<Context>,
                                   absolutePosition:Int) {
         holder?.let {
             if (it is SetupViewHolder) {
-                it.bind(apps[relativePosition], listener)
+                when (section) {
+                    0 -> it.bind(apps.filter { it.packageName.hasContent() }[relativePosition],
+                                 listener)
+                    1 -> it.bind(apps.filter { (!(it.packageName.hasContent())) }[relativePosition],
+                                 listener)
+                }
             }
         }
     }
     
-    override fun onCreateViewHolder(parent:ViewGroup?, viewType:Int):SectionedViewHolder? =
-            when (viewType) {
-                0, 1 -> parent?.inflate(R.layout.item_komponent)?.let { KuperViewHolder(it) }
-                else -> parent?.inflate(R.layout.item_section_header)?.let {
-                    SectionedHeaderViewHolder(it)
-                }
-            }
+    override fun onCreateViewHolder(parent:ViewGroup?, viewType:Int):SectionedViewHolder? {
+        return if (viewType >= 0) {
+            parent?.inflate(R.layout.item_app_to_setup)?.let { SetupViewHolder(it) }
+        } else parent?.inflate(R.layout.item_section_header)?.let { SectionedHeaderViewHolder(it) }
+    }
     
     override fun getItemCount(section:Int):Int = when (section) {
         0 -> apps.filter { it.packageName.hasContent() }.size

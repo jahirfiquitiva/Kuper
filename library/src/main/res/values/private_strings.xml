@@ -22,4 +22,5 @@
     <string name="komponents">Komponents</string>
     <string name="media_utils">Media Utilities</string>
     <string name="kolorette">Kolorette</string>
+    <bool name="isKuper">true</bool>
 </resources>

@@ -18,6 +18,7 @@ package jahirfiquitiva.libs.kuper.helpers.utils
 import android.content.Context
 import android.os.Environment
 import jahirfiquitiva.libs.frames.helpers.utils.SimpleAsyncTask
+import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
@@ -29,7 +30,6 @@ class CopyAssetsTask(param:WeakReference<Context>, folder:String, doOnSuccess:(B
                 object:SimpleAsyncTask.AsyncTaskCallback<Context, Boolean>() {
                     override fun doLoad(param:Context):Boolean? {
                         return try {
-                            
                             val files = param.assets.list(folder)
                             files?.forEach {
                                 if (it.contains(".") && !(filesToIgnore.contains(it))) {
@@ -37,10 +37,15 @@ class CopyAssetsTask(param:WeakReference<Context>, folder:String, doOnSuccess:(B
                                     var out:OutputStream? = null
                                     try {
                                         ins = param.assets.open("$folder/$it")
-                                        out = FileOutputStream(
-                                                "${Environment.getExternalStorageDirectory()}/ZooperWidget/${getCorrectFolderName(
-                                                        folder)}/$it")
+                                        val outFile = File(
+                                                "${Environment.getExternalStorageDirectory()}/" +
+                                                        "ZooperWidget/" +
+                                                        getCorrectFolderName(folder), it)
+                                        outFile.parentFile.mkdirs()
+                                        out = FileOutputStream(outFile)
                                         ins.copyTo(out, 2048)
+                                    } catch (e:Exception) {
+                                        e.printStackTrace()
                                     } finally {
                                         ins?.close()
                                         out?.flush()
@@ -48,7 +53,6 @@ class CopyAssetsTask(param:WeakReference<Context>, folder:String, doOnSuccess:(B
                                     }
                                 }
                             }
-                            
                             true
                         } catch (e:Exception) {
                             e.printStackTrace()
@@ -65,7 +69,8 @@ class CopyAssetsTask(param:WeakReference<Context>, folder:String, doOnSuccess:(B
         val filesToIgnore = arrayOf("material-design-iconic-font-v2.2.0.ttf",
                                     "materialdrawerfont.ttf",
                                     "materialdrawerfont-font-v5.0.0.ttf",
-                                    "google-material-font-v2.2.0.1.original.ttf")
+                                    "google-material-font-v2.2.0.1.original.ttf",
+                                    "google-material-font-v3.0.1.0.original.ttf")
         
         fun getCorrectFolderName(folder:String):String = when (folder) {
             "fonts" -> "Fonts"

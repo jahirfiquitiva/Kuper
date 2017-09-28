@@ -19,6 +19,8 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import ca.allanwang.kau.utils.dpToPx
+import ca.allanwang.kau.utils.setPaddingBottom
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.frames.helpers.extensions.isLowRamDevice
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
@@ -27,6 +29,7 @@ import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kauextensions.extensions.openLink
+import jahirfiquitiva.libs.kauextensions.extensions.printDebug
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
 import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
@@ -56,25 +59,8 @@ class SetupFragment:BasicFragment<KuperApp>() {
             loadingView = content.findViewById(R.id.loading_view)
             setLoadingText(R.string.loading_section)
             
-            val layoutManager = GridLayoutManager(context, if (context.isInPortraitMode) 1 else 2,
-                                                  GridLayoutManager.VERTICAL, false)
-            
-            if (activity is KuperActivity) {
-                setupAdapter = SetupAdapter(
-                        WeakReference(context),
-                        (activity as KuperActivity).apps, {
-                            if (it.packageName.hasContent()) {
-                                context.openLink(
-                                        PLAY_STORE_LINK_PREFIX + it.packageName)
-                            } else {
-                                (activity as KuperActivity).requestPermissionInstallAssets()
-                            }
-                        })
-                setupAdapter?.setLayoutManager(layoutManager)
-                rv.layoutManager = layoutManager
-                rv.adapter = setupAdapter
-                rv.state = EmptyViewRecyclerView.State.NORMAL
-            }
+            updateList()
+            setPaddingBottom(64.dpToPx)
         }
         
         with(fastScroll) {
@@ -83,6 +69,29 @@ class SetupFragment:BasicFragment<KuperApp>() {
         }
         
         rv.state = EmptyViewRecyclerView.State.NORMAL
+    }
+    
+    fun updateList() {
+        if (activity is KuperActivity) {
+            val layoutManager = GridLayoutManager(context, if (context.isInPortraitMode) 1 else 2,
+                                                  GridLayoutManager.VERTICAL, false)
+            
+            setupAdapter = SetupAdapter(
+                    WeakReference(context),
+                    (activity as KuperActivity).apps, {
+                        context.printDebug(it.packageName)
+                        if (it.packageName.hasContent()) {
+                            context.openLink(
+                                    PLAY_STORE_LINK_PREFIX + it.packageName)
+                        } else {
+                            (activity as KuperActivity).requestPermissionInstallAssets()
+                        }
+                    })
+            setupAdapter?.setLayoutManager(layoutManager)
+            rv.layoutManager = layoutManager
+            rv.adapter = setupAdapter
+            rv.state = EmptyViewRecyclerView.State.NORMAL
+        }
     }
     
     override fun getContentLayout():Int = R.layout.section_lists

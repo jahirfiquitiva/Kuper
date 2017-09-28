@@ -27,6 +27,7 @@ import jahirfiquitiva.libs.frames.helpers.extensions.isLowRamDevice
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.fragments.base.BasicFragment
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
+import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kauextensions.extensions.openLink
 import jahirfiquitiva.libs.kuper.R
@@ -91,8 +92,17 @@ class KuperFragment:BasicFragment<KuperKomponent>() {
         rv.state = EmptyViewRecyclerView.State.NORMAL
     }
     
-    fun setList(list:ArrayList<KuperKomponent>) {
-        kuperAdapter.setList(list)
+    fun applyFilter(filter:String = "") {
+        if (activity is KuperActivity) {
+            val list = ArrayList((activity as KuperActivity).komponents)
+            if (filter.hasContent()) {
+                kuperAdapter.setList(ArrayList(list.filter {
+                    (it.name.contains(filter, true) || it.type.toString().contains(filter, true))
+                }))
+            } else {
+                kuperAdapter.setList(list)
+            }
+        }
     }
     
     override fun getContentLayout():Int = R.layout.section_lists

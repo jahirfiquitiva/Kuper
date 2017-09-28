@@ -61,7 +61,7 @@
                 android:id="@+id/app_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/cards_margin"
                 android:paddingStart="@dimen/fabs_margin"
                 android:paddingLeft="@dimen/fabs_margin"
                 android:paddingEnd="@dimen/fabs_margin"
@@ -72,13 +72,14 @@
                 android:textSize="14sp"
                 tools:text="@string/required_for_wallpapers"/>
 
-        <android.support.v7.widget.AppCompatButton
+        <Button
                 android:id="@+id/install_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:gravity="center"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/cards_margin"
+                android:layout_marginBottom="@dimen/cards_margin"
                 android:layout_marginStart="@dimen/cards_big_margin"
                 android:layout_marginLeft="@dimen/cards_big_margin"
                 android:layout_marginEnd="@dimen/fabs_margin"
