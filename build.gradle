@@ -50,7 +50,7 @@ allprojects {
         libPubPlugin = '1.5'
         kotlin = '1.1.50'
         // Libraries versions
-        frames = '6955ef1'
+        frames = '2.0.6'
         bottomNavigation = '2.1.0'
     }
 
