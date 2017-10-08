@@ -61,13 +61,16 @@ class KuperFragment:BasicFragment<KuperKomponent>() {
             setLoadingText(R.string.loading_section)
             
             val spanCount = if (context.isInPortraitMode) 2 else 3
-            val layoutManager = GridLayoutManager(context, spanCount, GridLayoutManager.VERTICAL,
-                                                  false)
+            val layoutManager = object:GridLayoutManager(context, spanCount,
+                                                         GridLayoutManager.VERTICAL,
+                                                         false) {
+                override fun supportsPredictiveItemAnimations():Boolean = false
+            }
             if (activity is KuperActivity) {
                 val wm = WallpaperManager.getInstance(context)
                 kuperAdapter = KuperAdapter(
                         WeakReference(context), Glide.with(context),
-                        wm?.fastDrawable, (activity as KuperActivity).komponents, {
+                        wm?.fastDrawable, ArrayList((activity as KuperActivity).komponents), {
                             try {
                                 startActivity(it)
                             } catch (e:Exception) {
@@ -96,11 +99,11 @@ class KuperFragment:BasicFragment<KuperKomponent>() {
         if (activity is KuperActivity) {
             val list = ArrayList((activity as KuperActivity).komponents)
             if (filter.hasContent()) {
-                kuperAdapter.setList(ArrayList(list.filter {
+                kuperAdapter.setItems(ArrayList(list.filter {
                     (it.name.contains(filter, true) || it.type.toString().contains(filter, true))
                 }))
             } else {
-                kuperAdapter.setList(list)
+                kuperAdapter.setItems((activity as KuperActivity).komponents)
             }
         }
     }

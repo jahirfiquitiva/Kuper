@@ -37,6 +37,7 @@ import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
 import jahirfiquitiva.libs.frames.helpers.extensions.checkPermission
 import jahirfiquitiva.libs.frames.helpers.extensions.requestPermissions
 import jahirfiquitiva.libs.frames.ui.activities.base.BaseFramesActivity
+import jahirfiquitiva.libs.frames.ui.fragments.base.BaseFramesFragment
 import jahirfiquitiva.libs.frames.ui.widgets.CustomToolbar
 import jahirfiquitiva.libs.frames.ui.widgets.SearchView
 import jahirfiquitiva.libs.frames.ui.widgets.bindSearchView
@@ -288,12 +289,19 @@ abstract class KuperActivity:BaseFramesActivity() {
         postDelayed(100, { navigateToItem(currentItemId, true) })
     }
     
+    private val LOCK = Any()
     private fun doSearch(filter:String = "") {
-        if (currentFragment is KuperFragment) {
-            (currentFragment as KuperFragment).applyFilter(filter)
-        } else if (currentFragment is WallpapersFragment) {
-            (currentFragment as WallpapersFragment).applyFilter(filter)
-        }
+        synchronized(LOCK, {
+            postDelayed(200, {
+                if (currentFragment is KuperFragment) {
+                    (currentFragment as KuperFragment).applyFilter(filter)
+                } else if (currentFragment is BaseFramesFragment<*, *>) {
+                    (currentFragment as BaseFramesFragment<*, *>)
+                            .enableRefresh(!filter.hasContent())
+                    (currentFragment as BaseFramesFragment<*, *>).applyFilter(filter)
+                }
+            })
+        })
     }
     
     private fun refreshContent() {

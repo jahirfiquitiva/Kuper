@@ -18,12 +18,14 @@ package jahirfiquitiva.libs.kuper.ui.adapters
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.support.v7.util.DiffUtil
 import android.view.ViewGroup
 import ca.allanwang.kau.utils.gone
 import ca.allanwang.kau.utils.inflate
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import com.bumptech.glide.RequestManager
+import jahirfiquitiva.libs.frames.ui.adapters.presenters.ItemsAdapterPresenter
 import jahirfiquitiva.libs.frames.ui.adapters.viewholders.SectionedHeaderViewHolder
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
@@ -35,17 +37,49 @@ class KuperAdapter(private val context:WeakReference<Context>,
                    private val wallpaper:Drawable?,
                    private val komponents:ArrayList<KuperKomponent>,
                    private val listener:(Intent) -> Unit):
-        SectionedRecyclerViewAdapter<SectionedViewHolder>() {
+        SectionedRecyclerViewAdapter<SectionedViewHolder>(), ItemsAdapterPresenter<KuperKomponent> {
+    override fun clearList() {
+        val size = itemCount
+        komponents.clear()
+        notifyItemRangeRemoved(0, size)
+    }
+    
+    override fun addAll(newItems:ArrayList<KuperKomponent>) {
+        val prevSize = itemCount
+        komponents.addAll(newItems)
+        notifyItemRangeInserted(prevSize, newItems.size)
+    }
+    
+    override fun setItems(newItems:ArrayList<KuperKomponent>) {
+        komponents.clear()
+        komponents.addAll(newItems)
+        notifyDataSetChanged()
+    }
+    
+    override fun removeItem(item:KuperKomponent) {
+        val prevSize = itemCount
+        val index = komponents.indexOf(item)
+        if (index < 0) return
+        komponents.remove(item)
+        notifyItemRangeRemoved(index, prevSize)
+    }
+    
+    override fun updateItem(item:KuperKomponent) {
+        val prevSize = itemCount
+        val index = komponents.indexOf(item)
+        if (index < 0) return
+        notifyItemRangeChanged(index, prevSize)
+    }
+    
+    override fun addItem(newItem:KuperKomponent) {
+        val prevSize = itemCount
+        komponents.add(newItem)
+        notifyItemRangeInserted(prevSize, itemCount)
+    }
     
     init {
         shouldShowHeadersForEmptySections(false)
         shouldShowFooters(false)
-    }
-    
-    fun setList(items:ArrayList<KuperKomponent>) {
-        komponents.clear()
-        komponents.addAll(items)
-        notifyDataSetChanged()
     }
     
     fun getHeadersBeforePosition(position:Int):Int {
