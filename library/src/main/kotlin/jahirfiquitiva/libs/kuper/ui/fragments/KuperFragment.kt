@@ -23,13 +23,13 @@ import android.view.View
 import ca.allanwang.kau.utils.dimenPixelSize
 import com.bumptech.glide.Glide
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
-import jahirfiquitiva.libs.frames.helpers.extensions.isLowRamDevice
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
-import jahirfiquitiva.libs.frames.ui.fragments.base.BasicFragment
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
+import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kauextensions.extensions.openLink
+import jahirfiquitiva.libs.kauextensions.ui.fragments.Fragment
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
@@ -37,15 +37,15 @@ import jahirfiquitiva.libs.kuper.ui.adapters.KuperAdapter
 import jahirfiquitiva.libs.kuper.ui.decorations.SectionedGridSpacingDecoration
 import java.lang.ref.WeakReference
 
-class KuperFragment:BasicFragment<KuperKomponent>() {
+class KuperFragment : Fragment<KuperKomponent>() {
     
-    private lateinit var swipeToRefresh:SwipeRefreshLayout
-    private lateinit var rv:EmptyViewRecyclerView
-    private lateinit var fastScroll:RecyclerFastScroller
+    private lateinit var swipeToRefresh: SwipeRefreshLayout
+    private lateinit var rv: EmptyViewRecyclerView
+    private lateinit var fastScroll: RecyclerFastScroller
     
-    private lateinit var kuperAdapter:KuperAdapter
+    private lateinit var kuperAdapter: KuperAdapter
     
-    override fun initUI(content:View) {
+    override fun initUI(content: View) {
         swipeToRefresh = content.findViewById(R.id.swipe_to_refresh)
         swipeToRefresh.isEnabled = false
         rv = content.findViewById(R.id.list_rv)
@@ -61,10 +61,11 @@ class KuperFragment:BasicFragment<KuperKomponent>() {
             setLoadingText(R.string.loading_section)
             
             val spanCount = if (context.isInPortraitMode) 2 else 3
-            val layoutManager = object:GridLayoutManager(context, spanCount,
-                                                         GridLayoutManager.VERTICAL,
-                                                         false) {
-                override fun supportsPredictiveItemAnimations():Boolean = false
+            val layoutManager = object : GridLayoutManager(
+                    context, spanCount,
+                    GridLayoutManager.VERTICAL,
+                    false) {
+                override fun supportsPredictiveItemAnimations(): Boolean = false
             }
             if (activity is KuperActivity) {
                 val wm = WallpaperManager.getInstance(context)
@@ -73,16 +74,18 @@ class KuperFragment:BasicFragment<KuperKomponent>() {
                         wm?.fastDrawable, ArrayList((activity as KuperActivity).komponents), {
                             try {
                                 startActivity(it)
-                            } catch (e:Exception) {
+                            } catch (e: Exception) {
                                 context.openLink(PLAY_STORE_LINK_PREFIX + it.component.packageName)
                             }
                         })
                 kuperAdapter.setLayoutManager(layoutManager)
                 rv.layoutManager = layoutManager
-                rv.addItemDecoration(SectionedGridSpacingDecoration(spanCount,
-                                                                    context.dimenPixelSize(
-                                                                            R.dimen.wallpapers_grid_spacing),
-                                                                    true, kuperAdapter))
+                rv.addItemDecoration(
+                        SectionedGridSpacingDecoration(
+                                spanCount,
+                                context.dimenPixelSize(
+                                        R.dimen.wallpapers_grid_spacing),
+                                true, kuperAdapter))
                 rv.adapter = kuperAdapter
             }
         }
@@ -95,19 +98,22 @@ class KuperFragment:BasicFragment<KuperKomponent>() {
         rv.state = EmptyViewRecyclerView.State.NORMAL
     }
     
-    fun applyFilter(filter:String = "") {
+    fun applyFilter(filter: String = "") {
         if (activity is KuperActivity) {
             val list = ArrayList((activity as KuperActivity).komponents)
             if (filter.hasContent()) {
-                kuperAdapter.setItems(ArrayList(list.filter {
-                    (it.name.contains(filter, true) || it.type.toString().contains(filter, true))
-                }))
+                kuperAdapter.setItems(
+                        ArrayList(
+                                list.filter {
+                                    (it.name.contains(filter, true) || it.type.toString().contains(
+                                            filter, true))
+                                }))
             } else {
                 kuperAdapter.setItems((activity as KuperActivity).komponents)
             }
         }
     }
     
-    override fun getContentLayout():Int = R.layout.section_lists
-    override fun onItemClicked(item:KuperKomponent) {}
+    override fun getContentLayout(): Int = R.layout.section_lists
+    override fun onItemClicked(item: KuperKomponent, longClick: Boolean) {}
 }

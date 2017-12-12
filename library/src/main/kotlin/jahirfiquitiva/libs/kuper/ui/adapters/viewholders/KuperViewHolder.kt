@@ -38,16 +38,18 @@ import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import java.io.File
 
-class KuperViewHolder(itemView:View):GlideSectionedViewHolder(itemView) {
-    private val wall:ImageView by itemView.bind(R.id.wall)
-    private val preview:ImageView by itemView.bind(R.id.preview)
-    private val details:LinearLayout by itemView.bind(R.id.komponent_details)
-    private val name:TextView by itemView.bind(R.id.komponent_name)
-    private val app:TextView by itemView.bind(R.id.komponent_app)
-    private val icon:ImageView by itemView.bind(R.id.launch_app)
+class KuperViewHolder(itemView: View) : GlideSectionedViewHolder(itemView) {
+    private val wall: ImageView by itemView.bind(R.id.wall)
+    private val preview: ImageView by itemView.bind(R.id.preview)
+    private val details: LinearLayout by itemView.bind(R.id.komponent_details)
+    private val name: TextView by itemView.bind(R.id.komponent_name)
+    private val app: TextView by itemView.bind(R.id.komponent_app)
+    private val icon: ImageView by itemView.bind(R.id.launch_app)
     
-    fun bind(komponent:KuperKomponent, manager:RequestManager,
-             wallpaper:Drawable?, listener:(Intent) -> Unit = {}) {
+    fun bind(
+            komponent: KuperKomponent, manager: RequestManager,
+            wallpaper: Drawable?, listener: (Intent) -> Unit = {}
+            ) {
         with(itemView) {
             wall.setImageDrawable(wallpaper)
             details.setBackgroundColor(context.dividerColor)
@@ -67,7 +69,7 @@ class KuperViewHolder(itemView:View):GlideSectionedViewHolder(itemView) {
         }
     }
     
-    override fun doOnRecycle() {
+    override fun onRecycled() {
         preview.releaseFromGlide()
     }
 }

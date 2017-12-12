@@ -17,8 +17,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion project.ext.compileSdk
-    buildToolsVersion project.ext.buildTools
+    compileSdkVersion versions.targetSdk
+    buildToolsVersion versions.buildTools
 
     lintOptions {
         warningsAsErrors true
@@ -33,10 +33,10 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion project.ext.minSdk
-        targetSdkVersion project.ext.targetSdk
-        versionCode project.ext.versionCode
-        versionName project.ext.versionName
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -66,14 +66,14 @@ android {
 
 dependencies {
     // Frames
-    compile('me.jahirfiquitiva:Frames:' + project.ext.frames + '@aar') {
+    api(libraries.frames) {
         transitive = true
     }
     // Bottom Navigation
-    compile 'com.aurelhubert:ahbottomnavigation:' + project.ext.bottomNavigation
+    api libraries.bottomNav
     // Kustom API
     //noinspection GradleDynamicVersion
-    compile 'org.bitbucket.frankmonza:kustomapi:+'
+    api 'org.bitbucket.frankmonza:kustomapi:+'
 }
 
 tasks.whenTaskAdded { task ->

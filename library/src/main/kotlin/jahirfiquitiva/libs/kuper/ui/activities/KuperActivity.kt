@@ -20,6 +20,7 @@ import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
 import android.support.annotation.IntRange
@@ -32,15 +33,11 @@ import ca.allanwang.kau.utils.postDelayed
 import ca.allanwang.kau.utils.visibleIf
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
-import jahirfiquitiva.libs.frames.helpers.extensions.PermissionRequestListener
 import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
-import jahirfiquitiva.libs.frames.helpers.extensions.checkPermission
-import jahirfiquitiva.libs.frames.helpers.extensions.requestPermissions
 import jahirfiquitiva.libs.frames.ui.activities.base.BaseFramesActivity
 import jahirfiquitiva.libs.frames.ui.fragments.base.BaseFramesFragment
 import jahirfiquitiva.libs.frames.ui.widgets.CustomToolbar
-import jahirfiquitiva.libs.frames.ui.widgets.SearchView
-import jahirfiquitiva.libs.frames.ui.widgets.bindSearchView
+import jahirfiquitiva.libs.kauextensions.extensions.PermissionRequestListener
 import jahirfiquitiva.libs.kauextensions.extensions.accentColor
 import jahirfiquitiva.libs.kauextensions.extensions.bind
 import jahirfiquitiva.libs.kauextensions.extensions.cardBackgroundColor
@@ -53,7 +50,10 @@ import jahirfiquitiva.libs.kauextensions.extensions.getSecondaryTextColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.inactiveIconsColor
 import jahirfiquitiva.libs.kauextensions.extensions.primaryColor
+import jahirfiquitiva.libs.kauextensions.extensions.requestSinglePermission
 import jahirfiquitiva.libs.kauextensions.extensions.tint
+import jahirfiquitiva.libs.kauextensions.ui.widgets.SearchView
+import jahirfiquitiva.libs.kauextensions.ui.widgets.bindSearchView
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.FragmentWithKey
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
@@ -73,33 +73,35 @@ import jahirfiquitiva.libs.kuper.ui.fragments.WallpapersFragment
 import java.io.File
 import java.lang.ref.WeakReference
 
-abstract class KuperActivity:BaseFramesActivity() {
+abstract class KuperActivity : BaseFramesActivity() {
     
     private val SETUP_KEY = "setup"
     private val WIDGETS_KEY = "widgets"
     private val WALLPAPERS_KEY = "wallpapers"
     
-    private val toolbar:CustomToolbar by bind(R.id.toolbar)
-    private val bottomNavigation:AHBottomNavigation by bind(R.id.bottom_navigation)
+    private val toolbar: CustomToolbar by bind(R.id.toolbar)
+    private val bottomNavigation: AHBottomNavigation by bind(R.id.bottom_navigation)
     
     val apps = ArrayList<KuperApp>()
     val komponents = ArrayList<KuperKomponent>()
     private val fragments = ArrayList<FragmentWithKey>()
     
-    private lateinit var kuperViewModel:KuperViewModel
+    private lateinit var kuperViewModel: KuperViewModel
     
-    private var searchView:SearchView? = null
+    private var searchView: SearchView? = null
     
     private var currentItemId = -1
-    private var currentFragment:Fragment? = null
+    private var currentFragment: Fragment? = null
     
-    override fun onCreate(savedInstanceState:Bundle?) {
+    @SuppressLint("MissingSuperCall")
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kuper)
         toolbar.bindToActivity(this, false)
         
         kuperViewModel = ViewModelProviders.of(this).get(KuperViewModel::class.java)
-        kuperViewModel.observe(this, { list ->
+        kuperViewModel.observe(
+                this, { list ->
             komponents.clear()
             komponents.addAll(list)
             destroyDialog()
@@ -122,51 +124,64 @@ abstract class KuperActivity:BaseFramesActivity() {
         setupBottomNavigation()
     }
     
+    @SuppressLint("MissingSuperCall")
     override fun onResume() {
         super.onResume()
         setupApps()
         if (apps.isEmpty()) setupBottomNavigation()
     }
     
-    override fun fragmentsContainer():Int = R.id.fragments_container
+    override fun fragmentsContainer(): Int = R.id.fragments_container
     
     private fun setupApps() {
         apps.clear()
         
         if (!isAppInstalled(ZOOPER_PACKAGE)) {
-            apps.add(KuperApp(getString(R.string.zooper_widget),
-                              getString(R.string.required_for_widgets),
-                              "ic_zooper", ZOOPER_PACKAGE))
+            apps.add(
+                    KuperApp(
+                            getString(R.string.zooper_widget),
+                            getString(R.string.required_for_widgets),
+                            "ic_zooper", ZOOPER_PACKAGE))
         }
         
         if (!isAppInstalled(MEDIA_UTILS_PACKAGE) && getBoolean(R.bool.media_utils_required)) {
-            apps.add(KuperApp(getString(R.string.media_utils),
-                              getString(R.string.required_for_widgets),
-                              "ic_zooper", MEDIA_UTILS_PACKAGE))
+            apps.add(
+                    KuperApp(
+                            getString(R.string.media_utils),
+                            getString(R.string.required_for_widgets),
+                            "ic_zooper", MEDIA_UTILS_PACKAGE))
         }
         
         if (!isAppInstalled(KOLORETTE_PACKAGE) && getBoolean(R.bool.kolorette_required)) {
-            apps.add(KuperApp(getString(R.string.kolorette),
-                              getString(R.string.required_for_widgets),
-                              "ic_zooper", KOLORETTE_PACKAGE))
+            apps.add(
+                    KuperApp(
+                            getString(R.string.kolorette),
+                            getString(R.string.required_for_widgets),
+                            "ic_zooper", KOLORETTE_PACKAGE))
         }
         
         if (!isAppInstalled(KWGT_PACKAGE) && inAssetsAndWithContent("widgets")) {
-            apps.add(KuperApp(getString(R.string.kwgt),
-                              getString(R.string.required_for_widgets),
-                              "ic_kustom", KWGT_PACKAGE))
+            apps.add(
+                    KuperApp(
+                            getString(R.string.kwgt),
+                            getString(R.string.required_for_widgets),
+                            "ic_kustom", KWGT_PACKAGE))
         }
         
         if (!isAppInstalled(KLWP_PACKAGE) && inAssetsAndWithContent("wallpapers")) {
-            apps.add(KuperApp(getString(R.string.klwp),
-                              getString(R.string.required_for_wallpapers),
-                              "ic_kustom", KLWP_PACKAGE))
+            apps.add(
+                    KuperApp(
+                            getString(R.string.klwp),
+                            getString(R.string.required_for_wallpapers),
+                            "ic_kustom", KLWP_PACKAGE))
         }
         
         if (!areAssetsInstalled()) {
-            apps.add(KuperApp(getString(R.string.zooper_widget),
-                              getString(R.string.required_assets),
-                              "ic_zooper"))
+            apps.add(
+                    KuperApp(
+                            getString(R.string.zooper_widget),
+                            getString(R.string.required_assets),
+                            "ic_zooper"))
         }
         
         if (currentFragment is SetupFragment) {
@@ -197,8 +212,10 @@ abstract class KuperActivity:BaseFramesActivity() {
             
             addItem(AHBottomNavigationItem(getString(R.string.widgets), R.drawable.ic_widgets))
             if (getBoolean(R.bool.isKuper))
-                addItem(AHBottomNavigationItem(getString(R.string.wallpapers),
-                                               R.drawable.ic_all_wallpapers))
+                addItem(
+                        AHBottomNavigationItem(
+                                getString(R.string.wallpapers),
+                                R.drawable.ic_all_wallpapers))
             
             setOnTabSelectedListener { position, _ ->
                 navigateToItem(position)
@@ -208,32 +225,34 @@ abstract class KuperActivity:BaseFramesActivity() {
         }
     }
     
-    override fun onCreateOptionsMenu(menu:Menu?):Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.frames_menu, menu)
         
         menu?.let {
             val donationItem = it.findItem(R.id.donate)
             donationItem?.isVisible = donationsEnabled
             
-            it.changeOptionVisibility(R.id.search,
-                                      currentItemId != (if (apps.isNotEmpty()) 0 else -1))
+            it.changeOptionVisibility(
+                    R.id.search,
+                    currentItemId != (if (apps.isNotEmpty()) 0 else -1))
             
-            it.changeOptionVisibility(R.id.refresh,
-                                      currentItemId == (if (apps.isNotEmpty()) 2 else 1))
+            it.changeOptionVisibility(
+                    R.id.refresh,
+                    currentItemId == (if (apps.isNotEmpty()) 2 else 1))
             
             searchView = bindSearchView(it, R.id.search)
-            searchView?.listener = object:SearchView.SearchListener {
-                override fun onQueryChanged(query:String) {
+            searchView?.listener = object : SearchView.SearchListener {
+                override fun onQueryChanged(query: String) {
                     doSearch(query)
                 }
                 
-                override fun onQuerySubmit(query:String) {
+                override fun onQuerySubmit(query: String) {
                     doSearch(query)
                 }
                 
-                override fun onSearchOpened(searchView:SearchView) {}
+                override fun onSearchOpened(searchView: SearchView) {}
                 
-                override fun onSearchClosed(searchView:SearchView) {
+                override fun onSearchClosed(searchView: SearchView) {
                     doSearch()
                 }
             }
@@ -241,28 +260,32 @@ abstract class KuperActivity:BaseFramesActivity() {
             searchView?.hintText = getString(R.string.search_x, hint.toLowerCase())
         }
         
-        toolbar.tint(getPrimaryTextColorFor(primaryColor, 0.6F),
-                     getSecondaryTextColorFor(primaryColor, 0.6F),
-                     getActiveIconsColorFor(primaryColor, 0.6F))
+        toolbar.tint(
+                getPrimaryTextColorFor(primaryColor, 0.6F),
+                getSecondaryTextColorFor(primaryColor, 0.6F),
+                getActiveIconsColorFor(primaryColor, 0.6F))
         return super.onCreateOptionsMenu(menu)
     }
     
-    override fun onOptionsItemSelected(item:MenuItem?):Boolean {
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         item?.let {
             val id = it.itemId
             when (id) {
                 R.id.refresh -> refreshContent()
                 R.id.about -> startActivity(Intent(this, CreditsActivity::class.java))
-                R.id.settings -> startActivityForResult(Intent(this, SettingsActivity::class.java),
-                                                        22)
+                R.id.settings -> startActivityForResult(
+                        Intent(this, SettingsActivity::class.java),
+                        22)
                 R.id.donate -> doDonation()
             }
         }
         return super.onOptionsItemSelected(item)
     }
     
-    private fun navigateToItem(@IntRange(from = 0, to = 2) position:Int,
-                               force:Boolean = false):Boolean {
+    private fun navigateToItem(
+            @IntRange(from = 0, to = 2) position: Int,
+            force: Boolean = false
+                              ): Boolean {
         if (!force && currentItemId == position) return false
         currentItemId = position
         invalidateOptionsMenu()
@@ -278,21 +301,23 @@ abstract class KuperActivity:BaseFramesActivity() {
     }
     
     @SuppressLint("MissingSuperCall")
-    override fun onSaveInstanceState(outState:Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle?) {
         outState?.putInt("current", currentItemId)
         super.onSaveInstanceState(outState)
     }
     
-    override fun onRestoreInstanceState(savedInstanceState:Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         currentItemId = savedInstanceState?.getInt("current", -1) ?: -1
         postDelayed(100, { navigateToItem(currentItemId, true) })
     }
     
     private val LOCK = Any()
-    private fun doSearch(filter:String = "") {
-        synchronized(LOCK, {
-            postDelayed(200, {
+    private fun doSearch(filter: String = "") {
+        synchronized(
+                LOCK, {
+            postDelayed(
+                    200, {
                 if (currentFragment is KuperFragment) {
                     (currentFragment as KuperFragment).applyFilter(filter)
                 } else if (currentFragment is BaseFramesFragment<*, *>) {
@@ -310,7 +335,7 @@ abstract class KuperActivity:BaseFramesActivity() {
         }
     }
     
-    private fun inAssetsAndWithContent(folder:String):Boolean {
+    private fun inAssetsAndWithContent(folder: String): Boolean {
         val folders = assets.list("")
         return if (folders != null) {
             if (folders.contains(folder)) {
@@ -319,7 +344,7 @@ abstract class KuperActivity:BaseFramesActivity() {
         } else false
     }
     
-    private fun getFilesInAssetsFolder(folder:String):ArrayList<String> {
+    private fun getFilesInAssetsFolder(folder: String): ArrayList<String> {
         val list = ArrayList<String>()
         val files = assets.list(folder)
         if (files != null) {
@@ -332,7 +357,7 @@ abstract class KuperActivity:BaseFramesActivity() {
         return list
     }
     
-    private fun areAssetsInstalled():Boolean {
+    private fun areAssetsInstalled(): Boolean {
         val folders = arrayOf("fonts", "iconsets", "bitmaps")
         val actualFolders = ArrayList<String>()
         folders.forEach { if (inAssetsAndWithContent(it)) actualFolders.add(it) }
@@ -356,8 +381,10 @@ abstract class KuperActivity:BaseFramesActivity() {
         return count == actualFolders.size
     }
     
-    override fun onRequestPermissionsResult(requestCode:Int, permissions:Array<out String>,
-                                            grantResults:IntArray) {
+    override fun onRequestPermissionsResult(
+            requestCode: Int, permissions: Array<out String>,
+            grantResults: IntArray
+                                           ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 43) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -369,31 +396,31 @@ abstract class KuperActivity:BaseFramesActivity() {
     }
     
     fun requestPermissionInstallAssets() {
-        checkPermission(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                object:PermissionRequestListener {
-                    override fun onPermissionRequest(permission:String) =
-                            requestPermissions(43, permission)
-                    
-                    override fun showPermissionInformation(permission:String) =
+        requestSinglePermission(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, 43,
+                object : PermissionRequestListener() {
+                    override fun onShowInformation(permission: String) =
                             showPermissionExplanation()
                     
                     override fun onPermissionCompletelyDenied() =
-                            showSnackbar(getString(R.string.permission_denied_completely),
-                                         Snackbar.LENGTH_LONG)
+                            showSnackbar(
+                                    getString(R.string.permission_denied_completely),
+                                    Snackbar.LENGTH_LONG)
                     
                     override fun onPermissionGranted() = installAssets()
                 })
     }
     
     private fun showPermissionExplanation() {
-        showSnackbar(getString(R.string.permission_request_assets, getAppName()),
-                     Snackbar.LENGTH_LONG, {
-                         setAction(R.string.allow, {
-                             dismiss()
-                             installAssets()
-                         })
-                     })
+        showSnackbar(
+                getString(R.string.permission_request_assets, getAppName()),
+                Snackbar.LENGTH_LONG, {
+                    setAction(
+                            R.string.allow, {
+                        dismiss()
+                        installAssets()
+                    })
+                })
     }
     
     fun installAssets() {
@@ -412,15 +439,17 @@ abstract class KuperActivity:BaseFramesActivity() {
                 cancelable(false)
             }
             dialog?.setOnShowListener {
-                CopyAssetsTask(WeakReference(this), s, {
+                CopyAssetsTask(
+                        WeakReference(this), s, {
                     if (it) count += 1
                     destroyDialog()
                     if (index == actualFolders.size - 1) {
-                        showSnackbar(getString(
-                                if (count == actualFolders.size) R.string.copied_assets_successfully
-                                else R.string.copied_assets_error), Snackbar.LENGTH_LONG)
+                        showSnackbar(
+                                getString(
+                                        if (count == actualFolders.size) R.string.copied_assets_successfully
+                                        else R.string.copied_assets_error), Snackbar.LENGTH_LONG)
                         if (count == actualFolders.size) {
-                            val item:KuperApp? = apps.firstOrNull { !(it.packageName.hasContent()) }
+                            val item: KuperApp? = apps.firstOrNull { !(it.packageName.hasContent()) }
                             item?.let {
                                 apps.remove(it)
                                 if (currentFragment is SetupFragment) {

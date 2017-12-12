@@ -22,36 +22,36 @@ import android.view.View
 import ca.allanwang.kau.utils.dpToPx
 import ca.allanwang.kau.utils.setPaddingBottom
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
-import jahirfiquitiva.libs.frames.helpers.extensions.isLowRamDevice
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
-import jahirfiquitiva.libs.frames.ui.fragments.base.BasicFragment
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
+import jahirfiquitiva.libs.kauextensions.extensions.ctxt
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
+import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kauextensions.extensions.openLink
-import jahirfiquitiva.libs.kauextensions.extensions.printDebug
+import jahirfiquitiva.libs.kauextensions.ui.fragments.Fragment
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
 import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
 import jahirfiquitiva.libs.kuper.ui.adapters.SetupAdapter
 import java.lang.ref.WeakReference
 
-class SetupFragment:BasicFragment<KuperApp>() {
+class SetupFragment : Fragment<KuperApp>() {
     
-    private lateinit var swipeToRefresh:SwipeRefreshLayout
-    private lateinit var rv:EmptyViewRecyclerView
-    private lateinit var fastScroll:RecyclerFastScroller
+    private lateinit var swipeToRefresh: SwipeRefreshLayout
+    private lateinit var rv: EmptyViewRecyclerView
+    private lateinit var fastScroll: RecyclerFastScroller
     
-    private var setupAdapter:SetupAdapter? = null
+    private var setupAdapter: SetupAdapter? = null
     
-    override fun initUI(content:View) {
+    override fun initUI(content: View) {
         swipeToRefresh = content.findViewById(R.id.swipe_to_refresh)
         swipeToRefresh.isEnabled = false
         rv = content.findViewById(R.id.list_rv)
         fastScroll = content.findViewById(R.id.fast_scroller)
         
         with(rv) {
-            itemAnimator = if (context.isLowRamDevice) null else DefaultItemAnimator()
+            itemAnimator = if (ctxt.isLowRamDevice) null else DefaultItemAnimator()
             textView = content.findViewById(R.id.empty_text)
             emptyView = content.findViewById(R.id.empty_view)
             setEmptyImage(R.drawable.empty_section)
@@ -73,15 +73,15 @@ class SetupFragment:BasicFragment<KuperApp>() {
     
     fun updateList() {
         if (activity is KuperActivity) {
-            val layoutManager = GridLayoutManager(context, if (context.isInPortraitMode) 1 else 2,
-                                                  GridLayoutManager.VERTICAL, false)
+            val layoutManager = GridLayoutManager(
+                    context, if (ctxt.isInPortraitMode) 1 else 2,
+                    GridLayoutManager.VERTICAL, false)
             
             setupAdapter = SetupAdapter(
-                    WeakReference(context),
+                    WeakReference(ctxt),
                     (activity as KuperActivity).apps, {
-                        context.printDebug(it.packageName)
                         if (it.packageName.hasContent()) {
-                            context.openLink(
+                            ctxt.openLink(
                                     PLAY_STORE_LINK_PREFIX + it.packageName)
                         } else {
                             (activity as KuperActivity).requestPermissionInstallAssets()
@@ -94,6 +94,6 @@ class SetupFragment:BasicFragment<KuperApp>() {
         }
     }
     
-    override fun getContentLayout():Int = R.layout.section_lists
-    override fun onItemClicked(item:KuperApp) {}
+    override fun getContentLayout(): Int = R.layout.section_lists
+    override fun onItemClicked(item: KuperApp, longClick: Boolean) {}
 }

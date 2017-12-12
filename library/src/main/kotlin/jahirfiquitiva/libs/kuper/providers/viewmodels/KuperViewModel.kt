@@ -19,8 +19,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import jahirfiquitiva.libs.archhelpers.viewmodels.ListViewModel
 import jahirfiquitiva.libs.frames.helpers.extensions.maxPictureRes
-import jahirfiquitiva.libs.frames.providers.viewmodels.ListViewModel
 import jahirfiquitiva.libs.kauextensions.extensions.formatCorrectly
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
@@ -33,8 +33,8 @@ import java.io.OutputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 
-class KuperViewModel:ListViewModel<Context, KuperKomponent>() {
-    override fun internalLoad(param:Context):MutableList<KuperKomponent> {
+class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
+    override fun internalLoad(param: Context): ArrayList<KuperKomponent> {
         val folders = arrayOf("templates", "komponents", "wallpapers", "widgets")
         val komponents = ArrayList<KuperKomponent>()
         val assets = param.assets
@@ -49,20 +49,23 @@ class KuperViewModel:ListViewModel<Context, KuperKomponent>() {
                     val previewFile = File(previewsFolder, it)
                     val widgetName = it.substring(0, it.lastIndexOf("."))
                     komponents.add(
-                            getWidgetPreviewsPathFromZip(param, widgetName,
-                                                         assets.open("$folder/$it"),
-                                                         previewsFolder, previewFile, type))
+                            getWidgetPreviewsPathFromZip(
+                                    param, widgetName,
+                                    assets.open("$folder/$it"),
+                                    previewsFolder, previewFile, type))
                 }
             }
         }
         return komponents
     }
     
-    private fun getWidgetPreviewsPathFromZip(context:Context, name:String,
-                                             ins:InputStream,
-                                             folder:File, file:File,
-                                             type:KuperKomponent.Type):KuperKomponent {
-        var out:OutputStream? = null
+    private fun getWidgetPreviewsPathFromZip(
+            context: Context, name: String,
+            ins: InputStream,
+            folder: File, file: File,
+            type: KuperKomponent.Type
+                                            ): KuperKomponent {
+        var out: OutputStream? = null
         
         val thumbnails = arrayOf("", "")
         if (type == KuperKomponent.Type.KOMPONENT) {
@@ -74,8 +77,9 @@ class KuperViewModel:ListViewModel<Context, KuperKomponent>() {
             }
         }
         
-        val preview = File(folder,
-                           name + (if (type == KuperKomponent.Type.ZOOPER) ".png" else "_port.jpg"))
+        val preview = File(
+                folder,
+                name + (if (type == KuperKomponent.Type.ZOOPER) ".png" else "_port.jpg"))
         val previewLand = if (type == KuperKomponent.Type.WIDGET || type == KuperKomponent.Type.WALLPAPER) {
             File(folder, "${name}_land.jpg")
         } else null
@@ -90,7 +94,7 @@ class KuperViewModel:ListViewModel<Context, KuperKomponent>() {
             if (file.exists()) {
                 val zipFile = ZipFile(file)
                 val entries = zipFile.entries()
-                var entry:ZipEntry? = entries.nextElement()
+                var entry: ZipEntry? = entries.nextElement()
                 while (entry != null) {
                     if (type == KuperKomponent.Type.ZOOPER) {
                         val endsWith = entry.name?.endsWith("screen.png") ?: false
@@ -112,14 +116,14 @@ class KuperViewModel:ListViewModel<Context, KuperKomponent>() {
                     entry = try {
                         if (entries.hasMoreElements()) entries.nextElement()
                         else null
-                    } catch (e:Exception) {
+                    } catch (e: Exception) {
                         e.printStackTrace()
                         null
                     }
                 }
             }
             
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         } finally {
             out?.flush()
@@ -129,11 +133,12 @@ class KuperViewModel:ListViewModel<Context, KuperKomponent>() {
         if (type == KuperKomponent.Type.ZOOPER) {
             out = null
             try {
-                val bmp = KuperKomponent.clearBitmap(BitmapFactory.decodeFile(preview.absolutePath),
-                                                     Color.parseColor("#555555"))
+                val bmp = KuperKomponent.clearBitmap(
+                        BitmapFactory.decodeFile(preview.absolutePath),
+                        Color.parseColor("#555555"))
                 out = FileOutputStream(preview)
                 bmp.compress(Bitmap.CompressFormat.PNG, context.maxPictureRes * 2, out)
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             } finally {
                 out?.flush()
@@ -143,7 +148,8 @@ class KuperViewModel:ListViewModel<Context, KuperKomponent>() {
         
         val correctName = if (type != KuperKomponent.Type.ZOOPER)
             name.substring(0, name.lastIndexOf(".")) else name
-        return KuperKomponent(type, correctName.formatCorrectly().replace("_", " "),
-                              preview.absolutePath, previewLand?.absolutePath ?: "")
+        return KuperKomponent(
+                type, correctName.formatCorrectly().replace("_", " "),
+                preview.absolutePath, previewLand?.absolutePath ?: "")
     }
 }

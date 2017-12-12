@@ -24,14 +24,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <jahirfiquitiva.libs.kauextensions.ui.views.SquaredImageView
+        <jahirfiquitiva.libs.kauextensions.ui.widgets.SquaredImageView
                 android:id="@+id/wall"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 tools:ignore="ContentDescription, UnusedAttribute"/>
 
-        <jahirfiquitiva.libs.kauextensions.ui.views.SquaredImageView
+        <jahirfiquitiva.libs.kauextensions.ui.widgets.SquaredImageView
                 android:id="@+id/preview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -93,7 +93,7 @@
 
         </LinearLayout>
 
-        <jahirfiquitiva.libs.frames.ui.widgets.MaterialIcon
+        <jahirfiquitiva.libs.kauextensions.ui.widgets.MaterialIcon
                 android:id="@+id/launch_app"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
