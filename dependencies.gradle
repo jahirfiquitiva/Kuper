@@ -20,11 +20,11 @@ ext.versions = [
         buildTools: '27.0.2',
         // Gradle Plugins
         gradle    : '3.0.1',
-        kotlin    : '1.2.0',
+        kotlin    : '1.2.10',
         libs      : '2.0',
         gms       : '3.1.0',
         // Dependencies
-        frames    : '2.1.2',
+        frames    : '677372a',
         bottomNav : '2.1.0',
         firebase  : '11.6.2'
 ]
