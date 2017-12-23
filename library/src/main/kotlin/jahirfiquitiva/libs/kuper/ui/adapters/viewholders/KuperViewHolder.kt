@@ -30,6 +30,7 @@ import jahirfiquitiva.libs.frames.helpers.extensions.releaseFromGlide
 import jahirfiquitiva.libs.frames.ui.adapters.viewholders.GlideSectionedViewHolder
 import jahirfiquitiva.libs.kauextensions.extensions.bind
 import jahirfiquitiva.libs.kauextensions.extensions.dividerColor
+import jahirfiquitiva.libs.kauextensions.extensions.formatCorrectly
 import jahirfiquitiva.libs.kauextensions.extensions.getDrawable
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kauextensions.extensions.primaryTextColor
@@ -54,7 +55,7 @@ class KuperViewHolder(itemView: View) : GlideSectionedViewHolder(itemView) {
             wall.setImageDrawable(wallpaper)
             details.setBackgroundColor(context.dividerColor)
             name.setTextColor(context.primaryTextColor)
-            name.text = komponent.name
+            name.text = komponent.name.formatCorrectly().replace("_", " ")
             app.setTextColor(context.secondaryTextColor)
             app.text = komponent.type.toString()
             icon.visibleIf(komponent.hasIntent)

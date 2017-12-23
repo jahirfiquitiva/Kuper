@@ -22,7 +22,7 @@ import java.io.OutputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 
-fun File.clean():Int {
+fun File.clean(): Int {
     if (!(exists())) return 0
     var count = 0
     if (isDirectory) {
@@ -32,17 +32,17 @@ fun File.clean():Int {
     return count
 }
 
-fun InputStream.copyFilesTo(os:OutputStream) {
+fun InputStream.copyFilesTo(os: OutputStream) {
     val buffer = ByteArray(2048)
     var readInt = 0
     while ({ readInt = read(buffer);readInt }() != -1) os.write(buffer, 0, readInt)
     os.flush()
 }
 
-fun ZipFile.copyFromTo(from:ZipEntry, to:File?) {
+fun ZipFile.copyFromTo(from: ZipEntry, to: File?) {
     to ?: return
-    var zipIn:InputStream? = null
-    var zipOut:OutputStream? = null
+    var zipIn: InputStream? = null
+    var zipOut: OutputStream? = null
     try {
         zipIn = getInputStream(from)
         zipOut = FileOutputStream(to)

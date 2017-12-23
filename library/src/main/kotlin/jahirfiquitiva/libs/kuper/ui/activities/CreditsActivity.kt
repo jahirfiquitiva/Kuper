@@ -18,6 +18,6 @@ package jahirfiquitiva.libs.kuper.ui.activities
 import jahirfiquitiva.libs.frames.ui.activities.CreditsActivity
 import jahirfiquitiva.libs.kuper.R
 
-class CreditsActivity:CreditsActivity() {
-    override fun getDashboardTitle():Int = R.string.kuper_dashboard
+class CreditsActivity : CreditsActivity() {
+    override fun getDashboardTitle(): Int = R.string.kuper_dashboard
 }

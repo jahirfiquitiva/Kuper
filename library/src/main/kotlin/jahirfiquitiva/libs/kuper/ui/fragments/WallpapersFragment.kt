@@ -15,17 +15,25 @@
  */
 package jahirfiquitiva.libs.kuper.ui.fragments
 
+import android.view.View
+import ca.allanwang.kau.utils.dpToPx
+import ca.allanwang.kau.utils.setPaddingBottom
 import jahirfiquitiva.libs.frames.data.models.Wallpaper
 import jahirfiquitiva.libs.frames.ui.fragments.base.BaseWallpapersFragment
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
 
-class WallpapersFragment:BaseWallpapersFragment() {
-    override fun fromCollectionActivity():Boolean = false
-    override fun autoStartLoad():Boolean = true
-    override fun fromFavorites():Boolean = false
-    override fun showFavoritesIcon():Boolean = false
+class WallpapersFragment : BaseWallpapersFragment() {
+    override fun fromCollectionActivity(): Boolean = false
+    override fun autoStartLoad(): Boolean = true
+    override fun fromFavorites(): Boolean = false
+    override fun showFavoritesIcon(): Boolean = false
     
-    override fun doOnWallpapersChange(data:ArrayList<Wallpaper>, fromCollectionActivity:Boolean) {
+    override fun initUI(content: View) {
+        super.initUI(content)
+        rv.setPaddingBottom(64.dpToPx)
+    }
+    
+    override fun doOnWallpapersChange(data: ArrayList<Wallpaper>, fromCollectionActivity: Boolean) {
         super.doOnWallpapersChange(data, fromCollectionActivity)
         wallsAdapter?.setItems(data)
         rv.state = EmptyViewRecyclerView.State.NORMAL

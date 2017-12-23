@@ -18,7 +18,7 @@ package jahirfiquitiva.libs.kuper.ui.fragments
 import android.preference.PreferenceCategory
 import jahirfiquitiva.libs.frames.ui.fragments.SettingsFragment
 
-class SettingsFragment:SettingsFragment() {
+class SettingsFragment : SettingsFragment() {
     override fun initPreferences() {
         super.initPreferences()
         val storagePrefs = findPreference("storage_settings") as PreferenceCategory

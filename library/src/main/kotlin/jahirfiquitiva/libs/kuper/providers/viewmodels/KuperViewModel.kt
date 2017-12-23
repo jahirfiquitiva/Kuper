@@ -21,7 +21,6 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import jahirfiquitiva.libs.archhelpers.viewmodels.ListViewModel
 import jahirfiquitiva.libs.frames.helpers.extensions.maxPictureRes
-import jahirfiquitiva.libs.kauextensions.extensions.formatCorrectly
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.helpers.extensions.clean
@@ -35,7 +34,7 @@ import java.util.zip.ZipFile
 
 class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
     override fun internalLoad(param: Context): ArrayList<KuperKomponent> {
-        val folders = arrayOf("templates", "komponents", "wallpapers", "widgets")
+        val folders = arrayOf("templates", "komponents", "widgets", "lockscreens", "wallpapers")
         val komponents = ArrayList<KuperKomponent>()
         val assets = param.assets
         val previewsFolder = File(param.externalCacheDir, "KuperPreviews")
@@ -60,9 +59,11 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
     }
     
     private fun getWidgetPreviewsPathFromZip(
-            context: Context, name: String,
+            context: Context,
+            name: String,
             ins: InputStream,
-            folder: File, file: File,
+            folder: File,
+            file: File,
             type: KuperKomponent.Type
                                             ): KuperKomponent {
         var out: OutputStream? = null
@@ -80,7 +81,9 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
         val preview = File(
                 folder,
                 name + (if (type == KuperKomponent.Type.ZOOPER) ".png" else "_port.jpg"))
-        val previewLand = if (type == KuperKomponent.Type.WIDGET || type == KuperKomponent.Type.WALLPAPER) {
+        val previewLand = if (type == KuperKomponent.Type.WIDGET ||
+                type == KuperKomponent.Type.WALLPAPER ||
+                type == KuperKomponent.Type.LOCKSCREEN) {
             File(folder, "${name}_land.jpg")
         } else null
         
@@ -149,7 +152,6 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
         val correctName = if (type != KuperKomponent.Type.ZOOPER)
             name.substring(0, name.lastIndexOf(".")) else name
         return KuperKomponent(
-                type, correctName.formatCorrectly().replace("_", " "),
-                preview.absolutePath, previewLand?.absolutePath ?: "")
+                type, correctName, preview.absolutePath, previewLand?.absolutePath ?: "")
     }
 }

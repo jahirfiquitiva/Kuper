@@ -21,17 +21,21 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.support.annotation.ColorInt
+import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
+import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PICKER
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PICKER
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PICKER
 
-data class KuperKomponent(val type:Type,
-                          val name:String,
-                          val previewPath:String,
-                          private val previewLandPath:String = "") {
+data class KuperKomponent(
+        val type: Type,
+        val name: String,
+        val previewPath: String,
+        private val previewLandPath: String = ""
+                         ) {
     
-    override fun hashCode():Int {
+    override fun hashCode(): Int {
         var result = type.hashCode()
         result = 31 * result + name.hashCode()
         result = 31 * result + previewPath.hashCode()
@@ -39,44 +43,53 @@ data class KuperKomponent(val type:Type,
         return result
     }
     
-    override fun equals(other:Any?):Boolean {
+    override fun equals(other: Any?): Boolean {
         if (other == null) return false
         return other is KuperKomponent && other.type == type && other.name.equals(name, true) &&
                 other.previewPath.equals(previewPath, true)
     }
     
-    val hasIntent = type == Type.WIDGET || type == Type.WALLPAPER
+    val hasIntent = type == Type.WIDGET || type == Type.LOCKSCREEN || type == Type.WALLPAPER
     val rightLandPath = if (hasIntent) previewLandPath else previewPath
     
-    fun getIntent(context:Context):Intent? {
+    fun getIntent(context: Context): Intent? {
         return if (hasIntent) {
             val intent = Intent()
-            val extra:String = if (type == Type.WIDGET) {
-                intent.component = ComponentName(KWGT_PACKAGE, KWGT_PICKER)
-                "widgets"
-            } else {
-                intent.component = ComponentName(KLWP_PACKAGE, KLWP_PICKER)
-                "wallpapers"
+            val extra: String = when (type) {
+                Type.WIDGET -> {
+                    intent.component = ComponentName(KWGT_PACKAGE, KWGT_PICKER)
+                    "widgets"
+                }
+                Type.WALLPAPER -> {
+                    intent.component = ComponentName(KLWP_PACKAGE, KLWP_PICKER)
+                    "wallpapers"
+                }
+                Type.LOCKSCREEN -> {
+                    intent.component = ComponentName(KLCK_PACKAGE, KLCK_PICKER)
+                    "lockscreens"
+                }
+                else -> ""
             }
-            intent.data = Uri.parse("kfile://${context.packageName}/$extra/")
+            intent.data = Uri.parse("kfile://${context.packageName}/$extra/$name")
             intent
         } else null
     }
     
     enum class Type {
-        ZOOPER, KOMPONENT, WALLPAPER, WIDGET, UNKNOWN
+        ZOOPER, KOMPONENT, WALLPAPER, WIDGET, LOCKSCREEN, UNKNOWN
     }
     
     companion object {
-        fun typeForKey(key:Int):Type = when (key) {
+        fun typeForKey(key: Int): Type = when (key) {
             0 -> Type.ZOOPER
             1 -> Type.KOMPONENT
             2 -> Type.WIDGET
-            3 -> Type.WALLPAPER
+            3 -> Type.LOCKSCREEN
+            4 -> Type.WALLPAPER
             else -> Type.UNKNOWN
         }
         
-        fun clearBitmap(bitmap:Bitmap, @ColorInt colorToReplace:Int):Bitmap {
+        fun clearBitmap(bitmap: Bitmap, @ColorInt colorToReplace: Int): Bitmap {
             val width = bitmap.width
             val height = bitmap.height
             val pixels = IntArray(width * height)
@@ -88,7 +101,7 @@ data class KuperKomponent(val type:Type,
             var maxY = -1
             
             val newBitmap = Bitmap.createBitmap(width, height, bitmap.config)
-            var pixel:Int
+            var pixel: Int
             
             for (y in 0 until height) {
                 for (x in 0 until width) {

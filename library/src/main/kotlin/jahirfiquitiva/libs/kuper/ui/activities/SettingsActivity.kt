@@ -19,6 +19,6 @@ import android.support.v4.app.Fragment
 import jahirfiquitiva.libs.frames.ui.activities.SettingsActivity
 import jahirfiquitiva.libs.kuper.ui.fragments.SettingsFragment
 
-class SettingsActivity:SettingsActivity() {
-    override fun settingsFragment():Fragment = SettingsFragment()
+class SettingsActivity : SettingsActivity() {
+    override fun settingsFragment(): Fragment = SettingsFragment()
 }

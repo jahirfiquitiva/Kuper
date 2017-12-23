@@ -28,9 +28,11 @@ import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.ui.adapters.viewholders.SetupViewHolder
 import java.lang.ref.WeakReference
 
-class SetupAdapter(private val context:WeakReference<Context>,
-                   private val apps:ArrayList<KuperApp>,
-                   private val listener:(KuperApp) -> Unit):
+class SetupAdapter(
+        private val context: WeakReference<Context>,
+        private val apps: ArrayList<KuperApp>,
+        private val listener: (KuperApp) -> Unit
+                  ) :
         SectionedRecyclerViewAdapter<SectionedViewHolder>() {
     
     
@@ -39,37 +41,45 @@ class SetupAdapter(private val context:WeakReference<Context>,
         shouldShowFooters(false)
     }
     
-    override fun getItemViewType(section:Int, relativePosition:Int,
-                                 absolutePosition:Int):Int = section
+    override fun getItemViewType(
+            section: Int, relativePosition: Int,
+            absolutePosition: Int
+                                ): Int = section
     
-    override fun onBindViewHolder(holder:SectionedViewHolder?, section:Int, relativePosition:Int,
-                                  absolutePosition:Int) {
+    override fun onBindViewHolder(
+            holder: SectionedViewHolder?, section: Int, relativePosition: Int,
+            absolutePosition: Int
+                                 ) {
         holder?.let {
             if (it is SetupViewHolder) {
                 when (section) {
-                    0 -> it.bind(apps.filter { it.packageName.hasContent() }[relativePosition],
-                                 listener)
-                    1 -> it.bind(apps.filter { (!(it.packageName.hasContent())) }[relativePosition],
-                                 listener)
+                    0 -> it.bind(
+                            apps.filter { it.packageName.hasContent() }[relativePosition],
+                            listener)
+                    1 -> it.bind(
+                            apps.filter { (!(it.packageName.hasContent())) }[relativePosition],
+                            listener)
                 }
             }
         }
     }
     
-    override fun onCreateViewHolder(parent:ViewGroup?, viewType:Int):SectionedViewHolder? {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SectionedViewHolder? {
         return if (viewType >= 0) {
             parent?.inflate(R.layout.item_app_to_setup)?.let { SetupViewHolder(it) }
         } else parent?.inflate(R.layout.item_section_header)?.let { SectionedHeaderViewHolder(it) }
     }
     
-    override fun getItemCount(section:Int):Int = when (section) {
+    override fun getItemCount(section: Int): Int = when (section) {
         0 -> apps.filter { it.packageName.hasContent() }.size
         1 -> apps.filter { (!(it.packageName.hasContent())) }.size
         else -> 0
     }
     
-    override fun onBindHeaderViewHolder(holder:SectionedViewHolder?, section:Int,
-                                        expanded:Boolean) {
+    override fun onBindHeaderViewHolder(
+            holder: SectionedViewHolder?, section: Int,
+            expanded: Boolean
+                                       ) {
         context.get()?.let {
             if (holder is SectionedHeaderViewHolder) {
                 when (section) {
@@ -87,9 +97,11 @@ class SetupAdapter(private val context:WeakReference<Context>,
         }
     }
     
-    override fun getSectionCount():Int = 2
-    override fun onBindFooterViewHolder(holder:SectionedViewHolder?, section:Int) {}
+    override fun getSectionCount(): Int = 2
+    override fun onBindFooterViewHolder(holder: SectionedViewHolder?, section: Int) {}
 }
 
-data class KuperApp(val name:String, val desc:String, val icon:String,
-                    val packageName:String = "")
+data class KuperApp(
+        val name: String, val desc: String, val icon: String,
+        val packageName: String = ""
+                   )

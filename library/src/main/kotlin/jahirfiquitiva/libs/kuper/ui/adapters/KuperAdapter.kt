@@ -116,6 +116,9 @@ class KuperAdapter(
                             komponents.filter { it.type == KuperKomponent.Type.WIDGET }[relativePosition],
                             manager, wallpaper, listener)
                     3 -> it.bind(
+                            komponents.filter { it.type == KuperKomponent.Type.LOCKSCREEN }[relativePosition],
+                            manager, wallpaper, listener)
+                    4 -> it.bind(
                             komponents.filter { it.type == KuperKomponent.Type.WALLPAPER }[relativePosition],
                             manager, wallpaper, listener)
                 }
@@ -133,7 +136,8 @@ class KuperAdapter(
         0 -> komponents.filter { it.type == KuperKomponent.Type.ZOOPER }.size
         1 -> komponents.filter { it.type == KuperKomponent.Type.KOMPONENT }.size
         2 -> komponents.filter { it.type == KuperKomponent.Type.WIDGET }.size
-        3 -> komponents.filter { it.type == KuperKomponent.Type.WALLPAPER }.size
+        3 -> komponents.filter { it.type == KuperKomponent.Type.LOCKSCREEN }.size
+        4 -> komponents.filter { it.type == KuperKomponent.Type.WALLPAPER }.size
         else -> 0
     }
     
@@ -162,6 +166,12 @@ class KuperAdapter(
                     }
                     3 -> {
                         holder.setTitle(
+                                "${it.getString(R.string.klck)} ${it.getString(
+                                        R.string.templates)}")
+                        holder.icon.gone()
+                    }
+                    4 -> {
+                        holder.setTitle(
                                 "${it.getString(R.string.klwp)} ${it.getString(
                                         R.string.templates)}")
                         holder.icon.gone()
@@ -171,6 +181,6 @@ class KuperAdapter(
         }
     }
     
-    override fun getSectionCount(): Int = 4
+    override fun getSectionCount(): Int = 5
     override fun onBindFooterViewHolder(holder: SectionedViewHolder?, section: Int) {}
 }

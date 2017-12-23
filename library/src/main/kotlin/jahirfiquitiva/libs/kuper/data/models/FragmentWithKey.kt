@@ -17,4 +17,4 @@ package jahirfiquitiva.libs.kuper.data.models
 
 import android.support.v4.app.Fragment
 
-data class FragmentWithKey(val key:String, val fragment:Fragment)
+data class FragmentWithKey(val key: String, val fragment: Fragment)

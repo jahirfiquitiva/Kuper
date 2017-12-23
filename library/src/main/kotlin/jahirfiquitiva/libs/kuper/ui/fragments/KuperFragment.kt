@@ -21,6 +21,8 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import ca.allanwang.kau.utils.dimenPixelSize
+import ca.allanwang.kau.utils.dpToPx
+import ca.allanwang.kau.utils.setPaddingBottom
 import com.bumptech.glide.Glide
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
@@ -88,6 +90,8 @@ class KuperFragment : Fragment<KuperKomponent>() {
                                 true, kuperAdapter))
                 rv.adapter = kuperAdapter
             }
+            
+            setPaddingBottom(64.dpToPx)
         }
         
         with(fastScroll) {

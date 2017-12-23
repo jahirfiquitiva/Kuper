@@ -22,22 +22,24 @@ import android.database.Cursor
 import android.database.MatrixCursor
 import android.net.Uri
 
-open class ZooperTemplateProvider:ContentProvider() {
+open class ZooperTemplateProvider : ContentProvider() {
     
-    override fun openAssetFile(paramUri:Uri, paramString:String):AssetFileDescriptor? {
+    override fun openAssetFile(paramUri: Uri, paramString: String): AssetFileDescriptor? {
         if (paramUri.pathSegments.size > 0)
             try {
                 if (context == null) return null
                 val name = paramUri.path.substring(1)
                 return context.assets.openFd(name)
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 return null
             }
         return null
     }
     
-    override fun query(paramUri:Uri, paramArrayOfString1:Array<String>, paramString1:String,
-                       paramArrayOfString2:Array<String>, paramString2:String):Cursor {
+    override fun query(
+            paramUri: Uri, paramArrayOfString1: Array<String>, paramString1: String,
+            paramArrayOfString2: Array<String>, paramString2: String
+                      ): Cursor {
         val cursor = MatrixCursor(arrayOf("string"))
         try {
             if (context == null) return cursor
@@ -48,7 +50,7 @@ open class ZooperTemplateProvider:ContentProvider() {
                 cursor.moveToNext()
             }
             cursor.moveToFirst()
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             cursor.close()
             throw RuntimeException(e)
         }
@@ -56,11 +58,17 @@ open class ZooperTemplateProvider:ContentProvider() {
         return cursor
     }
     
-    override fun getType(paramUri:Uri):String? = null
-    override fun onCreate():Boolean = false
-    override fun insert(paramUri:Uri, paramContentValues:ContentValues):Uri? = null
-    override fun update(paramUri:Uri, paramContentValues:ContentValues, paramString:String,
-                        paramArrayOfString:Array<String>):Int = 0
+    override fun getType(paramUri: Uri): String? = null
+    override fun onCreate(): Boolean = false
+    override fun insert(paramUri: Uri, paramContentValues: ContentValues): Uri? = null
+    override fun update(
+            paramUri: Uri, paramContentValues: ContentValues, paramString: String,
+            paramArrayOfString: Array<String>
+                       ): Int = 0
     
-    override fun delete(paramUri:Uri, paramString:String, paramArrayOfString:Array<String>):Int = 0
+    override fun delete(
+            paramUri: Uri,
+            paramString: String,
+            paramArrayOfString: Array<String>
+                       ): Int = 0
 }
