@@ -5,8 +5,6 @@ Kuper
 
 [![JitPack](https://jitpack.io/v/jahirfiquitiva/Kuper.svg)](https://jitpack.io/#jahirfiquitiva/Kuper)
 [![Build Status](https://travis-ci.org/jahirfiquitiva/Kuper.svg?branch=master)](https://travis-ci.org/jahirfiquitiva/Kuper)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0daab9c8435f451eabd86c5218bc2950)](https://www.codacy.com/app/jahirfiquitiva/Kuper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jahirfiquitiva/Kuper&amp;utm_campaign=Badge_Grade)
-[![codebeat badge](https://codebeat.co/badges/eee96484-e205-455d-b5c2-6e4cda77b5f3)](https://codebeat.co/projects/github-com-jahirfiquitiva-frames-master)
 
 [![Waffle.io - To Do](https://badge.waffle.io/jahirfiquitiva/Kuper.svg?label=to%20do&title=To%20Do:)](http://waffle.io/jahirfiquitiva/Kuper)
 [![Waffle.io - Issues in progress](https://badge.waffle.io/jahirfiquitiva/Kuper.svg?label=in%20progress&title=In%20Progress:)](http://waffle.io/jahirfiquitiva/Kuper)
