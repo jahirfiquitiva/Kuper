@@ -27,32 +27,25 @@ A full-of-features, easy-to-customize, free and open source, light-weight, Andro
 
 # Previews
 
-### Customizable styles
+### Setup & Widgets
 <p align="center">
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/3.png" height="350"/>
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/9.png" height="350"/>
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/2.png" height="350"/>
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/10.png" height="350"/>
-</p>
-<p align="center">
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/1.png" height="350"/>
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/11.png" height="350"/>
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/12.png" height="350"/>
+<img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/1.png" height="350"/>
+<img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/2.png" height="350"/>
+<img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/3.png" height="350"/>
+<img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/4.png" height="350"/>
 </p>
 
-### Full-screen Viewer / Multiple themes
+### Wallpapers support (Based on [Frames](https://github.com/jahirfiquitiva/Frames))
 <p align="center">
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/4.png" height="350"/>
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/14.png" height="350"/>
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/7.png" height="350"/>
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/8.png" height="350"/>
+<img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/5.png" height="350"/>
+<img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/6.png" height="350"/>
+<img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/7.png" height="350"/>
 </p>
 
-### Credits / Settings / Muzei Settings
+### Credits / Settings
 <p align="center">
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/5.png" height="350"/>
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/6.png" height="350"/>
-<img src="https://github.com/jahirfiquitiva/Kuper/raw/images/13.png" height="350"/>
+<img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/8.png" height="350"/>
+<img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/9.png" height="350"/>
 </p>
 
 ---
@@ -64,7 +57,6 @@ A full-of-features, easy-to-customize, free and open source, light-weight, Andro
 - Firebase notifications ready.
 - Cloud based (only) wallpapers.
 - App can work offline.
-- Deep search (users can search wallpapers by name, author and/or collection at the same time).
 - Wallpapers can be applied and downloaded.
 - Wallpapers include a full-screen viewer with zooming capabilities and detailed info viewer.
 - [Muzei Live Wallpaper](http://muzei.co/) support.
@@ -102,7 +94,7 @@ allprojects {
 2. Add the dependency in your project `build.gradle` file
 ```gradle
 dependencies {
-    compile('me.jahirfiquitiva:Kuper:{latest version}@aar') {
+    implementation('me.jahirfiquitiva:Kuper:{latest version}@aar') {
         transitive = true
     }
 }
