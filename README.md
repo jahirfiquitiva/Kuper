@@ -9,7 +9,7 @@ Kuper
 [![Waffle.io - To Do](https://badge.waffle.io/jahirfiquitiva/Kuper.svg?label=to%20do&title=To%20Do:)](http://waffle.io/jahirfiquitiva/Kuper)
 [![Waffle.io - Issues in progress](https://badge.waffle.io/jahirfiquitiva/Kuper.svg?label=in%20progress&title=In%20Progress:)](http://waffle.io/jahirfiquitiva/Kuper)
 ![API](https://img.shields.io/badge/API-16%2B-7ac143.svg)
-[![Sample App](https://img.shields.io/badge/SAMPLE-APP-34bf49.svg)](https://github.com/jahirfiquitiva/Kuper/raw/images/frames-sample.apk)
+[![Sample App](https://img.shields.io/badge/SAMPLE-APP-34bf49.svg)](https://github.com/jahirfiquitiva/Kuper/raw/master/art/KuperSample.apk)
 
 A full-of-features, easy-to-customize, free and open source, light-weight, Android dashboard library to create wallpapers apps with almost-null effort.
 
