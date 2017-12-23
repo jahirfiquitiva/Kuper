@@ -4,7 +4,7 @@ Kuper
 ======
 
 [![JitPack](https://jitpack.io/v/jahirfiquitiva/Kuper.svg)](https://jitpack.io/#jahirfiquitiva/Kuper)
-[![Build Status](https://travis-ci.org/jahirfiquitiva/Kuper.svg?branch=master)](https://travis-ci.org/jahirfiquitiva/Kuper)
+[![Build Status](https://travis-ci.org/jahirfiquitiva/Kuper.svg?branch=sample)](https://travis-ci.org/jahirfiquitiva/Kuper)
 
 [![Waffle.io - To Do](https://badge.waffle.io/jahirfiquitiva/Kuper.svg?label=to%20do&title=To%20Do:)](http://waffle.io/jahirfiquitiva/Kuper)
 [![Waffle.io - Issues in progress](https://badge.waffle.io/jahirfiquitiva/Kuper.svg?label=in%20progress&title=In%20Progress:)](http://waffle.io/jahirfiquitiva/Kuper)
