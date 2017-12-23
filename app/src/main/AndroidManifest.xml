@@ -43,13 +43,14 @@
 
         <provider
                 android:name="org.kustom.api.Provider"
-                android:authorities="${applicationId}.kustomprovider"
+                android:authorities="${applicationId}.kustom.provider"
                 android:exported="true"
                 tools:ignore="ExportedContentProvider">
             <intent-filter>
                 <action android:name="org.kustom.provider.WALLPAPERS"/>
                 <action android:name="org.kustom.provider.WIDGETS"/>
                 <action android:name="org.kustom.provider.KOMPONENTS"/>
+                <action android:name="org.kustom.provider.LOCKSCREENS"/>
             </intent-filter>
         </provider>
         -->
@@ -75,6 +76,12 @@
                 android:name=".MainActivity"
                 android:windowSoftInputMode="stateHidden|adjustResize|adjustPan"
                 android:label="@string/app_name">
+
+            <!-- TODO: Remove comment marks to enable Zooper
+            <intent-filter>
+                <action android:name="org.zooper.zw.TEMPLATES"/>
+            </intent-filter>
+            -->
 
             <!-- TODO: Do NOT remove the intent-filter tags -->
             <intent-filter>

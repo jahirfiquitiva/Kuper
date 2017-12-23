@@ -67,7 +67,7 @@ android {
 
 dependencies {
     // Kuper
-    implementation('me.jahirfiquitiva:Kuper:1.0.3@aar') {
+    implementation('me.jahirfiquitiva:Kuper:1.0.4@aar') {
         transitive = true
     }
 }
