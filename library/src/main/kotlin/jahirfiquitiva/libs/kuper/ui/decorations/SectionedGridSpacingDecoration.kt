@@ -23,7 +23,7 @@ import jahirfiquitiva.libs.kuper.ui.adapters.KuperAdapter
 class SectionedGridSpacingDecoration(
         private val spanCount: Int, private val spacing: Int,
         private val includeEdge: Boolean,
-        private val adapter: KuperAdapter
+        private val adapter: KuperAdapter?
                                     ) : RecyclerView.ItemDecoration() {
     
     override fun getItemOffsets(
@@ -33,7 +33,7 @@ class SectionedGridSpacingDecoration(
         super.getItemOffsets(outRect, view, parent, state)
         
         var position = (view.layoutParams as RecyclerView.LayoutParams).viewAdapterPosition
-        val headersBeforeItemPosition = adapter.getHeadersBeforePosition(position)
+        val headersBeforeItemPosition = adapter?.getHeadersBeforePosition(position) ?: 0
         
         position -= headersBeforeItemPosition
         

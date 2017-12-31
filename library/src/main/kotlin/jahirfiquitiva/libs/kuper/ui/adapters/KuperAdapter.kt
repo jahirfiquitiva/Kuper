@@ -34,11 +34,12 @@ import java.lang.ref.WeakReference
 class KuperAdapter(
         private val context: WeakReference<Context>,
         private val manager: RequestManager,
-        private val wallpaper: Drawable?,
-        private val komponents: ArrayList<KuperKomponent>,
+        private val wallpaper: Drawable,
         private val listener: (Intent) -> Unit
                   ) :
         SectionedRecyclerViewAdapter<SectionedViewHolder>(), ListAdapterPresenter<KuperKomponent> {
+    
+    private val komponents = ArrayList<KuperKomponent>()
     
     override fun get(index: Int): KuperKomponent = komponents[index]
     

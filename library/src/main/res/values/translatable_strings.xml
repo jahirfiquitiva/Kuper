@@ -40,5 +40,6 @@
     <string name="copied_assets_error">An unexpected error occurred while copying assets</string>
 
     <string name="permission_request_assets">%1$s requires access to storage in order to be able to install assets</string>
+    <string name="permission_request_wallpaper">%1$s requires access to storage in order to be able to show your wallpaper in widgets previews</string>
 
 </resources>
