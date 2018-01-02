@@ -35,6 +35,7 @@
 }
 
 -keep class android.arch.** { *; }
+-keep class jahirfiquitiva.libs.** { *; }
 
 -keep class com.google.**
 -keep class autovalue.shaded.com.google.**
