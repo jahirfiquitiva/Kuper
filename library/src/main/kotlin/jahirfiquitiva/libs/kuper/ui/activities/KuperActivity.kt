@@ -92,27 +92,15 @@ abstract class KuperActivity : BaseFramesActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kuper)
         toolbar.bindToActivity(this, false)
-        
-        destroyDialog()
-        dialog = buildMaterialDialog {
-            content(R.string.loading)
-            progress(true, 0)
-            cancelable(false)
-        }
-        dialog?.show()
-        
         setupContent()
     }
     
     private fun setupContent() {
-        destroyDialog()
-        
         setupApps()
         
         postDelayed(
                 100, {
             setupBottomNavigation()
-            
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 showWallpaperPermissionExplanation()
             }
