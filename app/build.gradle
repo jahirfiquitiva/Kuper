@@ -50,9 +50,10 @@ android {
             proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
             consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
         }
-        aaptOptions {
-            noCompress 'zip', 'komp', 'klwp', 'kwgt', 'klck', 'kwch'
-        }
+    }
+
+    aaptOptions {
+        noCompress 'zw', 'zip', 'komp', 'klwp', 'kwgt', 'klck', 'kwch'
     }
 
     sourceSets {
@@ -69,7 +70,7 @@ android {
 
 dependencies {
     // Kuper
-    implementation('me.jahirfiquitiva:Kuper:1.0.5@aar') {
+    implementation('me.jahirfiquitiva:Kuper:1.0.6@aar') {
         transitive = true
     }
 }
