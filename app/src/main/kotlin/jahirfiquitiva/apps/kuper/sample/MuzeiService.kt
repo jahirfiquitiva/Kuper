@@ -17,4 +17,4 @@ package jahirfiquitiva.apps.kuper.sample
 
 import jahirfiquitiva.libs.frames.data.services.FramesArtSource
 
-class MuzeiService:FramesArtSource("MyMuzeiService")
+class MuzeiService : FramesArtSource("MyMuzeiService")
