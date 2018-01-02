@@ -36,8 +36,8 @@ android {
         applicationId "jahirfiquitiva.apps.kuper.sample"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode versions.versionCode
-        versionName versions.versionName
+        versionCode 106
+        versionName "1.0.6"
         vectorDrawables.useSupportLibrary = true
     }
 
