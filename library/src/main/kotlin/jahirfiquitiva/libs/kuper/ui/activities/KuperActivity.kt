@@ -73,10 +73,6 @@ import java.lang.ref.WeakReference
 
 abstract class KuperActivity : BaseFramesActivity() {
     
-    private val SETUP_KEY = "setup"
-    private val WIDGETS_KEY = "widgets"
-    private val WALLPAPERS_KEY = "wallpapers"
-    
     private val toolbar: CustomToolbar by bind(R.id.toolbar)
     private val bottomNavigation: AHBottomNavigation by bind(R.id.bottom_navigation)
     

@@ -27,7 +27,7 @@ ext.versions = [
         versionCode: 100,
         versionName: '1.0.0',
         // Dependencies
-        frames     : '677372a',
+        frames     : '11e3504',
         bottomNav  : '2.1.0',
         firebase   : '11.8.0'
 ]
