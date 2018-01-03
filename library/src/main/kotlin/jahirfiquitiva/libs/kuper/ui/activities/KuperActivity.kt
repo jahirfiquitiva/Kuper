@@ -58,6 +58,7 @@ import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask
 import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask.Companion.filesToIgnore
 import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask.Companion.getCorrectFolderName
+import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KOLORETTE_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
@@ -119,7 +120,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     private fun setupApps() {
         apps.clear()
         
-        if (!isAppInstalled(ZOOPER_PACKAGE)) {
+        if (!isAppInstalled(ZOOPER_PACKAGE) && inAssetsAndWithContent("templates")) {
             apps.add(
                     KuperApp(
                             getString(R.string.zooper_widget),
@@ -157,6 +158,14 @@ abstract class KuperActivity : BaseFramesActivity() {
                             getString(R.string.klwp),
                             getString(R.string.required_for_wallpapers),
                             "ic_kustom", KLWP_PACKAGE))
+        }
+        
+        if (!isAppInstalled(KLCK_PACKAGE) && inAssetsAndWithContent("lockscreens")) {
+            apps.add(
+                    KuperApp(
+                            getString(R.string.klck),
+                            getString(R.string.required_for_lockscreens),
+                            "ic_kustom", KLCK_PACKAGE))
         }
         
         if (!areAssetsInstalled()) {
