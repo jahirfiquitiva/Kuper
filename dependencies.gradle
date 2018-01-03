@@ -21,7 +21,6 @@ ext.versions = [
         // Gradle Plugins
         gradle    : '3.0.1',
         kotlin    : '1.2.10',
-        libs      : '2.0',
         gms       : '3.1.0',
         // Dependencies
         frames    : '677372a',
@@ -32,7 +31,6 @@ ext.versions = [
 ext.gradlePlugins = [
         android: 'com.android.tools.build:gradle:' + versions.gradle,
         kotlin : 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + versions.kotlin,
-        libs   : 'com.github.dcendents:android-maven-gradle-plugin:' + versions.libs,
         gms    : 'com.google.gms:google-services:' + versions.gms
 ]
 
