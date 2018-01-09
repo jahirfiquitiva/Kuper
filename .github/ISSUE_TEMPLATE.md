@@ -19,7 +19,7 @@ println("Hello, world!")
 java.lang.RuntimeException: This is an example Exception log
     at jahirfiquitiva.libs.kuper.HelloWorld
     at jahirfiquitiva.libs.kuper.HelloWorld$ThisIsNotARealLog
-    at android.app.Instrumentation.callActivityOnResume(Instrumentation.kava)
+    at android.app.Instrumentation.callActivityOnResume(Instrumentation.kt)
 ```
  
 ###### Reproduction Steps
