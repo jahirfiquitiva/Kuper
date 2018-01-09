@@ -1,8 +1,8 @@
 - [ ] I have verified there are no duplicate active or recent bugs, questions, or requests
-- [ ] I have verified that I am using the latest version of Frames.
+- [ ] I have verified that I am using the latest version of Kuper.
 
 ###### Device/dashboard info:
- - Frames version: `?`
+ - Kuper version: `?`
  - Device OS version: `?`
  - Device Manufacturer: `?`
  - Device Name: `?`
