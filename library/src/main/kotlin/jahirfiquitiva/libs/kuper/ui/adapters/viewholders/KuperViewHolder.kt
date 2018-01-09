@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Jahir Fiquitiva
+ * Copyright (c) 2018. Jahir Fiquitiva
  *
  * Licensed under the CreativeCommons Attribution-ShareAlike
  * 4.0 International License. You may not use this file except in compliance
@@ -48,8 +48,10 @@ class KuperViewHolder(itemView: View) : GlideSectionedViewHolder(itemView) {
     private val icon: ImageView by itemView.bind(R.id.launch_app)
     
     fun bind(
-            komponent: KuperKomponent, manager: RequestManager,
-            wallpaper: Drawable?, listener: (Intent) -> Unit = {}
+            komponent: KuperKomponent,
+            manager: RequestManager,
+            wallpaper: Drawable?,
+            listener: (Intent) -> Unit = {}
             ) {
         with(itemView) {
             wall.setImageDrawable(wallpaper)
@@ -67,6 +69,7 @@ class KuperViewHolder(itemView: View) : GlideSectionedViewHolder(itemView) {
             manager.load(File(rightPreview))
                     .apply(RequestOptions().priority(Priority.HIGH))
                     .into(preview)
+                    .clearOnDetach()
         }
     }
     

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Jahir Fiquitiva
+ * Copyright (c) 2018. Jahir Fiquitiva
  *
  * Licensed under the CreativeCommons Attribution-ShareAlike
  * 4.0 International License. You may not use this file except in compliance
@@ -21,6 +21,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.support.annotation.ColorInt
+import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PICKER
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE
@@ -70,8 +71,10 @@ data class KuperKomponent(
                 }
                 else -> ""
             }
-            intent.data = Uri.parse("kfile://${context.packageName}/$extra/$name")
-            intent
+            if(extra.hasContent()) {
+                intent.data = Uri.parse("kfile://${context.packageName}/$extra/$name")
+                intent
+            }else null
         } else null
     }
     
