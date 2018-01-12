@@ -30,11 +30,17 @@ import java.lang.ref.WeakReference
 
 class SetupAdapter(
         private val context: WeakReference<Context>,
-        private val apps: ArrayList<KuperApp>,
         private val listener: (KuperApp) -> Unit
                   ) :
         SectionedRecyclerViewAdapter<SectionedViewHolder>() {
     
+    private val apps = ArrayList<KuperApp>()
+    
+    fun updateApps(apps: ArrayList<KuperApp>) {
+        this.apps.clear()
+        this.apps.addAll(apps)
+        notifyDataSetChanged()
+    }
     
     init {
         shouldShowHeadersForEmptySections(false)

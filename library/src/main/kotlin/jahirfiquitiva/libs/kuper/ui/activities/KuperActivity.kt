@@ -31,7 +31,6 @@ import ca.allanwang.kau.utils.restart
 import ca.allanwang.kau.utils.visibleIf
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
-import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
 import jahirfiquitiva.libs.frames.ui.activities.base.BaseFramesActivity
 import jahirfiquitiva.libs.frames.ui.fragments.base.BaseFramesFragment
 import jahirfiquitiva.libs.frames.ui.widgets.CustomToolbar
@@ -53,13 +52,9 @@ import jahirfiquitiva.libs.kauextensions.extensions.tint
 import jahirfiquitiva.libs.kauextensions.ui.widgets.SearchView
 import jahirfiquitiva.libs.kauextensions.ui.widgets.bindSearchView
 import jahirfiquitiva.libs.kuper.R
-import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask
-import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask.Companion.getCorrectFolderName
-import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
 import jahirfiquitiva.libs.kuper.ui.fragments.KuperFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.SetupFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.WallpapersFragment
-import java.lang.ref.WeakReference
 
 abstract class KuperActivity : BaseFramesActivity() {
     
@@ -71,7 +66,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     private var searchView: SearchView? = null
     
     private var currentItemId = -1
-    private var currentFragment: Fragment? = null
+    private var activeFragment: Fragment? = null
     
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,29 +76,29 @@ abstract class KuperActivity : BaseFramesActivity() {
         setupContent()
     }
     
-    private fun setupContent() {
+    fun hideSetup() {
+        currentItemId = -1
+        setupContent(false)
+    }
+    
+    private fun setupContent(withSetup: Boolean = true) {
         postDelayed(
                 100, {
-            setupBottomNavigation()
+            setupBottomNavigation(withSetup)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 showWallpaperPermissionExplanation()
             }
         })
     }
     
-    @SuppressLint("MissingSuperCall")
-    override fun onResume() {
-        super.onResume()
-        setupBottomNavigation()
-    }
-    
     override fun fragmentsContainer(): Int = R.id.fragments_container
     
-    private fun setupBottomNavigation() {
+    private fun setupBottomNavigation(withSetup: Boolean) {
         fragments.clear()
-        fragments += SetupFragment()
+        if (withSetup)
+            fragments += SetupFragment()
         fragments += KuperFragment()
-        fragments += WallpapersFragment()
+        // fragments += WallpapersFragment()
         
         bottomNavigation.accentColor = accentColor
         with(bottomNavigation) {
@@ -115,7 +110,9 @@ abstract class KuperActivity : BaseFramesActivity() {
             isForceTint = true
             titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
             
-            addItem(AHBottomNavigationItem(getString(R.string.setup), R.drawable.ic_setup))
+            if (withSetup)
+                addItem(AHBottomNavigationItem(getString(R.string.setup), R.drawable.ic_setup))
+            
             addItem(AHBottomNavigationItem(getString(R.string.widgets), R.drawable.ic_widgets))
             
             if (getBoolean(R.bool.isKuper) && getString(R.string.json_url).hasContent())
@@ -193,28 +190,36 @@ abstract class KuperActivity : BaseFramesActivity() {
         invalidateOptionsMenu()
         
         try {
-            val correctPosition = if (bottomNavigation.itemsCount >= 2) position + 1 else position
-            if (!isFragmentValid(correctPosition) || currentItemId != position) {
-                currentFragment = when (correctPosition) {
-                    0, 1 -> fragments[correctPosition]
+            val hasSetup = (bottomNavigation.itemsCount > 2)
+            if (!isFragmentValid(position) || currentItemId != position) {
+                activeFragment = when (position) {
+                    0 -> {
+                        if (hasSetup) SetupFragment()
+                        else fragments[position]
+                    }
+                    1 -> {
+                        if (hasSetup) fragments[position]
+                        else WallpapersFragment()
+                    }
                     2 -> WallpapersFragment()
                     else -> null
                 }
-                currentFragment?.let {
+                activeFragment?.let {
                     changeFragment(it)
                     currentItemId = position
                 }
             }
-        } catch (ignored: Exception) {
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
         return true
     }
     
     private fun isFragmentValid(position: Int): Boolean {
         return when (position) {
-            0 -> currentFragment is SetupFragment
-            1 -> currentFragment is KuperFragment
-            2 -> currentFragment is WallpapersFragment
+            0 -> activeFragment is SetupFragment
+            1 -> activeFragment is KuperFragment
+            2 -> activeFragment is WallpapersFragment
             else -> true
         }
     }
@@ -237,20 +242,20 @@ abstract class KuperActivity : BaseFramesActivity() {
                 LOCK, {
             postDelayed(
                     200, {
-                if (currentFragment is KuperFragment) {
-                    (currentFragment as KuperFragment).applyFilter(filter)
-                } else if (currentFragment is BaseFramesFragment<*, *>) {
-                    (currentFragment as BaseFramesFragment<*, *>)
+                if (activeFragment is KuperFragment) {
+                    (activeFragment as KuperFragment).applyFilter(filter)
+                } else if (activeFragment is BaseFramesFragment<*, *>) {
+                    (activeFragment as BaseFramesFragment<*, *>)
                             .enableRefresh(!filter.hasContent())
-                    (currentFragment as BaseFramesFragment<*, *>).applyFilter(filter)
+                    (activeFragment as BaseFramesFragment<*, *>).applyFilter(filter)
                 }
             })
         })
     }
     
     private fun refreshContent() {
-        if (currentFragment is WallpapersFragment) {
-            (currentFragment as WallpapersFragment).reloadData(1)
+        if (activeFragment is WallpapersFragment) {
+            (activeFragment as WallpapersFragment).reloadData(1)
         }
     }
     
@@ -293,13 +298,13 @@ abstract class KuperActivity : BaseFramesActivity() {
     private fun showWallpaperPermissionExplanation() {
         showSnackbar(
                 getString(R.string.permission_request_wallpaper, getAppName()),
-                Snackbar.LENGTH_LONG, {
-                    setAction(
-                            R.string.allow, {
-                        dismiss()
-                        requestPermissionWallpaper()
-                    })
-                })
+                Snackbar.LENGTH_LONG) {
+            setAction(
+                    R.string.allow, {
+                dismiss()
+                requestPermissionWallpaper()
+            })
+        }
     }
     
     fun requestPermissionInstallAssets() {
@@ -321,13 +326,13 @@ abstract class KuperActivity : BaseFramesActivity() {
     private fun showAssetsPermissionExplanation() {
         showSnackbar(
                 getString(R.string.permission_request_assets, getAppName()),
-                Snackbar.LENGTH_LONG, {
-                    setAction(
-                            R.string.allow, {
-                        dismiss()
-                        requestPermissionInstallAssets()
-                    })
-                })
+                Snackbar.LENGTH_LONG) {
+            setAction(
+                    R.string.allow, {
+                dismiss()
+                requestPermissionInstallAssets()
+            })
+        }
     }
     
     fun installAssets() {
@@ -361,8 +366,8 @@ abstract class KuperActivity : BaseFramesActivity() {
                             val item: KuperApp? = apps.firstOrNull { !(it.packageName.hasContent()) }
                             item?.let {
                                 apps.remove(it)
-                                if (currentFragment is SetupFragment) {
-                                    (currentFragment as SetupFragment).updateList()
+                                if (activeFragment is SetupFragment) {
+                                    (activeFragment as SetupFragment).updateList()
                                 }
                             }
                         }

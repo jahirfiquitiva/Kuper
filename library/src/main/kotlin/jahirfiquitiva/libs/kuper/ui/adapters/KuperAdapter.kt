@@ -16,7 +16,6 @@
 package jahirfiquitiva.libs.kuper.ui.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 import ca.allanwang.kau.utils.gone
@@ -35,7 +34,7 @@ class KuperAdapter(
         private val context: WeakReference<Context>,
         private val manager: RequestManager,
         private val wallpaper: Drawable,
-        private val listener: (Intent) -> Unit
+        private val listener: (KuperKomponent) -> Unit
                   ) :
         SectionedRecyclerViewAdapter<SectionedViewHolder>(), ListAdapterPresenter<KuperKomponent> {
     

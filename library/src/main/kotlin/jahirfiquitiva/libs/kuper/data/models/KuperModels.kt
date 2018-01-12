@@ -15,23 +15,16 @@
  */
 package jahirfiquitiva.libs.kuper.data.models
 
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.support.annotation.ColorInt
-import jahirfiquitiva.libs.kauextensions.extensions.hasContent
-import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
-import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PICKER
-import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE
-import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PICKER
-import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
-import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PICKER
 
 data class KuperKomponent(
         val type: Type,
         val name: String,
+        val path: String,
         val previewPath: String,
         private val previewLandPath: String = ""
                          ) {
@@ -56,25 +49,16 @@ data class KuperKomponent(
     fun getIntent(context: Context): Intent? {
         return if (hasIntent) {
             val intent = Intent()
-            val extra: String = when (type) {
-                Type.WIDGET -> {
-                    intent.component = ComponentName(KWGT_PACKAGE, KWGT_PICKER)
-                    "widgets"
-                }
-                Type.WALLPAPER -> {
-                    intent.component = ComponentName(KLWP_PACKAGE, KLWP_PICKER)
-                    "wallpapers"
-                }
-                Type.LOCKSCREEN -> {
-                    intent.component = ComponentName(KLCK_PACKAGE, KLCK_PICKER)
-                    "lockscreens"
-                }
-                else -> ""
+            try {
+                intent.data = Uri.Builder()
+                        .scheme("kfile")
+                        .authority("${context.packageName}.kustom.provider")
+                        .appendPath(path)
+                        .build()
+            } catch (e: Exception) {
+                intent.data = Uri.parse("kfile://${context.packageName}/$path")
             }
-            if(extra.hasContent()) {
-                intent.data = Uri.parse("kfile://${context.packageName}/$extra/$name")
-                intent
-            }else null
+            intent
         } else null
     }
     
@@ -91,6 +75,17 @@ data class KuperKomponent(
             4 -> Type.WALLPAPER
             else -> Type.UNKNOWN
         }
+        
+        fun extensionForType(type: Type) = when (type) {
+            Type.ZOOPER -> ".zw"
+            Type.KOMPONENT -> ".komp"
+            Type.LOCKSCREEN -> ".klck"
+            Type.WALLPAPER -> ".klwp"
+            Type.WIDGET -> ".kwgt"
+            Type.UNKNOWN -> ".zip"
+        }
+        
+        fun extensionForKey(key: Int) = extensionForType(typeForKey(key))
         
         fun clearBitmap(bitmap: Bitmap, @ColorInt colorToReplace: Int): Bitmap {
             val width = bitmap.width

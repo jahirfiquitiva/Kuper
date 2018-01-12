@@ -15,7 +15,6 @@
  */
 package jahirfiquitiva.libs.kuper.ui.adapters.viewholders
 
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
@@ -51,7 +50,7 @@ class KuperViewHolder(itemView: View) : GlideSectionedViewHolder(itemView) {
             komponent: KuperKomponent,
             manager: RequestManager,
             wallpaper: Drawable?,
-            listener: (Intent) -> Unit = {}
+            listener: (KuperKomponent) -> Unit = {}
             ) {
         with(itemView) {
             wall.setImageDrawable(wallpaper)
@@ -63,7 +62,7 @@ class KuperViewHolder(itemView: View) : GlideSectionedViewHolder(itemView) {
             icon.visibleIf(komponent.hasIntent)
             if (icon.isVisible) {
                 icon.setImageDrawable("ic_open_app".getDrawable(context))
-                icon.setOnClickListener { komponent.getIntent(context)?.let { listener(it) } }
+                icon.setOnClickListener { listener(komponent) }
             }
             val rightPreview = if (context.isInPortraitMode) komponent.previewPath else komponent.rightLandPath
             manager.load(File(rightPreview))

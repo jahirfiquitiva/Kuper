@@ -39,6 +39,10 @@ import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kauextensions.extensions.openLink
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
+import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
+import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE
+import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
+import jahirfiquitiva.libs.kuper.helpers.utils.ZOOPER_PACKAGE
 import jahirfiquitiva.libs.kuper.providers.viewmodels.KuperViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
 import jahirfiquitiva.libs.kuper.ui.adapters.KuperAdapter
@@ -89,12 +93,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                     
                     kuperAdapter = KuperAdapter(
                             WeakReference(context), Glide.with(context), drawable) {
-                        try {
-                            startActivity(it)
-                        } catch (e: Exception) {
-                            context.openLink(
-                                    PLAY_STORE_LINK_PREFIX + it.component.packageName)
-                        }
+                        launchIntentFor(it)
                     }
                     kuperAdapter?.setLayoutManager(gridLayout)
                     layoutManager = gridLayout
@@ -131,8 +130,8 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 kuperAdapter?.setItems(
                         ArrayList(
                                 ArrayList(list).filter {
-                                    (it.name.contains(filter, true) || it.type.toString().contains(
-                                            filter, true))
+                                    (it.name.contains(filter, true) ||
+                                            it.type.toString().contains(filter, true))
                                 }))
             } else {
                 kuperAdapter?.setItems(list)
@@ -143,15 +142,36 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     override fun getContentLayout(): Int = R.layout.section_lists
     override fun onItemClicked(item: KuperKomponent, longClick: Boolean) {}
     
+    private fun launchIntentFor(item: KuperKomponent) {
+        context?.let { contxt ->
+            item.getIntent(contxt)?.let {
+                try {
+                    startActivity(it)
+                } catch (e: Exception) {
+                    val itemPkg = when (item.type) {
+                        KuperKomponent.Type.ZOOPER -> ZOOPER_PACKAGE
+                        KuperKomponent.Type.KOMPONENT,
+                        KuperKomponent.Type.WALLPAPER -> KLWP_PACKAGE
+                        KuperKomponent.Type.WIDGET -> KWGT_PACKAGE
+                        KuperKomponent.Type.LOCKSCREEN -> KLCK_PACKAGE
+                        else -> ""
+                    }
+                    if (itemPkg.hasContent())
+                        contxt.openLink(PLAY_STORE_LINK_PREFIX + itemPkg)
+                }
+            }
+        }
+    }
+    
     override fun initViewModel() {
         kuperViewModel = ViewModelProviders.of(this).get(KuperViewModel::class.java)
     }
     
     override fun loadDataFromViewModel() {
-        kuperViewModel?.loadData(ctxt, true)
+        kuperViewModel?.loadData(ctxt, false)
     }
     
-    override fun autoStartLoad(): Boolean = true
+    override fun autoStartLoad() = true
     
     override fun registerObserver() {
         kuperViewModel?.observe(

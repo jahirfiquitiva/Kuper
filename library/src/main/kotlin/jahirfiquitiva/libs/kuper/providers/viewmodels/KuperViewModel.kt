@@ -45,13 +45,15 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
             files?.forEach {
                 val type = KuperKomponent.typeForKey(index)
                 if (type != KuperKomponent.Type.UNKNOWN) {
-                    val previewFile = File(previewsFolder, it)
-                    val widgetName = it.substring(0, it.lastIndexOf("."))
-                    komponents.add(
-                            getWidgetPreviewsPathFromZip(
-                                    param, widgetName,
-                                    assets.open("$folder/$it"),
-                                    previewsFolder, previewFile, type))
+                    if (it.endsWith(KuperKomponent.extensionForType(type)) || it.endsWith(".zip")) {
+                        val previewFile = File(previewsFolder, it)
+                        val widgetName = it.substring(0, it.lastIndexOf("."))
+                        komponents.add(
+                                getWidgetPreviewsPathFromZip(
+                                        param, widgetName, "$folder/$it",
+                                        assets.open("$folder/$it"),
+                                        previewsFolder, previewFile, type))
+                    }
                 }
             }
         }
@@ -61,6 +63,7 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
     private fun getWidgetPreviewsPathFromZip(
             context: Context,
             name: String,
+            path: String,
             ins: InputStream,
             folder: File,
             file: File,
@@ -149,9 +152,15 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
             }
         }
         
-        val correctName = if (type != KuperKomponent.Type.ZOOPER)
-            name.substring(0, name.lastIndexOf(".")) else name
+        val correctName = try {
+            if (type != KuperKomponent.Type.ZOOPER)
+                name.substring(0, name.lastIndexOf('.'))
+            else name
+        } catch (e: Exception) {
+            name
+        }
+        
         return KuperKomponent(
-                type, correctName, preview.absolutePath, previewLand?.absolutePath ?: "")
+                type, correctName, path, preview.absolutePath, previewLand?.absolutePath ?: "")
     }
 }
