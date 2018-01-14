@@ -15,4 +15,13 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources></resources>
+<resources>
+  <string name="kuper_dashboard">ಕೂಪರ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್</string>
+  <string name="setup">ಸೆಟಪ್</string>
+  <string name="widgets">ವಿಜೆಟ್‌ಗಳು</string>
+  <string name="required_apps">ಅವಶ್ಯಕ ಆ್ಯಪ್‌ಗಳು</string>
+  <string name="assets">ಅಸ್ಸೆಟ್‌ಗಳು</string>
+  <string name="required_for_widgets">ಒಳಗೊಂಡಿರುವ ವಿಜೆಟ್‌ಗಳನ್ನು ಬಳಸಲು ಅವಶ್ಯಕ</string>
+  <string name="required_for_wallpapers">ಒಳಗೊಂಡಿರುವ ವಾಲ್ಪೇಪರ್‌ಳನ್ನು ಬಳಸಲು ಅವಶ್ಯಕ</string>
+  <string name="required_for_lockscreens">ಒಳಗೊಂಡಿರುವ ಲಾಕ್‌ಸ್ಕ್ರೀನ್‌ಗಳನ್ನು ಬಳಸಲು ಅವಶ್ಯಕ</string>
+</resources>
