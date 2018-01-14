@@ -24,4 +24,13 @@
   <string name="required_for_widgets">ಒಳಗೊಂಡಿರುವ ವಿಜೆಟ್‌ಗಳನ್ನು ಬಳಸಲು ಅವಶ್ಯಕ</string>
   <string name="required_for_wallpapers">ಒಳಗೊಂಡಿರುವ ವಾಲ್ಪೇಪರ್‌ಳನ್ನು ಬಳಸಲು ಅವಶ್ಯಕ</string>
   <string name="required_for_lockscreens">ಒಳಗೊಂಡಿರುವ ಲಾಕ್‌ಸ್ಕ್ರೀನ್‌ಗಳನ್ನು ಬಳಸಲು ಅವಶ್ಯಕ</string>
+  <string name="required_assets">ಟೆಂಪ್ಲೇಟ್‌ಗಳು ಸರಿಯಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸಲು ಅಗತ್ಯವಿರುವ ಸ್ವತ್ತುಗಳು</string>
+  <string name="install">ಸ್ಥಾಪಿಸಿ</string>
+  <string name="template">ಟೆಂಪ್ಲೇಟ್</string>
+  <string name="templates">ಟೆಂಪ್ಲೇಟ್‌ಗಳು</string>
+  <string name="assets_installed">ಈಗಾಗಲೇ ಸ್ಥಾಪಿಸಲಾದ ಸ್ವತ್ತುಗಳು</string>
+  <string name="apps_installed">ಈಗಾಗಲೇ ಸ್ಥಾಪಿಸಲಾದ ಆ್ಯಪ್‌ಗಳು</string>
+  <string name="copying_assets">ZooperWidget/%1$s ಗೆ ಫೈಲ್ಗಳನ್ನು ನಕಲಿಸಲಾಗುತ್ತಿದೆ</string>
+  <string name="copied_assets_successfully">ಸ್ವತ್ತುಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನಕಲಿಸಲಾಗಿದೆ</string>
+  <string name="copied_assets_error">ಸ್ವತ್ತುಗಳನ್ನು ನಕಲಿಸುವಾಗ ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ</string>
 </resources>
