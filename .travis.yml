@@ -28,6 +28,7 @@ branches:
   except:
     - images
     - gh-pages
+    - i18n
 
 notifications:
   email: false
