@@ -17,22 +17,22 @@
   -->
 <resources>
   <string name="kuper_dashboard">Kuper Dashboard</string>
-  <string name="setup">Setup</string>
+  <string name="setup">Configuración</string>
   <string name="widgets">Widgets</string>
-  <string name="required_apps">Required apps</string>
-  <string name="assets">Assets</string>
-  <string name="required_for_widgets">Required to use widgets included</string>
-  <string name="required_for_wallpapers">Required to use wallpapers included</string>
-  <string name="required_for_lockscreens">Required to use lockscreens included</string>
-  <string name="required_assets">Assets required for templates to work properly</string>
-  <string name="install">Install</string>
-  <string name="template">Template</string>
-  <string name="templates">Templates</string>
-  <string name="assets_installed">Assets already installed</string>
-  <string name="apps_installed">Apps already installed</string>
-  <string name="copying_assets">Copying files to ZooperWidget/%1$s</string>
-  <string name="copied_assets_successfully">Copied assets successfully</string>
-  <string name="copied_assets_error">An unexpected error occurred while copying assets</string>
-  <string name="permission_request_assets">%1$s requires access to storage in order to be able to install assets</string>
-  <string name="permission_request_wallpaper">%1$s requires access to storage in order to be able to show your wallpaper in widgets previews</string>
+  <string name="required_apps">Aplicaciones necesarias</string>
+  <string name="assets">Archivos</string>
+  <string name="required_for_widgets">Necesario para usar los widgets incluídos</string>
+  <string name="required_for_wallpapers">Necesario para usar los fondos de pantalla incluídos</string>
+  <string name="required_for_lockscreens">Necesario para usar las pantallas de bloqueo incluídas</string>
+  <string name="required_assets">Archivos requeridos para que las plantillas funcionen adecuadamente</string>
+  <string name="install">Instalar</string>
+  <string name="template">Plantilla</string>
+  <string name="templates">Plantillas</string>
+  <string name="assets_installed">Archivos ya instalados</string>
+  <string name="apps_installed">Aplicaciones ya instaladas</string>
+  <string name="copying_assets">Copiando archivos a ZooperWidget/%1$s</string>
+  <string name="copied_assets_successfully">Archivos copiados con éxito</string>
+  <string name="copied_assets_error">Un error inesperado ocurrió mientras se copiaban los archivos</string>
+  <string name="permission_request_assets">%1$s requiere acceso al almacenamiento para poder instalar los archivos</string>
+  <string name="permission_request_wallpaper">%1$s requiere acceso al almacenamiento para poder mostrar tu fondo de pantalla en la previsualización de widgets</string>
 </resources>
