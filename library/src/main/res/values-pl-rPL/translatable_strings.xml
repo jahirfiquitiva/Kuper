@@ -16,23 +16,23 @@
   ~ limitations under the License.
   -->
 <resources>
-  <string name="kuper_dashboard">Kuper Dashboard</string>
-  <string name="setup">Setup</string>
-  <string name="widgets">Widgets</string>
-  <string name="required_apps">Required apps</string>
-  <string name="assets">Assets</string>
-  <string name="required_for_widgets">Required to use widgets included</string>
-  <string name="required_for_wallpapers">Required to use wallpapers included</string>
-  <string name="required_for_lockscreens">Required to use lockscreens included</string>
-  <string name="required_assets">Assets required for templates to work properly</string>
-  <string name="install">Install</string>
-  <string name="template">Template</string>
-  <string name="templates">Templates</string>
-  <string name="assets_installed">Assets already installed</string>
-  <string name="apps_installed">Apps already installed</string>
-  <string name="copying_assets">Copying files to ZooperWidget/%1$s</string>
-  <string name="copied_assets_successfully">Copied assets successfully</string>
-  <string name="copied_assets_error">An unexpected error occurred while copying assets</string>
-  <string name="permission_request_assets">%1$s requires access to storage in order to be able to install assets</string>
-  <string name="permission_request_wallpaper">%1$s requires access to storage in order to be able to show your wallpaper in widgets previews</string>
+  <string name="kuper_dashboard">Aplikacja bazowa Kuper</string>
+  <string name="setup">Konfiguracja</string>
+  <string name="widgets">Widżety</string>
+  <string name="required_apps">Wymagane aplikacje</string>
+  <string name="assets">Zasoby</string>
+  <string name="required_for_widgets">Wymagane do użycia wbudowanych widżetów</string>
+  <string name="required_for_wallpapers">Wymagane do użycia wbudowanych tapet</string>
+  <string name="required_for_lockscreens">Wymagane do użycia szablonów ekranu blokady</string>
+  <string name="required_assets">Wymagane zasoby do poprawnego działania szablonów</string>
+  <string name="install">Zainstaluj</string>
+  <string name="template">Szablon</string>
+  <string name="templates">Szablony</string>
+  <string name="assets_installed">Zasoby są już zainstalowane</string>
+  <string name="apps_installed">Aplikacje są już zainstalowane</string>
+  <string name="copying_assets">Kopiowanie plików do ZooperWidget/%1$s</string>
+  <string name="copied_assets_successfully">Kopiowanie zasobów powiodło się</string>
+  <string name="copied_assets_error">Podczas kopiowania zasobów wystąpił nieoczekiwany błąd</string>
+  <string name="permission_request_assets">%1$s wymaga dostępu do pamięci wewnętrznej, aby móc zainstalować zasoby</string>
+  <string name="permission_request_wallpaper">%1$s wymaga dostępu do pamięci wewnętrznej, aby móc wyświetlać twoją tapetę jako tło podglądu widżetów</string>
 </resources>
