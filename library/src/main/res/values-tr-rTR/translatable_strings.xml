@@ -23,7 +23,7 @@
   <string name="assets">Araçlar</string>
   <string name="required_for_widgets">Widget\'lari kullanmak için gerekli</string>
   <string name="required_for_wallpapers">Duvar kağıtlarını kullanmak için gerekli</string>
-  <string name="required_for_lockscreens">Eklenmiş kilit ekranlarını kullanmak için gerekli</string>
+  <string name="required_for_lockscreens">Kilit ekranlarını kullanmak için gerekli</string>
   <string name="required_assets">Şablonların düzgün çalışması için gereken araçlar</string>
   <string name="install">Yükle</string>
   <string name="template">Şablon</string>
