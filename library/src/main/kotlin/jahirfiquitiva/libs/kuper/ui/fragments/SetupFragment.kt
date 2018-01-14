@@ -27,10 +27,13 @@ import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
 import jahirfiquitiva.libs.kauextensions.extensions.ctxt
+import jahirfiquitiva.libs.kauextensions.extensions.getAppName
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kauextensions.extensions.openLink
+import jahirfiquitiva.libs.kauextensions.extensions.safeActv
+import jahirfiquitiva.libs.kauextensions.extensions.safeCtxt
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.providers.viewmodels.SetupViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
@@ -48,6 +51,10 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     
     private var setupAdapter: SetupAdapter? = null
     
+    fun scrollToTop() {
+        rv?.post { rv?.scrollToPosition(0) }
+    }
+    
     override fun initUI(content: View) {
         swipeToRefresh = content.findViewById(R.id.swipe_to_refresh)
         swipeToRefresh?.isEnabled = false
@@ -64,7 +71,15 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
                 loadingView = content.findViewById(R.id.loading_view)
                 setLoadingText(R.string.loading_section)
                 
-                updateList()
+                val layoutManager = GridLayoutManager(
+                        context, if (ctxt.isInPortraitMode) 1 else 2,
+                        GridLayoutManager.VERTICAL, false)
+                
+                setupAdapter = SetupAdapter(WeakReference(ctxt)) { onItemClicked(it, false) }
+                setupAdapter?.setLayoutManager(layoutManager)
+                rv.layoutManager = layoutManager
+                rv.adapter = setupAdapter
+                
                 setPaddingBottom(64.dpToPx)
             }
             
@@ -75,32 +90,25 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
                 }
             }
             
-            rv.state = EmptyViewRecyclerView.State.NORMAL
-        }
-    }
-    
-    fun updateList() {
-        (activity as? KuperActivity)?.let {
-            val layoutManager = GridLayoutManager(
-                    context, if (ctxt.isInPortraitMode) 1 else 2,
-                    GridLayoutManager.VERTICAL, false)
-            
-            setupAdapter = SetupAdapter(WeakReference(ctxt)) {
-                if (it.packageName.hasContent()) {
-                    ctxt.openLink(PLAY_STORE_LINK_PREFIX + it.packageName)
-                } else {
-                    (activity as KuperActivity).requestPermissionInstallAssets()
-                }
-            }
-            setupAdapter?.setLayoutManager(layoutManager)
-            rv?.layoutManager = layoutManager
-            rv?.adapter = setupAdapter
-            rv?.state = EmptyViewRecyclerView.State.NORMAL
+            rv.state = EmptyViewRecyclerView.State.LOADING
         }
     }
     
     override fun getContentLayout(): Int = R.layout.section_lists
-    override fun onItemClicked(item: KuperApp, longClick: Boolean) {}
+    
+    override fun onItemClicked(item: KuperApp, longClick: Boolean) {
+        if (item.packageName.hasContent()) {
+            safeCtxt { it.openLink(PLAY_STORE_LINK_PREFIX + item.packageName) }
+        } else {
+            (activity as? KuperActivity)?.executeStorageAction(
+                    explanation = getString(
+                            R.string.permission_request_assets, ctxt.getAppName())) {
+                safeActv {
+                    appsModel?.installAssets(it)
+                }
+            }
+        }
+    }
     
     override fun initViewModel() {
         appsModel = ViewModelProviders.of(this).get(SetupViewModel::class.java)

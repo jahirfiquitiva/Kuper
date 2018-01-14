@@ -23,7 +23,6 @@ import android.os.Build
 import android.os.Bundle
 import android.support.annotation.IntRange
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.view.Menu
 import android.view.MenuItem
 import ca.allanwang.kau.utils.postDelayed
@@ -49,24 +48,26 @@ import jahirfiquitiva.libs.kauextensions.extensions.inactiveIconsColor
 import jahirfiquitiva.libs.kauextensions.extensions.primaryColor
 import jahirfiquitiva.libs.kauextensions.extensions.requestSinglePermission
 import jahirfiquitiva.libs.kauextensions.extensions.tint
+import jahirfiquitiva.libs.kauextensions.ui.fragments.adapters.FragmentsAdapter
 import jahirfiquitiva.libs.kauextensions.ui.widgets.SearchView
 import jahirfiquitiva.libs.kauextensions.ui.widgets.bindSearchView
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.ui.fragments.KuperFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.SetupFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.WallpapersFragment
+import jahirfiquitiva.libs.kuper.ui.widgets.PseudoViewPager
 
 abstract class KuperActivity : BaseFramesActivity() {
     
     private val toolbar: CustomToolbar by bind(R.id.toolbar)
     private val bottomNavigation: AHBottomNavigation by bind(R.id.bottom_navigation)
-    
-    private val fragments = ArrayList<Fragment>()
+    private val pager: PseudoViewPager by bind(R.id.pager)
     
     private var searchView: SearchView? = null
     
-    private var currentItemId = -1
-    private var activeFragment: Fragment? = null
+    private var currentItemId = 0
+    
+    private var fragmentsAdapter: FragmentsAdapter? = null
     
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +78,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     }
     
     fun hideSetup() {
-        currentItemId = -1
+        currentItemId = 0
         setupContent(false)
     }
     
@@ -86,19 +87,33 @@ abstract class KuperActivity : BaseFramesActivity() {
                 100, {
             setupBottomNavigation(withSetup)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                showWallpaperPermissionExplanation()
+                executeStorageAction(
+                        55, getString(
+                        R.string.permission_request_wallpaper, getAppName())) {
+                    restart()
+                }
             }
         })
     }
     
-    override fun fragmentsContainer(): Int = R.id.fragments_container
+    override fun fragmentsContainer(): Int = 0
     
     private fun setupBottomNavigation(withSetup: Boolean) {
-        fragments.clear()
-        if (withSetup)
-            fragments += SetupFragment()
-        fragments += KuperFragment()
-        // fragments += WallpapersFragment()
+        fragmentsAdapter = if (withSetup) {
+            FragmentsAdapter(
+                    supportFragmentManager,
+                    SetupFragment(),
+                    KuperFragment(),
+                    WallpapersFragment())
+        } else {
+            FragmentsAdapter(
+                    supportFragmentManager,
+                    KuperFragment(),
+                    WallpapersFragment())
+        }
+        
+        pager.offscreenPageLimit = fragmentsAdapter?.count ?: 1
+        pager.adapter = fragmentsAdapter
         
         bottomNavigation.accentColor = accentColor
         with(bottomNavigation) {
@@ -190,38 +205,19 @@ abstract class KuperActivity : BaseFramesActivity() {
         invalidateOptionsMenu()
         
         try {
-            val hasSetup = (bottomNavigation.itemsCount > 2)
-            if (!isFragmentValid(position) || currentItemId != position) {
-                activeFragment = when (position) {
-                    0 -> {
-                        if (hasSetup) SetupFragment()
-                        else fragments[position]
-                    }
-                    1 -> {
-                        if (hasSetup) fragments[position]
-                        else WallpapersFragment()
-                    }
-                    2 -> WallpapersFragment()
-                    else -> null
-                }
-                activeFragment?.let {
-                    changeFragment(it)
-                    currentItemId = position
-                }
+            if (currentItemId != position) {
+                pager.setCurrentItem(position, true)
+                currentItemId = position
+            } else {
+                val activeFragment = fragmentsAdapter?.get(pager.currentItem)
+                (activeFragment as? SetupFragment)?.scrollToTop()
+                (activeFragment as? KuperFragment)?.scrollToTop()
+                (activeFragment as? WallpapersFragment)?.scrollToTop()
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
         return true
-    }
-    
-    private fun isFragmentValid(position: Int): Boolean {
-        return when (position) {
-            0 -> activeFragment is SetupFragment
-            1 -> activeFragment is KuperFragment
-            2 -> activeFragment is WallpapersFragment
-            else -> true
-        }
     }
     
     @SuppressLint("MissingSuperCall")
@@ -232,7 +228,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-        currentItemId = savedInstanceState?.getInt("current", -1) ?: -1
+        currentItemId = savedInstanceState?.getInt("current", 0) ?: 0
         postDelayed(100, { navigateToItem(currentItemId) })
     }
     
@@ -242,140 +238,22 @@ abstract class KuperActivity : BaseFramesActivity() {
                 LOCK, {
             postDelayed(
                     200, {
+                val activeFragment = fragmentsAdapter?.get(pager.currentItem)
                 if (activeFragment is KuperFragment) {
-                    (activeFragment as KuperFragment).applyFilter(filter)
+                    activeFragment.applyFilter(filter)
                 } else if (activeFragment is BaseFramesFragment<*, *>) {
-                    (activeFragment as BaseFramesFragment<*, *>)
+                    activeFragment
                             .enableRefresh(!filter.hasContent())
-                    (activeFragment as BaseFramesFragment<*, *>).applyFilter(filter)
+                    activeFragment.applyFilter(filter)
                 }
             })
         })
     }
     
     private fun refreshContent() {
+        val activeFragment = fragmentsAdapter?.get(pager.currentItem)
         if (activeFragment is WallpapersFragment) {
-            (activeFragment as WallpapersFragment).reloadData(1)
+            activeFragment.reloadData(1)
         }
-    }
-    
-    override fun onRequestPermissionsResult(
-            requestCode: Int, permissions: Array<out String>,
-            grantResults: IntArray
-                                           ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 43) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                installAssets()
-            } else {
-                showSnackbar(getString(R.string.permission_denied), Snackbar.LENGTH_LONG)
-            }
-        } else if (requestCode == 55) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                restart()
-            } else {
-                showSnackbar(getString(R.string.permission_denied), Snackbar.LENGTH_LONG)
-            }
-        }
-    }
-    
-    fun requestPermissionWallpaper() {
-        requestSinglePermission(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, 55,
-                object : PermissionRequestListener() {
-                    override fun onShowInformation(permission: String) =
-                            showWallpaperPermissionExplanation()
-                    
-                    override fun onPermissionCompletelyDenied() =
-                            showSnackbar(
-                                    getString(R.string.permission_denied_completely),
-                                    Snackbar.LENGTH_LONG)
-                    
-                    override fun onPermissionGranted() = restart()
-                })
-    }
-    
-    private fun showWallpaperPermissionExplanation() {
-        showSnackbar(
-                getString(R.string.permission_request_wallpaper, getAppName()),
-                Snackbar.LENGTH_LONG) {
-            setAction(
-                    R.string.allow, {
-                dismiss()
-                requestPermissionWallpaper()
-            })
-        }
-    }
-    
-    fun requestPermissionInstallAssets() {
-        requestSinglePermission(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, 43,
-                object : PermissionRequestListener() {
-                    override fun onShowInformation(permission: String) =
-                            showAssetsPermissionExplanation()
-                    
-                    override fun onPermissionCompletelyDenied() =
-                            showSnackbar(
-                                    getString(R.string.permission_denied_completely),
-                                    Snackbar.LENGTH_LONG)
-                    
-                    override fun onPermissionGranted() = installAssets()
-                })
-    }
-    
-    private fun showAssetsPermissionExplanation() {
-        showSnackbar(
-                getString(R.string.permission_request_assets, getAppName()),
-                Snackbar.LENGTH_LONG) {
-            setAction(
-                    R.string.allow, {
-                dismiss()
-                requestPermissionInstallAssets()
-            })
-        }
-    }
-    
-    fun installAssets() {
-        // TODO Finish
-        /*
-        val folders = arrayOf("fonts", "iconsets", "bitmaps")
-        val actualFolders = ArrayList<String>()
-        folders.forEach { if (inAssetsAndWithContent(it)) actualFolders.add(it) }
-        
-        var count = 0
-        
-        actualFolders.forEachIndexed { index, s ->
-            destroyDialog()
-            val dialogContent = getString(R.string.copying_assets, getCorrectFolderName(s))
-            dialog = buildMaterialDialog {
-                content(dialogContent)
-                progress(true, 0)
-                cancelable(false)
-            }
-            dialog?.setOnShowListener {
-                CopyAssetsTask(
-                        WeakReference(this), s, {
-                    if (it) count += 1
-                    destroyDialog()
-                    if (index == actualFolders.size - 1) {
-                        showSnackbar(
-                                getString(
-                                        if (count == actualFolders.size) R.string.copied_assets_successfully
-                                        else R.string.copied_assets_error), Snackbar.LENGTH_LONG)
-                        if (count == actualFolders.size) {
-                            val item: KuperApp? = apps.firstOrNull { !(it.packageName.hasContent()) }
-                            item?.let {
-                                apps.remove(it)
-                                if (activeFragment is SetupFragment) {
-                                    (activeFragment as SetupFragment).updateList()
-                                }
-                            }
-                        }
-                    }
-                }).execute()
-            }
-            dialog?.show()
-        }
-        */
     }
 }

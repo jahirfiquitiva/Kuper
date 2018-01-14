@@ -59,6 +59,10 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     private var fastScroll: RecyclerFastScroller? = null
     private var kuperAdapter: KuperAdapter? = null
     
+    fun scrollToTop() {
+        rv?.post { rv?.scrollToPosition(0) }
+    }
+    
     override fun initUI(content: View) {
         swipeToRefresh = content.findViewById(R.id.swipe_to_refresh)
         swipeToRefresh?.isEnabled = false
