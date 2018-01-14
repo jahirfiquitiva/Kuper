@@ -100,11 +100,11 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
         if (item.packageName.hasContent()) {
             safeCtxt { it.openLink(PLAY_STORE_LINK_PREFIX + item.packageName) }
         } else {
-            (activity as? KuperActivity)?.executeStorageAction(
-                    explanation = getString(
-                            R.string.permission_request_assets, ctxt.getAppName())) {
-                safeActv {
-                    appsModel?.installAssets(it)
+            (activity as? KuperActivity)?.let { actv ->
+                actv.executeStorageAction(
+                        explanation = getString(
+                                R.string.permission_request_assets, ctxt.getAppName())) {
+                    appsModel?.installAssets(actv)
                 }
             }
         }
