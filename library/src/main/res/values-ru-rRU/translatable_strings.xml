@@ -32,4 +32,7 @@
   <string name="apps_installed">Приложения уже установлены</string>
   <string name="copying_assets">Копируем файлы в ZooperWidget/%1$s</string>
   <string name="copied_assets_successfully">Ресурсы успешно скопированы</string>
+  <string name="copied_assets_error">Возникла непредвиденная ошибка при копировании ресурсов</string>
+  <string name="permission_request_assets">%1$s необходим доступ к хранилищу чтобы установить ресурсы</string>
+  <string name="permission_request_wallpaper">%1$s запрашивает доступ к хранилищу, чтобы отображать ваши текущие обои как фон для виджетов</string>
 </resources>
