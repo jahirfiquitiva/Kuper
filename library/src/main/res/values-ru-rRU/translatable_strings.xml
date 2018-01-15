@@ -21,4 +21,15 @@
   <string name="widgets">Виджеты</string>
   <string name="required_apps">Необходимые приложения</string>
   <string name="assets">Ресурсы</string>
+  <string name="required_for_widgets">Необходимо для использования этих виджетов</string>
+  <string name="required_for_wallpapers">Необходимо для использования этих обоев</string>
+  <string name="required_for_lockscreens">Необходимо для использования этих экранов блокировки</string>
+  <string name="required_assets">Ресурсы необходимы для корректной работы шаблонов</string>
+  <string name="install">Установить</string>
+  <string name="template">Шаблон</string>
+  <string name="templates">Шаблоны</string>
+  <string name="assets_installed">Ресурсы уже установлены</string>
+  <string name="apps_installed">Приложения уже установлены</string>
+  <string name="copying_assets">Копируем файлы в ZooperWidget/%1$s</string>
+  <string name="copied_assets_successfully">Ресурсы успешно скопированы</string>
 </resources>
