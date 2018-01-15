@@ -15,4 +15,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources></resources>
+<resources>
+  <string name="kuper_dashboard">Kuper Dashboard</string>
+  <string name="setup">Установить</string>
+  <string name="widgets">Виджеты</string>
+  <string name="required_apps">Необходимые приложения</string>
+  <string name="assets">Ресурсы</string>
+</resources>
