@@ -45,23 +45,23 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     private var appsModel: SetupViewModel? = null
     
     private var swipeToRefresh: SwipeRefreshLayout? = null
-    private var rv: EmptyViewRecyclerView? = null
+    private var recyclerView: EmptyViewRecyclerView? = null
     private var fastScroll: RecyclerFastScroller? = null
     
     private var setupAdapter: SetupAdapter? = null
     
     fun scrollToTop() {
-        rv?.post { rv?.scrollToPosition(0) }
+        recyclerView?.post { recyclerView?.scrollToPosition(0) }
     }
     
     override fun initUI(content: View) {
         swipeToRefresh = content.findViewById(R.id.swipe_to_refresh)
         swipeToRefresh?.isEnabled = false
-        rv = content.findViewById(R.id.list_rv)
+        recyclerView = content.findViewById(R.id.list_rv)
         fastScroll = content.findViewById(R.id.fast_scroller)
         
-        rv?.let { rv ->
-            with(rv) {
+        recyclerView?.let { recyclerView ->
+            with(recyclerView) {
                 itemAnimator = if (ctxt.isLowRamDevice) null else DefaultItemAnimator()
                 textView = content.findViewById(R.id.empty_text)
                 emptyView = content.findViewById(R.id.empty_view)
@@ -76,8 +76,8 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
                 
                 setupAdapter = SetupAdapter(WeakReference(ctxt)) { onItemClicked(it, false) }
                 setupAdapter?.setLayoutManager(layoutManager)
-                rv.layoutManager = layoutManager
-                rv.adapter = setupAdapter
+                recyclerView.layoutManager = layoutManager
+                recyclerView.adapter = setupAdapter
                 
                 setPaddingBottom(64.dpToPx)
             }
@@ -85,11 +85,11 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
             fastScroll?.let {
                 with(it) {
                     attachSwipeRefreshLayout(swipeToRefresh)
-                    attachRecyclerView(rv)
+                    attachRecyclerView(recyclerView)
                 }
             }
             
-            rv.state = EmptyViewRecyclerView.State.LOADING
+            recyclerView.state = EmptyViewRecyclerView.State.LOADING
         }
     }
     

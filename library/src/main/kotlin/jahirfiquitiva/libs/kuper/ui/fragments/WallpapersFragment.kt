@@ -25,7 +25,7 @@ class WallpapersFragment : BaseWallpapersFragment() {
     
     override fun initUI(content: View) {
         super.initUI(content)
-        rv?.setPaddingBottom(64.dpToPx)
+        recyclerView?.setPaddingBottom(64.dpToPx)
     }
     
     override fun doOnWallpapersChange(data: ArrayList<Wallpaper>, fromCollectionActivity: Boolean) {
