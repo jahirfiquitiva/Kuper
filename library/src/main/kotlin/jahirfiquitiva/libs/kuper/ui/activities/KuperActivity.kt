@@ -15,10 +15,8 @@
  */
 package jahirfiquitiva.libs.kuper.ui.activities
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.IntRange
@@ -30,10 +28,10 @@ import ca.allanwang.kau.utils.restart
 import ca.allanwang.kau.utils.visibleIf
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
+import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
 import jahirfiquitiva.libs.frames.ui.activities.base.BaseFramesActivity
 import jahirfiquitiva.libs.frames.ui.fragments.base.BaseFramesFragment
 import jahirfiquitiva.libs.frames.ui.widgets.CustomToolbar
-import jahirfiquitiva.libs.kauextensions.extensions.PermissionRequestListener
 import jahirfiquitiva.libs.kauextensions.extensions.accentColor
 import jahirfiquitiva.libs.kauextensions.extensions.bind
 import jahirfiquitiva.libs.kauextensions.extensions.cardBackgroundColor
@@ -46,16 +44,18 @@ import jahirfiquitiva.libs.kauextensions.extensions.getSecondaryTextColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.inactiveIconsColor
 import jahirfiquitiva.libs.kauextensions.extensions.primaryColor
-import jahirfiquitiva.libs.kauextensions.extensions.requestSinglePermission
 import jahirfiquitiva.libs.kauextensions.extensions.tint
 import jahirfiquitiva.libs.kauextensions.ui.fragments.adapters.FragmentsAdapter
 import jahirfiquitiva.libs.kauextensions.ui.widgets.SearchView
 import jahirfiquitiva.libs.kauextensions.ui.widgets.bindSearchView
 import jahirfiquitiva.libs.kuper.R
+import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
+import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask
 import jahirfiquitiva.libs.kuper.ui.fragments.KuperFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.SetupFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.WallpapersFragment
 import jahirfiquitiva.libs.kuper.ui.widgets.PseudoViewPager
+import java.lang.ref.WeakReference
 
 abstract class KuperActivity : BaseFramesActivity() {
     
@@ -254,6 +254,47 @@ abstract class KuperActivity : BaseFramesActivity() {
         val activeFragment = fragmentsAdapter?.get(pager.currentItem)
         if (activeFragment is WallpapersFragment) {
             activeFragment.reloadData(1)
+        }
+    }
+    
+    fun installAssets() {
+        val folders = arrayOf("fonts", "iconsets", "bitmaps")
+        val actualFolders = ArrayList<String>()
+        folders.forEach { if (it.inAssetsAndWithContent(this)) actualFolders.add(it) }
+        
+        var count = 0
+        
+        actualFolders.forEachIndexed { index, s ->
+            destroyDialog()
+            val dialogContent = getString(
+                    R.string.copying_assets,
+                    CopyAssetsTask.getCorrectFolderName(s))
+            dialog = buildMaterialDialog {
+                content(dialogContent)
+                progress(true, 0)
+                cancelable(false)
+            }
+            dialog?.setOnShowListener {
+                CopyAssetsTask(
+                        WeakReference(this), s, {
+                    if (it) count += 1
+                    destroyDialog()
+                    if (index == actualFolders.size - 1) {
+                        showSnackbar(
+                                getString(
+                                        if (count == actualFolders.size) R.string.copied_assets_successfully
+                                        else R.string.copied_assets_error),
+                                Snackbar.LENGTH_LONG)
+                        if (count == actualFolders.size) {
+                            (getCurrentFragment() as? SetupFragment)?.loadDataFromViewModel() ?: {
+                                (fragmentsAdapter?.get(
+                                        currentItemId) as? SetupFragment)?.loadDataFromViewModel()
+                            }()
+                        }
+                    }
+                }).execute()
+            }
+            dialog?.show()
         }
     }
 }

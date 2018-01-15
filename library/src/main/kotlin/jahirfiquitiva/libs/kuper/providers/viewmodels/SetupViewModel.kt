@@ -17,33 +17,27 @@ package jahirfiquitiva.libs.kuper.providers.viewmodels
 
 import android.content.Context
 import android.os.Environment
-import android.support.design.widget.Snackbar
-import android.support.v4.app.FragmentActivity
 import ca.allanwang.kau.utils.isAppInstalled
 import jahirfiquitiva.libs.archhelpers.viewmodels.ListViewModel
-import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
 import jahirfiquitiva.libs.kauextensions.extensions.getBoolean
-import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kuper.R
+import jahirfiquitiva.libs.kuper.helpers.extensions.getFilesInAssetsFolder
+import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
 import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask
-import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask.Companion.getCorrectFolderName
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KOLORETTE_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.MEDIA_UTILS_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.ZOOPER_PACKAGE
-import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
 import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
-import jahirfiquitiva.libs.kuper.ui.fragments.SetupFragment
 import java.io.File
-import java.lang.ref.WeakReference
 
 class SetupViewModel : ListViewModel<Context, KuperApp>() {
     override fun internalLoad(param: Context): ArrayList<KuperApp> {
         val apps = ArrayList<KuperApp>()
         
-        if (!param.isAppInstalled(ZOOPER_PACKAGE) && inAssetsAndWithContent(param, "templates")) {
+        if (!param.isAppInstalled(ZOOPER_PACKAGE) && "templates".inAssetsAndWithContent(param)) {
             apps.add(
                     KuperApp(
                             param.getString(R.string.zooper_widget),
@@ -69,7 +63,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
                             "ic_zooper", KOLORETTE_PACKAGE))
         }
         
-        if (!param.isAppInstalled(KWGT_PACKAGE) && inAssetsAndWithContent(param, "widgets")) {
+        if (!param.isAppInstalled(KWGT_PACKAGE) && "widgets".inAssetsAndWithContent(param)) {
             apps.add(
                     KuperApp(
                             param.getString(R.string.kwgt),
@@ -77,7 +71,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
                             "ic_kustom", KWGT_PACKAGE))
         }
         
-        if (!param.isAppInstalled(KLWP_PACKAGE) && inAssetsAndWithContent(param, "wallpapers")) {
+        if (!param.isAppInstalled(KLWP_PACKAGE) && "wallpapers".inAssetsAndWithContent(param)) {
             apps.add(
                     KuperApp(
                             param.getString(R.string.klwp),
@@ -85,7 +79,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
                             "ic_kustom", KLWP_PACKAGE))
         }
         
-        if (!param.isAppInstalled(KLCK_PACKAGE) && inAssetsAndWithContent(param, "lockscreens")) {
+        if (!param.isAppInstalled(KLCK_PACKAGE) && "lockscreens".inAssetsAndWithContent(param)) {
             apps.add(
                     KuperApp(
                             param.getString(R.string.klck),
@@ -103,81 +97,16 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         return apps
     }
     
-    fun installAssets(activity: FragmentActivity) {
-        val folders = arrayOf("fonts", "iconsets", "bitmaps")
-        val actualFolders = ArrayList<String>()
-        folders.forEach { if (inAssetsAndWithContent(activity, it)) actualFolders.add(it) }
-        
-        var count = 0
-        
-        actualFolders.forEachIndexed { index, s ->
-            (activity as? KuperActivity)?.let { actv ->
-                actv.destroyDialog()
-                val dialogContent = actv.getString(R.string.copying_assets, getCorrectFolderName(s))
-                actv.dialog = actv.buildMaterialDialog {
-                    content(dialogContent)
-                    progress(true, 0)
-                    cancelable(false)
-                }
-                actv.dialog?.setOnShowListener {
-                    CopyAssetsTask(
-                            WeakReference(actv), s, {
-                        if (it) count += 1
-                        actv.destroyDialog()
-                        if (index == actualFolders.size - 1) {
-                            actv.showSnackbar(
-                                    actv.getString(
-                                            if (count == actualFolders.size) R.string.copied_assets_successfully
-                                            else R.string.copied_assets_error),
-                                    Snackbar.LENGTH_LONG)
-                            if (count == actualFolders.size) {
-                                val apps = ArrayList(getData().orEmpty())
-                                val item: KuperApp? = apps.firstOrNull { !(it.packageName.hasContent()) }
-                                item?.let {
-                                    apps.remove(it)
-                                    postResult(apps)
-                                }
-                            }
-                        }
-                    }).execute()
-                }
-                actv.dialog?.show()
-            }
-        }
-    }
-    
-    private fun inAssetsAndWithContent(context: Context, folder: String): Boolean {
-        val folders = context.assets.list("")
-        return if (folders != null) {
-            if (folders.contains(folder)) {
-                return getFilesInAssetsFolder(context, folder).isNotEmpty()
-            } else false
-        } else false
-    }
-    
-    private fun getFilesInAssetsFolder(context: Context, folder: String): ArrayList<String> {
-        val list = ArrayList<String>()
-        val files = context.assets.list(folder)
-        if (files != null) {
-            if (files.isNotEmpty()) {
-                files.forEach {
-                    if (!(CopyAssetsTask.filesToIgnore.contains(it))) list.add(it)
-                }
-            }
-        }
-        return list
-    }
-    
     private fun areAssetsInstalled(context: Context): Boolean {
         val folders = arrayOf("fonts", "iconsets", "bitmaps")
         val actualFolders = ArrayList<String>()
-        folders.forEach { if (inAssetsAndWithContent(context, it)) actualFolders.add(it) }
+        folders.forEach { if (it.inAssetsAndWithContent(context)) actualFolders.add(it) }
         
         var count = 0
         
         for (folder in actualFolders) {
             var filesCount = 0
-            val possibleFiles = getFilesInAssetsFolder(context, folder)
+            val possibleFiles = folder.getFilesInAssetsFolder(context)
             possibleFiles.forEach {
                 if (it.contains(".") && (!CopyAssetsTask.filesToIgnore.contains(it))) {
                     val file = File(

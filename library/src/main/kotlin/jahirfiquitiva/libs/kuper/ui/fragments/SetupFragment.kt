@@ -32,7 +32,6 @@ import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kauextensions.extensions.openLink
-import jahirfiquitiva.libs.kauextensions.extensions.safeActv
 import jahirfiquitiva.libs.kauextensions.extensions.safeCtxt
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.providers.viewmodels.SetupViewModel
@@ -104,7 +103,7 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
                 actv.executeStorageAction(
                         explanation = getString(
                                 R.string.permission_request_assets, ctxt.getAppName())) {
-                    appsModel?.installAssets(actv)
+                    actv.installAssets()
                 }
             }
         }
