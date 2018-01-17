@@ -3,13 +3,17 @@
 Kuper
 ======
 
+![API](https://img.shields.io/badge/API-16%2B-34bf49.svg)
 [![JitPack](https://jitpack.io/v/jahirfiquitiva/Kuper.svg)](https://jitpack.io/#jahirfiquitiva/Kuper)
-[![Build Status](https://travis-ci.org/jahirfiquitiva/Kuper.svg?branch=sample)](https://travis-ci.org/jahirfiquitiva/Kuper)
-
-![API](https://img.shields.io/badge/API-16%2B-7ac143.svg)
-[![Sample App](https://img.shields.io/badge/SAMPLE-APP-34bf49.svg)](https://github.com/jahirfiquitiva/Kuper/raw/master/art/KuperSample.apk)
+[![Build Status](https://travis-ci.org/jahirfiquitiva/Kuper.svg?branch=master)](https://travis-ci.org/jahirfiquitiva/Kuper)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d031c3945451435d950b66352fa6abb6)](https://www.codacy.com/app/jahirfiquitiva/Kuper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jahirfiquitiva/Kuper&amp;utm_campaign=Badge_Grade)
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/Kuper/localized.svg)](http://j.mp/KuperTranslations)
 
 A full-of-features, easy-to-customize, free and open source, light-weight, Android dashboard library to create widgets apps with Zooper widgets and/or Kustom assets (Widgets, Wallpapers and Komponents)
+
+<a target="_blank" href="https://github.com/jahirfiquitiva/Kuper/raw/master/art/KuperSample.apk">
+<img src="http://jahirfiquitiva.me/share/download_sample.svg" width="250"/>
+</a>
 
 ## Show some  :blue_heart:
 [![GitHub stars](https://img.shields.io/github/stars/jahirfiquitiva/Kuper.svg?style=social&label=Star)](https://github.com/jahirfiquitiva/Kuper)
@@ -71,7 +75,7 @@ A full-of-features, easy-to-customize, free and open source, light-weight, Andro
 - Works with Android 4.1 and newer.
 
 ## Help translating
-:page_facing_up: Help making Kuper available in more languages. [Click here to go to the translation site](http://j.mp/TranslateKuper)
+:page_facing_up: Help making Kuper available in more languages. [Click here to go to the translation site](http://j.mp/KuperTranslations)
 
 ## Changelog
 :radio_button: You can find it in the [Releases page](https://github.com/jahirfiquitiva/Kuper/releases)
@@ -141,7 +145,7 @@ Just join our community and make a post. We'll help you as soon as possible. [![
 
 This app is shared under the CreativeCommons Attribution-ShareAlike license.
 
-	Copyright © 2017 Jahir Fiquitiva
+	Copyright © 2018 Jahir Fiquitiva
 
 	Licensed under the CreativeCommons Attribution-ShareAlike 
 	4.0 International License. You may not use this file except in compliance 
