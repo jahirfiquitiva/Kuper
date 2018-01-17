@@ -15,6 +15,20 @@
  */
 package jahirfiquitiva.apps.kuper.sample
 
-import jahirfiquitiva.libs.frames.data.services.FramesArtSource
+import android.app.Application
 
-class MuzeiService : FramesArtSource("MyMuzeiService")
+// TODO: Remove comment marks to enable
+// import com.onesignal.OneSignal
+
+class MyApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        // TODO: Remove comment marks to enable
+        /*
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init()
+                */
+    }
+}

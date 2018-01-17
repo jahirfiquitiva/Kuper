@@ -15,30 +15,23 @@
  */
 ext.versions = [
         // Projects
-        minSdk    : 16,
-        targetSdk : 27,
-        buildTools: '27.0.2',
+        minSdk         : 16,
+        targetSdk      : 27,
+        buildTools     : '27.0.3',
         // Gradle Plugins
-        gradle    : '3.0.1',
-        kotlin    : '1.2.10',
-        gms       : '3.1.0',
+        gradle         : '3.0.1',
+        kotlin         : '1.2.10',
         // Dependencies
-        frames    : '677372a',
-        bottomNav : '2.1.0',
-        firebase  : '11.6.2'
+        oneSignal      : '3.7.1',
+        oneSignalPlugin: '0.8.1'
 ]
 
 ext.gradlePlugins = [
         android: 'com.android.tools.build:gradle:' + versions.gradle,
-        kotlin : 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + versions.kotlin,
-        gms    : 'com.google.gms:google-services:' + versions.gms
+        kotlin : 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + versions.kotlin
 ]
 
 ext.libraries = [
-        // Frames
-        frames   : 'me.jahirfiquitiva:Frames:' + versions.frames + '@aar',
-        // Bottom Navigation
-        bottomNav: 'com.aurelhubert:ahbottomnavigation:' + versions.bottomNav,
-        // Firebase
-        firebase : 'com.google.firebase:firebase-messaging:' + versions.firebase
+        // OneSignal
+        oneSignal: 'com.onesignal:OneSignal:' + versions.oneSignal
 ]

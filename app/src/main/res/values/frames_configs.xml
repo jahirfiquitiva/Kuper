@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2017. Jahir Fiquitiva
+  ~ Copyright (c) 2018. Jahir Fiquitiva
   ~
   ~ Licensed under the CreativeCommons Attribution-ShareAlike
   ~ 4.0 International License. You may not use this file except in compliance
@@ -15,12 +15,6 @@
   ~ limitations under the License.
   -->
 <resources>
-
-    <!--    Notifications class name
-    -       Must be something similar to:
-    -       com.mypackage.name.FirebaseService
-    -->
-    <string name="notifications_class">jahirfiquitiva.apps.frames.sample.FirebaseService</string>
 
     <!--    Use old format?
     -       If you're coming from the previous Frames, then you will find this useful

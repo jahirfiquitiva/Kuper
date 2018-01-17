@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Jahir Fiquitiva
+ * Copyright (c) 2018. Jahir Fiquitiva
  *
  * Licensed under the CreativeCommons Attribution-ShareAlike
  * 4.0 International License. You may not use this file except in compliance
@@ -22,8 +22,8 @@ import jahirfiquitiva.libs.frames.data.services.FramesNotificationPublisher
 */
 
 // TODO: Remove comment marks to enable
-class FirebaseService /*:FirebaseMessagingService() {
-    override fun onMessageReceived(remoteMessage:RemoteMessage) {
+class FirebaseService /*: FirebaseMessagingService() {
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
         remoteMessage.notification?.let {
             FramesNotificationPublisher.publish {
                 id = 0 // Put any number here

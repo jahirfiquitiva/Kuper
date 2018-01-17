@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Jahir Fiquitiva
+ * Copyright (c) 2018. Jahir Fiquitiva
  *
  * Licensed under the CreativeCommons Attribution-ShareAlike
  * 4.0 International License. You may not use this file except in compliance
@@ -13,8 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-dependencies {
-    compile 'com.google.firebase:firebase-messaging:11.4.2'
-}
+package jahirfiquitiva.apps.kuper.sample
 
-apply plugin: 'com.google.gms.google-services'
+/* TODO: Remove comment marks to enable
+import com.onesignal.NotificationExtenderService
+import com.onesignal.OSNotificationReceivedResult
+import jahirfiquitiva.libs.frames.helpers.extensions.framesKonfigs
+
+class NotificationService : NotificationExtenderService() {
+    override fun onNotificationProcessing(notification: OSNotificationReceivedResult?): Boolean =
+            !framesKonfigs.notificationsEnabled
+}
+*/

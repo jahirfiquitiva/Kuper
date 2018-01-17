@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2017. Jahir Fiquitiva
+  ~ Copyright (c) 2018. Jahir Fiquitiva
   ~
   ~ Licensed under the CreativeCommons Attribution-ShareAlike
   ~ 4.0 International License. You may not use this file except in compliance
@@ -21,6 +22,7 @@
     <uses-permission android:name="com.android.vending.BILLING"/>
 
     <application
+            android:name=".MyApplication"
             android:allowBackup="true"
             android:fullBackupContent="true"
             android:icon="@mipmap/ic_launcher"
@@ -55,21 +57,16 @@
         </provider>
         -->
 
-        <!-- FirebaseService -->
+        <!-- OneSignal Notifications Service -->
         <!-- TODO: Remove comment marks to enable
         <service
-                android:name=".FirebaseService"
-                tools:ignore="ExportedService">
+                android:name=".NotificationService"
+                android:permission="android.permission.BIND_JOB_SERVICE"
+                android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.onesignal.NotificationExtender"/>
             </intent-filter>
         </service>
-        <meta-data
-                android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@drawable/ic_notifications"/>
-        <meta-data
-                android:name="com.google.firebase.messaging.default_notification_color"
-                android:resource="@color/notification_color"/>
         -->
 
         <activity
