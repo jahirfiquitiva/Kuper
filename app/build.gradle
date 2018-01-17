@@ -30,10 +30,10 @@ def isCi = System.getenv("CI") == "true"
 android {
     signingConfigs {
         release {
-            keyAlias 'frames'
-            keyPassword 'frames'
-            storeFile rootProject.file('/library/frames.jks')
-            storePassword 'frames'
+            keyAlias 'kuper'
+            keyPassword 'kupersample'
+            storeFile file('kuper.jks')
+            storePassword 'kupersample'
         }
     }
 
