@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2018. Jahir Fiquitiva
  *
- * Licensed under the CreativeCommons Attribution-ShareAlike 
- * 4.0 International License. You may not use this file except in compliance 
+ * Licensed under the CreativeCommons Attribution-ShareAlike
+ * 4.0 International License. You may not use this file except in compliance
  * with the License. You may obtain a copy of the License at
  *
  *    http://creativecommons.org/licenses/by-sa/4.0/legalcode
@@ -13,16 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// TODO: Remove comment marks to enable
+/*
+plugins {
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin' version versions.oneSignalPlugin
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+*/
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+// Determines if the application was built on Continuous Integration Server.
+def isCi = System.getenv("CI") == "true"
+
 android {
+    signingConfigs {
+        release {
+            keyAlias 'frames'
+            keyPassword 'frames'
+            storeFile rootProject.file('/library/frames.jks')
+            storePassword 'frames'
+        }
+    }
+
     compileSdkVersion versions.targetSdk
     buildToolsVersion versions.buildTools
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            outputFileName = "MyKuperApp-v${variant.versionName}-${variant.name}.apk"
+            if (isCi) {
+                outputFileName = "kuper-v${variant.versionName}-${variant.name}-${gitLocalSha()}.apk"
+            } else {
+                outputFileName = "MyKuperApp-v${variant.versionName}-${variant.name}.apk"
+            }
         }
     }
 
@@ -33,6 +57,13 @@ android {
     }
 
     defaultConfig {
+        // TODO: Remove comment marks to enable
+        /*
+        manifestPlaceholders = [onesignal_app_id               : "abcd-1234-efgh-5678",
+                                // Project number pulled from dashboard, local value is ignored.
+                                onesignal_google_project_number: "1234567890"]
+                                */
+
         applicationId "jahirfiquitiva.apps.kuper.sample"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
@@ -45,15 +76,12 @@ android {
         release {
             debuggable false
             zipAlignEnabled true
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources false
             proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
             consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
-    }
-
-    aaptOptions {
-        noCompress 'zw', 'zip', 'komp', 'klwp', 'kwgt', 'klck', 'kwch'
     }
 
     sourceSets {
@@ -70,13 +98,24 @@ android {
 
 dependencies {
     implementation project(path: ':library')
+    // TODO: Remove comment marks to enable
+    // implementation libraries.oneSignal
 }
-
-// TODO: Remove comment marks if you plan on implementing Firebase Notifications
-// apply from: './firebase.gradle'
 
 tasks.whenTaskAdded { task ->
     if (task.name.contains("lint") || task.name.contains("test")) {
         task.enabled = false
     }
+}
+
+/**
+ * Get SHA of the current commit.
+ */
+def gitLocalSha() {
+    def p = 'git rev-parse --short HEAD'.execute([], project.rootDir)
+    p.waitFor()
+    if (p.exitValue() != 0) {
+        return "000"
+    }
+    return p.text.trim()
 }

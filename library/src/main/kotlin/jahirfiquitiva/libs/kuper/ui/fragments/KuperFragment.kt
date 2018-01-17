@@ -49,6 +49,7 @@ import jahirfiquitiva.libs.kuper.ui.adapters.KuperAdapter
 import jahirfiquitiva.libs.kuper.ui.decorations.SectionedGridSpacingDecoration
 import java.lang.ref.WeakReference
 
+@Suppress("DEPRECATION")
 class KuperFragment : ViewModelFragment<KuperKomponent>() {
     
     private val list = ArrayList<KuperKomponent>()

@@ -22,11 +22,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import ca.allanwang.kau.utils.isVisible
 import ca.allanwang.kau.utils.visibleIf
+import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import jahirfiquitiva.libs.frames.helpers.extensions.releaseFromGlide
-import jahirfiquitiva.libs.frames.ui.adapters.viewholders.GlideSectionedViewHolder
 import jahirfiquitiva.libs.kauextensions.extensions.bind
 import jahirfiquitiva.libs.kauextensions.extensions.dividerColor
 import jahirfiquitiva.libs.kauextensions.extensions.formatCorrectly
@@ -38,7 +38,7 @@ import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import java.io.File
 
-class KuperViewHolder(itemView: View) : GlideSectionedViewHolder(itemView) {
+class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     private val wall: ImageView by itemView.bind(R.id.wall)
     private val preview: ImageView by itemView.bind(R.id.preview)
     private val details: LinearLayout by itemView.bind(R.id.komponent_details)
@@ -72,7 +72,8 @@ class KuperViewHolder(itemView: View) : GlideSectionedViewHolder(itemView) {
         }
     }
     
-    override fun onRecycled() {
+    fun unbind() {
         preview.releaseFromGlide()
+        preview.setImageDrawable(null)
     }
 }

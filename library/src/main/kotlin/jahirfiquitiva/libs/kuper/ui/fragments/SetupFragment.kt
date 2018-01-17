@@ -40,6 +40,7 @@ import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
 import jahirfiquitiva.libs.kuper.ui.adapters.SetupAdapter
 import java.lang.ref.WeakReference
 
+@Suppress("DEPRECATION")
 class SetupFragment : ViewModelFragment<KuperApp>() {
     
     private var appsModel: SetupViewModel? = null
