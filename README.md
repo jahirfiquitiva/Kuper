@@ -11,7 +11,7 @@ Kuper
 
 A full-of-features, easy-to-customize, free and open source, light-weight, Android dashboard library to create widgets apps with Zooper widgets and/or Kustom assets (Widgets, Wallpapers and Komponents)
 
-<a target="_blank" href="https://github.com/jahirfiquitiva/Kuper/raw/master/art/KuperSample.apk">
+<a target="_blank" href="http://j.mp/KuperAPK">
 <img src="http://jahirfiquitiva.me/share/download_sample.svg" width="250"/>
 </a>
 
