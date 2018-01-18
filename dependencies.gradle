@@ -23,8 +23,8 @@ ext.versions = [
         kotlin         : '1.2.10',
         libs           : '2.0',
         // App Versions:
-        versionCode    : 110,
-        versionName    : '1.1.0',
+        versionCode    : 111,
+        versionName    : '1.1.1',
         // Dependencies
         frames         : '2.1.6',
         bottomNav      : '2.1.0',
