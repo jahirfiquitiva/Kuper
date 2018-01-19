@@ -24,6 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+        <jahirfiquitiva.libs.kauextensions.ui.widgets.SquaredImageView
+                android:id="@+id/wall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription, UnusedAttribute"/>
+
         <ProgressBar
                 android:id="@+id/loading"
                 style="?android:progressBarStyle"
@@ -31,13 +38,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"/>
-
-        <jahirfiquitiva.libs.kauextensions.ui.widgets.SquaredImageView
-                android:id="@+id/wall"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:ignore="ContentDescription, UnusedAttribute"/>
 
         <jahirfiquitiva.libs.kauextensions.ui.widgets.SquaredImageView
                 android:id="@+id/preview"
