@@ -87,10 +87,9 @@ abstract class KuperActivity : BaseFramesActivity() {
                 100, {
             setupBottomNavigation(withSetup)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                executeStorageAction(
-                        55, getString(
-                        R.string.permission_request_wallpaper, getAppName())) {
-                    restart()
+                requestStoragePermission(
+                        getString(R.string.permission_request_wallpaper, getAppName())) {
+                    onThemeChanged()
                 }
             }
         })

@@ -24,6 +24,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+        <ProgressBar
+                android:id="@+id/loading"
+                style="?android:progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
         <jahirfiquitiva.libs.kauextensions.ui.widgets.SquaredImageView
                 android:id="@+id/wall"
                 android:layout_width="match_parent"

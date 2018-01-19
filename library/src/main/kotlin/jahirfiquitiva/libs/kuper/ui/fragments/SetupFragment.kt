@@ -32,7 +32,6 @@ import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kauextensions.extensions.openLink
-import jahirfiquitiva.libs.kauextensions.extensions.safeCtxt
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.providers.viewmodels.SetupViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
@@ -98,12 +97,11 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     
     override fun onItemClicked(item: KuperApp, longClick: Boolean) {
         if (item.packageName.hasContent()) {
-            safeCtxt { it.openLink(PLAY_STORE_LINK_PREFIX + item.packageName) }
+            ctxt { it.openLink(PLAY_STORE_LINK_PREFIX + item.packageName) }
         } else {
             (activity as? KuperActivity)?.let { actv ->
-                actv.executeStorageAction(
-                        explanation = getString(
-                                R.string.permission_request_assets, ctxt.getAppName())) {
+                actv.requestStoragePermission(
+                        getString(R.string.permission_request_assets, ctxt.getAppName())) {
                     actv.installAssets()
                 }
             }

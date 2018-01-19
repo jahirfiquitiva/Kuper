@@ -15,18 +15,24 @@
  */
 package jahirfiquitiva.libs.kuper.ui.adapters.viewholders
 
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
+import ca.allanwang.kau.utils.gone
 import ca.allanwang.kau.utils.isVisible
+import ca.allanwang.kau.utils.visible
 import ca.allanwang.kau.utils.visibleIf
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import jahirfiquitiva.libs.frames.helpers.extensions.releaseFromGlide
+import jahirfiquitiva.libs.frames.helpers.utils.GlideRequestCallback
+import jahirfiquitiva.libs.kauextensions.extensions.applyColorFilter
 import jahirfiquitiva.libs.kauextensions.extensions.bind
 import jahirfiquitiva.libs.kauextensions.extensions.dividerColor
 import jahirfiquitiva.libs.kauextensions.extensions.formatCorrectly
@@ -45,6 +51,7 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     private val name: TextView by itemView.bind(R.id.komponent_name)
     private val app: TextView by itemView.bind(R.id.komponent_app)
     private val icon: ImageView by itemView.bind(R.id.launch_app)
+    private val progress: ProgressBar by itemView.bind(R.id.loading)
     
     fun bind(
             komponent: KuperKomponent,
@@ -64,9 +71,27 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
                 icon.setImageDrawable("ic_open_app".getDrawable(context))
                 icon.setOnClickListener { listener(komponent) }
             }
-            val rightPreview = if (context.isInPortraitMode) komponent.previewPath else komponent.rightLandPath
+            val rightPreview =
+                    if (context.isInPortraitMode) komponent.previewPath else komponent.rightLandPath
+            
+            try {
+                progress.indeterminateDrawable.applyColorFilter(Color.parseColor("#888"))
+            } catch (e: Exception) {
+            }
+            
             manager.load(File(rightPreview))
                     .apply(RequestOptions().priority(Priority.HIGH))
+                    .listener(object : GlideRequestCallback<Drawable>() {
+                        override fun onLoadSucceed(resource: Drawable): Boolean {
+                            progress.gone()
+                            return false
+                        }
+                        
+                        override fun onLoadFailed(): Boolean {
+                            progress.visible()
+                            return super.onLoadFailed()
+                        }
+                    })
                     .into(preview)
                     .clearOnDetach()
         }
@@ -75,5 +100,6 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     fun unbind() {
         preview.releaseFromGlide()
         preview.setImageDrawable(null)
+        progress.visible()
     }
 }
