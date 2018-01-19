@@ -51,8 +51,8 @@ android {
         applicationId "jahirfiquitiva.apps.kuper.sample"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode 111
-        versionName "1.1.1"
+        versionCode 114
+        versionName "1.1.4"
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -85,7 +85,7 @@ android {
 
 dependencies {
     // Kuper
-    implementation('me.jahirfiquitiva:Kuper:1.1.1@aar') {
+    implementation('me.jahirfiquitiva:Kuper:1.1.4@aar') {
         transitive = true
     }
     // TODO: Remove comment marks to enable
