@@ -24,7 +24,6 @@ import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import ca.allanwang.kau.utils.postDelayed
-import ca.allanwang.kau.utils.restart
 import ca.allanwang.kau.utils.visibleIf
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
@@ -50,6 +49,7 @@ import jahirfiquitiva.libs.kauextensions.ui.widgets.SearchView
 import jahirfiquitiva.libs.kauextensions.ui.widgets.bindSearchView
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
+import jahirfiquitiva.libs.kuper.helpers.extensions.kuperKonfigs
 import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask
 import jahirfiquitiva.libs.kuper.ui.fragments.KuperFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.SetupFragment
@@ -89,7 +89,10 @@ abstract class KuperActivity : BaseFramesActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 requestStoragePermission(
                         getString(R.string.permission_request_wallpaper, getAppName())) {
-                    onThemeChanged()
+                    if (!kuperKonfigs.permissionRequested) {
+                        kuperKonfigs.permissionRequested = true
+                        onThemeChanged()
+                    }
                 }
             }
         })

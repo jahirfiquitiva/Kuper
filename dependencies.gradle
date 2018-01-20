@@ -23,13 +23,12 @@ ext.versions = [
         kotlin         : '1.2.20',
         libs           : '2.0',
         // App Versions:
-        versionCode    : 114,
-        versionName    : '1.1.4',
+        versionCode    : 115,
+        versionName    : '1.1.5',
         // Dependencies
-        frames         : '2.1.7',
+        frames         : '2.1.8',
         bottomNav      : '2.1.0',
-        oneSignal      : '3.7.1',
-        oneSignalPlugin: '0.8.1'
+        oneSignal      : '3.7.1'
 ]
 
 ext.gradlePlugins = [
