@@ -16,6 +16,7 @@
   ~ limitations under the License.
   -->
 <resources>
+  <string name="kuper_dashboard">Kuper Dashboard</string>
   <string name="setup">Einrichtung</string>
   <string name="widgets">Widgets</string>
   <string name="required_apps">Erforderliche Anwendungen</string>
@@ -23,6 +24,7 @@
   <string name="required_for_widgets">Wird benötigt, um Widgets zu verwenden</string>
   <string name="required_for_wallpapers">Wird benötigt, um Hintergründe zu verwenden</string>
   <string name="required_for_lockscreens">Wird benötigt, um Sperrbildschirme zu verwenden</string>
+  <string name="required_assets">Ressourcen werden benötigt, damit Vorlagen ordnungsgemäß funktionieren</string>
   <string name="install">Installieren</string>
   <string name="template">Vorlage</string>
   <string name="templates">Vorlagen</string>
@@ -31,6 +33,6 @@
   <string name="copying_assets">Kopiere Dateien nach ZooperWidget/%1$s</string>
   <string name="copied_assets_successfully">Ressourcen erfolgreich kopiert</string>
   <string name="copied_assets_error">Unerwarteter Fehler beim Kopieren der Ressourcen</string>
-  <string name="permission_request_assets">%1$s benötigt Speicherzugriff, um benötigte Ressourcen zu installieren</string>
-  <string name="permission_request_wallpaper">%1$s benötigt Speicherzugriff, um deinen Hintergrund in den Widget-Vorschauen anzuzeigen</string>
+  <string name="permission_request_assets">%1$s benötigt Zugriff auf deinen Speicher, um benötigte Ressourcen zu installieren</string>
+  <string name="permission_request_wallpaper">%1$s benötigt Zugriff auf deinen Speicher, um deinen Hintergrund in den Widget-Vorschauen anzuzeigen</string>
 </resources>
