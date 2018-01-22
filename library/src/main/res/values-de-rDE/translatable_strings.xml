@@ -33,6 +33,6 @@
   <string name="copying_assets">Kopiere Dateien nach ZooperWidget/%1$s</string>
   <string name="copied_assets_successfully">Ressourcen erfolgreich kopiert</string>
   <string name="copied_assets_error">Unerwarteter Fehler beim Kopieren der Ressourcen</string>
-  <string name="permission_request_assets">%1$s benötigt Zugriff auf deinen Speicher, um benötigte Ressourcen zu installieren</string>
+  <string name="permission_request_assets">%1$s benötigt Zugriff auf deinen Speicher, um Ressourcen zu installieren</string>
   <string name="permission_request_wallpaper">%1$s benötigt Zugriff auf deinen Speicher, um deinen Hintergrund in den Widget-Vorschauen anzuzeigen</string>
 </resources>
