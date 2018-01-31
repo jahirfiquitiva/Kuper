@@ -20,4 +20,5 @@ import jahirfiquitiva.libs.kuper.R
 
 class CreditsActivity : CreditsActivity() {
     override fun getDashboardTitle(): Int = R.string.kuper_dashboard
+    override fun getTranslationSite(): String = "http://j.mp/KuperTranslations"
 }

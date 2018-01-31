@@ -21,8 +21,8 @@ import jahirfiquitiva.libs.frames.ui.fragments.SettingsFragment
 class SettingsFragment : SettingsFragment() {
     override fun initPreferences() {
         super.initPreferences()
-        val storagePrefs = findPreference("storage_settings") as PreferenceCategory
+        val storagePrefs = findPreference("storage_settings") as? PreferenceCategory
         val dbPref = findPreference("clear_database")
-        storagePrefs.removePreference(dbPref)
+        if (dbPref != null) storagePrefs?.removePreference(dbPref)
     }
 }

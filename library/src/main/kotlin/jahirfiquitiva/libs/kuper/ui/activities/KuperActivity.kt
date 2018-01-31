@@ -41,12 +41,13 @@ import jahirfiquitiva.libs.kauextensions.extensions.getBoolean
 import jahirfiquitiva.libs.kauextensions.extensions.getPrimaryTextColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.getSecondaryTextColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
+import jahirfiquitiva.libs.kauextensions.extensions.hideAllItems
 import jahirfiquitiva.libs.kauextensions.extensions.inactiveIconsColor
 import jahirfiquitiva.libs.kauextensions.extensions.primaryColor
+import jahirfiquitiva.libs.kauextensions.extensions.showAllItems
 import jahirfiquitiva.libs.kauextensions.extensions.tint
 import jahirfiquitiva.libs.kauextensions.ui.fragments.adapters.FragmentsAdapter
-import jahirfiquitiva.libs.kauextensions.ui.widgets.SearchView
-import jahirfiquitiva.libs.kauextensions.ui.widgets.bindSearchView
+import jahirfiquitiva.libs.kauextensions.ui.widgets.CustomSearchView
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
 import jahirfiquitiva.libs.kuper.helpers.extensions.kuperKonfigs
@@ -63,7 +64,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     private val bottomNavigation: AHBottomNavigation by bind(R.id.bottom_navigation)
     private val pager: PseudoViewPager by bind(R.id.pager)
     
-    private var searchView: SearchView? = null
+    private var searchView: CustomSearchView? = null
     
     private var currentItemId = 0
     
@@ -159,24 +160,22 @@ abstract class KuperActivity : BaseFramesActivity() {
             it.changeOptionVisibility(R.id.about, getBoolean(R.bool.isKuper))
             it.changeOptionVisibility(R.id.settings, getBoolean(R.bool.isKuper))
             
-            searchView = bindSearchView(it, R.id.search)
-            searchView?.listener = object : SearchView.SearchListener {
-                override fun onQueryChanged(query: String) {
-                    doSearch(query)
-                }
-                
-                override fun onQuerySubmit(query: String) {
-                    doSearch(query)
-                }
-                
-                override fun onSearchOpened(searchView: SearchView) {}
-                
-                override fun onSearchClosed(searchView: SearchView) {
-                    doSearch()
-                }
+            val searchItem = it.findItem(R.id.search)
+            searchView = searchItem.actionView as CustomSearchView?
+            searchView?.onExpand = { it.hideAllItems() }
+            searchView?.onCollapse = {
+                it.showAllItems()
+                doSearch()
             }
+            searchView?.onQueryChanged = { doSearch(it) }
+            searchView?.onQuerySubmit = { doSearch(it) }
+            searchView?.bindToItem(searchItem)
+            
             val hint = bottomNavigation.getItem(currentItemId)?.getTitle(this).orEmpty()
-            searchView?.hintText = getString(R.string.search_x, hint.toLowerCase())
+            searchView?.queryHint = getString(R.string.search_x, hint.toLowerCase())
+            
+            searchView?.tint(getPrimaryTextColorFor(primaryColor, 0.6F))
+            it.tint(getActiveIconsColorFor(primaryColor, 0.6F))
         }
         
         toolbar.tint(

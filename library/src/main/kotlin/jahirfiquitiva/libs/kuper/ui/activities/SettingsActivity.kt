@@ -21,4 +21,5 @@ import jahirfiquitiva.libs.kuper.ui.fragments.SettingsFragment
 
 class SettingsActivity : SettingsActivity() {
     override fun settingsFragment(): Fragment = SettingsFragment()
+    override fun getTranslationSite(): String = "http://j.mp/KuperTranslations"
 }

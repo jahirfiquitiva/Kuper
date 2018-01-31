@@ -24,4 +24,5 @@
     <string name="media_utils">Media Utilities</string>
     <string name="kolorette">Kolorette</string>
     <bool name="isKuper">true</bool>
+    <bool name="isFrames">false</bool>
 </resources>

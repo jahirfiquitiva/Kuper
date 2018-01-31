@@ -28,6 +28,7 @@ import ca.allanwang.kau.utils.setPaddingBottom
 import com.bumptech.glide.Glide
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
+import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
 import jahirfiquitiva.libs.kauextensions.extensions.actv
@@ -155,7 +156,6 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 } catch (e: Exception) {
                     val itemPkg = when (item.type) {
                         KuperKomponent.Type.ZOOPER -> ZOOPER_PACKAGE
-                        KuperKomponent.Type.KOMPONENT,
                         KuperKomponent.Type.WALLPAPER -> KLWP_PACKAGE
                         KuperKomponent.Type.WIDGET -> KWGT_PACKAGE
                         KuperKomponent.Type.LOCKSCREEN -> KLCK_PACKAGE
@@ -164,7 +164,15 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                     if (itemPkg.hasContent())
                         contxt.openLink(PLAY_STORE_LINK_PREFIX + itemPkg)
                 }
-            }
+            } ?: {
+                if (item.type == KuperKomponent.Type.KOMPONENT) {
+                    contxt.buildMaterialDialog {
+                        title(R.string.komponents)
+                        content(R.string.open_komponents)
+                        positiveText(android.R.string.ok)
+                    }.show()
+                }
+            }()
         }
     }
     
