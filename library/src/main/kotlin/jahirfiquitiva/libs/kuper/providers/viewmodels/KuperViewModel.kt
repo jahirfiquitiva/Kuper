@@ -25,6 +25,7 @@ import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.helpers.extensions.clean
 import jahirfiquitiva.libs.kuper.helpers.extensions.copyFromTo
+import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -81,14 +82,13 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
             }
         }
         
-        val preview = File(
-                folder,
-                name + (if (type == KuperKomponent.Type.ZOOPER) ".png" else "_port.jpg"))
-        val previewLand = if (type == KuperKomponent.Type.WIDGET ||
-                type == KuperKomponent.Type.WALLPAPER ||
-                type == KuperKomponent.Type.LOCKSCREEN) {
-            File(folder, "${name}_land.jpg")
-        } else null
+        val preview =
+                File(folder, name + if (type == KuperKomponent.Type.ZOOPER) ".png" else "_port.jpg")
+        val previewLand =
+                if (type == KuperKomponent.Type.WIDGET || type == KuperKomponent.Type.WALLPAPER ||
+                        type == KuperKomponent.Type.LOCKSCREEN) {
+                    File(folder, "${name}_land.jpg")
+                } else null
         
         try {
             out = FileOutputStream(file)
@@ -123,7 +123,7 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
                         if (entries.hasMoreElements()) entries.nextElement()
                         else null
                     } catch (e: Exception) {
-                        e.printStackTrace()
+                        KuperLog.e { e.message }
                         null
                     }
                 }

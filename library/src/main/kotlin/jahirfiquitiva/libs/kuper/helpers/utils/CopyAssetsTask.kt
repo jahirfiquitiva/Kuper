@@ -36,7 +36,7 @@ class CopyAssetsTask(
                         return try {
                             val files = param.assets.list(folder)
                             files?.forEach {
-                                if (it.contains(".") && !(filesToIgnore.contains(it))) {
+                                if (it.contains(".") && !filesToIgnore.contains(it)) {
                                     var ins: InputStream? = null
                                     var out: OutputStream? = null
                                     try {
@@ -59,7 +59,7 @@ class CopyAssetsTask(
                             }
                             true
                         } catch (e: Exception) {
-                            e.printStackTrace()
+                            KuperLog.e { e.message }
                             false
                         }
                     }

@@ -132,7 +132,7 @@ data class KuperKomponent(
             }
             
             newBitmap.setPixels(pixels, 0, width, 0, 0, width, height)
-            return Bitmap.createBitmap(newBitmap, minX, minY, (maxX - minX) + 1, (maxY - minY) + 1)
+            return Bitmap.createBitmap(newBitmap, minX, minY, maxX - minX + 1, maxY - minY + 1)
         }
     }
 }

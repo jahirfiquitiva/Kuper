@@ -38,7 +38,7 @@ internal fun String.getFilesInAssetsFolder(context: Context): ArrayList<String> 
         if (files != null) {
             if (files.isNotEmpty()) {
                 files.forEach {
-                    if (!(CopyAssetsTask.filesToIgnore.contains(it))) list.add(it)
+                    if (!CopyAssetsTask.filesToIgnore.contains(it)) list.add(it)
                 }
             }
         }

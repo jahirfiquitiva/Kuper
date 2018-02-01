@@ -63,7 +63,7 @@ class SetupAdapter(
                             apps.filter { it.packageName.hasContent() }[relativePosition],
                             listener)
                     1 -> it.bind(
-                            apps.filter { (!(it.packageName.hasContent())) }[relativePosition],
+                            apps.filter { (!it.packageName.hasContent()) }[relativePosition],
                             listener)
                 }
             }
@@ -78,7 +78,7 @@ class SetupAdapter(
     
     override fun getItemCount(section: Int): Int = when (section) {
         0 -> apps.filter { it.packageName.hasContent() }.size
-        1 -> apps.filter { (!(it.packageName.hasContent())) }.size
+        1 -> apps.filter { (!it.packageName.hasContent()) }.size
         else -> 0
     }
     

@@ -23,7 +23,7 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 
 fun File.clean(): Int {
-    if (!(exists())) return 0
+    if (!exists()) return 0
     var count = 0
     if (isDirectory) {
         listFiles().forEach { count += it.clean() }

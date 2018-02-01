@@ -32,7 +32,9 @@ class SectionedGridSpacingDecoration(
                                ) {
         super.getItemOffsets(outRect, view, parent, state)
         
-        var position = (view.layoutParams as RecyclerView.LayoutParams).viewAdapterPosition
+        var position = (view.layoutParams as? RecyclerView.LayoutParams)?.viewAdapterPosition ?: -1
+        if (position < 0) return
+        
         val headersBeforeItemPosition = adapter?.getHeadersBeforePosition(position) ?: 0
         
         position -= headersBeforeItemPosition

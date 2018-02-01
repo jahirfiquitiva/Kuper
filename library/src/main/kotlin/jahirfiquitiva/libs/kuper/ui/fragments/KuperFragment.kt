@@ -136,8 +136,8 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 kuperAdapter?.setItems(
                         ArrayList(
                                 ArrayList(list).filter {
-                                    (it.name.contains(filter, true) ||
-                                            it.type.toString().contains(filter, true))
+                                    it.name.contains(filter, true) ||
+                                            it.type.toString().contains(filter, true)
                                 }))
             } else {
                 kuperAdapter?.setItems(list)

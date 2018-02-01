@@ -134,10 +134,10 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
             var filesCount = 0
             val possibleFiles = folder.getFilesInAssetsFolder(context)
             possibleFiles.forEach {
-                if (it.contains(".") && (!CopyAssetsTask.filesToIgnore.contains(it))) {
+                if (it.contains(".") && !CopyAssetsTask.filesToIgnore.contains(it)) {
                     val file = File(
-                            "${Environment.getExternalStorageDirectory()}/ZooperWidget/${CopyAssetsTask.getCorrectFolderName(
-                                    folder)}/$it")
+                            "${Environment.getExternalStorageDirectory()}/ZooperWidget/" +
+                                    "${CopyAssetsTask.getCorrectFolderName(folder)}/$it")
                     if (file.exists()) filesCount += 1
                 }
             }

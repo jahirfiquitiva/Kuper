@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jahirfiquitiva.apps.kuper.sample
+package jahirfiquitiva.libs.kuper.helpers.utils
 
-import jahirfiquitiva.libs.frames.data.services.FramesArtSource
+import ca.allanwang.kau.logging.KauLogger
 
-// TODO: Use a unique name instead of MyKuperMuzeiService
-class MuzeiService : FramesArtSource("MyKuperMuzeiService")
+internal object KuperLog : KauLogger("Kuper")

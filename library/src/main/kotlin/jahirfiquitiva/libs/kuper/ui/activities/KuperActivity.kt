@@ -50,6 +50,7 @@ import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
 import jahirfiquitiva.libs.kuper.helpers.extensions.kuperKonfigs
 import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask
+import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 import jahirfiquitiva.libs.kuper.ui.fragments.KuperFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.SetupFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.WallpapersFragment
@@ -159,7 +160,7 @@ abstract class KuperActivity : BaseFramesActivity() {
             it.changeOptionVisibility(R.id.settings, getBoolean(R.bool.isKuper))
             
             val searchItem = it.findItem(R.id.search)
-            searchView = searchItem.actionView as CustomSearchView?
+            searchView = searchItem.actionView as? CustomSearchView
             searchView?.onCollapse = { doSearch() }
             searchView?.onQueryChanged = { doSearch(it) }
             searchView?.onQuerySubmit = { doSearch(it) }
@@ -207,7 +208,7 @@ abstract class KuperActivity : BaseFramesActivity() {
                 (activeFragment as? WallpapersFragment)?.scrollToTop()
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            KuperLog.e { e.message }
         }
         return true
     }

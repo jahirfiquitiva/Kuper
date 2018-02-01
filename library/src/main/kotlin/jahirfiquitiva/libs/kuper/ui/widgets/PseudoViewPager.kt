@@ -27,7 +27,9 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.Scroller
 import jahirfiquitiva.libs.kauextensions.extensions.SimpleAnimatorListener
+import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 
+@Suppress("ImplicitThis", "LeakingThis")
 open class PseudoViewPager : ViewPager {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -65,7 +67,7 @@ open class PseudoViewPager : ViewPager {
             scroller.isAccessible = true
             scroller.set(this, PseudoScroller(context))
         } catch (e: Exception) {
-            e.printStackTrace()
+            KuperLog.e { e.message }
         }
     }
     
