@@ -184,20 +184,14 @@ abstract class KuperActivity : BaseFramesActivity() {
             val id = it.itemId
             when (id) {
                 R.id.refresh -> refreshContent()
-                R.id.about -> startCreditsActivity()
-                R.id.settings -> startSettingsActivity()
+                R.id.about -> startActivity(Intent(this, CreditsActivity::class.java))
+                R.id.settings ->
+                    startActivityForResult(Intent(this, SettingsActivity::class.java), 22)
                 R.id.donate -> doDonation()
+                android.R.id.home -> finish()
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-    
-    open fun startCreditsActivity() {
-        startActivity(Intent(this, CreditsActivity::class.java))
-    }
-    
-    open fun startSettingsActivity() {
-        startActivityForResult(Intent(this, SettingsActivity::class.java), 22)
     }
     
     private fun navigateToItem(@IntRange(from = 0, to = 2) position: Int): Boolean {

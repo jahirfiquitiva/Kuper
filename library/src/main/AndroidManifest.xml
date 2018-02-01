@@ -84,7 +84,6 @@
             </intent-filter>
         </activity>
 
-
         <activity android:name="jahirfiquitiva.libs.frames.ui.activities.CreditsActivity">
             <intent-filter tools:node="removeAll"/>
         </activity>
