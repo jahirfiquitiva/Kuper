@@ -71,12 +71,29 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
                             "ic_kustom", KWGT_PACKAGE))
         }
         
+        if (!param.isAppInstalled("$KWGT_PACKAGE.pro") && "widgets".inAssetsAndWithContent(param)) {
+            apps.add(
+                    KuperApp(
+                            param.getString(R.string.kwgt_pro),
+                            param.getString(R.string.required_for_widgets),
+                            "ic_kustom", "$KWGT_PACKAGE.pro"))
+        }
+        
         if (!param.isAppInstalled(KLWP_PACKAGE) && "wallpapers".inAssetsAndWithContent(param)) {
             apps.add(
                     KuperApp(
                             param.getString(R.string.klwp),
                             param.getString(R.string.required_for_wallpapers),
                             "ic_kustom", KLWP_PACKAGE))
+        }
+        
+        if (!param.isAppInstalled("$KLWP_PACKAGE.pro") && "wallpapers".inAssetsAndWithContent(
+                        param)) {
+            apps.add(
+                    KuperApp(
+                            param.getString(R.string.klwp_pro),
+                            param.getString(R.string.required_for_wallpapers),
+                            "ic_kustom", "$KLWP_PACKAGE.pro"))
         }
         
         if (!param.isAppInstalled(KLCK_PACKAGE) && "lockscreens".inAssetsAndWithContent(param)) {
@@ -87,10 +104,19 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
                             "ic_kustom", KLCK_PACKAGE))
         }
         
+        if (!param.isAppInstalled("$KLCK_PACKAGE.pro") &&
+                "lockscreens".inAssetsAndWithContent(param)) {
+            apps.add(
+                    KuperApp(
+                            param.getString(R.string.klck_pro),
+                            param.getString(R.string.required_for_lockscreens),
+                            "ic_kustom", "$KLCK_PACKAGE.pro"))
+        }
+        
         if (!areAssetsInstalled(param)) {
             apps.add(
                     KuperApp(
-                            param.getString(R.string.zooper_widget),
+                            param.getString(R.string.widgets),
                             param.getString(R.string.required_assets),
                             "ic_zooper"))
         }

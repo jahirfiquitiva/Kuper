@@ -41,10 +41,8 @@ import jahirfiquitiva.libs.kauextensions.extensions.getBoolean
 import jahirfiquitiva.libs.kauextensions.extensions.getPrimaryTextColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.getSecondaryTextColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
-import jahirfiquitiva.libs.kauextensions.extensions.hideAllItems
 import jahirfiquitiva.libs.kauextensions.extensions.inactiveIconsColor
 import jahirfiquitiva.libs.kauextensions.extensions.primaryColor
-import jahirfiquitiva.libs.kauextensions.extensions.showAllItems
 import jahirfiquitiva.libs.kauextensions.extensions.tint
 import jahirfiquitiva.libs.kauextensions.ui.fragments.adapters.FragmentsAdapter
 import jahirfiquitiva.libs.kauextensions.ui.widgets.CustomSearchView
@@ -74,7 +72,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kuper)
-        toolbar.bindToActivity(this, false)
+        toolbar.bindToActivity(this, !getBoolean(R.bool.isKuper))
         setupContent()
     }
     
@@ -162,11 +160,7 @@ abstract class KuperActivity : BaseFramesActivity() {
             
             val searchItem = it.findItem(R.id.search)
             searchView = searchItem.actionView as CustomSearchView?
-            searchView?.onExpand = { it.hideAllItems() }
-            searchView?.onCollapse = {
-                it.showAllItems()
-                doSearch()
-            }
+            searchView?.onCollapse = { doSearch() }
             searchView?.onQueryChanged = { doSearch(it) }
             searchView?.onQuerySubmit = { doSearch(it) }
             searchView?.bindToItem(searchItem)
@@ -190,21 +184,24 @@ abstract class KuperActivity : BaseFramesActivity() {
             val id = it.itemId
             when (id) {
                 R.id.refresh -> refreshContent()
-                R.id.about -> startActivity(Intent(this, CreditsActivity::class.java))
-                R.id.settings -> startActivityForResult(
-                        Intent(this, SettingsActivity::class.java),
-                        22)
+                R.id.about -> startCreditsActivity()
+                R.id.settings -> startSettingsActivity()
                 R.id.donate -> doDonation()
             }
         }
         return super.onOptionsItemSelected(item)
     }
     
-    private fun navigateToItem(
-            @IntRange(from = 0, to = 2) position: Int
-                              ): Boolean {
+    open fun startCreditsActivity() {
+        startActivity(Intent(this, CreditsActivity::class.java))
+    }
+    
+    open fun startSettingsActivity() {
+        startActivityForResult(Intent(this, SettingsActivity::class.java), 22)
+    }
+    
+    private fun navigateToItem(@IntRange(from = 0, to = 2) position: Int): Boolean {
         invalidateOptionsMenu()
-        
         try {
             if (currentItemId != position) {
                 pager.setCurrentItem(position, true)
@@ -233,12 +230,10 @@ abstract class KuperActivity : BaseFramesActivity() {
         postDelayed(100, { navigateToItem(currentItemId) })
     }
     
-    private val LOCK = Any()
+    private val lock = Any()
     private fun doSearch(filter: String = "") {
-        synchronized(
-                LOCK, {
-            postDelayed(
-                    200, {
+        synchronized(lock) {
+            postDelayed(200) {
                 val activeFragment = fragmentsAdapter?.get(pager.currentItem)
                 if (activeFragment is KuperFragment) {
                     activeFragment.applyFilter(filter)
@@ -247,15 +242,13 @@ abstract class KuperActivity : BaseFramesActivity() {
                             .enableRefresh(!filter.hasContent())
                     activeFragment.applyFilter(filter)
                 }
-            })
-        })
+            }
+        }
     }
     
     private fun refreshContent() {
         val activeFragment = fragmentsAdapter?.get(pager.currentItem)
-        if (activeFragment is WallpapersFragment) {
-            activeFragment.reloadData(1)
-        }
+        (activeFragment as? WallpapersFragment)?.reloadData(1)
     }
     
     fun installAssets() {
