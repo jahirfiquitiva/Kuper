@@ -17,9 +17,9 @@ package jahirfiquitiva.libs.kuper.providers.viewmodels
 
 import android.content.Context
 import android.os.Environment
+import ca.allanwang.kau.utils.boolean
 import ca.allanwang.kau.utils.isAppInstalled
 import jahirfiquitiva.libs.archhelpers.viewmodels.ListViewModel
-import jahirfiquitiva.libs.kauextensions.extensions.getBoolean
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.extensions.getFilesInAssetsFolder
 import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
@@ -46,7 +46,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         }
         
         if (!param.isAppInstalled(MEDIA_UTILS_PACKAGE) &&
-                param.getBoolean(R.bool.media_utils_required)) {
+                param.boolean(R.bool.media_utils_required)) {
             apps.add(
                     KuperApp(
                             param.getString(R.string.media_utils),
@@ -54,8 +54,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
                             "ic_zooper", MEDIA_UTILS_PACKAGE))
         }
         
-        if (!param.isAppInstalled(KOLORETTE_PACKAGE) &&
-                param.getBoolean(R.bool.kolorette_required)) {
+        if (!param.isAppInstalled(KOLORETTE_PACKAGE) && param.boolean(R.bool.kolorette_required)) {
             apps.add(
                     KuperApp(
                             param.getString(R.string.kolorette),

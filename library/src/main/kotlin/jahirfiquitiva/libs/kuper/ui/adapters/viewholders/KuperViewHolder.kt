@@ -45,13 +45,13 @@ import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import java.io.File
 
 class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
-    private val wall: ImageView by itemView.bind(R.id.wall)
-    private val preview: ImageView by itemView.bind(R.id.preview)
-    private val details: LinearLayout by itemView.bind(R.id.komponent_details)
-    private val name: TextView by itemView.bind(R.id.komponent_name)
-    private val app: TextView by itemView.bind(R.id.komponent_app)
-    private val icon: ImageView by itemView.bind(R.id.launch_app)
-    private val progress: ProgressBar by itemView.bind(R.id.loading)
+    private val wall: ImageView? by itemView.bind(R.id.wall)
+    private val preview: ImageView? by itemView.bind(R.id.preview)
+    private val details: LinearLayout? by itemView.bind(R.id.komponent_details)
+    private val name: TextView? by itemView.bind(R.id.komponent_name)
+    private val app: TextView? by itemView.bind(R.id.komponent_app)
+    private val icon: ImageView? by itemView.bind(R.id.launch_app)
+    private val progress: ProgressBar? by itemView.bind(R.id.loading)
     
     fun bind(
             komponent: KuperKomponent,
@@ -60,46 +60,48 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
             listener: (KuperKomponent) -> Unit = {}
             ) {
         with(itemView) {
-            wall.setImageDrawable(wallpaper)
-            details.setBackgroundColor(context.dividerColor)
-            name.setTextColor(context.primaryTextColor)
-            name.text = komponent.name.formatCorrectly().replace("_", " ")
-            app.setTextColor(context.secondaryTextColor)
-            app.text = komponent.type.toString()
-            icon.visibleIf(komponent.hasIntent)
-            if (icon.isVisible) {
-                icon.setImageDrawable("ic_open_app".getDrawable(context))
-                icon.setOnClickListener { listener(komponent) }
+            wall?.setImageDrawable(wallpaper)
+            details?.setBackgroundColor(context.dividerColor)
+            name?.setTextColor(context.primaryTextColor)
+            name?.text = komponent.name.formatCorrectly().replace("_", " ")
+            app?.setTextColor(context.secondaryTextColor)
+            app?.text = komponent.type.toString()
+            icon?.visibleIf(komponent.hasIntent)
+            if (icon?.isVisible == true) {
+                icon?.setImageDrawable("ic_open_app".getDrawable(context))
+                icon?.setOnClickListener { listener(komponent) }
             }
             val rightPreview =
                     if (context.isInPortraitMode) komponent.previewPath else komponent.rightLandPath
             
             try {
-                progress.indeterminateDrawable.applyColorFilter(Color.parseColor("#888"))
+                progress?.indeterminateDrawable?.applyColorFilter(Color.parseColor("#888"))
             } catch (e: Exception) {
             }
             
-            manager.load(File(rightPreview))
-                    .apply(RequestOptions().priority(Priority.HIGH))
-                    .listener(object : GlideRequestCallback<Drawable>() {
-                        override fun onLoadSucceed(resource: Drawable): Boolean {
-                            progress.gone()
-                            return false
-                        }
-                        
-                        override fun onLoadFailed(): Boolean {
-                            progress.visible()
-                            return super.onLoadFailed()
-                        }
-                    })
-                    .into(preview)
-                    .clearOnDetach()
+            preview?.let {
+                manager.load(File(rightPreview))
+                        .apply(RequestOptions().priority(Priority.HIGH))
+                        .listener(object : GlideRequestCallback<Drawable>() {
+                            override fun onLoadSucceed(resource: Drawable): Boolean {
+                                progress?.gone()
+                                return false
+                            }
+                            
+                            override fun onLoadFailed(): Boolean {
+                                progress?.visible()
+                                return super.onLoadFailed()
+                            }
+                        })
+                        .into(it)
+                        .clearOnDetach()
+            }
         }
     }
     
     fun unbind() {
-        preview.releaseFromGlide()
-        preview.setImageDrawable(null)
-        progress.visible()
+        preview?.releaseFromGlide()
+        preview?.setImageDrawable(null)
+        progress?.visible()
     }
 }

@@ -30,19 +30,19 @@ import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
 
 class SetupViewHolder(itemView: View) : SectionedViewHolder(itemView) {
-    private val title: TextView by itemView.bind(R.id.app_name)
-    private val description: TextView by itemView.bind(R.id.app_description)
-    private val button: AppCompatButton by itemView.bind(R.id.install_button)
-    private val icon: MaterialIcon by itemView.bind(R.id.icon)
+    private val title: TextView? by itemView.bind(R.id.app_name)
+    private val description: TextView? by itemView.bind(R.id.app_description)
+    private val button: AppCompatButton? by itemView.bind(R.id.install_button)
+    private val icon: MaterialIcon? by itemView.bind(R.id.icon)
     
     fun bind(app: KuperApp, listener: (KuperApp) -> Unit) =
             with(itemView) {
-                title.setTextColor(context.primaryTextColor)
-                title.text = app.name
-                description.setTextColor(context.secondaryTextColor)
-                description.text = app.desc
-                icon.setImageDrawable(app.icon.getDrawable(context))
-                button.setTextColor(context.getPrimaryTextColorFor(context.accentColor))
-                button.setOnClickListener { listener(app) }
+                title?.setTextColor(context.primaryTextColor)
+                title?.text = app.name
+                description?.setTextColor(context.secondaryTextColor)
+                description?.text = app.desc
+                icon?.setImageDrawable(app.icon.getDrawable(context))
+                button?.setTextColor(context.getPrimaryTextColorFor(context.accentColor))
+                button?.setOnClickListener { listener(app) }
             }
 }

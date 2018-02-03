@@ -23,7 +23,9 @@ import android.support.annotation.IntRange
 import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
+import ca.allanwang.kau.utils.boolean
 import ca.allanwang.kau.utils.postDelayed
+import ca.allanwang.kau.utils.string
 import ca.allanwang.kau.utils.visibleIf
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
@@ -37,7 +39,6 @@ import jahirfiquitiva.libs.kauextensions.extensions.cardBackgroundColor
 import jahirfiquitiva.libs.kauextensions.extensions.changeOptionVisibility
 import jahirfiquitiva.libs.kauextensions.extensions.getActiveIconsColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.getAppName
-import jahirfiquitiva.libs.kauextensions.extensions.getBoolean
 import jahirfiquitiva.libs.kauextensions.extensions.getPrimaryTextColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.getSecondaryTextColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
@@ -59,9 +60,9 @@ import java.lang.ref.WeakReference
 
 abstract class KuperActivity : BaseFramesActivity() {
     
-    private val toolbar: CustomToolbar by bind(R.id.toolbar)
-    private val bottomNavigation: AHBottomNavigation by bind(R.id.bottom_navigation)
-    private val pager: PseudoViewPager by bind(R.id.pager)
+    private val toolbar: CustomToolbar? by bind(R.id.toolbar)
+    private val bottomNavigation: AHBottomNavigation? by bind(R.id.bottom_navigation)
+    private val pager: PseudoViewPager? by bind(R.id.pager)
     
     private var searchView: CustomSearchView? = null
     
@@ -73,7 +74,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kuper)
-        toolbar.bindToActivity(this, !getBoolean(R.bool.isKuper))
+        toolbar?.bindToActivity(this, !boolean(R.bool.isKuper))
         setupContent()
     }
     
@@ -88,7 +89,7 @@ abstract class KuperActivity : BaseFramesActivity() {
             setupBottomNavigation(withSetup)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 requestStoragePermission(
-                        getString(R.string.permission_request_wallpaper, getAppName())) {
+                        string(R.string.permission_request_wallpaper, getAppName()).orEmpty()) {
                     if (!kuperKonfigs.permissionRequested) {
                         kuperKonfigs.permissionRequested = true
                         onThemeChanged()
@@ -114,35 +115,36 @@ abstract class KuperActivity : BaseFramesActivity() {
                     WallpapersFragment())
         }
         
-        pager.offscreenPageLimit = fragmentsAdapter?.count ?: 1
-        pager.adapter = fragmentsAdapter
+        pager?.offscreenPageLimit = fragmentsAdapter?.count ?: 1
+        pager?.adapter = fragmentsAdapter
         
-        bottomNavigation.accentColor = accentColor
-        with(bottomNavigation) {
-            removeAllItems()
-            
-            defaultBackgroundColor = cardBackgroundColor
-            inactiveColor = inactiveIconsColor
-            isBehaviorTranslationEnabled = false
-            isForceTint = true
-            titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
-            
-            if (withSetup)
-                addItem(AHBottomNavigationItem(getString(R.string.setup), R.drawable.ic_setup))
-            
-            addItem(AHBottomNavigationItem(getString(R.string.widgets), R.drawable.ic_widgets))
-            
-            if (getBoolean(R.bool.isKuper) && getString(R.string.json_url).hasContent())
-                addItem(
-                        AHBottomNavigationItem(
-                                getString(R.string.wallpapers),
-                                R.drawable.ic_all_wallpapers))
-            
-            setOnTabSelectedListener { position, _ ->
-                navigateToItem(position)
+        bottomNavigation?.let {
+            it.accentColor = accentColor
+            with(it) {
+                removeAllItems()
+                
+                defaultBackgroundColor = cardBackgroundColor
+                inactiveColor = inactiveIconsColor
+                isBehaviorTranslationEnabled = false
+                isForceTint = true
+                titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
+                
+                if (withSetup)
+                    addItem(AHBottomNavigationItem(string(R.string.setup), R.drawable.ic_setup))
+                
+                addItem(AHBottomNavigationItem(string(R.string.widgets), R.drawable.ic_widgets))
+                
+                if (boolean(R.bool.isKuper) && string(R.string.json_url).hasContent())
+                    addItem(
+                            AHBottomNavigationItem(
+                                    string(R.string.wallpapers), R.drawable.ic_all_wallpapers))
+                
+                setOnTabSelectedListener { position, _ ->
+                    navigateToItem(position)
+                }
+                setCurrentItem(if (currentItem < 0) 0 else currentItem, true)
+                visibleIf(itemsCount >= 2)
             }
-            setCurrentItem(if (currentItem < 0) 0 else currentItem, true)
-            visibleIf(itemsCount >= 2)
         }
     }
     
@@ -150,14 +152,14 @@ abstract class KuperActivity : BaseFramesActivity() {
         menuInflater.inflate(R.menu.frames_menu, menu)
         
         menu?.let {
-            it.changeOptionVisibility(R.id.donate, donationsEnabled && getBoolean(R.bool.isKuper))
+            it.changeOptionVisibility(R.id.donate, donationsEnabled && boolean(R.bool.isKuper))
             
             it.changeOptionVisibility(R.id.search, currentItemId != 0)
             
             it.changeOptionVisibility(R.id.refresh, currentItemId == 2)
             
-            it.changeOptionVisibility(R.id.about, getBoolean(R.bool.isKuper))
-            it.changeOptionVisibility(R.id.settings, getBoolean(R.bool.isKuper))
+            it.changeOptionVisibility(R.id.about, boolean(R.bool.isKuper))
+            it.changeOptionVisibility(R.id.settings, boolean(R.bool.isKuper))
             
             val searchItem = it.findItem(R.id.search)
             searchView = searchItem.actionView as? CustomSearchView
@@ -166,14 +168,14 @@ abstract class KuperActivity : BaseFramesActivity() {
             searchView?.onQuerySubmit = { doSearch(it) }
             searchView?.bindToItem(searchItem)
             
-            val hint = bottomNavigation.getItem(currentItemId)?.getTitle(this).orEmpty()
-            searchView?.queryHint = getString(R.string.search_x, hint.toLowerCase())
+            val hint = bottomNavigation?.getItem(currentItemId)?.getTitle(this).orEmpty()
+            searchView?.queryHint = string(R.string.search_x, hint.toLowerCase())
             
             searchView?.tint(getPrimaryTextColorFor(primaryColor, 0.6F))
             it.tint(getActiveIconsColorFor(primaryColor, 0.6F))
         }
         
-        toolbar.tint(
+        toolbar?.tint(
                 getPrimaryTextColorFor(primaryColor, 0.6F),
                 getSecondaryTextColorFor(primaryColor, 0.6F),
                 getActiveIconsColorFor(primaryColor, 0.6F))
@@ -199,10 +201,10 @@ abstract class KuperActivity : BaseFramesActivity() {
         invalidateOptionsMenu()
         try {
             if (currentItemId != position) {
-                pager.setCurrentItem(position, true)
+                pager?.setCurrentItem(position, true)
                 currentItemId = position
             } else {
-                val activeFragment = fragmentsAdapter?.get(pager.currentItem)
+                val activeFragment = fragmentsAdapter?.get(pager?.currentItem ?: -1)
                 (activeFragment as? SetupFragment)?.scrollToTop()
                 (activeFragment as? KuperFragment)?.scrollToTop()
                 (activeFragment as? WallpapersFragment)?.scrollToTop()
@@ -229,7 +231,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     private fun doSearch(filter: String = "") {
         synchronized(lock) {
             postDelayed(200) {
-                val activeFragment = fragmentsAdapter?.get(pager.currentItem)
+                val activeFragment = fragmentsAdapter?.get(pager?.currentItem ?: -1)
                 if (activeFragment is KuperFragment) {
                     activeFragment.applyFilter(filter)
                 } else if (activeFragment is BaseFramesFragment<*, *>) {
@@ -242,7 +244,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     }
     
     private fun refreshContent() {
-        val activeFragment = fragmentsAdapter?.get(pager.currentItem)
+        val activeFragment = fragmentsAdapter?.get(pager?.currentItem ?: -1)
         (activeFragment as? WallpapersFragment)?.reloadData(1)
     }
     
@@ -255,11 +257,11 @@ abstract class KuperActivity : BaseFramesActivity() {
         
         actualFolders.forEachIndexed { index, s ->
             destroyDialog()
-            val dialogContent = getString(
+            val dialogContent = string(
                     R.string.copying_assets,
                     CopyAssetsTask.getCorrectFolderName(s))
             dialog = buildMaterialDialog {
-                content(dialogContent)
+                content(dialogContent.orEmpty())
                 progress(true, 0)
                 cancelable(false)
             }
@@ -270,7 +272,7 @@ abstract class KuperActivity : BaseFramesActivity() {
                     destroyDialog()
                     if (index == actualFolders.size - 1) {
                         showSnackbar(
-                                getString(
+                                string(
                                         if (count == actualFolders.size) R.string.copied_assets_successfully
                                         else R.string.copied_assets_error),
                                 Snackbar.LENGTH_LONG)

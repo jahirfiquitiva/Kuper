@@ -18,7 +18,6 @@ package jahirfiquitiva.libs.kuper.ui.adapters
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.ViewGroup
-import ca.allanwang.kau.utils.gone
 import ca.allanwang.kau.utils.inflate
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
@@ -151,34 +150,40 @@ class KuperAdapter(
                     0 -> {
                         holder.setTitle(
                                 "${it.getString(R.string.zooper_widget)} ${it.getString(
-                                        R.string.templates)}")
-                        holder.icon.gone()
+                                        R.string.templates)}",
+                                shouldShowIcon = false)
                     }
                     1 -> {
-                        holder.setTitle(it.getString(R.string.komponents))
-                        holder.icon.gone()
+                        holder.setTitle(
+                                it.getString(R.string.komponents),
+                                shouldShowIcon = false)
                     }
                     2 -> {
                         holder.setTitle(
                                 "${it.getString(R.string.kwgt)} ${it.getString(
-                                        R.string.templates)}")
-                        holder.icon.gone()
+                                        R.string.templates)}",
+                                shouldShowIcon = false)
                     }
                     3 -> {
                         holder.setTitle(
                                 "${it.getString(R.string.klck)} ${it.getString(
-                                        R.string.templates)}")
-                        holder.icon.gone()
+                                        R.string.templates)}",
+                                shouldShowIcon = false)
                     }
                     4 -> {
                         holder.setTitle(
                                 "${it.getString(R.string.klwp)} ${it.getString(
-                                        R.string.templates)}")
-                        holder.icon.gone()
+                                        R.string.templates)}",
+                                shouldShowIcon = false)
                     }
                 }
             }
         }
+    }
+    
+    override fun onViewRecycled(holder: SectionedViewHolder?) {
+        super.onViewRecycled(holder)
+        (holder as? KuperViewHolder)?.unbind()
     }
     
     override fun getSectionCount(): Int = 5

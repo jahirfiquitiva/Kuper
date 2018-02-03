@@ -18,7 +18,7 @@ package jahirfiquitiva.libs.kuper.helpers.utils
 import android.content.Context
 import jahirfiquitiva.libs.frames.helpers.utils.FramesKonfigs
 
-class KuperKonfigs(val name: String, ctxt: Context) : FramesKonfigs(name, ctxt) {
+open class KuperKonfigs(val name: String, ctxt: Context) : FramesKonfigs(name, ctxt) {
     var permissionRequested: Boolean
         get() = prefs.getBoolean(PERMISSION_REQUESTED, false)
         set(value) = prefsEditor.putBoolean(PERMISSION_REQUESTED, value).apply()

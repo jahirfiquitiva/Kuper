@@ -17,9 +17,7 @@ package jahirfiquitiva.libs.kuper.ui.adapters
 
 import android.content.Context
 import android.view.ViewGroup
-import ca.allanwang.kau.utils.gone
 import ca.allanwang.kau.utils.inflate
-import ca.allanwang.kau.utils.visible
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import jahirfiquitiva.libs.frames.ui.adapters.viewholders.SectionedHeaderViewHolder
@@ -90,13 +88,10 @@ class SetupAdapter(
             if (holder is SectionedHeaderViewHolder) {
                 when (section) {
                     0 -> {
-                        holder.setTitle(it.getString(R.string.required_apps))
-                        holder.icon.gone()
+                        holder.setTitle(it.getString(R.string.required_apps), false, false)
                     }
                     1 -> {
-                        holder.setTitle(it.getString(R.string.assets))
-                        holder.icon.gone()
-                        holder.divider.visible()
+                        holder.setTitle(it.getString(R.string.assets), true, false)
                     }
                 }
             }
