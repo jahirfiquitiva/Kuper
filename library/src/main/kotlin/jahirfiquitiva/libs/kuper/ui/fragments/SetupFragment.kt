@@ -16,7 +16,6 @@
 package jahirfiquitiva.libs.kuper.ui.fragments
 
 import android.arch.lifecycle.ViewModelProviders
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
@@ -44,7 +43,6 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     
     private var appsModel: SetupViewModel? = null
     
-    private var swipeToRefresh: SwipeRefreshLayout? = null
     private var recyclerView: EmptyViewRecyclerView? = null
     private var fastScroller: RecyclerFastScroller? = null
     
@@ -55,8 +53,6 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     }
     
     override fun initUI(content: View) {
-        swipeToRefresh = content.findViewById(R.id.swipe_to_refresh)
-        swipeToRefresh?.isEnabled = false
         recyclerView = content.findViewById(R.id.list_rv)
         fastScroller = content.findViewById(R.id.fast_scroller)
         
@@ -82,14 +78,13 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
                 setPaddingBottom(64.dpToPx)
             }
             
-            fastScroller?.attachSwipeRefreshLayout(swipeToRefresh)
             fastScroller?.attachRecyclerView(recyclerView)
             
             recyclerView.state = EmptyViewRecyclerView.State.LOADING
         }
     }
     
-    override fun getContentLayout(): Int = R.layout.section_lists
+    override fun getContentLayout(): Int = R.layout.section_layout
     
     override fun onItemClicked(item: KuperApp, longClick: Boolean) {
         if (item.packageName.hasContent()) {
