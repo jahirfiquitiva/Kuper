@@ -132,4 +132,9 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     override fun unregisterObserver() {
         appsModel?.destroy(this)
     }
+    
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser && !allowReloadAfterVisibleToUser()) recyclerView?.updateEmptyState()
+    }
 }

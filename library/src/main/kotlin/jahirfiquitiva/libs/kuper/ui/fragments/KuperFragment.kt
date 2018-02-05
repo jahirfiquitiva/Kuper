@@ -57,21 +57,21 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     
     private var kuperViewModel: KuperViewModel? = null
     private var swipeToRefresh: SwipeRefreshLayout? = null
-    private var rv: EmptyViewRecyclerView? = null
+    private var recyclerView: EmptyViewRecyclerView? = null
     private var fastScroll: RecyclerFastScroller? = null
     private var kuperAdapter: KuperAdapter? = null
     
     fun scrollToTop() {
-        rv?.post { rv?.scrollToPosition(0) }
+        recyclerView?.post { recyclerView?.scrollToPosition(0) }
     }
     
     override fun initUI(content: View) {
         swipeToRefresh = content.findViewById(R.id.swipe_to_refresh)
         swipeToRefresh?.isEnabled = false
-        rv = content.findViewById(R.id.list_rv)
+        recyclerView = content.findViewById(R.id.list_rv)
         fastScroll = content.findViewById(R.id.fast_scroller)
         
-        rv?.let {
+        recyclerView?.let {
             with(it) {
                 itemAnimator = if (context.isLowRamDevice) null else DefaultItemAnimator()
                 textView = content.findViewById(R.id.empty_text)
@@ -118,12 +118,12 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         fastScroll?.let {
             with(it) {
                 attachSwipeRefreshLayout(swipeToRefresh)
-                attachRecyclerView(rv)
+                attachRecyclerView(recyclerView)
             }
         }
         
         if (list.isEmpty()) {
-            rv?.state = EmptyViewRecyclerView.State.LOADING
+            recyclerView?.state = EmptyViewRecyclerView.State.LOADING
             loadDataFromViewModel()
         } else {
             kuperAdapter?.setItems(list)
@@ -198,5 +198,10 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     
     override fun unregisterObserver() {
         kuperViewModel?.destroy(this)
+    }
+    
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser && !allowReloadAfterVisibleToUser()) recyclerView?.updateEmptyState()
     }
 }
