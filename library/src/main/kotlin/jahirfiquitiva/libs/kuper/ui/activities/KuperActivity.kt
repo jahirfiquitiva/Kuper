@@ -80,6 +80,11 @@ abstract class KuperActivity : BaseFramesActivity() {
         setupContent()
     }
     
+    override fun onPause() {
+        super.onPause()
+        if (searchView?.isOpen == true) searchItem?.collapseActionView()
+    }
+    
     open fun getActivityTitle(): String = getAppName()
     
     fun hideSetup() {
@@ -88,8 +93,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     }
     
     private fun setupContent(withSetup: Boolean = true) {
-        postDelayed(
-                100, {
+        postDelayed(50) {
             setupBottomNavigation(withSetup)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 requestStoragePermission(
@@ -100,7 +104,7 @@ abstract class KuperActivity : BaseFramesActivity() {
                     }
                 }
             }
-        })
+        }
     }
     
     override fun fragmentsContainer(): Int = 0
@@ -171,7 +175,9 @@ abstract class KuperActivity : BaseFramesActivity() {
             searchView?.bindToItem(searchItem)
             
             val hint = bottomNavigation?.getItem(currentItemId)?.getTitle(this).orEmpty()
-            searchView?.queryHint = string(R.string.search_x, hint.toLowerCase())
+            searchView?.queryHint =
+                    if (hint.hasContent()) getString(R.string.search_x, hint.toLowerCase())
+                    else string(R.string.search)
             
             searchView?.tint(getPrimaryTextColorFor(primaryColor, 0.6F))
             it.tint(getActiveIconsColorFor(primaryColor, 0.6F))
@@ -201,7 +207,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     
     private fun navigateToItem(@IntRange(from = 0, to = 2) position: Int): Boolean {
         return try {
-            postDelayed(15) {
+            postDelayed(10) {
                 if (currentItemId != position) {
                     pager?.setCurrentItem(position, true)
                     currentItemId = position
@@ -240,8 +246,7 @@ abstract class KuperActivity : BaseFramesActivity() {
                 if (activeFragment is KuperFragment) {
                     activeFragment.applyFilter(filter)
                 } else if (activeFragment is BaseFramesFragment<*, *>) {
-                    activeFragment
-                            .enableRefresh(!filter.hasContent())
+                    activeFragment.enableRefresh(!filter.hasContent())
                     activeFragment.applyFilter(filter)
                 }
             }
