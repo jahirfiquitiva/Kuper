@@ -52,8 +52,6 @@ import java.lang.ref.WeakReference
 @Suppress("DEPRECATION")
 class KuperFragment : ViewModelFragment<KuperKomponent>() {
     
-    private val list = ArrayList<KuperKomponent>()
-    
     private var kuperViewModel: KuperViewModel? = null
     
     private var recyclerView: EmptyViewRecyclerView? = null
@@ -111,17 +109,13 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 }
                 
                 setPaddingBottom(64.dpToPx)
+                
+                fastScroller?.attachRecyclerView(this)
             }
         }
         
-        fastScroller?.attachRecyclerView(recyclerView)
-        
-        if (list.isEmpty()) {
-            recyclerView?.state = EmptyViewRecyclerView.State.LOADING
-            loadDataFromViewModel()
-        } else {
-            kuperAdapter?.setItems(list)
-        }
+        recyclerView?.state = EmptyViewRecyclerView.State.LOADING
+        loadDataFromViewModel()
     }
     
     fun applyFilter(filter: String = "") {
@@ -129,13 +123,13 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
             recyclerView?.setEmptyImage(R.drawable.no_results)
             recyclerView?.setEmptyText(R.string.search_no_results)
             kuperAdapter?.setItems(
-                    ArrayList(ArrayList(list).filter {
+                    ArrayList(ArrayList(kuperViewModel?.getData().orEmpty()).filter {
                         it.name.contains(filter, true) || it.type.toString().contains(filter, true)
                     }))
         } else {
             recyclerView?.setEmptyImage(R.drawable.empty_section)
             recyclerView?.setEmptyText(R.string.empty_section)
-            kuperAdapter?.setItems(list)
+            kuperAdapter?.setItems(ArrayList(kuperViewModel?.getData().orEmpty()))
         }
         scrollToTop()
     }
@@ -182,13 +176,10 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     override fun autoStartLoad() = true
     
     override fun registerObserver() {
-        kuperViewModel?.observe(
-                this, {
-            this.list.clear()
-            this.list.addAll(it)
-            kuperAdapter?.setItems(list)
+        kuperViewModel?.observe(this) {
+            kuperAdapter?.setItems(it)
             (actv as? KuperActivity)?.destroyDialog()
-        })
+        }
     }
     
     override fun unregisterObserver() {

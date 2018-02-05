@@ -82,6 +82,9 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
             
             recyclerView.state = EmptyViewRecyclerView.State.LOADING
         }
+        
+        recyclerView?.state = EmptyViewRecyclerView.State.LOADING
+        loadDataFromViewModel()
     }
     
     override fun getContentLayout(): Int = R.layout.section_layout
