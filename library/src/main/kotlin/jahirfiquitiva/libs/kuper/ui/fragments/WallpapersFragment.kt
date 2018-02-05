@@ -37,4 +37,9 @@ class WallpapersFragment : BaseWallpapersFragment() {
     override fun fromCollectionActivity(): Boolean = false
     override fun fromFavorites(): Boolean = false
     override fun showFavoritesIcon(): Boolean = false
+    
+    companion object {
+        fun create(hasChecker: Boolean) =
+                WallpapersFragment().apply { this.hasChecker = hasChecker }
+    }
 }

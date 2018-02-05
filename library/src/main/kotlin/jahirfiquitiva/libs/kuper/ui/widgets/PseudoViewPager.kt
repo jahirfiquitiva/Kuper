@@ -29,14 +29,13 @@ import android.widget.Scroller
 import jahirfiquitiva.libs.kauextensions.extensions.SimpleAnimatorListener
 import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 
-@Suppress("ImplicitThis", "LeakingThis")
-open class PseudoViewPager : ViewPager {
+class PseudoViewPager : ViewPager {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     
     companion object {
         private const val FADE_OUT_DURATION = 200L
-        private const val FADE_IN_DURATION = 250L
+        private const val FADE_IN_DURATION = 200L
     }
     
     init {

@@ -64,19 +64,23 @@ abstract class KuperActivity : BaseFramesActivity() {
     private val bottomNavigation: AHBottomNavigation? by bind(R.id.bottom_navigation)
     private val pager: PseudoViewPager? by bind(R.id.pager)
     
+    private var searchItem: MenuItem? = null
     private var searchView: CustomSearchView? = null
+    private var fragmentsAdapter: FragmentsAdapter? = null
     
     private var currentItemId = 0
-    
-    private var fragmentsAdapter: FragmentsAdapter? = null
     
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kuper)
         toolbar?.bindToActivity(this, !boolean(R.bool.isKuper))
+        toolbar?.title = getActivityTitle()
+        supportActionBar?.title = getActivityTitle()
         setupContent()
     }
+    
+    open fun getActivityTitle(): String = getAppName()
     
     fun hideSetup() {
         currentItemId = 0
@@ -107,15 +111,15 @@ abstract class KuperActivity : BaseFramesActivity() {
                     supportFragmentManager,
                     SetupFragment(),
                     KuperFragment(),
-                    WallpapersFragment())
+                    WallpapersFragment.create(getLicenseChecker() != null))
         } else {
             FragmentsAdapter(
                     supportFragmentManager,
                     KuperFragment(),
-                    WallpapersFragment())
+                    WallpapersFragment.create(getLicenseChecker() != null))
         }
         
-        pager?.offscreenPageLimit = fragmentsAdapter?.count ?: 1
+        pager?.offscreenPageLimit = fragmentsAdapter?.count ?: 2
         pager?.adapter = fragmentsAdapter
         
         bottomNavigation?.let {
@@ -153,16 +157,14 @@ abstract class KuperActivity : BaseFramesActivity() {
         
         menu?.let {
             it.changeOptionVisibility(R.id.donate, donationsEnabled && boolean(R.bool.isKuper))
-            
             it.changeOptionVisibility(R.id.search, currentItemId != 0)
-            
             it.changeOptionVisibility(R.id.refresh, currentItemId == 2)
             
             it.changeOptionVisibility(R.id.about, boolean(R.bool.isKuper))
             it.changeOptionVisibility(R.id.settings, boolean(R.bool.isKuper))
             
-            val searchItem = it.findItem(R.id.search)
-            searchView = searchItem.actionView as? CustomSearchView
+            searchItem = it.findItem(R.id.search)
+            searchView = searchItem?.actionView as? CustomSearchView
             searchView?.onCollapse = { doSearch() }
             searchView?.onQueryChanged = { doSearch(it) }
             searchView?.onQuerySubmit = { doSearch(it) }
@@ -198,21 +200,24 @@ abstract class KuperActivity : BaseFramesActivity() {
     }
     
     private fun navigateToItem(@IntRange(from = 0, to = 2) position: Int): Boolean {
-        invalidateOptionsMenu()
-        try {
-            if (currentItemId != position) {
-                pager?.setCurrentItem(position, true)
-                currentItemId = position
-            } else {
-                val activeFragment = fragmentsAdapter?.get(pager?.currentItem ?: -1)
-                (activeFragment as? SetupFragment)?.scrollToTop()
-                (activeFragment as? KuperFragment)?.scrollToTop()
-                (activeFragment as? WallpapersFragment)?.scrollToTop()
+        return try {
+            postDelayed(15) {
+                if (currentItemId != position) {
+                    pager?.setCurrentItem(position, true)
+                    currentItemId = position
+                    invalidateOptionsMenu()
+                } else {
+                    val activeFragment = fragmentsAdapter?.get(pager?.currentItem ?: -1)
+                    (activeFragment as? SetupFragment)?.scrollToTop()
+                    (activeFragment as? KuperFragment)?.scrollToTop()
+                    (activeFragment as? WallpapersFragment)?.scrollToTop()
+                }
             }
+            true
         } catch (e: Exception) {
             KuperLog.e { e.message }
+            false
         }
-        return true
     }
     
     @SuppressLint("MissingSuperCall")
@@ -224,7 +229,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         currentItemId = savedInstanceState?.getInt("current", 0) ?: 0
-        postDelayed(100, { navigateToItem(currentItemId) })
+        navigateToItem(currentItemId)
     }
     
     private val lock = Any()
