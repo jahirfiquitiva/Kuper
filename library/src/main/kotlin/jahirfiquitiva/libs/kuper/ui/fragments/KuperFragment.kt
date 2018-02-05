@@ -58,7 +58,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     private var kuperViewModel: KuperViewModel? = null
     private var swipeToRefresh: SwipeRefreshLayout? = null
     private var recyclerView: EmptyViewRecyclerView? = null
-    private var fastScroll: RecyclerFastScroller? = null
+    private var fastScroller: RecyclerFastScroller? = null
     private var kuperAdapter: KuperAdapter? = null
     
     fun scrollToTop() {
@@ -69,7 +69,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         swipeToRefresh = content.findViewById(R.id.swipe_to_refresh)
         swipeToRefresh?.isEnabled = false
         recyclerView = content.findViewById(R.id.list_rv)
-        fastScroll = content.findViewById(R.id.fast_scroller)
+        fastScroller = content.findViewById(R.id.fast_scroller)
         
         recyclerView?.let {
             with(it) {
@@ -97,12 +97,14 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                         ColorDrawable(context.cardBackgroundColor)
                     }
                     
-                    kuperAdapter = KuperAdapter(
-                            WeakReference(context), Glide.with(context), drawable) {
-                        launchIntentFor(it)
-                    }
+                    kuperAdapter =
+                            KuperAdapter(WeakReference(context), Glide.with(context), drawable) {
+                                launchIntentFor(it)
+                            }
                     kuperAdapter?.setLayoutManager(gridLayout)
+                    
                     layoutManager = gridLayout
+                    
                     addItemDecoration(
                             SectionedGridSpacingDecoration(
                                     spanCount,
@@ -115,12 +117,8 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
             }
         }
         
-        fastScroll?.let {
-            with(it) {
-                attachSwipeRefreshLayout(swipeToRefresh)
-                attachRecyclerView(recyclerView)
-            }
-        }
+        fastScroller?.attachSwipeRefreshLayout(swipeToRefresh)
+        fastScroller?.attachRecyclerView(recyclerView)
         
         if (list.isEmpty()) {
             recyclerView?.state = EmptyViewRecyclerView.State.LOADING
@@ -131,18 +129,19 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     }
     
     fun applyFilter(filter: String = "") {
-        if (activity is KuperActivity) {
-            if (filter.hasContent()) {
-                kuperAdapter?.setItems(
-                        ArrayList(
-                                ArrayList(list).filter {
-                                    it.name.contains(filter, true) ||
-                                            it.type.toString().contains(filter, true)
-                                }))
-            } else {
-                kuperAdapter?.setItems(list)
-            }
+        if (filter.hasContent()) {
+            recyclerView?.setEmptyImage(R.drawable.no_results)
+            recyclerView?.setEmptyText(R.string.search_no_results)
+            kuperAdapter?.setItems(
+                    ArrayList(ArrayList(list).filter {
+                        it.name.contains(filter, true) || it.type.toString().contains(filter, true)
+                    }))
+        } else {
+            recyclerView?.setEmptyImage(R.drawable.empty_section)
+            recyclerView?.setEmptyText(R.string.empty_section)
+            kuperAdapter?.setItems(list)
         }
+        scrollToTop()
     }
     
     override fun getContentLayout(): Int = R.layout.section_lists

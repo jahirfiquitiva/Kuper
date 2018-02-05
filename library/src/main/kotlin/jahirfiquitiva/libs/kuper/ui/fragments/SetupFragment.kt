@@ -46,7 +46,7 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     
     private var swipeToRefresh: SwipeRefreshLayout? = null
     private var recyclerView: EmptyViewRecyclerView? = null
-    private var fastScroll: RecyclerFastScroller? = null
+    private var fastScroller: RecyclerFastScroller? = null
     
     private var setupAdapter: SetupAdapter? = null
     
@@ -58,7 +58,7 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
         swipeToRefresh = content.findViewById(R.id.swipe_to_refresh)
         swipeToRefresh?.isEnabled = false
         recyclerView = content.findViewById(R.id.list_rv)
-        fastScroll = content.findViewById(R.id.fast_scroller)
+        fastScroller = content.findViewById(R.id.fast_scroller)
         
         recyclerView?.let { recyclerView ->
             with(recyclerView) {
@@ -82,12 +82,8 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
                 setPaddingBottom(64.dpToPx)
             }
             
-            fastScroll?.let {
-                with(it) {
-                    attachSwipeRefreshLayout(swipeToRefresh)
-                    attachRecyclerView(recyclerView)
-                }
-            }
+            fastScroller?.attachSwipeRefreshLayout(swipeToRefresh)
+            fastScroller?.attachRecyclerView(recyclerView)
             
             recyclerView.state = EmptyViewRecyclerView.State.LOADING
         }
