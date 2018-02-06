@@ -15,20 +15,20 @@
  */
 ext.versions = [
         // Projects
-        minSdk         : 16,
-        targetSdk      : 27,
-        buildTools     : '27.0.3',
+        minSdk     : 16,
+        targetSdk  : 27,
+        buildTools : '27.0.3',
         // Gradle Plugins
-        gradle         : '3.0.1',
-        kotlin         : '1.2.21',
-        libs           : '2.0',
+        gradle     : '3.0.1',
+        kotlin     : '1.2.21',
+        libs       : '2.0',
         // App Versions:
-        versionCode    : 116,
-        versionName    : '1.1.6',
+        versionCode: 116,
+        versionName: '1.1.6',
         // Dependencies
-        frames         : 'a01339a',
-        bottomNav      : '2.2.0',
-        oneSignal      : '3.7.1'
+        frames     : 'a9b1245',
+        bottomNav  : '2.2.0',
+        oneSignal  : '3.7.1'
 ]
 
 ext.gradlePlugins = [

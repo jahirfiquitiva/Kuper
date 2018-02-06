@@ -23,6 +23,7 @@
     <string name="required_apps">Required apps</string>
     <string name="assets">Assets</string>
 
+    <string name="required_for_templates">Required to use templates included</string>
     <string name="required_for_widgets">Required to use widgets included</string>
     <string name="required_for_wallpapers">Required to use wallpapers included</string>
     <string name="required_for_lockscreens">Required to use lockscreens included</string>

@@ -45,23 +45,6 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
                             "ic_zooper", ZOOPER_PACKAGE))
         }
         
-        if (!param.isAppInstalled(MEDIA_UTILS_PACKAGE) &&
-                param.boolean(R.bool.media_utils_required)) {
-            apps.add(
-                    KuperApp(
-                            param.getString(R.string.media_utils),
-                            param.getString(R.string.required_for_widgets),
-                            "ic_zooper", MEDIA_UTILS_PACKAGE))
-        }
-        
-        if (!param.isAppInstalled(KOLORETTE_PACKAGE) && param.boolean(R.bool.kolorette_required)) {
-            apps.add(
-                    KuperApp(
-                            param.getString(R.string.kolorette),
-                            param.getString(R.string.required_for_widgets),
-                            "ic_zooper", KOLORETTE_PACKAGE))
-        }
-        
         if (!param.isAppInstalled(KWGT_PACKAGE) && "widgets".inAssetsAndWithContent(param)) {
             apps.add(
                     KuperApp(
@@ -110,6 +93,23 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
                             param.getString(R.string.klck_pro),
                             param.getString(R.string.required_for_lockscreens),
                             "ic_kustom", "$KLCK_PACKAGE.pro"))
+        }
+        
+        if (!param.isAppInstalled(MEDIA_UTILS_PACKAGE) &&
+                param.boolean(R.bool.media_utils_required)) {
+            apps.add(
+                    KuperApp(
+                            param.getString(R.string.media_utils),
+                            param.getString(R.string.required_for_widgets),
+                            "ic_zooper", MEDIA_UTILS_PACKAGE))
+        }
+        
+        if (!param.isAppInstalled(KOLORETTE_PACKAGE) && param.boolean(R.bool.kolorette_required)) {
+            apps.add(
+                    KuperApp(
+                            param.getString(R.string.kolorette),
+                            param.getString(R.string.required_for_templates),
+                            "ic_color_palette", KOLORETTE_PACKAGE))
         }
         
         if (!areAssetsInstalled(param)) {
