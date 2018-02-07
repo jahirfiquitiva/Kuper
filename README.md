@@ -56,7 +56,8 @@ A full-of-features, easy-to-customize, free and open source, light-weight, Andro
 - Material Design dashboard.
 - License Checker.
 - Donations.
-- Firebase notifications ready.
+- OneSignal notifications ready.
+- Support for Zooper templates, Kustom Wallpapers, Widgets, Lockscreens and Komponents.
 - Cloud based (only) wallpapers.
 - App can work offline.
 - Wallpapers can be applied and downloaded.
