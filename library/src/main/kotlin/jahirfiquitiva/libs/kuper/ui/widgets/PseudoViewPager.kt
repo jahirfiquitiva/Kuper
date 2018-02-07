@@ -27,6 +27,7 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.Scroller
 import jahirfiquitiva.libs.kauextensions.extensions.SimpleAnimatorListener
+import jahirfiquitiva.libs.kauextensions.extensions.postDelayed
 import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 
 class PseudoViewPager : ViewPager {
@@ -70,19 +71,25 @@ class PseudoViewPager : ViewPager {
         }
     }
     
+    override fun setCurrentItem(item: Int) {
+        setCurrentItem(item, false)
+    }
+    
     override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
         animate().alpha(0.0F).setDuration(FADE_OUT_DURATION).setListener(
                 object : SimpleAnimatorListener() {
                     override fun onEnd(animator: Animator) {
                         super.onEnd(animator)
-                        actualSetCurrentItem(item, false)
+                        actualSetCurrentItem(item)
                     }
                 })
     }
     
-    private fun actualSetCurrentItem(item: Int, smoothScroll: Boolean) {
-        super.setCurrentItem(item, smoothScroll)
-        animate().alpha(1.0F).duration = FADE_IN_DURATION
+    private fun actualSetCurrentItem(item: Int) {
+        super.setCurrentItem(item, false)
+        postDelayed(10) {
+            animate().alpha(1.0F).duration = FADE_IN_DURATION
+        }
     }
     
     private class PseudoScroller(context: Context) : Scroller(context, DecelerateInterpolator()) {
