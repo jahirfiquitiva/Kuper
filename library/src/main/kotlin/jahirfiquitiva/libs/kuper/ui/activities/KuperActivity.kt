@@ -97,7 +97,7 @@ abstract class KuperActivity : BaseFramesActivity() {
             setupBottomNavigation(withSetup)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 requestStoragePermission(
-                        string(R.string.permission_request_wallpaper, getAppName()).orEmpty()) {
+                        getString(R.string.permission_request_wallpaper, getAppName()).orEmpty()) {
                     if (!kuperKonfigs.permissionRequested) {
                         kuperKonfigs.permissionRequested = true
                         onThemeChanged()

@@ -55,6 +55,7 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     override fun initUI(content: View) {
         recyclerView = content.findViewById(R.id.list_rv)
         fastScroller = content.findViewById(R.id.fast_scroller)
+        fastScroller?.setPaddingBottom(48.dpToPx)
         
         recyclerView?.let { recyclerView ->
             with(recyclerView) {
@@ -95,7 +96,7 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
         } else {
             (activity as? KuperActivity)?.let { actv ->
                 actv.requestStoragePermission(
-                        getString(R.string.permission_request_assets, ctxt.getAppName())) {
+                        getString(R.string.permission_request_assets, actv.getAppName())) {
                     actv.installAssets()
                 }
             }

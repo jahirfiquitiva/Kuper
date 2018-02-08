@@ -65,6 +65,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     override fun initUI(content: View) {
         recyclerView = content.findViewById(R.id.list_rv)
         fastScroller = content.findViewById(R.id.fast_scroller)
+        fastScroller?.setPaddingBottom(48.dpToPx)
         
         recyclerView?.let {
             with(it) {
