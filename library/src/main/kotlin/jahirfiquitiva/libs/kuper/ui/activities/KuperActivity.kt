@@ -62,12 +62,12 @@ abstract class KuperActivity : BaseFramesActivity() {
     
     private val toolbar: CustomToolbar? by bind(R.id.toolbar)
     private val bottomNavigation: AHBottomNavigation? by bind(R.id.bottom_navigation)
-    private val pager: PseudoViewPager? by bind(R.id.pager)
     
     private var searchItem: MenuItem? = null
     private var searchView: CustomSearchView? = null
-    private var fragmentsAdapter: FragmentsAdapter? = null
     
+    private val pager: PseudoViewPager? by bind(R.id.pager)
+    private var fragmentsAdapter: FragmentsAdapter? = null
     private var currentItemId = 0
     
     @SuppressLint("MissingSuperCall")
@@ -207,19 +207,18 @@ abstract class KuperActivity : BaseFramesActivity() {
     
     private fun navigateToItem(@IntRange(from = 0, to = 2) position: Int): Boolean {
         return try {
-            postDelayed(10) {
-                if (currentItemId != position) {
-                    pager?.setCurrentItem(position, true)
-                    currentItemId = position
-                    invalidateOptionsMenu()
-                } else {
-                    val activeFragment = fragmentsAdapter?.get(pager?.currentItem ?: -1)
-                    (activeFragment as? SetupFragment)?.scrollToTop()
-                    (activeFragment as? KuperFragment)?.scrollToTop()
-                    (activeFragment as? WallpapersFragment)?.scrollToTop()
-                }
+            return if (currentItemId != position) {
+                pager?.setCurrentItem(position, true)
+                currentItemId = position
+                invalidateOptionsMenu()
+                true
+            } else {
+                val activeFragment = fragmentsAdapter?.get(pager?.currentItem ?: -1)
+                (activeFragment as? SetupFragment)?.scrollToTop()
+                (activeFragment as? KuperFragment)?.scrollToTop()
+                (activeFragment as? WallpapersFragment)?.scrollToTop()
+                false
             }
-            true
         } catch (e: Exception) {
             KuperLog.e { e.message }
             false

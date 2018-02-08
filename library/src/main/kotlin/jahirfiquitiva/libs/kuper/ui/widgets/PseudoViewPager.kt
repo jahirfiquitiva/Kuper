@@ -31,7 +31,7 @@ import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 
 class PseudoViewPager : ViewPager {
     
-    private var transitioning = false;
+    private var transitioning = false
     
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -78,7 +78,10 @@ class PseudoViewPager : ViewPager {
     }
     
     override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
-        if (transitioning) return
+        if (transitioning) {
+            clearAnimation()
+            animate().cancel()
+        }
         transitioning = true
         animate().alpha(0.0F).setDuration(FADE_OUT_DURATION).setListener(
                 object : SimpleAnimatorListener() {
