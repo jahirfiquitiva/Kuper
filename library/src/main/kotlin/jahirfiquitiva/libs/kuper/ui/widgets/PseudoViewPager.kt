@@ -80,6 +80,10 @@ class PseudoViewPager : ViewPager {
     }
     
     override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
+        setCurrentItem(item) {}
+    }
+    
+    fun setCurrentItem(item: Int, afterTransition: () -> Unit = {}) {
         if (transitioning) {
             clearAnimation()
             animate().cancel()
@@ -90,12 +94,12 @@ class PseudoViewPager : ViewPager {
                     override fun onEnd(animator: Animator) {
                         super.onEnd(animator)
                         gone()
-                        actualSetCurrentItem(item)
+                        actualSetCurrentItem(item, afterTransition)
                     }
                 })
     }
     
-    private fun actualSetCurrentItem(item: Int) {
+    private fun actualSetCurrentItem(item: Int, afterTransition: () -> Unit = {}) {
         super.setCurrentItem(item, false)
         visible()
         animate().alpha(1.0F).setDuration(FADE_IN_DURATION).setListener(
@@ -103,6 +107,7 @@ class PseudoViewPager : ViewPager {
                     override fun onEnd(animator: Animator) {
                         super.onEnd(animator)
                         transitioning = false
+                        afterTransition()
                     }
                 })
     }

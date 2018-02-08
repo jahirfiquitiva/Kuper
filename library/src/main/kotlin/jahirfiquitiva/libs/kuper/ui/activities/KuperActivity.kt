@@ -208,7 +208,7 @@ abstract class KuperActivity : BaseFramesActivity() {
     private fun navigateToItem(@IntRange(from = 0, to = 2) position: Int): Boolean {
         return try {
             return if (currentItemId != position) {
-                pager?.setCurrentItem(position, true)
+                pager?.currentItem = position
                 currentItemId = position
                 invalidateOptionsMenu()
                 true
