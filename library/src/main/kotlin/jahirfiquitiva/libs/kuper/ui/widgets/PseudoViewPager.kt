@@ -26,6 +26,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.Scroller
+import ca.allanwang.kau.utils.gone
+import ca.allanwang.kau.utils.visible
 import jahirfiquitiva.libs.kauextensions.extensions.SimpleAnimatorListener
 import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 
@@ -37,8 +39,8 @@ class PseudoViewPager : ViewPager {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     
     companion object {
-        private const val FADE_OUT_DURATION = 200L
-        private const val FADE_IN_DURATION = 200L
+        private const val FADE_OUT_DURATION = 150L
+        private const val FADE_IN_DURATION = 150L
     }
     
     init {
@@ -87,6 +89,7 @@ class PseudoViewPager : ViewPager {
                 object : SimpleAnimatorListener() {
                     override fun onEnd(animator: Animator) {
                         super.onEnd(animator)
+                        gone()
                         actualSetCurrentItem(item)
                     }
                 })
@@ -94,6 +97,7 @@ class PseudoViewPager : ViewPager {
     
     private fun actualSetCurrentItem(item: Int) {
         super.setCurrentItem(item, false)
+        visible()
         animate().alpha(1.0F).setDuration(FADE_IN_DURATION).setListener(
                 object : SimpleAnimatorListener() {
                     override fun onEnd(animator: Animator) {
