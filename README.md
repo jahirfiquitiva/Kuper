@@ -5,15 +5,20 @@ Kuper
 
 ![API](https://img.shields.io/badge/API-16%2B-34bf49.svg)
 [![JitPack](https://jitpack.io/v/jahirfiquitiva/Kuper.svg)](https://jitpack.io/#jahirfiquitiva/Kuper)
-[![Build Status](https://travis-ci.org/jahirfiquitiva/Kuper.svg?branch=sample)](https://travis-ci.org/jahirfiquitiva/Kuper)
+[![Build Status](https://travis-ci.org/jahirfiquitiva/Kuper.svg?branch=master)](https://travis-ci.org/jahirfiquitiva/Kuper)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d8cd40ec4cb400d9091d34026c904e7)](https://www.codacy.com/app/jahirfiquitiva/Kuper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jahirfiquitiva/Kuper&amp;utm_campaign=Badge_Grade)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/Kuper/localized.svg)](http://j.mp/KuperTranslations)
 
 A full-of-features, easy-to-customize, free and open source, light-weight, Android dashboard library to create widgets apps with Zooper widgets and/or Kustom assets (Widgets, Wallpapers and Komponents)
 
 <a target="_blank" href="http://j.mp/KuperAPK">
-<img src="http://jahirfiquitiva.me/share/download_sample.svg" width="250"/>
+<img src="http://jahirfiquitiva.me/share/download_sample.svg?maxAge=432000" width="200"/>
 </a>
+
+<a target="_blank" href="http://www.jahirfiquitiva.me/support/">
+<img src="http://jahirfiquitiva.me/share/support_my_work.svg?maxAge=432000" width="200"/>
+</a>
+
 
 ## Show some  :blue_heart:
 [![GitHub stars](https://img.shields.io/github/stars/jahirfiquitiva/Kuper.svg?style=social&label=Star)](https://github.com/jahirfiquitiva/Kuper)
@@ -56,7 +61,8 @@ A full-of-features, easy-to-customize, free and open source, light-weight, Andro
 - Material Design dashboard.
 - License Checker.
 - Donations.
-- Firebase notifications ready.
+- OneSignal notifications ready.
+- Support for Zooper templates, Kustom Wallpapers, Widgets, Lockscreens and Komponents.
 - Cloud based (only) wallpapers.
 - App can work offline.
 - Wallpapers can be applied and downloaded.
@@ -118,11 +124,14 @@ Just join our community and make a post. We'll help you as soon as possible. [![
 [![Follow on GitHub](https://img.shields.io/github/followers/jahirfiquitiva.svg?style=social&label=Follow)](https://github.com/jahirfiquitiva)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jahirfiquitiva.svg?style=social)](https://twitter.com/jahirfiquitiva)
 [![Google+](https://img.shields.io/badge/Follow-Google%2B-ea4335.svg)](https://plus.google.com/+JahirFiquitivaR)
-[![Donate](https://img.shields.io/badge/PayPal-Donate-009cde.svg)](https://www.paypal.me/jahirfiquitiva)
 
-> If you found this app/library helpful and want to thank me, consider [buying me a cup of :coffee: or a slice of :pizza:](https://www.paypal.me/jahirfiquitiva).
->
-> Thanks in advance :blush:
+If you found this app/library helpful and want to thank me, you can:
+
+<a target="_blank" href="http://www.jahirfiquitiva.me/support/">
+<img src="http://jahirfiquitiva.me/share/support_my_work.svg?maxAge=432000" width="200"/>
+</a>
+
+**Thanks in advance!** :pray:
 
 ## Special Thanks:
 
