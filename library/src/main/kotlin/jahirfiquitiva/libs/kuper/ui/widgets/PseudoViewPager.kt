@@ -87,6 +87,7 @@ class PseudoViewPager : ViewPager {
         if (transitioning) {
             clearAnimation()
             animate().cancel()
+            afterTransition()
         }
         transitioning = true
         animate().alpha(0.0F).setDuration(FADE_OUT_DURATION).setListener(
