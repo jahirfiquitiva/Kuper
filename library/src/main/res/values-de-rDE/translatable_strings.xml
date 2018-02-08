@@ -21,6 +21,7 @@
   <string name="widgets">Widgets</string>
   <string name="required_apps">Erforderliche Anwendungen</string>
   <string name="assets">Ressourcen</string>
+  <string name="required_for_templates">Wird für enthaltene Vorlagen benötigt</string>
   <string name="required_for_widgets">Wird benötigt, um Widgets zu verwenden</string>
   <string name="required_for_wallpapers">Wird benötigt, um Hintergründe zu verwenden</string>
   <string name="required_for_lockscreens">Wird benötigt, um Sperrbildschirme zu verwenden</string>
@@ -35,4 +36,5 @@
   <string name="copied_assets_error">Unerwarteter Fehler beim Kopieren der Ressourcen</string>
   <string name="permission_request_assets">%1$s benötigt Zugriff auf deinen Speicher, um Ressourcen zu installieren</string>
   <string name="permission_request_wallpaper">%1$s benötigt Zugriff auf deinen Speicher, um deinen Hintergrund in den Widget-Vorschauen anzuzeigen</string>
+  <string name="open_komponents">Um eine Komponente hinzuzufügen, öffne Kustom und tippe auf das + in der Toolbar, wähle dann Komponente auswählen aus und suche nach diesem Pack.</string>
 </resources>
