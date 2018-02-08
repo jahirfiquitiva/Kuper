@@ -69,8 +69,6 @@ dependencies {
     // Frames
     api(libraries.frames) {
         transitive = true
-        exclude group: 'android.arch.persistence.room'
-        exclude group: 'android.arch.room'
     }
     // Bottom Navigation
     api(libraries.bottomNav) {
