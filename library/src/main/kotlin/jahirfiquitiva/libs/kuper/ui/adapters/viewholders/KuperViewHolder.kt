@@ -34,10 +34,10 @@ import jahirfiquitiva.libs.frames.helpers.extensions.releaseFromGlide
 import jahirfiquitiva.libs.frames.helpers.utils.GlideRequestCallback
 import jahirfiquitiva.libs.kauextensions.extensions.applyColorFilter
 import jahirfiquitiva.libs.kauextensions.extensions.bind
-import jahirfiquitiva.libs.kauextensions.extensions.dividerColor
 import jahirfiquitiva.libs.kauextensions.extensions.formatCorrectly
 import jahirfiquitiva.libs.kauextensions.extensions.getDrawable
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
+import jahirfiquitiva.libs.kauextensions.extensions.primaryDarkColor
 import jahirfiquitiva.libs.kauextensions.extensions.primaryTextColor
 import jahirfiquitiva.libs.kauextensions.extensions.secondaryTextColor
 import jahirfiquitiva.libs.kuper.R
@@ -61,7 +61,7 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
             ) {
         with(itemView) {
             wall?.setImageDrawable(wallpaper)
-            details?.setBackgroundColor(context.dividerColor)
+            details?.setBackgroundColor(context.primaryDarkColor)
             name?.setTextColor(context.primaryTextColor)
             name?.text = komponent.name.formatCorrectly().replace("_", " ")
             app?.setTextColor(context.secondaryTextColor)
