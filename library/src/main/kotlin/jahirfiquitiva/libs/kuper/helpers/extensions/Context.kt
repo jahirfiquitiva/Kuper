@@ -16,7 +16,18 @@
 package jahirfiquitiva.libs.kuper.helpers.extensions
 
 import android.content.Context
+import ca.allanwang.kau.utils.darken
+import ca.allanwang.kau.utils.lighten
+import jahirfiquitiva.libs.kauextensions.extensions.cardBackgroundColor
+import jahirfiquitiva.libs.kauextensions.extensions.usesDarkTheme
 import jahirfiquitiva.libs.kuper.helpers.utils.KuperKonfigs
 
 val Context.kuperKonfigs
     get() = KuperKonfigs.newInstance("kuper_konfigs", this)
+
+val Context.tilesColor: Int
+    get() {
+        return if (usesDarkTheme) {
+            cardBackgroundColor.lighten(0.1F)
+        } else cardBackgroundColor.darken(0.1F)
+    }

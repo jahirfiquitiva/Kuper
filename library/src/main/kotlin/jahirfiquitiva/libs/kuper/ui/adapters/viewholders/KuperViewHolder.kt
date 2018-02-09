@@ -37,11 +37,11 @@ import jahirfiquitiva.libs.kauextensions.extensions.bind
 import jahirfiquitiva.libs.kauextensions.extensions.formatCorrectly
 import jahirfiquitiva.libs.kauextensions.extensions.getDrawable
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
-import jahirfiquitiva.libs.kauextensions.extensions.primaryDarkColor
 import jahirfiquitiva.libs.kauextensions.extensions.primaryTextColor
 import jahirfiquitiva.libs.kauextensions.extensions.secondaryTextColor
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
+import jahirfiquitiva.libs.kuper.helpers.extensions.tilesColor
 import java.io.File
 
 class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
@@ -61,7 +61,7 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
             ) {
         with(itemView) {
             wall?.setImageDrawable(wallpaper)
-            details?.setBackgroundColor(context.primaryDarkColor)
+            details?.setBackgroundColor(context.tilesColor)
             name?.setTextColor(context.primaryTextColor)
             name?.text = komponent.name.formatCorrectly().replace("_", " ")
             app?.setTextColor(context.secondaryTextColor)

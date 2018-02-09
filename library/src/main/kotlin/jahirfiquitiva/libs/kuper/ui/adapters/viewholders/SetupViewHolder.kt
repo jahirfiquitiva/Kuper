@@ -42,7 +42,7 @@ class SetupViewHolder(itemView: View) : SectionedViewHolder(itemView) {
                 description?.setTextColor(context.secondaryTextColor)
                 description?.text = app.desc
                 icon?.setImageDrawable(app.icon.getDrawable(context))
-                button?.setTextColor(context.getPrimaryTextColorFor(context.accentColor))
+                button?.setTextColor(context.getPrimaryTextColorFor(context.accentColor, 0.6F))
                 button?.setOnClickListener { listener(app) }
             }
 }
