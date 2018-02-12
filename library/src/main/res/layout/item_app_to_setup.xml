@@ -14,16 +14,17 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:minHeight="56dp"
-              android:maxHeight="88dp"
-              android:paddingTop="@dimen/cards_margin"
-              android:paddingBottom="@dimen/cards_margin">
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="56dp"
+        android:maxHeight="88dp"
+        android:paddingTop="@dimen/cards_margin"
+        android:paddingBottom="@dimen/cards_margin">
 
     <jahirfiquitiva.libs.kauextensions.ui.widgets.MaterialIcon
             android:id="@+id/icon"

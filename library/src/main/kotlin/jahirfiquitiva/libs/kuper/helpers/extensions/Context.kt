@@ -23,7 +23,7 @@ import jahirfiquitiva.libs.kauextensions.extensions.usesDarkTheme
 import jahirfiquitiva.libs.kuper.helpers.utils.KuperKonfigs
 
 val Context.kuperKonfigs
-    get() = KuperKonfigs.newInstance("kuper_konfigs", this)
+    get() = KuperKonfigs(this)
 
 val Context.tilesColor: Int
     get() {
