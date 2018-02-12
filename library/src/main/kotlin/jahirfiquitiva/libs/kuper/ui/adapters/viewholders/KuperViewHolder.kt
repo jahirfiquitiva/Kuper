@@ -31,6 +31,7 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import jahirfiquitiva.libs.frames.helpers.extensions.releaseFromGlide
+import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
 import jahirfiquitiva.libs.frames.helpers.utils.GlideRequestCallback
 import jahirfiquitiva.libs.kauextensions.extensions.applyColorFilter
 import jahirfiquitiva.libs.kauextensions.extensions.bind
@@ -41,7 +42,6 @@ import jahirfiquitiva.libs.kauextensions.extensions.primaryTextColor
 import jahirfiquitiva.libs.kauextensions.extensions.secondaryTextColor
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
-import jahirfiquitiva.libs.kuper.helpers.extensions.tilesColor
 import java.io.File
 
 class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {

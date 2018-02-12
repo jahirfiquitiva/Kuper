@@ -17,6 +17,10 @@ package jahirfiquitiva.libs.kuper.helpers.extensions
 
 import android.content.Context
 import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask
+import jahirfiquitiva.libs.kuper.helpers.utils.KuperKonfigs
+
+internal val Context.kuperKonfigs
+    get() = KuperKonfigs(this)
 
 internal fun String.inAssetsAndWithContent(context: Context): Boolean {
     val folders = context.assets.list("")
