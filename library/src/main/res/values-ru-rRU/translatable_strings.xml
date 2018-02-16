@@ -21,6 +21,7 @@
   <string name="widgets">Виджеты</string>
   <string name="required_apps">Необходимые приложения</string>
   <string name="assets">Ресурсы</string>
+  <string name="required_for_templates">Необходимо чтобы использовать пресеты и виджеты</string>
   <string name="required_for_widgets">Необходимо для использования этих виджетов</string>
   <string name="required_for_wallpapers">Необходимо для использования этих обоев</string>
   <string name="required_for_lockscreens">Необходимо для использования этих экранов блокировки</string>
@@ -35,4 +36,5 @@
   <string name="copied_assets_error">Возникла непредвиденная ошибка при копировании ресурсов</string>
   <string name="permission_request_assets">%1$s необходим доступ к хранилищу чтобы установить ресурсы</string>
   <string name="permission_request_wallpaper">%1$s запрашивает доступ к хранилищу, чтобы отображать ваши текущие обои как фон для виджетов</string>
+  <string name="open_komponents">Чтобы добавить Компонент, откройте приложение Kustom и нажмите значок \"+\" на панели редактирования инструментов. Затем выберите Компонент и найдите это приложение.</string>
 </resources>

@@ -16,23 +16,25 @@
   ~ limitations under the License.
   -->
 <resources>
-  <string name="kuper_dashboard">Kuper pano</string>
+  <string name="kuper_dashboard">Kuper Gösterge Paneli</string>
   <string name="setup">Kurulum</string>
-  <string name="widgets">Widget\'lar</string>
+  <string name="widgets">Araçlar</string>
   <string name="required_apps">Gerekli uygulamalar</string>
-  <string name="assets">Araçlar</string>
-  <string name="required_for_widgets">Widget\'lari kullanmak için gerekli</string>
-  <string name="required_for_wallpapers">Duvar kağıtlarını kullanmak için gerekli</string>
-  <string name="required_for_lockscreens">Kilit ekranlarını kullanmak için gerekli</string>
-  <string name="required_assets">Şablonların düzgün çalışması için gereken araçlar</string>
+  <string name="assets">Varlıklar</string>
+  <string name="required_for_templates">Dahil edilen şablonları kullanmak için gerekli</string>
+  <string name="required_for_widgets">Dahil edilen araçları kullanmak için gerekli</string>
+  <string name="required_for_wallpapers">Dahil edilen duvar kağıtlarını kullamak için gerekli</string>
+  <string name="required_for_lockscreens">Dahil edilen kilit ekranlarını kullanmak için gerekli</string>
+  <string name="required_assets">Şablonların düzgün çalışması için gereken varlıklar</string>
   <string name="install">Yükle</string>
   <string name="template">Şablon</string>
   <string name="templates">Şablonlar</string>
-  <string name="assets_installed">Araçlar zaten yüklü</string>
+  <string name="assets_installed">Varlıklar zaten yüklü</string>
   <string name="apps_installed">Uygulamalar zaten yüklü</string>
-  <string name="copying_assets">Dosyalar ZooperWidget/%1$s konumuna kopyalanıyor</string>
-  <string name="copied_assets_successfully">Araçlar başarıyla kopyalandı</string>
-  <string name="copied_assets_error">Araçlar kopyalanırken beklenmeyen bir hata oluştu.</string>
-  <string name="permission_request_assets">%1$s araçları yüklemek için saklama alanına erişmek gerekiyor</string>
-  <string name="permission_request_wallpaper">%1$s duvar kağıdınızı widget önizlemelerinde gösterebilmek için depolamaya erişim gerektiriyor</string>
+  <string name="copying_assets">Dosyalar ZooperWidget/%1$s\'e kopyalanıyor</string>
+  <string name="copied_assets_successfully">Varlıklar başarıyla kopyalandı</string>
+  <string name="copied_assets_error">Varlıkları kopyalanırken beklenmeyen bir hata oluştu</string>
+  <string name="permission_request_assets">%1$s varlıkları yüklemek için saklama alanına erişmek gerekiyor</string>
+  <string name="permission_request_wallpaper">%1$s duvar kağıdınızı araç ön izlemelerinde gösterebilmek için depolamaya erişim gerektiriyor</string>
+  <string name="open_komponents">Komponent eklemek için, Kustom\'u açın ve editör Araç Çubuğundan +\'ya basın, daha sonra Komponent\'i seçin ve bu paketi bulun.</string>
 </resources>
