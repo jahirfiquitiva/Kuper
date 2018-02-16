@@ -31,7 +31,7 @@ import java.lang.ref.WeakReference
 
 class KuperAdapter(
         private val context: WeakReference<Context>,
-        private val manager: RequestManager,
+        private val manager: RequestManager?,
         private val wallpaper: Drawable,
         private val listener: (KuperKomponent) -> Unit
                   ) :

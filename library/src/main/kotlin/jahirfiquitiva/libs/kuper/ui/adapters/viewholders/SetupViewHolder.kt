@@ -25,7 +25,7 @@ import jahirfiquitiva.libs.kauextensions.extensions.getDrawable
 import jahirfiquitiva.libs.kauextensions.extensions.getPrimaryTextColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.primaryTextColor
 import jahirfiquitiva.libs.kauextensions.extensions.secondaryTextColor
-import jahirfiquitiva.libs.kauextensions.ui.widgets.MaterialIcon
+import jahirfiquitiva.libs.kauextensions.ui.widgets.MaterialIconView
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
 
@@ -33,7 +33,7 @@ class SetupViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     private val title: TextView? by itemView.bind(R.id.app_name)
     private val description: TextView? by itemView.bind(R.id.app_description)
     private val button: AppCompatButton? by itemView.bind(R.id.install_button)
-    private val icon: MaterialIcon? by itemView.bind(R.id.icon)
+    private val icon: MaterialIconView? by itemView.bind(R.id.icon)
     
     fun bind(app: KuperApp, listener: (KuperApp) -> Unit) =
             with(itemView) {

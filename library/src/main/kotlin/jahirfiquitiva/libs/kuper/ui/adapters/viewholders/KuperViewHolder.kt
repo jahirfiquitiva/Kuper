@@ -27,6 +27,7 @@ import ca.allanwang.kau.utils.isVisible
 import ca.allanwang.kau.utils.visible
 import ca.allanwang.kau.utils.visibleIf
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
+import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
@@ -55,7 +56,7 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     
     fun bind(
             komponent: KuperKomponent,
-            manager: RequestManager,
+            manager: RequestManager?,
             wallpaper: Drawable?,
             listener: (KuperKomponent) -> Unit = {}
             ) {
@@ -80,7 +81,8 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
             }
             
             preview?.let {
-                manager.load(File(rightPreview))
+                val man = manager ?: Glide.with(context)
+                man.load(File(rightPreview))
                         .apply(RequestOptions().priority(Priority.HIGH))
                         .listener(object : GlideRequestCallback<Drawable>() {
                             override fun onLoadSucceed(resource: Drawable): Boolean {
@@ -94,14 +96,12 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
                             }
                         })
                         .into(it)
-                        .clearOnDetach()
             }
         }
     }
     
     fun unbind() {
         preview?.releaseFromGlide()
-        preview?.setImageDrawable(null)
         progress?.visible()
     }
 }

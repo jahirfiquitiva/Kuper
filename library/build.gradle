@@ -81,6 +81,15 @@ dependencies {
     }
 }
 
+configurations {
+    all*.exclude module: 'constraint'
+    all*.exclude module: 'transition'
+    all*.exclude module: 'mediarouter-v7'
+    all*.exclude module: 'support-media-compat'
+    all*.exclude module: 'support-v4'
+    all*.exclude group: 'com.google.code'
+}
+
 tasks.whenTaskAdded { task ->
     if (task.name.contains("lint") || task.name.contains("test")) {
         task.enabled = false

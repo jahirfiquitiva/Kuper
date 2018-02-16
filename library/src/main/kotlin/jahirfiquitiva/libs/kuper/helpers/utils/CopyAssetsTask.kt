@@ -17,7 +17,7 @@ package jahirfiquitiva.libs.kuper.helpers.utils
 
 import android.content.Context
 import android.os.Environment
-import jahirfiquitiva.libs.archhelpers.tasks.Async
+import jahirfiquitiva.libs.archhelpers.tasks.QAsync
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -29,9 +29,9 @@ class CopyAssetsTask(
         folder: String,
         doOnSuccess: (Boolean) -> Unit
                     ) :
-        Async<Context, Boolean>(
+        QAsync<Context, Boolean>(
                 param,
-                object : Async.Callback<Context, Boolean>() {
+                object : QAsync.Callback<Context, Boolean>() {
                     override fun doLoad(param: Context): Boolean? {
                         return try {
                             val files = param.assets.list(folder)

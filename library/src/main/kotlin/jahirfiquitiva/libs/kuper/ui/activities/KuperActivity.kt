@@ -45,7 +45,7 @@ import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.inactiveIconsColor
 import jahirfiquitiva.libs.kauextensions.extensions.primaryColor
 import jahirfiquitiva.libs.kauextensions.extensions.tint
-import jahirfiquitiva.libs.kauextensions.ui.fragments.adapters.FragmentsAdapter
+import jahirfiquitiva.libs.kauextensions.ui.fragments.adapters.FragmentsPagerAdapter
 import jahirfiquitiva.libs.kauextensions.ui.widgets.CustomSearchView
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
@@ -67,8 +67,8 @@ abstract class KuperActivity : BaseFramesActivity() {
     private var searchView: CustomSearchView? = null
     
     private val pager: PseudoViewPager? by bind(R.id.pager)
-    private var fragmentsAdapter: FragmentsAdapter? = null
     private var currentItemId = 0
+    private var withSetup = true
     
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,8 +93,9 @@ abstract class KuperActivity : BaseFramesActivity() {
     }
     
     private fun setupContent(withSetup: Boolean = true) {
+        this.withSetup = withSetup
         postDelayed(50) {
-            setupBottomNavigation(withSetup)
+            setupBottomNavigation()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 requestStoragePermission(
                         getString(R.string.permission_request_wallpaper, getAppName()).orEmpty()) {
@@ -109,22 +110,25 @@ abstract class KuperActivity : BaseFramesActivity() {
     
     override fun fragmentsContainer(): Int = 0
     
-    private fun setupBottomNavigation(withSetup: Boolean) {
-        fragmentsAdapter = if (withSetup) {
-            FragmentsAdapter(
+    private fun initPagerAdapter() {
+        pager?.adapter = if (withSetup) {
+            FragmentsPagerAdapter(
                     supportFragmentManager,
                     SetupFragment(),
                     KuperFragment(),
                     WallpapersFragment.create(getLicenseChecker() != null))
         } else {
-            FragmentsAdapter(
+            FragmentsPagerAdapter(
                     supportFragmentManager,
                     KuperFragment(),
                     WallpapersFragment.create(getLicenseChecker() != null))
         }
+    }
+    
+    private fun setupBottomNavigation() {
+        initPagerAdapter()
         
-        pager?.offscreenPageLimit = fragmentsAdapter?.count ?: 2
-        pager?.adapter = fragmentsAdapter
+        pager?.offscreenPageLimit = pager?.adapter?.count ?: 2
         
         bottomNavigation?.let {
             it.accentColor = accentColor
@@ -213,7 +217,8 @@ abstract class KuperActivity : BaseFramesActivity() {
                 invalidateOptionsMenu()
                 true
             } else {
-                val activeFragment = fragmentsAdapter?.get(pager?.currentItem ?: -1)
+                val activeFragment =
+                        (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
                 (activeFragment as? SetupFragment)?.scrollToTop()
                 (activeFragment as? KuperFragment)?.scrollToTop()
                 (activeFragment as? WallpapersFragment)?.scrollToTop()
@@ -228,12 +233,16 @@ abstract class KuperActivity : BaseFramesActivity() {
     @SuppressLint("MissingSuperCall")
     override fun onSaveInstanceState(outState: Bundle?) {
         outState?.putInt("current", currentItemId)
+        outState?.putBoolean("withSetup", withSetup)
         super.onSaveInstanceState(outState)
     }
     
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
+        invalidateOptionsMenu()
         currentItemId = savedInstanceState?.getInt("current", 0) ?: 0
+        withSetup = savedInstanceState?.getBoolean("withSetup", false) ?: false
+        initPagerAdapter()
         navigateToItem(currentItemId)
     }
     
@@ -241,7 +250,8 @@ abstract class KuperActivity : BaseFramesActivity() {
     private fun doSearch(filter: String = "") {
         synchronized(lock) {
             postDelayed(200) {
-                val activeFragment = fragmentsAdapter?.get(pager?.currentItem ?: -1)
+                val activeFragment =
+                        (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
                 if (activeFragment is KuperFragment) {
                     activeFragment.applyFilter(filter)
                 } else if (activeFragment is BaseFramesFragment<*, *>) {
@@ -253,7 +263,8 @@ abstract class KuperActivity : BaseFramesActivity() {
     }
     
     private fun refreshContent() {
-        val activeFragment = fragmentsAdapter?.get(pager?.currentItem ?: -1)
+        val activeFragment =
+                (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
         (activeFragment as? WallpapersFragment)?.reloadData(1)
     }
     
@@ -287,7 +298,7 @@ abstract class KuperActivity : BaseFramesActivity() {
                                 Snackbar.LENGTH_LONG)
                         if (count == actualFolders.size) {
                             (getCurrentFragment() as? SetupFragment)?.loadDataFromViewModel() ?: {
-                                (fragmentsAdapter?.get(
+                                ((pager?.adapter as? FragmentsPagerAdapter)?.get(
                                         currentItemId) as? SetupFragment)?.loadDataFromViewModel()
                             }()
                         }

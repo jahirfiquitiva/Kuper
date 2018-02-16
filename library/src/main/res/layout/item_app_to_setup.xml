@@ -26,7 +26,7 @@
         android:paddingTop="@dimen/cards_margin"
         android:paddingBottom="@dimen/cards_margin">
 
-    <jahirfiquitiva.libs.kauextensions.ui.widgets.MaterialIcon
+    <jahirfiquitiva.libs.kauextensions.ui.widgets.MaterialIconView
             android:id="@+id/icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
