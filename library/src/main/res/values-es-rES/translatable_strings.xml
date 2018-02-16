@@ -16,7 +16,7 @@
   ~ limitations under the License.
   -->
 <resources>
-  <string name="kuper_dashboard">Tablero Kuper</string>
+  <string name="kuper_dashboard">Aplicación Kuper</string>
   <string name="setup">Configuración</string>
   <string name="widgets">Widgets</string>
   <string name="required_apps">Aplicaciones necesarias</string>
