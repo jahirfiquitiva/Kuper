@@ -28,7 +28,6 @@ A full-of-features, easy-to-customize, free and open source, light-weight, Andro
 [![Follow on GitHub](https://img.shields.io/github/followers/jahirfiquitiva.svg?style=social&label=Follow)](https://github.com/jahirfiquitiva)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jahirfiquitiva.svg?style=social)](https://twitter.com/jahirfiquitiva)
 [![Google+](https://img.shields.io/badge/Follow-Google%2B-ea4335.svg)](https://plus.google.com/+JahirFiquitivaR)
-[![Donate](https://img.shields.io/badge/PayPal-Donate-009cde.svg)](https://www.paypal.me/jahirfiquitiva)
 
 ---
 
@@ -133,20 +132,21 @@ If you found this app/library helpful and want to thank me, you can:
 
 **Thanks in advance!** :pray:
 
-## Special Thanks:
+## Special thanks 🙌
 
-- [Sherry Sabatine](https://plus.google.com/+SherrySabatine). Thanks to her, Kuper is completely free and open-source.
-- [Allan Wang](https://www.allanwang.ca/)
-- [James Fenn](https://theandroidmaster.github.io/)
-- [Maximilian Keppeler](https://plus.google.com/+MaxKeppeler)
-- [Sasi Kanth](https://plus.google.com/+Sasikanth)
-- [Alexandre Piveteau](https://github.com/alexandrepiveteau)
-- [Lukas Koller](https://github.com/kollerlukas)
-- [Patryk Goworowski](https://plus.google.com/+PatrykGoworowski)
-- [Lumiq Creative](https://plus.google.com/+LumiqCreative)
-- [Kevin Aguilar](http://kevaguilar.com/)
-- [Eduardo Pratti](https://plus.google.com/+EduardoPratti/posts)
-- [Anthony Nguyen](https://plus.google.com/+AHNguyen)
+- [Sherry Sabatine](https://plus.google.com/+SherrySabatine) 💵
+- [Allan Wang](https://www.allanwang.ca/) 💻
+- [James Fenn](https://theandroidmaster.github.io/) 🔌
+- [Maximilian Keppeler](https://plus.google.com/+MaxKeppeler) 🔌
+- [Sasi Kanth](https://plus.google.com/+Sasikanth) 🔌
+- [Alexandre Piveteau](https://github.com/alexandrepiveteau) 💻
+- [Lukas Koller](https://github.com/kollerlukas) 🔌
+- [Patryk Goworowski](https://plus.google.com/+PatrykGoworowski) 🎨
+- [Lumiq Creative](https://plus.google.com/+LumiqCreative) 🎨
+- [Jackson Hayes](https://jacksonhayes.xyz/) 📖
+- [Kevin Aguilar](http://kevaguilar.com/) 🎨
+- [Eduardo Pratti](https://plus.google.com/+EduardoPratti) 🎨
+- [Anthony Nguyen](https://plus.google.com/+AHNguyen) 🎨
 
 ---
 
