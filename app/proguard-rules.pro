@@ -35,6 +35,7 @@
 }
 
 -keep class jahirfiquitiva.libs.frames.** { *; }
+-keep class jahirfiquitiva.libs.kuper.** { *; }
 
 -keep class com.google.**
 -keep class autovalue.shaded.com.google.**
