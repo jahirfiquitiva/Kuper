@@ -16,5 +16,18 @@
   ~ limitations under the License.
   -->
 <resources>
+  <string name="kuper_dashboard">Dasbor Kuper</string>
   <string name="setup">Mempersiapkan</string>
+  <string name="widgets">Widget</string>
+  <string name="required_apps">Aplikasi yang dibutuhkan</string>
+  <string name="assets">Aset</string>
+  <string name="required_for_templates">Diperlukan untuk menggunakan template yang disertakan</string>
+  <string name="required_for_widgets">Diperlukan untuk menggunakan widget yang disertakan</string>
+  <string name="required_for_wallpapers">Diperlukan untuk menggunakan wallpaper yang disertakan</string>
+  <string name="required_for_lockscreens">Diperlukan untuk menggunakan kunci layar yang disertakan</string>
+  <string name="required_assets">Aset-aset yang diperlukan untuk template supaya bekerja dengan baik</string>
+  <string name="install">Pasang</string>
+  <string name="template">Template</string>
+  <string name="templates">Template-template</string>
+  <string name="assets_installed">Aset sudah terpasang</string>
 </resources>
