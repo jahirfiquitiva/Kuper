@@ -27,6 +27,7 @@ import ca.allanwang.kau.utils.boolean
 import ca.allanwang.kau.utils.postDelayed
 import ca.allanwang.kau.utils.string
 import ca.allanwang.kau.utils.visibleIf
+import ca.allanwang.kau.xml.showChangelog
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
@@ -36,7 +37,6 @@ import jahirfiquitiva.libs.frames.ui.widgets.CustomToolbar
 import jahirfiquitiva.libs.kauextensions.extensions.accentColor
 import jahirfiquitiva.libs.kauextensions.extensions.bind
 import jahirfiquitiva.libs.kauextensions.extensions.cardBackgroundColor
-import jahirfiquitiva.libs.kauextensions.extensions.changeOptionVisibility
 import jahirfiquitiva.libs.kauextensions.extensions.getActiveIconsColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.getAppName
 import jahirfiquitiva.libs.kauextensions.extensions.getPrimaryTextColorFor
@@ -44,6 +44,8 @@ import jahirfiquitiva.libs.kauextensions.extensions.getSecondaryTextColorFor
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.inactiveIconsColor
 import jahirfiquitiva.libs.kauextensions.extensions.primaryColor
+import jahirfiquitiva.libs.kauextensions.extensions.secondaryTextColor
+import jahirfiquitiva.libs.kauextensions.extensions.setItemVisibility
 import jahirfiquitiva.libs.kauextensions.extensions.tint
 import jahirfiquitiva.libs.kauextensions.ui.fragments.adapters.FragmentsPagerAdapter
 import jahirfiquitiva.libs.kauextensions.ui.widgets.CustomSearchView
@@ -101,7 +103,7 @@ abstract class KuperActivity : BaseFramesActivity() {
                         getString(R.string.permission_request_wallpaper, getAppName()).orEmpty()) {
                     if (!kuperKonfigs.permissionRequested) {
                         kuperKonfigs.permissionRequested = true
-                        onThemeChanged()
+                        setupBottomNavigation()
                     }
                 }
             }
@@ -164,12 +166,12 @@ abstract class KuperActivity : BaseFramesActivity() {
         menuInflater.inflate(R.menu.frames_menu, menu)
         
         menu?.let {
-            it.changeOptionVisibility(R.id.donate, donationsEnabled && boolean(R.bool.isKuper))
-            it.changeOptionVisibility(R.id.search, currentItemId != 0)
-            it.changeOptionVisibility(R.id.refresh, currentItemId == 2)
+            it.setItemVisibility(R.id.donate, donationsEnabled && boolean(R.bool.isKuper))
+            it.setItemVisibility(R.id.search, currentItemId != 0)
+            it.setItemVisibility(R.id.refresh, currentItemId == 2)
             
-            it.changeOptionVisibility(R.id.about, boolean(R.bool.isKuper))
-            it.changeOptionVisibility(R.id.settings, boolean(R.bool.isKuper))
+            it.setItemVisibility(R.id.about, boolean(R.bool.isKuper))
+            it.setItemVisibility(R.id.settings, boolean(R.bool.isKuper))
             
             searchItem = it.findItem(R.id.search)
             searchView = searchItem?.actionView as? CustomSearchView
@@ -199,6 +201,7 @@ abstract class KuperActivity : BaseFramesActivity() {
             val id = it.itemId
             when (id) {
                 R.id.refresh -> refreshContent()
+                R.id.changelog -> showChangelog(R.xml.changelog, secondaryTextColor)
                 R.id.about -> startActivity(Intent(this, CreditsActivity::class.java))
                 R.id.settings ->
                     startActivityForResult(Intent(this, SettingsActivity::class.java), 22)

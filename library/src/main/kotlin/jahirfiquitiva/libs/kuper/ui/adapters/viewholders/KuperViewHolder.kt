@@ -69,7 +69,7 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
             app?.text = komponent.type.toString()
             icon?.visibleIf(komponent.hasIntent)
             if (icon?.isVisible == true) {
-                icon?.setImageDrawable("ic_open_app".getDrawable(context))
+                icon?.setImageDrawable(context.getDrawable("ic_open_app"))
                 icon?.setOnClickListener { listener(komponent) }
             }
             val rightPreview =

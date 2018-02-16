@@ -24,19 +24,19 @@ import android.view.View
 import ca.allanwang.kau.utils.dimenPixelSize
 import ca.allanwang.kau.utils.dpToPx
 import ca.allanwang.kau.utils.setPaddingBottom
+import ca.allanwang.kau.utils.startLink
 import com.bumptech.glide.Glide
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
+import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
 import jahirfiquitiva.libs.kauextensions.extensions.actv
-import jahirfiquitiva.libs.kauextensions.extensions.cardBackgroundColor
 import jahirfiquitiva.libs.kauextensions.extensions.ctxt
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
-import jahirfiquitiva.libs.kauextensions.extensions.openLink
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
@@ -88,9 +88,9 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                     val wm = WallpaperManager.getInstance(context)
                     
                     val drawable = try {
-                        wm?.fastDrawable ?: ColorDrawable(context.cardBackgroundColor)
+                        wm?.fastDrawable ?: ColorDrawable(context.tilesColor)
                     } catch (e: Exception) {
-                        ColorDrawable(context.cardBackgroundColor)
+                        ColorDrawable(context.tilesColor)
                     }
                     
                     kuperAdapter =
@@ -152,7 +152,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                         else -> ""
                     }
                     if (itemPkg.hasContent())
-                        contxt.openLink(PLAY_STORE_LINK_PREFIX + itemPkg)
+                        contxt.startLink(PLAY_STORE_LINK_PREFIX + itemPkg)
                 }
             } ?: {
                 if (item.type == KuperKomponent.Type.KOMPONENT) {

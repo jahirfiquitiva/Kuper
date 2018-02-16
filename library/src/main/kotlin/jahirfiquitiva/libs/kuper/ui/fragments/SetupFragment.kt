@@ -21,6 +21,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import ca.allanwang.kau.utils.dpToPx
 import ca.allanwang.kau.utils.setPaddingBottom
+import ca.allanwang.kau.utils.startLink
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
@@ -30,7 +31,6 @@ import jahirfiquitiva.libs.kauextensions.extensions.getAppName
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
-import jahirfiquitiva.libs.kauextensions.extensions.openLink
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.providers.viewmodels.SetupViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
@@ -92,7 +92,7 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     
     override fun onItemClicked(item: KuperApp, longClick: Boolean) {
         if (item.packageName.hasContent()) {
-            ctxt { it.openLink(PLAY_STORE_LINK_PREFIX + item.packageName) }
+            ctxt { it.startLink(PLAY_STORE_LINK_PREFIX + item.packageName) }
         } else {
             (activity as? KuperActivity)?.let { actv ->
                 actv.requestStoragePermission(

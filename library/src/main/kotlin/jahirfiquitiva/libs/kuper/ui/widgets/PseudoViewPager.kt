@@ -16,6 +16,7 @@
 package jahirfiquitiva.libs.kuper.ui.widgets
 
 import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v4.view.PagerAdapter
@@ -28,7 +29,6 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.Scroller
 import ca.allanwang.kau.utils.gone
 import ca.allanwang.kau.utils.visible
-import jahirfiquitiva.libs.kauextensions.extensions.SimpleAnimatorListener
 import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 
 class PseudoViewPager : ViewPager {
@@ -91,9 +91,9 @@ class PseudoViewPager : ViewPager {
         }
         transitioning = true
         animate().alpha(0.0F).setDuration(FADE_OUT_DURATION).setListener(
-                object : SimpleAnimatorListener() {
-                    override fun onEnd(animator: Animator) {
-                        super.onEnd(animator)
+                object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        super.onAnimationEnd(animation)
                         gone()
                         actualSetCurrentItem(item, afterTransition)
                     }
@@ -104,9 +104,9 @@ class PseudoViewPager : ViewPager {
         super.setCurrentItem(item, false)
         visible()
         animate().alpha(1.0F).setDuration(FADE_IN_DURATION).setListener(
-                object : SimpleAnimatorListener() {
-                    override fun onEnd(animator: Animator) {
-                        super.onEnd(animator)
+                object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        super.onAnimationEnd(animation)
                         transitioning = false
                         afterTransition()
                     }
