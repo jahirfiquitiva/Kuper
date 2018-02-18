@@ -16,11 +16,12 @@
   ~ limitations under the License.
   -->
 <resources>
-  <string name="kuper_dashboard">Kuper Dashboard</string>
+  <string name="kuper_dashboard">Aplicación Kuper</string>
   <string name="setup">Configuración</string>
   <string name="widgets">Widgets</string>
   <string name="required_apps">Aplicaciones necesarias</string>
   <string name="assets">Archivos</string>
+  <string name="required_for_templates">Necesario para utilizar las plantillas incluidas</string>
   <string name="required_for_widgets">Necesario para usar los widgets incluídos</string>
   <string name="required_for_wallpapers">Necesario para usar los fondos de pantalla incluídos</string>
   <string name="required_for_lockscreens">Necesario para usar las pantallas de bloqueo incluídas</string>
@@ -35,4 +36,5 @@
   <string name="copied_assets_error">Un error inesperado ocurrió mientras se copiaban los archivos</string>
   <string name="permission_request_assets">%1$s requiere acceso al almacenamiento para poder instalar los archivos</string>
   <string name="permission_request_wallpaper">%1$s requiere acceso al almacenamiento para poder mostrar tu fondo de pantalla en la previsualización de widgets</string>
+  <string name="open_komponents">Para agregar un Komponent, abra Kustom y presione + en el editor de la barra de herramientas, luego seleccione Komponent y encuentra este paquete.</string>
 </resources>
