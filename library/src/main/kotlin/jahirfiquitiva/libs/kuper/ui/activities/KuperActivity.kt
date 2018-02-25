@@ -212,9 +212,12 @@ abstract class KuperActivity : BaseFramesActivity() {
         return super.onOptionsItemSelected(item)
     }
     
-    private fun navigateToItem(@IntRange(from = 0, to = 2) position: Int): Boolean {
+    private fun navigateToItem(
+            @IntRange(from = 0, to = 2) position: Int,
+            force: Boolean = false
+                              ): Boolean {
         return try {
-            if (currentItemId != position) {
+            if (currentItemId != position || force) {
                 pager?.currentItem = position
                 currentItemId = position
                 invalidateOptionsMenu()
@@ -246,7 +249,8 @@ abstract class KuperActivity : BaseFramesActivity() {
         currentItemId = savedInstanceState?.getInt("current", 0) ?: 0
         withSetup = savedInstanceState?.getBoolean("withSetup", false) ?: false
         initPagerAdapter()
-        navigateToItem(currentItemId)
+        bottomNavigation?.currentItem = currentItemId
+        navigateToItem(currentItemId, true)
     }
     
     private val lock = Any()
