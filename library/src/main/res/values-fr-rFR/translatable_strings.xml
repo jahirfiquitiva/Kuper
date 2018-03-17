@@ -15,4 +15,12 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources></resources>
+<resources>
+  <string name="kuper_dashboard">Voir le Tableau de Bord</string>
+  <string name="setup">Configurer</string>
+  <string name="widgets">Widgets</string>
+  <string name="required_apps">Applications requises</string>
+  <string name="assets">Documents</string>
+  <string name="required_for_templates">Nécessaire d’utiliser des modèles inclus</string>
+  <string name="required_for_widgets">Requis pour utiliser les widgets inclus</string>
+</resources>
