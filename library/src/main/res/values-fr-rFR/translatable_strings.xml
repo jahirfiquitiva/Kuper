@@ -23,4 +23,16 @@
   <string name="assets">Documents</string>
   <string name="required_for_templates">Nécessaire d’utiliser des modèles inclus</string>
   <string name="required_for_widgets">Requis pour utiliser les widgets inclus</string>
+  <string name="required_for_wallpapers">Requis pour utiliser les fonds d\'écran inclus</string>
+  <string name="required_for_lockscreens">Requis pour utiliser les écran de verrouillage inclus</string>
+  <string name="required_assets">Documents requises pour que le travail fonctionne correctement</string>
+  <string name="install">Installer</string>
+  <string name="template">Modèle de document</string>
+  <string name="templates">Modèle de document</string>
+  <string name="assets_installed">Matériel déjà installé</string>
+  <string name="apps_installed">Applications déjà installées</string>
+  <string name="copying_assets">Copie de fichiers à ZooperWidget /%1$s</string>
+  <string name="copied_assets_successfully">Fichier copié avec succès</string>
+  <string name="copied_assets_error">Une erreur inattendue s’est produite lors de la copie des éléments d’actif</string>
+  <string name="permission_request_assets">%1$s requiert l’accès au stockage afin d’être en mesure d’installer des éléments d’actif</string>
 </resources>
