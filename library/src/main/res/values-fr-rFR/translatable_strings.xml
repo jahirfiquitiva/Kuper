@@ -16,12 +16,12 @@
   ~ limitations under the License.
   -->
 <resources>
-  <string name="kuper_dashboard">Tableau de bord de Kuper</string>
+  <string name="kuper_dashboard">Tableau de bord Kuper</string>
   <string name="setup">Le programme d\'installation</string>
   <string name="widgets">Widgets</string>
   <string name="required_apps">Applications requises</string>
   <string name="assets">Ressources</string>
-  <string name="required_for_templates">Nécessaire d’utiliser des modèles inclus</string>
+  <string name="required_for_templates">Requis d’utiliser des modèles inclus</string>
   <string name="required_for_widgets">Requis pour utiliser les widgets inclus</string>
   <string name="required_for_wallpapers">Requis pour utiliser les fonds d\'écran inclus</string>
   <string name="required_for_lockscreens">Requis pour utiliser les écrans de verrouillage inclus</string>
