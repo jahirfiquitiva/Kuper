@@ -15,4 +15,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources></resources>
+<resources>
+  <string name="kuper_dashboard">Kuper Dashboard</string>
+  <string name="setup">Installatie</string>
+  <string name="widgets">Widgets</string>
+  <string name="required_apps">Vereiste apps</string>
+</resources>
