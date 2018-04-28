@@ -36,4 +36,5 @@
   <string name="copied_assets_error">复制资源时发生了意外错误</string>
   <string name="permission_request_assets">为了安装资源，%1$s 需要系统存储权限</string>
   <string name="permission_request_wallpaper">为了能够在小部件预览中显示你的壁纸，%1$s 需要系统存储权限</string>
+  <string name="open_komponents">如要添加 Komponent，打开 Kustom 并点击编辑器工具栏上的 + ，然后选择 Komponent 并照道此包。</string>
 </resources>
