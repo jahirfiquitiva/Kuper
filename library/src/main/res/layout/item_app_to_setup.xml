@@ -15,79 +15,79 @@
   ~ limitations under the License.
   -->
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="56dp"
-        android:maxHeight="88dp"
-        android:paddingTop="@dimen/cards_margin"
-        android:paddingBottom="@dimen/cards_margin">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="56dp"
+    android:maxHeight="88dp"
+    android:paddingTop="@dimen/cards_margin"
+    android:paddingBottom="@dimen/cards_margin">
 
     <jahirfiquitiva.libs.kauextensions.ui.widgets.MaterialIconView
-            android:id="@+id/icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="@dimen/fabs_margin"
-            android:layout_marginStart="@dimen/fabs_margin"
-            android:scaleType="centerCrop"
-            app:active="true"
-            tools:ignore="ContentDescription"/>
+        android:id="@+id/icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/fabs_margin"
+        android:layout_marginStart="@dimen/fabs_margin"
+        android:scaleType="centerCrop"
+        app:active="true"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
-            android:layout_width="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:paddingStart="@dimen/fabs_margin"
+            android:paddingLeft="@dimen/fabs_margin"
+            android:paddingEnd="@dimen/fabs_margin"
+            android:paddingRight="@dimen/fabs_margin"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="KWGT" />
 
         <TextView
-                android:id="@+id/app_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/fabs_margin"
-                android:paddingLeft="@dimen/fabs_margin"
-                android:paddingEnd="@dimen/fabs_margin"
-                android:paddingRight="@dimen/fabs_margin"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="16sp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                tools:text="KWGT"/>
-
-        <TextView
-                android:id="@+id/app_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/cards_margin"
-                android:paddingStart="@dimen/fabs_margin"
-                android:paddingLeft="@dimen/fabs_margin"
-                android:paddingEnd="@dimen/fabs_margin"
-                android:paddingRight="@dimen/fabs_margin"
-                android:maxLines="4"
-                android:ellipsize="end"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textSize="14sp"
-                tools:text="@string/required_for_wallpapers"/>
+            android:id="@+id/app_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cards_margin"
+            android:paddingStart="@dimen/fabs_margin"
+            android:paddingLeft="@dimen/fabs_margin"
+            android:paddingEnd="@dimen/fabs_margin"
+            android:paddingRight="@dimen/fabs_margin"
+            android:maxLines="4"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="14sp"
+            tools:text="@string/required_for_wallpapers" />
 
         <Button
-                android:id="@+id/install_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/cards_margin"
-                android:layout_marginBottom="@dimen/cards_margin"
-                android:layout_marginStart="@dimen/cards_big_margin"
-                android:layout_marginLeft="@dimen/cards_big_margin"
-                android:layout_marginEnd="@dimen/fabs_margin"
-                android:layout_marginRight="@dimen/fabs_margin"
-                android:orientation="horizontal"
-                android:text="@string/install"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+            android:id="@+id/install_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/cards_margin"
+            android:layout_marginBottom="@dimen/cards_margin"
+            android:layout_marginStart="@dimen/cards_big_margin"
+            android:layout_marginLeft="@dimen/cards_big_margin"
+            android:layout_marginEnd="@dimen/fabs_margin"
+            android:layout_marginRight="@dimen/fabs_margin"
+            android:orientation="horizontal"
+            android:text="@string/install"
+            style="@style/Widget.AppCompat.Button.Colored" />
 
     </LinearLayout>
 

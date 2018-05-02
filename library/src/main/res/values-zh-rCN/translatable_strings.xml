@@ -16,25 +16,25 @@
   ~ limitations under the License.
   -->
 <resources>
-  <string name="kuper_dashboard">Kuper 仪表盘</string>
-  <string name="setup">设定</string>
-  <string name="widgets">小部件</string>
-  <string name="required_apps">必需的应用程序</string>
-  <string name="assets">资源</string>
-  <string name="required_for_templates">需要使用内置的模板</string>
-  <string name="required_for_widgets">需要使用内置的小部件</string>
-  <string name="required_for_wallpapers">需要使用内置的壁纸</string>
-  <string name="required_for_lockscreens">需要使用内置的锁屏</string>
-  <string name="required_assets">模板正常工作所需的资源</string>
-  <string name="install">安装</string>
-  <string name="template">模板</string>
-  <string name="templates">模板</string>
-  <string name="assets_installed">资源已经安装</string>
-  <string name="apps_installed">应用程序已经安装</string>
-  <string name="copying_assets">正在将文件复制到 ZooperWidget/%1$s</string>
-  <string name="copied_assets_successfully">成功复制资源</string>
-  <string name="copied_assets_error">复制资源时发生了意外错误</string>
-  <string name="permission_request_assets">为了安装资源，%1$s 需要系统存储权限</string>
-  <string name="permission_request_wallpaper">为了能够在小部件预览中显示你的壁纸，%1$s 需要系统存储权限</string>
-  <string name="open_komponents">如要添加 Komponent，打开 Kustom 并点击编辑器工具栏上的 + ，然后选择 Komponent 并照道此包。</string>
+    <string name="kuper_dashboard">Kuper 仪表盘</string>
+    <string name="setup">设定</string>
+    <string name="widgets">小部件</string>
+    <string name="required_apps">必需的应用程序</string>
+    <string name="assets">资源</string>
+    <string name="required_for_templates">需要使用内置的模板</string>
+    <string name="required_for_widgets">需要使用内置的小部件</string>
+    <string name="required_for_wallpapers">需要使用内置的壁纸</string>
+    <string name="required_for_lockscreens">需要使用内置的锁屏</string>
+    <string name="required_assets">模板正常工作所需的资源</string>
+    <string name="install">安装</string>
+    <string name="template">模板</string>
+    <string name="templates">模板</string>
+    <string name="assets_installed">资源已经安装</string>
+    <string name="apps_installed">应用程序已经安装</string>
+    <string name="copying_assets">正在将文件复制到 ZooperWidget/%1$s</string>
+    <string name="copied_assets_successfully">成功复制资源</string>
+    <string name="copied_assets_error">复制资源时发生了意外错误</string>
+    <string name="permission_request_assets">为了安装资源，%1$s 需要系统存储权限</string>
+    <string name="permission_request_wallpaper">为了能够在小部件预览中显示你的壁纸，%1$s 需要系统存储权限</string>
+    <string name="open_komponents">如要添加 Komponent，打开 Kustom 并点击编辑器工具栏上的 + ，然后选择 Komponent 并照道此包。</string>
 </resources>
