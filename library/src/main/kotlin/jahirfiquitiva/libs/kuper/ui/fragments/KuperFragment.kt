@@ -15,6 +15,7 @@
  */
 package jahirfiquitiva.libs.kuper.ui.fragments
 
+import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.graphics.drawable.ColorDrawable
 import android.support.v7.widget.DefaultItemAnimator
@@ -29,6 +30,7 @@ import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.archhelpers.extensions.lazyViewModel
 import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
+import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
@@ -62,6 +64,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         recyclerView?.post { recyclerView?.scrollToPosition(0) }
     }
     
+    @SuppressLint("MissingPermission")
     override fun initUI(content: View) {
         recyclerView = content.findViewById(R.id.list_rv)
         fastScroller = content.findViewById(R.id.fast_scroller)
@@ -123,10 +126,9 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         if (filter.hasContent()) {
             recyclerView?.setEmptyImage(R.drawable.no_results)
             recyclerView?.setEmptyText(R.string.search_no_results)
-            kuperAdapter?.setItems(
-                    ArrayList(ArrayList(kuperViewModel.getData().orEmpty()).filter {
-                        it.name.contains(filter, true) || it.type.toString().contains(filter, true)
-                    }))
+            kuperAdapter?.setItems(ArrayList(kuperViewModel.getData().orEmpty()).jfilter {
+                it.name.contains(filter, true) || it.type.toString().contains(filter, true)
+            })
         } else {
             recyclerView?.setEmptyImage(R.drawable.empty_section)
             recyclerView?.setEmptyText(R.string.empty_section)

@@ -20,6 +20,7 @@ import android.view.ViewGroup
 import ca.allanwang.kau.utils.inflate
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
+import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.ui.adapters.viewholders.SectionedHeaderViewHolder
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kuper.R
@@ -58,10 +59,10 @@ class SetupAdapter(
             if (it is SetupViewHolder) {
                 when (section) {
                     0 -> it.bind(
-                            apps.filter { it.packageName.hasContent() }[relativePosition],
+                            apps.jfilter { it.packageName.hasContent() }[relativePosition],
                             listener)
                     1 -> it.bind(
-                            apps.filter { (!it.packageName.hasContent()) }[relativePosition],
+                            apps.jfilter { (!it.packageName.hasContent()) }[relativePosition],
                             listener)
                 }
             }
@@ -75,8 +76,8 @@ class SetupAdapter(
     }
     
     override fun getItemCount(section: Int): Int = when (section) {
-        0 -> apps.filter { it.packageName.hasContent() }.size
-        1 -> apps.filter { (!it.packageName.hasContent()) }.size
+        0 -> apps.jfilter { it.packageName.hasContent() }.size
+        1 -> apps.jfilter { (!it.packageName.hasContent()) }.size
         else -> 0
     }
     

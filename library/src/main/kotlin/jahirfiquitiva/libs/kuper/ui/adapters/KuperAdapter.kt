@@ -23,6 +23,7 @@ import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import com.bumptech.glide.RequestManager
 import jahirfiquitiva.libs.archhelpers.ui.adapters.presenters.ListAdapterPresenter
+import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.ui.adapters.viewholders.SectionedHeaderViewHolder
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
@@ -106,19 +107,19 @@ class KuperAdapter(
             if (it is KuperViewHolder) {
                 when (section) {
                     0 -> it.bind(
-                            komponents.filter { it.type == KuperKomponent.Type.ZOOPER }[relativePosition],
+                            komponents.jfilter { it.type == KuperKomponent.Type.ZOOPER }[relativePosition],
                             manager, wallpaper)
                     1 -> it.bind(
-                            komponents.filter { it.type == KuperKomponent.Type.KOMPONENT }[relativePosition],
+                            komponents.jfilter { it.type == KuperKomponent.Type.KOMPONENT }[relativePosition],
                             manager, wallpaper)
                     2 -> it.bind(
-                            komponents.filter { it.type == KuperKomponent.Type.WIDGET }[relativePosition],
+                            komponents.jfilter { it.type == KuperKomponent.Type.WIDGET }[relativePosition],
                             manager, wallpaper, listener)
                     3 -> it.bind(
-                            komponents.filter { it.type == KuperKomponent.Type.LOCKSCREEN }[relativePosition],
+                            komponents.jfilter { it.type == KuperKomponent.Type.LOCKSCREEN }[relativePosition],
                             manager, wallpaper, listener)
                     4 -> it.bind(
-                            komponents.filter { it.type == KuperKomponent.Type.WALLPAPER }[relativePosition],
+                            komponents.jfilter { it.type == KuperKomponent.Type.WALLPAPER }[relativePosition],
                             manager, wallpaper, listener)
                 }
             }
@@ -132,11 +133,11 @@ class KuperAdapter(
     }
     
     override fun getItemCount(section: Int): Int = when (section) {
-        0 -> komponents.filter { it.type == KuperKomponent.Type.ZOOPER }.size
-        1 -> komponents.filter { it.type == KuperKomponent.Type.KOMPONENT }.size
-        2 -> komponents.filter { it.type == KuperKomponent.Type.WIDGET }.size
-        3 -> komponents.filter { it.type == KuperKomponent.Type.LOCKSCREEN }.size
-        4 -> komponents.filter { it.type == KuperKomponent.Type.WALLPAPER }.size
+        0 -> komponents.jfilter { it.type == KuperKomponent.Type.ZOOPER }.size
+        1 -> komponents.jfilter { it.type == KuperKomponent.Type.KOMPONENT }.size
+        2 -> komponents.jfilter { it.type == KuperKomponent.Type.WIDGET }.size
+        3 -> komponents.jfilter { it.type == KuperKomponent.Type.LOCKSCREEN }.size
+        4 -> komponents.jfilter { it.type == KuperKomponent.Type.WALLPAPER }.size
         else -> 0
     }
     
