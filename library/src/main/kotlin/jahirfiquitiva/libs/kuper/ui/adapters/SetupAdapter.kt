@@ -68,10 +68,10 @@ class SetupAdapter(
         }
     }
     
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SectionedViewHolder? {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionedViewHolder {
         return if (viewType >= 0) {
-            parent?.inflate(R.layout.item_app_to_setup)?.let { SetupViewHolder(it) }
-        } else parent?.inflate(R.layout.item_section_header)?.let { SectionedHeaderViewHolder(it) }
+            SetupViewHolder(parent.inflate(R.layout.item_app_to_setup))
+        } else SectionedHeaderViewHolder(parent.inflate(R.layout.item_section_header))
     }
     
     override fun getItemCount(section: Int): Int = when (section) {

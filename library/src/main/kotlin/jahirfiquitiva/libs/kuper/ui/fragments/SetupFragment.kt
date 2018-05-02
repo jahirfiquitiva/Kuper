@@ -15,7 +15,6 @@
  */
 package jahirfiquitiva.libs.kuper.ui.fragments
 
-import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
@@ -23,6 +22,7 @@ import ca.allanwang.kau.utils.dpToPx
 import ca.allanwang.kau.utils.setPaddingBottom
 import ca.allanwang.kau.utils.startLink
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
+import jahirfiquitiva.libs.archhelpers.extensions.lazyViewModel
 import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
@@ -41,7 +41,7 @@ import java.lang.ref.WeakReference
 @Suppress("DEPRECATION")
 class SetupFragment : ViewModelFragment<KuperApp>() {
     
-    private var appsModel: SetupViewModel? = null
+    private val appsModel: SetupViewModel by lazyViewModel()
     
     private var recyclerView: EmptyViewRecyclerView? = null
     private var fastScroller: RecyclerFastScroller? = null
@@ -103,18 +103,14 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
         }
     }
     
-    override fun initViewModel() {
-        appsModel = ViewModelProviders.of(this).get(SetupViewModel::class.java)
-    }
-    
     override fun loadDataFromViewModel() {
-        appsModel?.loadData(ctxt, true)
+        appsModel.loadData(ctxt, true)
     }
     
     override fun autoStartLoad() = true
     
-    override fun registerObserver() {
-        appsModel?.observe(
+    override fun registerObservers() {
+        appsModel.observe(
                 this, {
             if (it.isEmpty()) {
                 (activity as? KuperActivity)?.hideSetup()
@@ -124,8 +120,8 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
         })
     }
     
-    override fun unregisterObserver() {
-        appsModel?.destroy(this)
+    override fun unregisterObservers() {
+        appsModel.destroy(this)
     }
     
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

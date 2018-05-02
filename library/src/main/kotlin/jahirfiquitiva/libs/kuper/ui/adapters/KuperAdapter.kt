@@ -125,10 +125,10 @@ class KuperAdapter(
         }
     }
     
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SectionedViewHolder? {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionedViewHolder {
         return if (viewType >= 0) {
-            parent?.inflate(R.layout.item_komponent)?.let { KuperViewHolder(it) }
-        } else parent?.inflate(R.layout.item_section_header)?.let { SectionedHeaderViewHolder(it) }
+            KuperViewHolder(parent.inflate(R.layout.item_komponent))
+        } else SectionedHeaderViewHolder(parent.inflate(R.layout.item_section_header))
     }
     
     override fun getItemCount(section: Int): Int = when (section) {
@@ -181,7 +181,7 @@ class KuperAdapter(
         }
     }
     
-    override fun onViewRecycled(holder: SectionedViewHolder?) {
+    override fun onViewRecycled(holder: SectionedViewHolder) {
         super.onViewRecycled(holder)
         (holder as? KuperViewHolder)?.unbind()
     }
