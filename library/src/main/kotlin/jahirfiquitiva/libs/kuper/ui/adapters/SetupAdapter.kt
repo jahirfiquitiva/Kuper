@@ -82,7 +82,8 @@ class SetupAdapter(
     }
     
     override fun onBindHeaderViewHolder(
-            holder: SectionedViewHolder?, section: Int,
+            holder: SectionedViewHolder?,
+            section: Int,
             expanded: Boolean
                                        ) {
         context.get()?.let {
