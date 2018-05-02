@@ -62,7 +62,7 @@ class SetupAdapter(
                             apps.jfilter { it.packageName.hasContent() }[relativePosition],
                             listener)
                     1 -> it.bind(
-                            apps.jfilter { (!it.packageName.hasContent()) }[relativePosition],
+                            apps.jfilter { !it.packageName.hasContent() }[relativePosition],
                             listener)
                 }
             }
