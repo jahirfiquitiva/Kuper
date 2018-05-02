@@ -26,7 +26,7 @@ ext.versions = [
         versionCode: 131,
         versionName: '1.3.1',
         // Dependencies
-        frames     : '5c6923c',
+        frames     : '6d3dd5a',
         bottomNav  : '2.2.0',
         oneSignal  : '3.8.3'
 ]

@@ -17,9 +17,11 @@ package jahirfiquitiva.libs.kuper.ui.activities
 
 import android.support.v4.app.Fragment
 import jahirfiquitiva.libs.frames.ui.activities.SettingsActivity
+import jahirfiquitiva.libs.kuper.helpers.utils.KuperKonfigs
 import jahirfiquitiva.libs.kuper.ui.fragments.SettingsFragment
 
 class SettingsActivity : SettingsActivity() {
+    override val configs: KuperKonfigs by lazy { KuperKonfigs(this) }
     override fun settingsFragment(): Fragment = SettingsFragment()
     override fun getTranslationSite(): String = "http://j.mp/KuperTranslations"
 }

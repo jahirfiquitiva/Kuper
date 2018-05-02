@@ -53,6 +53,7 @@ import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
 import jahirfiquitiva.libs.kuper.helpers.extensions.kuperKonfigs
 import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask
+import jahirfiquitiva.libs.kuper.helpers.utils.KuperKonfigs
 import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 import jahirfiquitiva.libs.kuper.ui.fragments.KuperFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.SetupFragment
@@ -60,7 +61,9 @@ import jahirfiquitiva.libs.kuper.ui.fragments.WallpapersFragment
 import jahirfiquitiva.libs.kuper.ui.widgets.PseudoViewPager
 import java.lang.ref.WeakReference
 
-abstract class KuperActivity : BaseFramesActivity() {
+abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
+    
+    override val configs: KuperKonfigs by lazy { KuperKonfigs(this) }
     
     private val toolbar: CustomToolbar? by bind(R.id.toolbar)
     private val bottomNavigation: AHBottomNavigation? by bind(R.id.bottom_navigation)
