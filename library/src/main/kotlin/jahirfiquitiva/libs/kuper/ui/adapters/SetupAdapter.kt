@@ -20,6 +20,7 @@ import android.view.ViewGroup
 import ca.allanwang.kau.utils.inflate
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
+import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.ui.adapters.viewholders.SectionedHeaderViewHolder
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kuper.R
@@ -58,30 +59,31 @@ class SetupAdapter(
             if (it is SetupViewHolder) {
                 when (section) {
                     0 -> it.bind(
-                            apps.filter { it.packageName.hasContent() }[relativePosition],
+                            apps.jfilter { it.packageName.hasContent() }[relativePosition],
                             listener)
                     1 -> it.bind(
-                            apps.filter { (!it.packageName.hasContent()) }[relativePosition],
+                            apps.jfilter { !it.packageName.hasContent() }[relativePosition],
                             listener)
                 }
             }
         }
     }
     
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SectionedViewHolder? {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionedViewHolder {
         return if (viewType >= 0) {
-            parent?.inflate(R.layout.item_app_to_setup)?.let { SetupViewHolder(it) }
-        } else parent?.inflate(R.layout.item_section_header)?.let { SectionedHeaderViewHolder(it) }
+            SetupViewHolder(parent.inflate(R.layout.item_app_to_setup))
+        } else SectionedHeaderViewHolder(parent.inflate(R.layout.item_section_header))
     }
     
     override fun getItemCount(section: Int): Int = when (section) {
-        0 -> apps.filter { it.packageName.hasContent() }.size
-        1 -> apps.filter { (!it.packageName.hasContent()) }.size
+        0 -> apps.jfilter { it.packageName.hasContent() }.size
+        1 -> apps.jfilter { !it.packageName.hasContent() }.size
         else -> 0
     }
     
     override fun onBindHeaderViewHolder(
-            holder: SectionedViewHolder?, section: Int,
+            holder: SectionedViewHolder?,
+            section: Int,
             expanded: Boolean
                                        ) {
         context.get()?.let {

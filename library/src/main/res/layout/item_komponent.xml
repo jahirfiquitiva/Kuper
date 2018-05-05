@@ -15,102 +15,102 @@
   ~ limitations under the License.
   -->
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
         <jahirfiquitiva.libs.kauextensions.ui.widgets.SquaredImageView
-                android:id="@+id/wall"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:ignore="ContentDescription, UnusedAttribute"/>
+            android:id="@+id/wall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription, UnusedAttribute" />
 
         <ProgressBar
-                android:id="@+id/loading"
-                style="?android:progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"/>
+            android:id="@+id/loading"
+            style="?android:progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center" />
 
         <jahirfiquitiva.libs.kauextensions.ui.widgets.SquaredImageView
-                android:id="@+id/preview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="24dp"
-                android:scaleType="fitCenter"
-                tools:ignore="ContentDescription, UnusedAttribute"/>
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="24dp"
+            android:scaleType="fitCenter"
+            tools:ignore="ContentDescription, UnusedAttribute" />
 
     </FrameLayout>
 
     <LinearLayout
-            android:id="@+id/komponent_details"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:paddingStart="@dimen/fabs_margin"
-            android:paddingLeft="@dimen/fabs_margin"
-            android:paddingEnd="@dimen/fabs_margin"
-            android:paddingRight="@dimen/fabs_margin"
-            android:layout_gravity="start|bottom"
-            android:gravity="start|bottom"
-            android:clipChildren="false"
-            tools:ignore="UseCompoundDrawables">
+        android:id="@+id/komponent_details"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:paddingStart="@dimen/fabs_margin"
+        android:paddingLeft="@dimen/fabs_margin"
+        android:paddingEnd="@dimen/fabs_margin"
+        android:paddingRight="@dimen/fabs_margin"
+        android:layout_gravity="start|bottom"
+        android:gravity="start|bottom"
+        android:clipChildren="false"
+        tools:ignore="UseCompoundDrawables">
 
         <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:clipChildren="false">
+
+            <TextView
+                android:id="@+id/komponent_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@android:color/white"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="16sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
-                android:clipChildren="false">
+                tools:text="Wallpaper name" />
 
             <TextView
-                    android:id="@+id/komponent_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textColor="@android:color/white"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textSize="16sp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
-                    tools:text="Wallpaper name"/>
-
-            <TextView
-                    android:id="@+id/komponent_app"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textColor="@android:color/white"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textSize="12sp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
-                    tools:text="John Doe"/>
+                android:id="@+id/komponent_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@android:color/white"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="12sp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                tools:text="John Doe" />
 
         </LinearLayout>
 
         <jahirfiquitiva.libs.kauextensions.ui.widgets.MaterialIconView
-                android:id="@+id/launch_app"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="?selectableItemBackgroundBorderless"
-                android:visibility="gone"
-                android:layout_gravity="center"
-                android:gravity="center"
-                tools:ignore="ContentDescription"/>
+            android:id="@+id/launch_app"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackgroundBorderless"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:gravity="center"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 

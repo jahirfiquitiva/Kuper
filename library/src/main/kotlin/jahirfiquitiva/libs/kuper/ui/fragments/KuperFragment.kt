@@ -15,8 +15,8 @@
  */
 package jahirfiquitiva.libs.kuper.ui.fragments
 
+import android.annotation.SuppressLint
 import android.app.WallpaperManager
-import android.arch.lifecycle.ViewModelProviders
 import android.graphics.drawable.ColorDrawable
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
@@ -27,8 +27,10 @@ import ca.allanwang.kau.utils.setPaddingBottom
 import ca.allanwang.kau.utils.startLink
 import com.bumptech.glide.Glide
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
+import jahirfiquitiva.libs.archhelpers.extensions.lazyViewModel
 import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
+import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
@@ -52,7 +54,7 @@ import java.lang.ref.WeakReference
 @Suppress("DEPRECATION")
 class KuperFragment : ViewModelFragment<KuperKomponent>() {
     
-    private var kuperViewModel: KuperViewModel? = null
+    private val kuperViewModel: KuperViewModel by lazyViewModel()
     
     private var recyclerView: EmptyViewRecyclerView? = null
     private var fastScroller: RecyclerFastScroller? = null
@@ -62,6 +64,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         recyclerView?.post { recyclerView?.scrollToPosition(0) }
     }
     
+    @SuppressLint("MissingPermission")
     override fun initUI(content: View) {
         recyclerView = content.findViewById(R.id.list_rv)
         fastScroller = content.findViewById(R.id.fast_scroller)
@@ -123,14 +126,13 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         if (filter.hasContent()) {
             recyclerView?.setEmptyImage(R.drawable.no_results)
             recyclerView?.setEmptyText(R.string.search_no_results)
-            kuperAdapter?.setItems(
-                    ArrayList(ArrayList(kuperViewModel?.getData().orEmpty()).filter {
-                        it.name.contains(filter, true) || it.type.toString().contains(filter, true)
-                    }))
+            kuperAdapter?.setItems(ArrayList(kuperViewModel.getData().orEmpty()).jfilter {
+                it.name.contains(filter, true) || it.type.toString().contains(filter, true)
+            })
         } else {
             recyclerView?.setEmptyImage(R.drawable.empty_section)
             recyclerView?.setEmptyText(R.string.empty_section)
-            kuperAdapter?.setItems(ArrayList(kuperViewModel?.getData().orEmpty()))
+            kuperAdapter?.setItems(ArrayList(kuperViewModel.getData().orEmpty()))
         }
         scrollToTop()
     }
@@ -166,25 +168,21 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         }
     }
     
-    override fun initViewModel() {
-        kuperViewModel = ViewModelProviders.of(this).get(KuperViewModel::class.java)
-    }
-    
     override fun loadDataFromViewModel() {
-        kuperViewModel?.loadData(ctxt, false)
+        kuperViewModel.loadData(ctxt, false)
     }
     
     override fun autoStartLoad() = true
     
-    override fun registerObserver() {
-        kuperViewModel?.observe(this) {
+    override fun registerObservers() {
+        kuperViewModel.observe(this) {
             kuperAdapter?.setItems(it)
             (actv as? KuperActivity)?.destroyDialog()
         }
     }
     
-    override fun unregisterObserver() {
-        kuperViewModel?.destroy(this)
+    override fun unregisterObservers() {
+        kuperViewModel.destroy(this)
     }
     
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

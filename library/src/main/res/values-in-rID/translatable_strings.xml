@@ -16,25 +16,25 @@
   ~ limitations under the License.
   -->
 <resources>
-  <string name="kuper_dashboard">Dasbor Kuper</string>
-  <string name="setup">Mempersiapkan</string>
-  <string name="widgets">Widget</string>
-  <string name="required_apps">Aplikasi yang dibutuhkan</string>
-  <string name="assets">Aset</string>
-  <string name="required_for_templates">Diperlukan untuk menggunakan template yang disertakan</string>
-  <string name="required_for_widgets">Diperlukan untuk menggunakan widget yang disertakan</string>
-  <string name="required_for_wallpapers">Diperlukan untuk menggunakan wallpaper yang disertakan</string>
-  <string name="required_for_lockscreens">Diperlukan untuk menggunakan kunci layar yang disertakan</string>
-  <string name="required_assets">Aset-aset yang diperlukan untuk template supaya bekerja dengan baik</string>
-  <string name="install">Pasang</string>
-  <string name="template">Template</string>
-  <string name="templates">Template-template</string>
-  <string name="assets_installed">Aset sudah terpasang</string>
-  <string name="apps_installed">Aplikasi sudah terpasang</string>
-  <string name="copying_assets">Menyalin berkas ke ZooperWidget/%1$s</string>
-  <string name="copied_assets_successfully">Aset berhasil disalin</string>
-  <string name="copied_assets_error">Terjadi sebuah kesalahan yang tidak terduga ketika sedang menyalin aset</string>
-  <string name="permission_request_assets">%1$s memerlukan akses ke penyimpanan supaya bisa memasang aset</string>
-  <string name="permission_request_wallpaper">%1$s memerlukan akses ke penyimpanan agar bisa menampilkan wallpaper anda di tinjauan widget</string>
-  <string name="open_komponents">Untuk menambahkan sebuah komponenj, buka kustom dan tekan + pada Toolbar penyunting, kemudian pilih komponen dan temukan paket ini.</string>
+    <string name="kuper_dashboard">Dasbor Kuper</string>
+    <string name="setup">Mempersiapkan</string>
+    <string name="widgets">Widget</string>
+    <string name="required_apps">Aplikasi yang dibutuhkan</string>
+    <string name="assets">Aset</string>
+    <string name="required_for_templates">Diperlukan untuk menggunakan template yang disertakan</string>
+    <string name="required_for_widgets">Diperlukan untuk menggunakan widget yang disertakan</string>
+    <string name="required_for_wallpapers">Diperlukan untuk menggunakan wallpaper yang disertakan</string>
+    <string name="required_for_lockscreens">Diperlukan untuk menggunakan kunci layar yang disertakan</string>
+    <string name="required_assets">Aset-aset yang diperlukan untuk template supaya bekerja dengan baik</string>
+    <string name="install">Pasang</string>
+    <string name="template">Template</string>
+    <string name="templates">Template-template</string>
+    <string name="assets_installed">Aset sudah terpasang</string>
+    <string name="apps_installed">Aplikasi sudah terpasang</string>
+    <string name="copying_assets">Menyalin berkas ke ZooperWidget/%1$s</string>
+    <string name="copied_assets_successfully">Aset berhasil disalin</string>
+    <string name="copied_assets_error">Terjadi sebuah kesalahan yang tidak terduga ketika sedang menyalin aset</string>
+    <string name="permission_request_assets">%1$s memerlukan akses ke penyimpanan supaya bisa memasang aset</string>
+    <string name="permission_request_wallpaper">%1$s memerlukan akses ke penyimpanan agar bisa menampilkan wallpaper anda di tinjauan widget</string>
+    <string name="open_komponents">Untuk menambahkan sebuah komponenj, buka kustom dan tekan + pada Toolbar penyunting, kemudian pilih komponen dan temukan paket ini.</string>
 </resources>
