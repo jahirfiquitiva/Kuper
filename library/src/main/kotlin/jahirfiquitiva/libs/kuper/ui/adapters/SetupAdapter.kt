@@ -77,7 +77,7 @@ class SetupAdapter(
     
     override fun getItemCount(section: Int): Int = when (section) {
         0 -> apps.jfilter { it.packageName.hasContent() }.size
-        1 -> apps.jfilter { (!it.packageName.hasContent()) }.size
+        1 -> apps.jfilter { !it.packageName.hasContent() }.size
         else -> 0
     }
     
