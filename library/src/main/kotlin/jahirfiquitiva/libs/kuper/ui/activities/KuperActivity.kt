@@ -16,17 +16,13 @@
 package jahirfiquitiva.libs.kuper.ui.activities
 
 import android.annotation.SuppressLint
-import android.app.WallpaperManager
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.IntRange
 import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
-import ca.allanwang.kau.logging.KL
 import ca.allanwang.kau.utils.boolean
 import ca.allanwang.kau.utils.postDelayed
 import ca.allanwang.kau.utils.string
@@ -35,7 +31,6 @@ import ca.allanwang.kau.xml.showChangelog
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
-import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
 import jahirfiquitiva.libs.frames.ui.activities.base.BaseFramesActivity
 import jahirfiquitiva.libs.frames.ui.fragments.base.BaseFramesFragment
 import jahirfiquitiva.libs.frames.ui.widgets.CustomToolbar
@@ -66,7 +61,6 @@ import jahirfiquitiva.libs.kuper.ui.fragments.WallpapersFragment
 import jahirfiquitiva.libs.kuper.ui.widgets.PseudoViewPager
 import java.lang.ref.WeakReference
 
-@SuppressLint("MissingPermission")
 abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     
     override val configs: KuperKonfigs by lazy { KuperKonfigs(this) }
@@ -125,6 +119,12 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
         try {
             getCurrentFragment()?.onDestroy()
         } catch (e: Exception) {
+        }
+        (pager?.adapter as? FragmentsPagerAdapter)?.let {
+            try {
+                for (i in 0 until it.count) it.removeItemAt(i)
+            } catch (e: Exception) {
+            }
         }
         pager?.adapter = null
         val adapt = FragmentsPagerAdapter(supportFragmentManager)
