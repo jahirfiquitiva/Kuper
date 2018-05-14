@@ -75,7 +75,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 wm?.fastDrawable ?: ColorDrawable(it.tilesColor)
             } catch (e: Exception) {
                 KuperLog.e { e.message }
-                null
+                ColorDrawable(it.tilesColor)
             }
         } ?: { null }()
     }
