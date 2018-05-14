@@ -80,6 +80,7 @@ dependencies {
     //noinspection GradleDynamicVersion
     api('org.bitbucket.frankmonza:kustomapi:+') {
         exclude group: 'com.android.support'
+        exclude group: 'com.github.bumptech.glide'
     }
 }
 

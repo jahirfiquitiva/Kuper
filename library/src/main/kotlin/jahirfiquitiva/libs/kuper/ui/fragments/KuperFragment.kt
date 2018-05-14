@@ -18,11 +18,15 @@ package jahirfiquitiva.libs.kuper.ui.fragments
 import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import ca.allanwang.kau.logging.KL
 import ca.allanwang.kau.utils.dimenPixelSize
 import ca.allanwang.kau.utils.dpToPx
+import ca.allanwang.kau.utils.postDelayed
 import ca.allanwang.kau.utils.setPaddingBottom
 import ca.allanwang.kau.utils.startLink
 import com.bumptech.glide.Glide
@@ -34,7 +38,6 @@ import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
-import jahirfiquitiva.libs.kauextensions.extensions.actv
 import jahirfiquitiva.libs.kauextensions.extensions.ctxt
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
@@ -51,6 +54,7 @@ import jahirfiquitiva.libs.kuper.ui.adapters.KuperAdapter
 import jahirfiquitiva.libs.kuper.ui.decorations.SectionedGridSpacingDecoration
 import java.lang.ref.WeakReference
 
+@SuppressLint("MissingPermission")
 @Suppress("DEPRECATION")
 class KuperFragment : ViewModelFragment<KuperKomponent>() {
     
@@ -58,7 +62,22 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     
     private var recyclerView: EmptyViewRecyclerView? = null
     private var fastScroller: RecyclerFastScroller? = null
-    private var kuperAdapter: KuperAdapter? = null
+    
+    private val kuperAdapter: KuperAdapter by lazy {
+        KuperAdapter(WeakReference(context), Glide.with(this)) { launchIntentFor(it) }
+    }
+    
+    private val wallpaper: Drawable? by lazy {
+        activity?.let {
+            try {
+                val wm = WallpaperManager.getInstance(it)
+                wm?.fastDrawable ?: ColorDrawable(it.tilesColor)
+            } catch (e: Exception) {
+                KL.e { e.message }
+                null
+            }
+        } ?: { null }()
+    }
     
     fun scrollToTop() {
         recyclerView?.post { recyclerView?.scrollToPosition(0) }
@@ -87,30 +106,16 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                         false) {
                     override fun supportsPredictiveItemAnimations(): Boolean = false
                 }
-                if (activity is KuperActivity) {
-                    val wm = WallpaperManager.getInstance(context)
-                    
-                    val drawable = try {
-                        wm?.fastDrawable ?: ColorDrawable(context.tilesColor)
-                    } catch (e: Exception) {
-                        ColorDrawable(context.tilesColor)
-                    }
-                    
-                    kuperAdapter =
-                            KuperAdapter(WeakReference(context), Glide.with(context), drawable) {
-                                launchIntentFor(it)
-                            }
-                    kuperAdapter?.setLayoutManager(gridLayout)
-                    
-                    layoutManager = gridLayout
-                    
-                    addItemDecoration(
-                            SectionedGridSpacingDecoration(
-                                    spanCount,
-                                    context.dimenPixelSize(R.dimen.wallpapers_grid_spacing), true,
-                                    kuperAdapter))
-                    adapter = kuperAdapter
-                }
+                
+                kuperAdapter.setLayoutManager(gridLayout)
+                layoutManager = gridLayout
+                
+                addItemDecoration(
+                        SectionedGridSpacingDecoration(
+                                spanCount,
+                                context.dimenPixelSize(R.dimen.wallpapers_grid_spacing), true,
+                                kuperAdapter))
+                adapter = kuperAdapter
                 
                 setPaddingBottom(64.dpToPx)
                 
@@ -119,6 +124,9 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         }
         
         recyclerView?.state = EmptyViewRecyclerView.State.LOADING
+        
+        
+        
         loadDataFromViewModel()
     }
     
@@ -126,13 +134,13 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         if (filter.hasContent()) {
             recyclerView?.setEmptyImage(R.drawable.no_results)
             recyclerView?.setEmptyText(R.string.search_no_results)
-            kuperAdapter?.setItems(ArrayList(kuperViewModel.getData().orEmpty()).jfilter {
+            kuperAdapter.setItems(ArrayList(kuperViewModel.getData().orEmpty()).jfilter {
                 it.name.contains(filter, true) || it.type.toString().contains(filter, true)
             })
         } else {
             recyclerView?.setEmptyImage(R.drawable.empty_section)
             recyclerView?.setEmptyText(R.string.empty_section)
-            kuperAdapter?.setItems(ArrayList(kuperViewModel.getData().orEmpty()))
+            kuperAdapter.setItems(ArrayList(kuperViewModel.getData().orEmpty()))
         }
         scrollToTop()
     }
@@ -169,15 +177,15 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     }
     
     override fun loadDataFromViewModel() {
-        kuperViewModel.loadData(ctxt, false)
+        kuperViewModel.loadData(ctxt)
     }
     
-    override fun autoStartLoad() = true
+    override fun autoStartLoad() = false
     
     override fun registerObservers() {
         kuperViewModel.observe(this) {
-            kuperAdapter?.setItems(it)
-            (actv as? KuperActivity)?.destroyDialog()
+            kuperAdapter.setItems(it)
+            (activity as? KuperActivity)?.destroyDialog()
         }
     }
     
@@ -188,5 +196,21 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser && !allowReloadAfterVisibleToUser()) recyclerView?.updateEmptyState()
+        if (isVisibleToUser) setupWallpaperInAdapter()
+    }
+    
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupWallpaperInAdapter()
+    }
+    
+    private fun setupWallpaperInAdapter() {
+        if (kuperAdapter.wallpaper == null) {
+            try {
+                postDelayed(10) { kuperAdapter.wallpaper = wallpaper }
+            } catch (e: Exception) {
+                KL.e { e.message }
+            }
+        }
     }
 }

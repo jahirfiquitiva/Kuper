@@ -23,10 +23,10 @@ ext.versions = [
         kotlin     : '1.2.41',
         libs       : '2.0',
         // App Versions:
-        versionCode: 131,
-        versionName: '1.3.1',
+        versionCode: 132,
+        versionName: '1.3.2',
         // Dependencies
-        frames     : '2.3.5',
+        frames     : '2.3.6',
         bottomNav  : '2.2.0',
         oneSignal  : '3.8.3'
 ]
@@ -39,7 +39,7 @@ ext.gradlePlugins = [
 
 ext.libraries = [
         // Frames
-        frames   : 'me.jahirfiquitiva:Frames:' + versions.frames + '@aar',
+        frames   : 'com.github.jahirfiquitiva:Frames:' + versions.frames + '@aar',
         // Bottom Navigation
         bottomNav: 'com.aurelhubert:ahbottomnavigation:' + versions.bottomNav,
         // OneSignal

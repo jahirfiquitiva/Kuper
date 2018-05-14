@@ -31,14 +31,19 @@ import jahirfiquitiva.libs.kuper.ui.adapters.viewholders.KuperViewHolder
 import java.lang.ref.WeakReference
 
 class KuperAdapter(
-        private val context: WeakReference<Context>,
+        private val context: WeakReference<Context?>,
         private val manager: RequestManager?,
-        private val wallpaper: Drawable,
         private val listener: (KuperKomponent) -> Unit
                   ) :
         SectionedRecyclerViewAdapter<SectionedViewHolder>(), ListAdapterPresenter<KuperKomponent> {
     
     private val komponents = ArrayList<KuperKomponent>()
+    
+    internal var wallpaper: Drawable? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
     
     override fun get(index: Int): KuperKomponent = komponents[index]
     

@@ -28,6 +28,13 @@ import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PICKER
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PICKER
 
+data class SimpleKuperKomponent(
+        val type: KuperKomponent.Type,
+        val name: String,
+        val folder: String,
+        val fileName: String
+                               )
+
 data class KuperKomponent(
         val type: Type,
         val name: String,
@@ -101,7 +108,9 @@ data class KuperKomponent(
         
         fun extensionForKey(key: Int) = extensionForType(typeForKey(key))
         
-        fun clearBitmap(bitmap: Bitmap, @ColorInt colorToReplace: Int): Bitmap {
+        fun clearBitmap(bitmap: Bitmap?, @ColorInt colorToReplace: Int): Bitmap? {
+            bitmap ?: return null
+            
             val width = bitmap.width
             val height = bitmap.height
             val pixels = IntArray(width * height)
