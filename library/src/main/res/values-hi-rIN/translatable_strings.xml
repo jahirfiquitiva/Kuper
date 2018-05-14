@@ -16,23 +16,23 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="kuper_dashboard">कूपर डैशबोर्ड</string>
-    <string name="setup">सेटअप</string>
-    <string name="widgets">विजेट्स</string>
-    <string name="required_apps">ज़रूरत के ऐप्पस</string>
-    <string name="assets">ऐसेट्स</string>
-    <string name="required_for_widgets">दिए हुए विजेट्स का इस्तेमाल करना आवश्यक</string>
-    <string name="required_for_wallpapers">दिए हुए वॉलपेपर का इस्तेमाल करना आवश्यक</string>
-    <string name="required_for_lockscreens">लॉकस्क्रीन का उपयोग करना आवश्यक है</string>
-    <string name="required_assets">टेम्पलेट्स के पूर्ण रूप से कार्य करने के लिए एसेट्स आवश्यक</string>
-    <string name="install">इंस्टॉल</string>
-    <string name="template">टेम्पलेट</string>
-    <string name="templates">टेम्पलेट्स</string>
-    <string name="assets_installed">एसेट्स पहले से इंस्टॉल्ड है</string>
-    <string name="apps_installed">ऐप्पस पहले से इंस्टॉल्ड है</string>
-    <string name="copying_assets">ZooperWidget/%1$s में फाइल्स कॉपी किये जा रहे है</string>
-    <string name="copied_assets_successfully">एसेट्स को सफलतापूर्वक कॉपी कर दिया गया है</string>
-    <string name="copied_assets_error">एसेट्स कॉपी करते वक्त एक अनअपेक्षित घटना घट गई</string>
-    <string name="permission_request_assets">%1$s को आपकी स्टोरेज की आवश्यकता है ताकि वह एसेट्स इंस्टॉल कर पाए</string>
-    <string name="permission_request_wallpaper">%1$s विगेट्स पूर्वावलोकन में अपना वॉलपेपर दिखाने में सक्षम होने के लिए संग्रहण की पहुंच की आवश्यकता है</string>
+  <string name="kuper_dashboard">कूपर डैशबोर्ड</string>
+  <string name="setup">सेटअप</string>
+  <string name="widgets">विजेट्स</string>
+  <string name="required_apps">ज़रूरत के ऐप्पस</string>
+  <string name="assets">ऐसेट्स</string>
+  <string name="required_for_widgets">दिए हुए विजेट्स का इस्तेमाल करना आवश्यक</string>
+  <string name="required_for_wallpapers">दिए हुए वॉलपेपर का इस्तेमाल करना आवश्यक</string>
+  <string name="required_for_lockscreens">लॉकस्क्रीन का उपयोग करना आवश्यक है</string>
+  <string name="required_assets">टेम्पलेट्स के पूर्ण रूप से कार्य करने के लिए एसेट्स आवश्यक</string>
+  <string name="install">इंस्टॉल</string>
+  <string name="template">टेम्पलेट</string>
+  <string name="templates">टेम्पलेट्स</string>
+  <string name="assets_installed">एसेट्स पहले से इंस्टॉल्ड है</string>
+  <string name="apps_installed">ऐप्पस पहले से इंस्टॉल्ड है</string>
+  <string name="copying_assets">ZooperWidget/%1$s में फाइल्स कॉपी किये जा रहे है</string>
+  <string name="copied_assets_successfully">एसेट्स को सफलतापूर्वक कॉपी कर दिया गया है</string>
+  <string name="copied_assets_error">एसेट्स कॉपी करते वक्त एक अनअपेक्षित घटना घट गई</string>
+  <string name="permission_request_assets">%1$s को आपकी स्टोरेज की आवश्यकता है ताकि वह एसेट्स इंस्टॉल कर पाए</string>
+  <string name="permission_request_wallpaper">%1$s विगेट्स पूर्वावलोकन में अपना वॉलपेपर दिखाने में सक्षम होने के लिए संग्रहण की पहुंच की आवश्यकता है</string>
 </resources>
