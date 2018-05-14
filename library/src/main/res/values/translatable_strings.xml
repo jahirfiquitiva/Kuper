@@ -30,6 +30,7 @@
     <string name="required_assets">Assets required for templates to work properly</string>
 
     <string name="install">Install</string>
+    <string name="app_not_installed">The required app is not installed</string>
 
     <string name="template">Template</string>
     <string name="templates">Templates</string>

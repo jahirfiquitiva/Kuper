@@ -42,6 +42,7 @@ import jahirfiquitiva.libs.kauextensions.extensions.ctxt
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
+import jahirfiquitiva.libs.kauextensions.extensions.showToast
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
@@ -161,8 +162,10 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                         KuperKomponent.Type.LOCKSCREEN -> KLCK_PACKAGE
                         else -> ""
                     }
-                    if (itemPkg.hasContent())
+                    if (itemPkg.hasContent()) {
+                        contxt.showToast(contxt.getString(R.string.app_not_installed))
                         contxt.startLink(PLAY_STORE_LINK_PREFIX + itemPkg)
+                    }
                 }
             } ?: {
                 if (item.type == KuperKomponent.Type.KOMPONENT) {

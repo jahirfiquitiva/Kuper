@@ -28,13 +28,6 @@ import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PICKER
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PICKER
 
-data class SimpleKuperKomponent(
-        val type: KuperKomponent.Type,
-        val name: String,
-        val folder: String,
-        val fileName: String
-                               )
-
 data class KuperKomponent(
         val type: Type,
         val name: String,
