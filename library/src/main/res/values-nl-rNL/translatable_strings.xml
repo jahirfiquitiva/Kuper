@@ -16,8 +16,8 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="kuper_dashboard">Kuper Dashboard</string>
-    <string name="setup">Installatie</string>
-    <string name="widgets">Widgets</string>
-    <string name="required_apps">Vereiste apps</string>
+  <string name="kuper_dashboard">Kuper Dashboard</string>
+  <string name="setup">Installatie</string>
+  <string name="widgets">Widgets</string>
+  <string name="required_apps">Vereiste apps</string>
 </resources>
