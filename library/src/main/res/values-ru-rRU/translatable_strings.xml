@@ -16,25 +16,25 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="kuper_dashboard">Kuper Dashboard</string>
-    <string name="setup">Установить</string>
-    <string name="widgets">Виджеты</string>
-    <string name="required_apps">Необходимые приложения</string>
-    <string name="assets">Ресурсы</string>
-    <string name="required_for_templates">Необходимо чтобы использовать пресеты и виджеты</string>
-    <string name="required_for_widgets">Необходимо для использования этих виджетов</string>
-    <string name="required_for_wallpapers">Необходимо для использования этих обоев</string>
-    <string name="required_for_lockscreens">Необходимо для использования этих экранов блокировки</string>
-    <string name="required_assets">Ресурсы необходимы для корректной работы шаблонов</string>
-    <string name="install">Установить</string>
-    <string name="template">Шаблон</string>
-    <string name="templates">Шаблоны</string>
-    <string name="assets_installed">Ресурсы уже установлены</string>
-    <string name="apps_installed">Приложения уже установлены</string>
-    <string name="copying_assets">Копируем файлы в ZooperWidget/%1$s</string>
-    <string name="copied_assets_successfully">Ресурсы успешно скопированы</string>
-    <string name="copied_assets_error">Возникла непредвиденная ошибка при копировании ресурсов</string>
-    <string name="permission_request_assets">%1$s необходим доступ к хранилищу чтобы установить ресурсы</string>
-    <string name="permission_request_wallpaper">%1$s запрашивает доступ к хранилищу, чтобы отображать ваши текущие обои как фон для виджетов</string>
-    <string name="open_komponents">Чтобы добавить Компонент, откройте приложение Kustom и нажмите значок \"+\" на панели редактирования инструментов. Затем выберите Компонент и найдите это приложение.</string>
+  <string name="kuper_dashboard">Kuper Dashboard</string>
+  <string name="setup">Установить</string>
+  <string name="widgets">Виджеты</string>
+  <string name="required_apps">Необходимые приложения</string>
+  <string name="assets">Ресурсы</string>
+  <string name="required_for_templates">Необходимо чтобы использовать пресеты и виджеты</string>
+  <string name="required_for_widgets">Необходимо для использования этих виджетов</string>
+  <string name="required_for_wallpapers">Необходимо для использования этих обоев</string>
+  <string name="required_for_lockscreens">Необходимо для использования этих экранов блокировки</string>
+  <string name="required_assets">Ресурсы необходимы для корректной работы шаблонов</string>
+  <string name="install">Установить</string>
+  <string name="template">Шаблон</string>
+  <string name="templates">Шаблоны</string>
+  <string name="assets_installed">Ресурсы уже установлены</string>
+  <string name="apps_installed">Приложения уже установлены</string>
+  <string name="copying_assets">Копируем файлы в ZooperWidget/%1$s</string>
+  <string name="copied_assets_successfully">Ресурсы успешно скопированы</string>
+  <string name="copied_assets_error">Возникла непредвиденная ошибка при копировании ресурсов</string>
+  <string name="permission_request_assets">%1$s необходим доступ к хранилищу чтобы установить ресурсы</string>
+  <string name="permission_request_wallpaper">%1$s запрашивает доступ к хранилищу, чтобы отображать ваши текущие обои как фон для виджетов</string>
+  <string name="open_komponents">Чтобы добавить Компонент, откройте приложение Kustom и нажмите значок \"+\" на панели редактирования инструментов. Затем выберите Компонент и найдите это приложение.</string>
 </resources>
