@@ -19,13 +19,13 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import ca.allanwang.kau.logging.KL
 import jahirfiquitiva.libs.archhelpers.viewmodels.ListViewModel
 import jahirfiquitiva.libs.frames.helpers.extensions.maxPictureRes
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.helpers.extensions.clean
 import jahirfiquitiva.libs.kuper.helpers.extensions.copyFromTo
+import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -56,7 +56,7 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
                                 komponents.add(it)
                             }
                         } catch (e: Exception) {
-                            KL.e { e.message }
+                            KuperLog.e { e.message }
                         }
                     }
                 }
@@ -130,7 +130,7 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
                         }
                     }
                 } catch (e: Exception) {
-                    KL.e { e.message }
+                    KuperLog.e { e.message }
                 } finally {
                     out?.flush()
                     out?.close()
@@ -148,7 +148,7 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
                             bmp?.compress(Bitmap.CompressFormat.PNG, context.maxPictureRes, out)
                         }
                     } catch (e: Exception) {
-                        KL.e { e.message }
+                        KuperLog.e { e.message }
                     } finally {
                         out?.flush()
                         out?.close()
@@ -168,7 +168,7 @@ class KuperViewModel : ListViewModel<Context, KuperKomponent>() {
                     type, correctName, path, preview.absolutePath ?: "",
                     previewLand?.absolutePath ?: "")
         } catch (e: Exception) {
-            KL.e { e.message }
+            KuperLog.e { e.message }
             null
         }
     }

@@ -23,7 +23,6 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
-import ca.allanwang.kau.logging.KL
 import ca.allanwang.kau.utils.dimenPixelSize
 import ca.allanwang.kau.utils.dpToPx
 import ca.allanwang.kau.utils.postDelayed
@@ -48,6 +47,7 @@ import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
+import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 import jahirfiquitiva.libs.kuper.helpers.utils.ZOOPER_PACKAGE
 import jahirfiquitiva.libs.kuper.providers.viewmodels.KuperViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
@@ -74,7 +74,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 val wm = WallpaperManager.getInstance(it)
                 wm?.fastDrawable ?: ColorDrawable(it.tilesColor)
             } catch (e: Exception) {
-                KL.e { e.message }
+                KuperLog.e { e.message }
                 null
             }
         } ?: { null }()
@@ -212,7 +212,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
             try {
                 postDelayed(10) { kuperAdapter.wallpaper = wallpaper }
             } catch (e: Exception) {
-                KL.e { e.message }
+                KuperLog.e { e.message }
             }
         }
     }
