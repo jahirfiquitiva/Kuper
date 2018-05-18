@@ -101,7 +101,7 @@ allprojects {
 2. Add the dependency in your project `build.gradle` file
 ```gradle
 dependencies {
-    implementation('me.jahirfiquitiva:Kuper:{latest version}@aar') {
+    implementation('com.jahirfiquitiva:Kuper:{latest version}@aar') {
         transitive = true
     }
 }
