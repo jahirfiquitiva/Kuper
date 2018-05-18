@@ -15,6 +15,4 @@
  */
 package jahirfiquitiva.apps.kuper.sample
 
-import jahirfiquitiva.libs.kuper.providers.zooper.ZooperTemplateProvider
-
 class ZooperProvider : ZooperTemplateProvider()

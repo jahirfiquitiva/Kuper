@@ -16,7 +16,6 @@
 package jahirfiquitiva.apps.kuper.sample
 
 import com.github.javiersantos.piracychecker.PiracyChecker
-import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
 
 class MainActivity : KuperActivity() {
     /**
