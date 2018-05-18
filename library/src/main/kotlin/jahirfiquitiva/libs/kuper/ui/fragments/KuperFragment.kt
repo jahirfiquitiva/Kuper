@@ -19,12 +19,12 @@ import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import ca.allanwang.kau.utils.dimenPixelSize
 import ca.allanwang.kau.utils.dpToPx
+import ca.allanwang.kau.utils.integer
 import ca.allanwang.kau.utils.postDelayed
 import ca.allanwang.kau.utils.setPaddingBottom
 import ca.allanwang.kau.utils.startLink
@@ -39,7 +39,6 @@ import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
 import jahirfiquitiva.libs.kauextensions.extensions.ctxt
 import jahirfiquitiva.libs.kauextensions.extensions.hasContent
-import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kauextensions.extensions.showToast
 import jahirfiquitiva.libs.kuper.R
@@ -65,7 +64,9 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     private var fastScroller: RecyclerFastScroller? = null
     
     private val kuperAdapter: KuperAdapter by lazy {
-        KuperAdapter(WeakReference(context), Glide.with(this)) { launchIntentFor(it) }
+        KuperAdapter(WeakReference(context), context?.let { Glide.with(it) }) {
+            launchIntentFor(it)
+        }
     }
     
     private val wallpaper: Drawable? by lazy {
@@ -100,7 +101,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 loadingView = content.findViewById(R.id.loading_view)
                 setLoadingText(R.string.loading_section)
                 
-                val spanCount = if (context.isInPortraitMode) 2 else 3
+                val spanCount = context.integer(R.integer.kuper_previews_columns)
                 val gridLayout = object : GridLayoutManager(
                         context, spanCount,
                         GridLayoutManager.VERTICAL,
@@ -125,9 +126,6 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         }
         
         recyclerView?.state = EmptyViewRecyclerView.State.LOADING
-        
-        
-        
         loadDataFromViewModel()
     }
     
@@ -198,13 +196,10 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser && !allowReloadAfterVisibleToUser()) recyclerView?.updateEmptyState()
-        if (isVisibleToUser) setupWallpaperInAdapter()
-    }
-    
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        setupWallpaperInAdapter()
+        if (isVisibleToUser) {
+            if (!allowReloadAfterVisibleToUser()) recyclerView?.updateEmptyState()
+            setupWallpaperInAdapter()
+        }
     }
     
     private fun setupWallpaperInAdapter() {

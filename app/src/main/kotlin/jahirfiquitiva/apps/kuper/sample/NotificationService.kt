@@ -18,10 +18,10 @@ package jahirfiquitiva.apps.kuper.sample
 /* TODO: Remove comment marks to enable
 import com.onesignal.NotificationExtenderService
 import com.onesignal.OSNotificationReceivedResult
-import jahirfiquitiva.libs.frames.helpers.extensions.framesKonfigs
+import jahirfiquitiva.libs.kuper.helpers.utils.KuperKonfigs
 
 class NotificationService : NotificationExtenderService() {
     override fun onNotificationProcessing(notification: OSNotificationReceivedResult?): Boolean =
-            !framesKonfigs.notificationsEnabled
+            !KuperKonfigs(this).notificationsEnabled
 }
 */

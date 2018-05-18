@@ -100,12 +100,15 @@ class KuperAdapter(
     }
     
     override fun getItemViewType(
-            section: Int, relativePosition: Int,
+            section: Int,
+            relativePosition: Int,
             absolutePosition: Int
                                 ): Int = section
     
     override fun onBindViewHolder(
-            holder: SectionedViewHolder?, section: Int, relativePosition: Int,
+            holder: SectionedViewHolder?,
+            section: Int,
+            relativePosition: Int,
             absolutePosition: Int
                                  ) {
         holder?.let {
@@ -147,7 +150,8 @@ class KuperAdapter(
     }
     
     override fun onBindHeaderViewHolder(
-            holder: SectionedViewHolder?, section: Int,
+            holder: SectionedViewHolder?,
+            section: Int,
             expanded: Boolean
                                        ) {
         context.get()?.let {
