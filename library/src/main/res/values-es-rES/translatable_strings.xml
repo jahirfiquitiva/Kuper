@@ -29,6 +29,7 @@
     <string name="install">Instalar</string>
     <string name="template">Plantilla</string>
     <string name="templates">Plantillas</string>
+    <string name="x_templates">Plantillas %1$s</string>
     <string name="assets_installed">Archivos ya instalados</string>
     <string name="apps_installed">Aplicaciones ya instaladas</string>
     <string name="copying_assets">Copiando archivos a ZooperWidget/%1$s</string>

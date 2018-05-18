@@ -28,22 +28,35 @@ import jahirfiquitiva.libs.frames.ui.adapters.viewholders.SectionedHeaderViewHol
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.ui.adapters.viewholders.KuperViewHolder
-import java.lang.ref.WeakReference
 
 class KuperAdapter(
-        private val context: WeakReference<Context?>,
         private val manager: RequestManager?,
         private val listener: (KuperKomponent) -> Unit
                   ) :
-        SectionedRecyclerViewAdapter<SectionedViewHolder>(), ListAdapterPresenter<KuperKomponent> {
+        SectionedRecyclerViewAdapter<SectionedViewHolder>(),
+        ListAdapterPresenter<KuperKomponent> {
     
     private val komponents = ArrayList<KuperKomponent>()
+    private val sectionTitles = ArrayList<String>()
     
     internal var wallpaper: Drawable? = null
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+    
+    internal fun updateSectionTitles(ctxt: Context?) {
+        ctxt ?: return
+        if (sectionTitles.isNotEmpty()) return
+        sectionTitles.clear()
+        sectionTitles.add(
+                ctxt.getString(R.string.x_templates, ctxt.getString(R.string.zooper_widget)))
+        sectionTitles.add(ctxt.getString(R.string.komponents))
+        sectionTitles.add(ctxt.getString(R.string.x_templates, ctxt.getString(R.string.kwgt)))
+        sectionTitles.add(ctxt.getString(R.string.x_templates, ctxt.getString(R.string.klck)))
+        sectionTitles.add(ctxt.getString(R.string.x_templates, ctxt.getString(R.string.klwp)))
+        notifyDataSetChanged()
+    }
     
     override fun get(index: Int): KuperKomponent = komponents[index]
     
@@ -154,40 +167,13 @@ class KuperAdapter(
             section: Int,
             expanded: Boolean
                                        ) {
-        context.get()?.let {
-            if (holder is SectionedHeaderViewHolder) {
-                when (section) {
-                    0 -> {
-                        holder.setTitle(
-                                "${it.getString(R.string.zooper_widget)} ${it.getString(
-                                        R.string.templates)}",
-                                shouldShowIcon = false)
-                    }
-                    1 -> {
-                        holder.setTitle(
-                                it.getString(R.string.komponents),
-                                shouldShowIcon = false)
-                    }
-                    2 -> {
-                        holder.setTitle(
-                                "${it.getString(R.string.kwgt)} ${it.getString(
-                                        R.string.templates)}",
-                                shouldShowIcon = false)
-                    }
-                    3 -> {
-                        holder.setTitle(
-                                "${it.getString(R.string.klck)} ${it.getString(
-                                        R.string.templates)}",
-                                shouldShowIcon = false)
-                    }
-                    4 -> {
-                        holder.setTitle(
-                                "${it.getString(R.string.klwp)} ${it.getString(
-                                        R.string.templates)}",
-                                shouldShowIcon = false)
-                    }
-                }
+        if (holder is SectionedHeaderViewHolder) {
+            val title = try {
+                sectionTitles[section]
+            } catch (e: Exception) {
+                ""
             }
+            holder.setTitle(title, shouldShowIcon = false)
         }
     }
     

@@ -52,7 +52,6 @@ import jahirfiquitiva.libs.kuper.providers.viewmodels.KuperViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
 import jahirfiquitiva.libs.kuper.ui.adapters.KuperAdapter
 import jahirfiquitiva.libs.kuper.ui.decorations.SectionedGridSpacingDecoration
-import java.lang.ref.WeakReference
 
 @SuppressLint("MissingPermission")
 @Suppress("DEPRECATION")
@@ -63,11 +62,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     private var recyclerView: EmptyViewRecyclerView? = null
     private var fastScroller: RecyclerFastScroller? = null
     
-    private val kuperAdapter: KuperAdapter by lazy {
-        KuperAdapter(WeakReference(context), context?.let { Glide.with(it) }) {
-            launchIntentFor(it)
-        }
-    }
+    private var kuperAdapter: KuperAdapter? = null
     
     private val wallpaper: Drawable? by lazy {
         activity?.let {
@@ -109,9 +104,15 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                     override fun supportsPredictiveItemAnimations(): Boolean = false
                 }
                 
-                kuperAdapter.setLayoutManager(gridLayout)
+                kuperAdapter = KuperAdapter(context?.let { Glide.with(it) }) {
+                    launchIntentFor(it)
+                }
+                setupWallpaperInAdapter()
+                
+                kuperAdapter?.setLayoutManager(gridLayout)
                 layoutManager = gridLayout
                 
+                kuperAdapter?.updateSectionTitles(context)
                 addItemDecoration(
                         SectionedGridSpacingDecoration(
                                 spanCount,
@@ -133,13 +134,13 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         if (filter.hasContent()) {
             recyclerView?.setEmptyImage(R.drawable.no_results)
             recyclerView?.setEmptyText(R.string.search_no_results)
-            kuperAdapter.setItems(ArrayList(kuperViewModel.getData().orEmpty()).jfilter {
+            kuperAdapter?.setItems(ArrayList(kuperViewModel.getData().orEmpty()).jfilter {
                 it.name.contains(filter, true) || it.type.toString().contains(filter, true)
             })
         } else {
             recyclerView?.setEmptyImage(R.drawable.empty_section)
             recyclerView?.setEmptyText(R.string.empty_section)
-            kuperAdapter.setItems(ArrayList(kuperViewModel.getData().orEmpty()))
+            kuperAdapter?.setItems(ArrayList(kuperViewModel.getData().orEmpty()))
         }
         scrollToTop()
     }
@@ -185,7 +186,8 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     
     override fun registerObservers() {
         kuperViewModel.observe(this) {
-            kuperAdapter.setItems(it)
+            recyclerView?.state = EmptyViewRecyclerView.State.NORMAL
+            kuperAdapter?.setItems(it)
             (activity as? KuperActivity)?.destroyDialog()
         }
     }
@@ -198,14 +200,15 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser) {
             if (!allowReloadAfterVisibleToUser()) recyclerView?.updateEmptyState()
+            kuperAdapter?.updateSectionTitles(context)
             setupWallpaperInAdapter()
         }
     }
     
     private fun setupWallpaperInAdapter() {
-        if (kuperAdapter.wallpaper == null) {
+        if (kuperAdapter?.wallpaper == null) {
             try {
-                postDelayed(10) { kuperAdapter.wallpaper = wallpaper }
+                postDelayed(10) { kuperAdapter?.wallpaper = wallpaper }
             } catch (e: Exception) {
                 KuperLog.e { e.message }
             }

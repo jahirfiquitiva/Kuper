@@ -35,6 +35,8 @@
     <string name="template">Template</string>
     <string name="templates">Templates</string>
 
+    <string name="x_templates">%1$s Templates</string>
+
     <string name="assets_installed">Assets already installed</string>
     <string name="apps_installed">Apps already installed</string>
 
