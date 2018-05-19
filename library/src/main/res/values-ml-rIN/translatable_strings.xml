@@ -16,25 +16,26 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="kuper_dashboard">കുപ്പർ ഡാഷ്ബോർഡ്</string>
-    <string name="setup">സജ്ജീകരിക്കുക</string>
-    <string name="widgets">വിജറ്റുകൾ</string>
-    <string name="required_apps">ആവശ്യമായ അപ്ലിക്കേഷനുകൾ</string>
-    <string name="assets">അസറ്റുകൾ</string>
-    <string name="required_for_templates">ഉൾപ്പെടുത്തിയിട്ടുള്ള ടെംപ്ലേറ്റ് ഉപയോഗിക്കേണ്ടതുണ്ട്</string>
-    <string name="required_for_widgets">ഉൾപ്പെടുത്തിയ വിഡ്ജറ്റുകൾ ഉപയോഗിക്കേണ്ടതുണ്ട്</string>
-    <string name="required_for_wallpapers">ഉൾപ്പെടുത്തിയിട്ടുള്ള വാൾപേപ്പറുകൾ ഉപയോഗിക്കേണ്ടതുണ്ട്</string>
-    <string name="required_for_lockscreens">ഉൾപ്പെടുത്തിയിട്ടുള്ള ലോക്ക് സ്ക്രീനുകൾ ഉപയോഗിക്കേണ്ടതുണ്ട്</string>
-    <string name="required_assets">ടെംപ്ലേറ്റുകൾ ശരിയായി പ്രവർത്തിക്കുന്നതിന് അസറ്റുകൾ ആവശ്യമാണ്</string>
-    <string name="install">ഇൻസ്റ്റാൾ ചെയ്യുക</string>
-    <string name="template">ടെംപ്ലേറ്റ്</string>
-    <string name="templates">ടെംപ്ലേറ്റുകൾ</string>
-    <string name="assets_installed">അസറ്റുകൾ ഇതിനകം ഇൻസ്റ്റാൾ ചെയ്തു</string>
-    <string name="apps_installed">അപ്ലിക്കേഷനുകൾ ഇതിനകം ഇൻസ്റ്റാളുചെയ്തു</string>
-    <string name="copying_assets">ZooperWidget /%1$s എന്നതിലേക്ക് ഫയലുകൾ പകർത്തുന്നു</string>
-    <string name="copied_assets_successfully">കോപ്പിചെയ്ത അസറ്റുകൾ വിജയകരമായി</string>
-    <string name="copied_assets_error">അസറ്റുകൾ പകർത്തുമ്പോൾ അപ്രതീക്ഷിത പിശക് സംഭവിച്ചു</string>
-    <string name="permission_request_assets">അസറ്റുകൾ ഇൻസ്റ്റാൾ ചെയ്യാൻ %1$s സംഭരണത്തിലേക്ക് ആക്സസ് ആവശ്യമാണ്</string>
-    <string name="permission_request_wallpaper">വിജറ്റുകൾ പ്രിവ്യൂകളിൽ നിങ്ങളുടെ വാൾപേപ്പർ കാണിക്കുന്നതിന് %1$s സംഭരണത്തിലേക്ക് ആക്സസ് ആവശ്യമാണ്</string>
-    <string name="open_komponents">ഒരു Komponent ചേർക്കുവാനായി Kustom എഡിറ്റർ വിൻഡോയിൽ + അമർത്തുക, പിന്നെ Komponent തിരഞ്ഞെടുത്ത് ഈ പായ്ക്ക് കണ്ടെത്തുക.</string>
+  <string name="kuper_dashboard">കുപ്പർ ഡാഷ്ബോർഡ്</string>
+  <string name="setup">സജ്ജീകരിക്കുക</string>
+  <string name="widgets">വിജറ്റുകൾ</string>
+  <string name="required_apps">ആവശ്യമായ അപ്ലിക്കേഷനുകൾ</string>
+  <string name="assets">അസറ്റുകൾ</string>
+  <string name="required_for_templates">ഉൾപ്പെടുത്തിയിട്ടുള്ള ടെംപ്ലേറ്റ് ഉപയോഗിക്കേണ്ടതുണ്ട്</string>
+  <string name="required_for_widgets">ഉൾപ്പെടുത്തിയ വിഡ്ജറ്റുകൾ ഉപയോഗിക്കേണ്ടതുണ്ട്</string>
+  <string name="required_for_wallpapers">ഉൾപ്പെടുത്തിയിട്ടുള്ള വാൾപേപ്പറുകൾ ഉപയോഗിക്കേണ്ടതുണ്ട്</string>
+  <string name="required_for_lockscreens">ഉൾപ്പെടുത്തിയിട്ടുള്ള ലോക്ക് സ്ക്രീനുകൾ ഉപയോഗിക്കേണ്ടതുണ്ട്</string>
+  <string name="required_assets">ടെംപ്ലേറ്റുകൾ ശരിയായി പ്രവർത്തിക്കുന്നതിന് അസറ്റുകൾ ആവശ്യമാണ്</string>
+  <string name="install">ഇൻസ്റ്റാൾ ചെയ്യുക</string>
+  <string name="app_not_installed">ഈ അപ്ലിക്കേഷൻ ഇൻസ്റ്റാളുചെയ്‌തിട്ടില്ല</string>
+  <string name="template">ടെംപ്ലേറ്റ്</string>
+  <string name="templates">ടെംപ്ലേറ്റുകൾ</string>
+  <string name="assets_installed">അസറ്റുകൾ ഇതിനകം ഇൻസ്റ്റാൾ ചെയ്തു</string>
+  <string name="apps_installed">അപ്ലിക്കേഷനുകൾ ഇതിനകം ഇൻസ്റ്റാളുചെയ്തു</string>
+  <string name="copying_assets">ZooperWidget /%1$s എന്നതിലേക്ക് ഫയലുകൾ പകർത്തുന്നു</string>
+  <string name="copied_assets_successfully">കോപ്പിചെയ്ത അസറ്റുകൾ വിജയകരമായി</string>
+  <string name="copied_assets_error">അസറ്റുകൾ പകർത്തുമ്പോൾ അപ്രതീക്ഷിത പിശക് സംഭവിച്ചു</string>
+  <string name="permission_request_assets">അസറ്റുകൾ ഇൻസ്റ്റാൾ ചെയ്യാൻ %1$s സംഭരണത്തിലേക്ക് ആക്സസ് ആവശ്യമാണ്</string>
+  <string name="permission_request_wallpaper">വിജറ്റുകൾ പ്രിവ്യൂകളിൽ നിങ്ങളുടെ വാൾപേപ്പർ കാണിക്കുന്നതിന് %1$s സംഭരണത്തിലേക്ക് ആക്സസ് ആവശ്യമാണ്</string>
+  <string name="open_komponents">ഒരു Komponent ചേർക്കുവാനായി Kustom എഡിറ്റർ വിൻഡോയിൽ + അമർത്തുക, പിന്നെ Komponent തിരഞ്ഞെടുത്ത് ഈ പായ്ക്ക് കണ്ടെത്തുക.</string>
 </resources>
