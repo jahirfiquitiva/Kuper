@@ -30,6 +30,7 @@
   <string name="app_not_installed">ഈ അപ്ലിക്കേഷൻ ഇൻസ്റ്റാളുചെയ്‌തിട്ടില്ല</string>
   <string name="template">ടെംപ്ലേറ്റ്</string>
   <string name="templates">ടെംപ്ലേറ്റുകൾ</string>
+  <string name="x_templates">%1$s ടെംപ്ലേറ്റുകൾ</string>
   <string name="assets_installed">അസറ്റുകൾ ഇതിനകം ഇൻസ്റ്റാൾ ചെയ്തു</string>
   <string name="apps_installed">അപ്ലിക്കേഷനുകൾ ഇതിനകം ഇൻസ്റ്റാളുചെയ്തു</string>
   <string name="copying_assets">ZooperWidget /%1$s എന്നതിലേക്ക് ഫയലുകൾ പകർത്തുന്നു</string>
