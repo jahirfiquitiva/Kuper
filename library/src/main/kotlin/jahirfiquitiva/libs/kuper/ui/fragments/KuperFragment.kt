@@ -126,7 +126,8 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         }
         
         recyclerView?.state = EmptyViewRecyclerView.State.LOADING
-        loadDataFromViewModel()
+        
+        postDelayed(5) { loadDataFromViewModel() }
     }
     
     fun applyFilter(filter: String = "", closed: Boolean = false) {

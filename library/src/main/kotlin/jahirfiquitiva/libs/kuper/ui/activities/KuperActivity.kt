@@ -79,6 +79,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kuper)
         toolbar?.bindToActivity(this, !boolean(R.bool.isKuper))
+        toolbar?.enableScroll(true)
         toolbar?.title = getActivityTitle()
         supportActionBar?.title = getActivityTitle()
         setupContent()

@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <jahirfiquitiva.libs.kauextensions.ui.widgets.SquaredImageView
+        <jahirfiquitiva.libs.kext.ui.widgets.SquaredImageView
             android:id="@+id/wall"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -40,7 +40,7 @@
             android:layout_gravity="center"
             android:gravity="center" />
 
-        <jahirfiquitiva.libs.kauextensions.ui.widgets.SquaredImageView
+        <jahirfiquitiva.libs.kext.ui.widgets.SquaredImageView
             android:id="@+id/preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -102,7 +102,7 @@
 
         </LinearLayout>
 
-        <jahirfiquitiva.libs.kauextensions.ui.widgets.MaterialIconView
+        <jahirfiquitiva.libs.kext.ui.widgets.MaterialIconView
             android:id="@+id/launch_app"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

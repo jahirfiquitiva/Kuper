@@ -22,5 +22,5 @@ import jahirfiquitiva.libs.kuper.helpers.utils.KuperKonfigs
 class CreditsActivity : CreditsActivity() {
     override val configs: KuperKonfigs by lazy { KuperKonfigs(this) }
     override fun getDashboardTitle(): Int = R.string.kuper_dashboard
-    override fun getTranslationSite(): String = "http://j.mp/KuperTranslations"
+    override fun getTranslationSite(): String = "http://j.mp/Trnsl8Kuper"
 }
