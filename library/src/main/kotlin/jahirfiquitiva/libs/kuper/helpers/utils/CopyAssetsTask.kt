@@ -25,57 +25,57 @@ import java.io.OutputStream
 import java.lang.ref.WeakReference
 
 class CopyAssetsTask(
-        param: WeakReference<Context>,
-        folder: String,
-        doOnSuccess: (Boolean) -> Unit
+    param: WeakReference<Context>,
+    folder: String,
+    doOnSuccess: (Boolean) -> Unit
                     ) :
-        QAsync<Context, Boolean>(
-                param,
-                object : QAsync.Callback<Context, Boolean>() {
-                    override fun doLoad(param: Context): Boolean? {
-                        return try {
-                            val files = param.assets.list(folder)
-                            files?.forEach {
-                                if (it.contains(".") && !filesToIgnore.contains(it)) {
-                                    var ins: InputStream? = null
-                                    var out: OutputStream? = null
-                                    try {
-                                        ins = param.assets.open("$folder/$it")
-                                        val outFile = File(
-                                                "${Environment.getExternalStorageDirectory()}/" +
-                                                        "ZooperWidget/" +
-                                                        getCorrectFolderName(folder), it)
-                                        outFile.parentFile.mkdirs()
-                                        out = FileOutputStream(outFile)
-                                        ins.copyTo(out, 2048)
-                                    } catch (e: Exception) {
-                                        e.printStackTrace()
-                                    } finally {
-                                        ins?.close()
-                                        out?.flush()
-                                        out?.close()
-                                    }
-                                }
+    QAsync<Context, Boolean>(
+        param,
+        object : QAsync.Callback<Context, Boolean>() {
+            override fun doLoad(param: Context): Boolean? {
+                return try {
+                    val files = param.assets.list(folder)
+                    files?.forEach {
+                        if (it.contains(".") && !filesToIgnore.contains(it)) {
+                            var ins: InputStream? = null
+                            var out: OutputStream? = null
+                            try {
+                                ins = param.assets.open("$folder/$it")
+                                val outFile = File(
+                                    "${Environment.getExternalStorageDirectory()}/" +
+                                        "ZooperWidget/" +
+                                        getCorrectFolderName(folder), it)
+                                outFile.parentFile.mkdirs()
+                                out = FileOutputStream(outFile)
+                                ins.copyTo(out, 2048)
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            } finally {
+                                ins?.close()
+                                out?.flush()
+                                out?.close()
                             }
-                            true
-                        } catch (e: Exception) {
-                            KuperLog.e { e.message }
-                            false
                         }
                     }
-                    
-                    override fun onSuccess(result: Boolean) {
-                        doOnSuccess(result)
-                    }
-                }) {
+                    true
+                } catch (e: Exception) {
+                    KL.e(e.message)
+                    false
+                }
+            }
+            
+            override fun onSuccess(result: Boolean) {
+                doOnSuccess(result)
+            }
+        }) {
     
     companion object {
         val filesToIgnore = arrayOf(
-                "material-design-iconic-font-v2.2.0.ttf",
-                "materialdrawerfont.ttf",
-                "materialdrawerfont-font-v5.0.0.ttf",
-                "google-material-font-v2.2.0.1.original.ttf",
-                "google-material-font-v3.0.1.0.original.ttf")
+            "material-design-iconic-font-v2.2.0.ttf",
+            "materialdrawerfont.ttf",
+            "materialdrawerfont-font-v5.0.0.ttf",
+            "google-material-font-v2.2.0.1.original.ttf",
+            "google-material-font-v3.0.1.0.original.ttf")
         
         fun getCorrectFolderName(folder: String): String = when (folder) {
             "fonts" -> "Fonts"

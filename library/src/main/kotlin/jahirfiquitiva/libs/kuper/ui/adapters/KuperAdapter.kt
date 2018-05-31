@@ -30,11 +30,11 @@ import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.ui.adapters.viewholders.KuperViewHolder
 
 class KuperAdapter(
-        private val manager: RequestManager?,
-        private val listener: (KuperKomponent) -> Unit
+    private val manager: RequestManager?,
+    private val listener: (KuperKomponent) -> Unit
                   ) :
-        SectionedRecyclerViewAdapter<SectionedViewHolder>(),
-        ListAdapterPresenter<KuperKomponent> {
+    SectionedRecyclerViewAdapter<SectionedViewHolder>(),
+    ListAdapterPresenter<KuperKomponent> {
     
     private val komponents = ArrayList<KuperKomponent>()
     private val sectionTitles = ArrayList<String>()
@@ -50,7 +50,7 @@ class KuperAdapter(
         if (sectionTitles.isNotEmpty()) return
         sectionTitles.clear()
         sectionTitles.add(
-                ctxt.getString(R.string.x_templates, ctxt.getString(R.string.zooper_widget)))
+            ctxt.getString(R.string.x_templates, ctxt.getString(R.string.zooper_widget)))
         sectionTitles.add(ctxt.getString(R.string.komponents))
         sectionTitles.add(ctxt.getString(R.string.x_templates, ctxt.getString(R.string.kwgt)))
         sectionTitles.add(ctxt.getString(R.string.x_templates, ctxt.getString(R.string.klck)))
@@ -107,41 +107,41 @@ class KuperAdapter(
     fun getHeadersBeforePosition(position: Int): Int {
         var headers = 0
         (0 until position)
-                .filter { isHeader(it) }
-                .forEach { headers += 1 }
+            .filter { isHeader(it) }
+            .forEach { headers += 1 }
         return headers
     }
     
     override fun getItemViewType(
-            section: Int,
-            relativePosition: Int,
-            absolutePosition: Int
+        section: Int,
+        relativePosition: Int,
+        absolutePosition: Int
                                 ): Int = section
     
     override fun onBindViewHolder(
-            holder: SectionedViewHolder?,
-            section: Int,
-            relativePosition: Int,
-            absolutePosition: Int
+        holder: SectionedViewHolder?,
+        section: Int,
+        relativePosition: Int,
+        absolutePosition: Int
                                  ) {
         holder?.let {
             if (it is KuperViewHolder) {
                 when (section) {
                     0 -> it.bind(
-                            komponents.jfilter { it.type == KuperKomponent.Type.ZOOPER }[relativePosition],
-                            manager, wallpaper)
+                        komponents.jfilter { it.type == KuperKomponent.Type.ZOOPER }[relativePosition],
+                        manager, wallpaper)
                     1 -> it.bind(
-                            komponents.jfilter { it.type == KuperKomponent.Type.KOMPONENT }[relativePosition],
-                            manager, wallpaper)
+                        komponents.jfilter { it.type == KuperKomponent.Type.KOMPONENT }[relativePosition],
+                        manager, wallpaper)
                     2 -> it.bind(
-                            komponents.jfilter { it.type == KuperKomponent.Type.WIDGET }[relativePosition],
-                            manager, wallpaper, listener)
+                        komponents.jfilter { it.type == KuperKomponent.Type.WIDGET }[relativePosition],
+                        manager, wallpaper, listener)
                     3 -> it.bind(
-                            komponents.jfilter { it.type == KuperKomponent.Type.LOCKSCREEN }[relativePosition],
-                            manager, wallpaper, listener)
+                        komponents.jfilter { it.type == KuperKomponent.Type.LOCKSCREEN }[relativePosition],
+                        manager, wallpaper, listener)
                     4 -> it.bind(
-                            komponents.jfilter { it.type == KuperKomponent.Type.WALLPAPER }[relativePosition],
-                            manager, wallpaper, listener)
+                        komponents.jfilter { it.type == KuperKomponent.Type.WALLPAPER }[relativePosition],
+                        manager, wallpaper, listener)
                 }
             }
         }
@@ -163,9 +163,9 @@ class KuperAdapter(
     }
     
     override fun onBindHeaderViewHolder(
-            holder: SectionedViewHolder?,
-            section: Int,
-            expanded: Boolean
+        holder: SectionedViewHolder?,
+        section: Int,
+        expanded: Boolean
                                        ) {
         if (holder is SectionedHeaderViewHolder) {
             val title = try {

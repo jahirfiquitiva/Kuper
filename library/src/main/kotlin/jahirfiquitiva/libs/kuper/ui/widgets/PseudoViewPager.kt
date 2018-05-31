@@ -29,7 +29,7 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.Scroller
 import ca.allanwang.kau.utils.gone
 import ca.allanwang.kau.utils.visible
-import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
+import jahirfiquitiva.libs.kuper.helpers.utils.KL
 
 class PseudoViewPager : ViewPager {
     
@@ -71,7 +71,7 @@ class PseudoViewPager : ViewPager {
             scroller.isAccessible = true
             scroller.set(this, PseudoScroller(context))
         } catch (e: Exception) {
-            KuperLog.e { e.message }
+            KL.e(e.message)
         }
     }
     
@@ -91,26 +91,26 @@ class PseudoViewPager : ViewPager {
         }
         transitioning = true
         animate().alpha(0.0F).setDuration(FADE_OUT_DURATION).setListener(
-                object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        super.onAnimationEnd(animation)
-                        gone()
-                        actualSetCurrentItem(item, afterTransition)
-                    }
-                })
+            object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    super.onAnimationEnd(animation)
+                    gone()
+                    actualSetCurrentItem(item, afterTransition)
+                }
+            })
     }
     
     private fun actualSetCurrentItem(item: Int, afterTransition: () -> Unit = {}) {
         super.setCurrentItem(item, false)
         visible()
         animate().alpha(1.0F).setDuration(FADE_IN_DURATION).setListener(
-                object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        super.onAnimationEnd(animation)
-                        transitioning = false
-                        afterTransition()
-                    }
-                })
+            object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    super.onAnimationEnd(animation)
+                    transitioning = false
+                    afterTransition()
+                }
+            })
     }
     
     private class PseudoScroller(context: Context) : Scroller(context, DecelerateInterpolator()) {

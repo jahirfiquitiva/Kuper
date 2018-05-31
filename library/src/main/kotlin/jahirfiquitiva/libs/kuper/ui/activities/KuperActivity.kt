@@ -23,38 +23,37 @@ import android.support.annotation.IntRange
 import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
-import ca.allanwang.kau.utils.boolean
 import ca.allanwang.kau.utils.postDelayed
-import ca.allanwang.kau.utils.string
 import ca.allanwang.kau.utils.visibleIf
-import ca.allanwang.kau.xml.showChangelog
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
-import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
+import jahirfiquitiva.libs.frames.helpers.extensions.mdDialog
+import jahirfiquitiva.libs.frames.helpers.extensions.showChanges
 import jahirfiquitiva.libs.frames.ui.activities.base.BaseFramesActivity
 import jahirfiquitiva.libs.frames.ui.fragments.base.BaseFramesFragment
 import jahirfiquitiva.libs.frames.ui.widgets.CustomToolbar
-import jahirfiquitiva.libs.kauextensions.extensions.accentColor
-import jahirfiquitiva.libs.kauextensions.extensions.bind
-import jahirfiquitiva.libs.kauextensions.extensions.cardBackgroundColor
-import jahirfiquitiva.libs.kauextensions.extensions.getActiveIconsColorFor
-import jahirfiquitiva.libs.kauextensions.extensions.getAppName
-import jahirfiquitiva.libs.kauextensions.extensions.getPrimaryTextColorFor
-import jahirfiquitiva.libs.kauextensions.extensions.getSecondaryTextColorFor
-import jahirfiquitiva.libs.kauextensions.extensions.hasContent
-import jahirfiquitiva.libs.kauextensions.extensions.inactiveIconsColor
-import jahirfiquitiva.libs.kauextensions.extensions.primaryColor
-import jahirfiquitiva.libs.kauextensions.extensions.secondaryTextColor
-import jahirfiquitiva.libs.kauextensions.extensions.setItemVisibility
-import jahirfiquitiva.libs.kauextensions.extensions.tint
-import jahirfiquitiva.libs.kauextensions.ui.fragments.adapters.FragmentsPagerAdapter
-import jahirfiquitiva.libs.kauextensions.ui.widgets.CustomSearchView
+import jahirfiquitiva.libs.kext.extensions.accentColor
+import jahirfiquitiva.libs.kext.extensions.bind
+import jahirfiquitiva.libs.kext.extensions.boolean
+import jahirfiquitiva.libs.kext.extensions.cardBackgroundColor
+import jahirfiquitiva.libs.kext.extensions.getActiveIconsColorFor
+import jahirfiquitiva.libs.kext.extensions.getAppName
+import jahirfiquitiva.libs.kext.extensions.getPrimaryTextColorFor
+import jahirfiquitiva.libs.kext.extensions.getSecondaryTextColorFor
+import jahirfiquitiva.libs.kext.extensions.hasContent
+import jahirfiquitiva.libs.kext.extensions.inactiveIconsColor
+import jahirfiquitiva.libs.kext.extensions.primaryColor
+import jahirfiquitiva.libs.kext.extensions.setItemVisibility
+import jahirfiquitiva.libs.kext.extensions.string
+import jahirfiquitiva.libs.kext.extensions.tint
+import jahirfiquitiva.libs.kext.ui.fragments.adapters.FragmentsPagerAdapter
+import jahirfiquitiva.libs.kext.ui.widgets.CustomSearchView
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
 import jahirfiquitiva.libs.kuper.helpers.extensions.kuperKonfigs
 import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask
+import jahirfiquitiva.libs.kuper.helpers.utils.KL
 import jahirfiquitiva.libs.kuper.helpers.utils.KuperKonfigs
-import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 import jahirfiquitiva.libs.kuper.ui.fragments.KuperFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.SetupFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.WallpapersFragment
@@ -103,7 +102,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
             setupBottomNavigation()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 requestStoragePermission(
-                        getString(R.string.permission_request_wallpaper, getAppName()).orEmpty()) {
+                    getString(R.string.permission_request_wallpaper, getAppName()).orEmpty()) {
                     if (!kuperKonfigs.permissionRequested) {
                         kuperKonfigs.permissionRequested = true
                         setupBottomNavigation()
@@ -156,8 +155,8 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
                 
                 if (boolean(R.bool.isKuper) && string(R.string.json_url).hasContent())
                     addItem(
-                            AHBottomNavigationItem(
-                                    string(R.string.wallpapers), R.drawable.ic_all_wallpapers))
+                        AHBottomNavigationItem(
+                            string(R.string.wallpapers), R.drawable.ic_all_wallpapers))
                 
                 setOnTabSelectedListener { position, _ ->
                     navigateToItem(position)
@@ -181,24 +180,28 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
             
             searchItem = it.findItem(R.id.search)
             searchView = searchItem?.actionView as? CustomSearchView
-            searchView?.onCollapse = { doSearch() }
+            searchView?.onExpand = { toolbar?.enableScroll(false) }
+            searchView?.onCollapse = {
+                toolbar?.enableScroll(true)
+                doSearch(closed = true)
+            }
             searchView?.onQueryChanged = { doSearch(it) }
             searchView?.onQuerySubmit = { doSearch(it) }
             searchView?.bindToItem(searchItem)
             
             val hint = bottomNavigation?.getItem(currentItemId)?.getTitle(this).orEmpty()
             searchView?.queryHint =
-                    if (hint.hasContent()) getString(R.string.search_x, hint.toLowerCase())
-                    else string(R.string.search)
+                if (hint.hasContent()) getString(R.string.search_x, hint.toLowerCase())
+                else string(R.string.search)
             
             searchView?.tint(getPrimaryTextColorFor(primaryColor, 0.6F))
             it.tint(getActiveIconsColorFor(primaryColor, 0.6F))
         }
         
         toolbar?.tint(
-                getPrimaryTextColorFor(primaryColor, 0.6F),
-                getSecondaryTextColorFor(primaryColor, 0.6F),
-                getActiveIconsColorFor(primaryColor, 0.6F))
+            getPrimaryTextColorFor(primaryColor, 0.6F),
+            getSecondaryTextColorFor(primaryColor, 0.6F),
+            getActiveIconsColorFor(primaryColor, 0.6F))
         return super.onCreateOptionsMenu(menu)
     }
     
@@ -207,7 +210,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
             val id = it.itemId
             when (id) {
                 R.id.refresh -> refreshContent()
-                R.id.changelog -> showChangelog(R.xml.changelog, secondaryTextColor)
+                R.id.changelog -> showChanges()
                 R.id.about -> startActivity(Intent(this, CreditsActivity::class.java))
                 R.id.settings ->
                     startActivityForResult(Intent(this, SettingsActivity::class.java), 22)
@@ -219,8 +222,8 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     }
     
     private fun navigateToItem(
-            @IntRange(from = 0, to = 2) position: Int,
-            force: Boolean = false
+        @IntRange(from = 0, to = 2) position: Int,
+        force: Boolean = false
                               ): Boolean {
         return try {
             if (currentItemId != position || force) {
@@ -230,14 +233,14 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
                 true
             } else {
                 val activeFragment =
-                        (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
+                    (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
                 (activeFragment as? SetupFragment)?.scrollToTop()
                 (activeFragment as? KuperFragment)?.scrollToTop()
                 (activeFragment as? WallpapersFragment)?.scrollToTop()
                 false
             }
         } catch (e: Exception) {
-            KuperLog.e { e.message }
+            KL.e(e.message)
             false
         }
     }
@@ -260,16 +263,16 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     }
     
     private val lock = Any()
-    private fun doSearch(filter: String = "") {
+    private fun doSearch(filter: String = "", closed: Boolean = false) {
         synchronized(lock) {
             postDelayed(200) {
                 val activeFragment =
-                        (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
+                    (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
                 if (activeFragment is KuperFragment) {
-                    activeFragment.applyFilter(filter)
+                    activeFragment.applyFilter(filter, closed)
                 } else if (activeFragment is BaseFramesFragment<*, *>) {
                     activeFragment.enableRefresh(!filter.hasContent())
-                    activeFragment.applyFilter(filter)
+                    activeFragment.applyFilter(filter, closed)
                 }
             }
         }
@@ -277,7 +280,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     
     private fun refreshContent() {
         val activeFragment =
-                (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
+            (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
         (activeFragment as? WallpapersFragment)?.reloadData(1)
     }
     
@@ -290,29 +293,28 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
         
         actualFolders.forEachIndexed { index, s ->
             destroyDialog()
-            val dialogContent = string(
-                    R.string.copying_assets,
-                    CopyAssetsTask.getCorrectFolderName(s))
-            dialog = buildMaterialDialog {
-                content(dialogContent.orEmpty())
+            val dialogContent =
+                string(R.string.copying_assets, CopyAssetsTask.getCorrectFolderName(s))
+            dialog = mdDialog {
+                content(dialogContent)
                 progress(true, 0)
                 cancelable(false)
             }
             dialog?.setOnShowListener {
                 CopyAssetsTask(
-                        WeakReference(this), s, {
+                    WeakReference(this), s, {
                     if (it) count += 1
                     destroyDialog()
                     if (index == actualFolders.size - 1) {
                         showSnackbar(
-                                string(
-                                        if (count == actualFolders.size) R.string.copied_assets_successfully
-                                        else R.string.copied_assets_error),
-                                Snackbar.LENGTH_LONG)
+                            string(
+                                if (count == actualFolders.size) R.string.copied_assets_successfully
+                                else R.string.copied_assets_error),
+                            Snackbar.LENGTH_LONG)
                         if (count == actualFolders.size) {
                             (getCurrentFragment() as? SetupFragment)?.loadDataFromViewModel() ?: {
                                 ((pager?.adapter as? FragmentsPagerAdapter)?.get(
-                                        currentItemId) as? SetupFragment)?.loadDataFromViewModel()
+                                    currentItemId) as? SetupFragment)?.loadDataFromViewModel()
                             }()
                         }
                     }

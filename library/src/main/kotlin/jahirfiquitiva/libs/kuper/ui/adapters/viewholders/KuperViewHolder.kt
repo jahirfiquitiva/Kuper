@@ -34,13 +34,13 @@ import com.bumptech.glide.request.RequestOptions
 import jahirfiquitiva.libs.frames.helpers.extensions.releaseFromGlide
 import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
 import jahirfiquitiva.libs.frames.helpers.utils.GlideRequestCallback
-import jahirfiquitiva.libs.kauextensions.extensions.applyColorFilter
-import jahirfiquitiva.libs.kauextensions.extensions.bind
-import jahirfiquitiva.libs.kauextensions.extensions.formatCorrectly
-import jahirfiquitiva.libs.kauextensions.extensions.getDrawable
-import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
-import jahirfiquitiva.libs.kauextensions.extensions.primaryTextColor
-import jahirfiquitiva.libs.kauextensions.extensions.secondaryTextColor
+import jahirfiquitiva.libs.kext.extensions.applyColorFilter
+import jahirfiquitiva.libs.kext.extensions.bind
+import jahirfiquitiva.libs.kext.extensions.drawable
+import jahirfiquitiva.libs.kext.extensions.formatCorrectly
+import jahirfiquitiva.libs.kext.extensions.isInPortraitMode
+import jahirfiquitiva.libs.kext.extensions.primaryTextColor
+import jahirfiquitiva.libs.kext.extensions.secondaryTextColor
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
 import java.io.File
@@ -55,10 +55,10 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     private val progress: ProgressBar? by itemView.bind(R.id.loading)
     
     fun bind(
-            komponent: KuperKomponent,
-            manager: RequestManager?,
-            wallpaper: Drawable?,
-            listener: (KuperKomponent) -> Unit = {}
+        komponent: KuperKomponent,
+        manager: RequestManager?,
+        wallpaper: Drawable?,
+        listener: (KuperKomponent) -> Unit = {}
             ) {
         with(itemView) {
             wall?.setImageDrawable(wallpaper)
@@ -69,11 +69,11 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
             app?.text = komponent.type.toString()
             icon?.visibleIf(komponent.hasIntent)
             if (icon?.isVisible == true) {
-                icon?.setImageDrawable(context.getDrawable("ic_open_app"))
+                icon?.setImageDrawable(context.drawable("ic_open_app"))
                 icon?.setOnClickListener { listener(komponent) }
             }
             val rightPreview =
-                    if (context.isInPortraitMode) komponent.previewPath else komponent.rightLandPath
+                if (context.isInPortraitMode) komponent.previewPath else komponent.rightLandPath
             
             try {
                 progress?.indeterminateDrawable?.applyColorFilter(Color.parseColor("#888"))
@@ -83,19 +83,19 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
             preview?.let {
                 val man = manager ?: Glide.with(context)
                 man.load(File(rightPreview))
-                        .apply(RequestOptions().priority(Priority.HIGH))
-                        .listener(object : GlideRequestCallback<Drawable>() {
-                            override fun onLoadSucceed(resource: Drawable): Boolean {
-                                progress?.gone()
-                                return false
-                            }
-                            
-                            override fun onLoadFailed(): Boolean {
-                                progress?.visible()
-                                return super.onLoadFailed()
-                            }
-                        })
-                        .into(it)
+                    .apply(RequestOptions().priority(Priority.HIGH))
+                    .listener(object : GlideRequestCallback<Drawable>() {
+                        override fun onLoadSucceed(resource: Drawable): Boolean {
+                            progress?.gone()
+                            return false
+                        }
+                        
+                        override fun onLoadFailed(): Boolean {
+                            progress?.visible()
+                            return super.onLoadFailed()
+                        }
+                    })
+                    .into(it)
             }
         }
     }

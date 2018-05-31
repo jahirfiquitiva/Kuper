@@ -22,16 +22,16 @@ import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.ui.adapters.viewholders.SectionedHeaderViewHolder
-import jahirfiquitiva.libs.kauextensions.extensions.hasContent
+import jahirfiquitiva.libs.kext.extensions.hasContent
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.ui.adapters.viewholders.SetupViewHolder
 import java.lang.ref.WeakReference
 
 class SetupAdapter(
-        private val context: WeakReference<Context>,
-        private val listener: (KuperApp) -> Unit
+    private val context: WeakReference<Context>,
+    private val listener: (KuperApp) -> Unit
                   ) :
-        SectionedRecyclerViewAdapter<SectionedViewHolder>() {
+    SectionedRecyclerViewAdapter<SectionedViewHolder>() {
     
     private val apps = ArrayList<KuperApp>()
     
@@ -47,23 +47,23 @@ class SetupAdapter(
     }
     
     override fun getItemViewType(
-            section: Int, relativePosition: Int,
-            absolutePosition: Int
+        section: Int, relativePosition: Int,
+        absolutePosition: Int
                                 ): Int = section
     
     override fun onBindViewHolder(
-            holder: SectionedViewHolder?, section: Int, relativePosition: Int,
-            absolutePosition: Int
+        holder: SectionedViewHolder?, section: Int, relativePosition: Int,
+        absolutePosition: Int
                                  ) {
         holder?.let {
             if (it is SetupViewHolder) {
                 when (section) {
                     0 -> it.bind(
-                            apps.jfilter { it.packageName.hasContent() }[relativePosition],
-                            listener)
+                        apps.jfilter { it.packageName.hasContent() }[relativePosition],
+                        listener)
                     1 -> it.bind(
-                            apps.jfilter { !it.packageName.hasContent() }[relativePosition],
-                            listener)
+                        apps.jfilter { !it.packageName.hasContent() }[relativePosition],
+                        listener)
                 }
             }
         }
@@ -82,9 +82,9 @@ class SetupAdapter(
     }
     
     override fun onBindHeaderViewHolder(
-            holder: SectionedViewHolder?,
-            section: Int,
-            expanded: Boolean
+        holder: SectionedViewHolder?,
+        section: Int,
+        expanded: Boolean
                                        ) {
         context.get()?.let {
             if (holder is SectionedHeaderViewHolder) {
@@ -105,6 +105,6 @@ class SetupAdapter(
 }
 
 data class KuperApp(
-        val name: String, val desc: String, val icon: String,
-        val packageName: String = ""
+    val name: String, val desc: String, val icon: String,
+    val packageName: String = ""
                    )

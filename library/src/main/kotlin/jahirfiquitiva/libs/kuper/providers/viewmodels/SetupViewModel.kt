@@ -17,12 +17,12 @@ package jahirfiquitiva.libs.kuper.providers.viewmodels
 
 import android.content.Context
 import android.os.Environment
-import ca.allanwang.kau.utils.boolean
-import ca.allanwang.kau.utils.isAppInstalled
 import jahirfiquitiva.libs.archhelpers.viewmodels.ListViewModel
+import jahirfiquitiva.libs.kext.extensions.boolean
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.extensions.getFilesInAssetsFolder
 import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
+import jahirfiquitiva.libs.kuper.helpers.extensions.isAppInstalled
 import jahirfiquitiva.libs.kuper.helpers.utils.CopyAssetsTask
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE
@@ -39,85 +39,85 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         
         if (!param.isAppInstalled(ZOOPER_PACKAGE) && "templates".inAssetsAndWithContent(param)) {
             apps.add(
-                    KuperApp(
-                            param.getString(R.string.zooper_widget),
-                            param.getString(R.string.required_for_widgets),
-                            "ic_zooper", ZOOPER_PACKAGE))
+                KuperApp(
+                    param.getString(R.string.zooper_widget),
+                    param.getString(R.string.required_for_widgets),
+                    "ic_zooper", ZOOPER_PACKAGE))
         }
         
         if (!param.isAppInstalled(KWGT_PACKAGE) && "widgets".inAssetsAndWithContent(param)) {
             apps.add(
-                    KuperApp(
-                            param.getString(R.string.kwgt),
-                            param.getString(R.string.required_for_widgets),
-                            "ic_kustom", KWGT_PACKAGE))
+                KuperApp(
+                    param.getString(R.string.kwgt),
+                    param.getString(R.string.required_for_widgets),
+                    "ic_kustom", KWGT_PACKAGE))
         }
         
         if (!param.isAppInstalled("$KWGT_PACKAGE.pro") && "widgets".inAssetsAndWithContent(param)) {
             apps.add(
-                    KuperApp(
-                            param.getString(R.string.kwgt_pro),
-                            param.getString(R.string.required_for_widgets),
-                            "ic_kustom", "$KWGT_PACKAGE.pro"))
+                KuperApp(
+                    param.getString(R.string.kwgt_pro),
+                    param.getString(R.string.required_for_widgets),
+                    "ic_kustom", "$KWGT_PACKAGE.pro"))
         }
         
         if (!param.isAppInstalled(KLWP_PACKAGE) && "wallpapers".inAssetsAndWithContent(param)) {
             apps.add(
-                    KuperApp(
-                            param.getString(R.string.klwp),
-                            param.getString(R.string.required_for_wallpapers),
-                            "ic_kustom", KLWP_PACKAGE))
+                KuperApp(
+                    param.getString(R.string.klwp),
+                    param.getString(R.string.required_for_wallpapers),
+                    "ic_kustom", KLWP_PACKAGE))
         }
         
         if (!param.isAppInstalled("$KLWP_PACKAGE.pro") && "wallpapers".inAssetsAndWithContent(
-                        param)) {
+                param)) {
             apps.add(
-                    KuperApp(
-                            param.getString(R.string.klwp_pro),
-                            param.getString(R.string.required_for_wallpapers),
-                            "ic_kustom", "$KLWP_PACKAGE.pro"))
+                KuperApp(
+                    param.getString(R.string.klwp_pro),
+                    param.getString(R.string.required_for_wallpapers),
+                    "ic_kustom", "$KLWP_PACKAGE.pro"))
         }
         
         if (!param.isAppInstalled(KLCK_PACKAGE) && "lockscreens".inAssetsAndWithContent(param)) {
             apps.add(
-                    KuperApp(
-                            param.getString(R.string.klck),
-                            param.getString(R.string.required_for_lockscreens),
-                            "ic_kustom", KLCK_PACKAGE))
+                KuperApp(
+                    param.getString(R.string.klck),
+                    param.getString(R.string.required_for_lockscreens),
+                    "ic_kustom", KLCK_PACKAGE))
         }
         
         if (!param.isAppInstalled("$KLCK_PACKAGE.pro") &&
-                "lockscreens".inAssetsAndWithContent(param)) {
+            "lockscreens".inAssetsAndWithContent(param)) {
             apps.add(
-                    KuperApp(
-                            param.getString(R.string.klck_pro),
-                            param.getString(R.string.required_for_lockscreens),
-                            "ic_kustom", "$KLCK_PACKAGE.pro"))
+                KuperApp(
+                    param.getString(R.string.klck_pro),
+                    param.getString(R.string.required_for_lockscreens),
+                    "ic_kustom", "$KLCK_PACKAGE.pro"))
         }
         
         if (!param.isAppInstalled(MEDIA_UTILS_PACKAGE) &&
-                param.boolean(R.bool.media_utils_required)) {
+            param.boolean(R.bool.media_utils_required)) {
             apps.add(
-                    KuperApp(
-                            param.getString(R.string.media_utils),
-                            param.getString(R.string.required_for_widgets),
-                            "ic_zooper", MEDIA_UTILS_PACKAGE))
+                KuperApp(
+                    param.getString(R.string.media_utils),
+                    param.getString(R.string.required_for_widgets),
+                    "ic_zooper", MEDIA_UTILS_PACKAGE))
         }
         
         if (!param.isAppInstalled(KOLORETTE_PACKAGE) && param.boolean(R.bool.kolorette_required)) {
             apps.add(
-                    KuperApp(
-                            param.getString(R.string.kolorette),
-                            param.getString(R.string.required_for_templates),
-                            "ic_color_palette", KOLORETTE_PACKAGE))
+                KuperApp(
+                    param.getString(R.string.kolorette),
+                    param.getString(R.string.required_for_templates),
+                    "ic_color_palette", KOLORETTE_PACKAGE))
         }
         
         if (!areAssetsInstalled(param)) {
             apps.add(
-                    KuperApp(
-                            param.getString(R.string.widgets),
-                            param.getString(R.string.required_assets),
-                            "ic_zooper"))
+                KuperApp(
+                    param.getString(R.string.widgets),
+                    param.getString(R.string.required_assets),
+                    "ic_zooper"))
         }
         return apps
     }
@@ -135,8 +135,8 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
             possibleFiles.forEach {
                 if (it.contains(".") && !CopyAssetsTask.filesToIgnore.contains(it)) {
                     val file = File(
-                            "${Environment.getExternalStorageDirectory()}/ZooperWidget/" +
-                                    "${CopyAssetsTask.getCorrectFolderName(folder)}/$it")
+                        "${Environment.getExternalStorageDirectory()}/ZooperWidget/" +
+                            "${CopyAssetsTask.getCorrectFolderName(folder)}/$it")
                     if (file.exists()) filesCount += 1
                 }
             }

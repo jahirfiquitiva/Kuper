@@ -15,6 +15,6 @@
  */
 package jahirfiquitiva.libs.kuper.helpers.utils
 
-import ca.allanwang.kau.logging.KauLogger
+import jahirfiquitiva.libs.kext.helpers.Rec
 
-internal object KuperLog : KauLogger("Kuper")
+internal object KL : Rec("Kuper")

@@ -21,14 +21,14 @@ import android.view.View
 import jahirfiquitiva.libs.kuper.ui.adapters.KuperAdapter
 
 class SectionedGridSpacingDecoration(
-        private val spanCount: Int, private val spacing: Int,
-        private val includeEdge: Boolean,
-        private val adapter: KuperAdapter?
+    private val spanCount: Int, private val spacing: Int,
+    private val includeEdge: Boolean,
+    private val adapter: KuperAdapter?
                                     ) : RecyclerView.ItemDecoration() {
     
     override fun getItemOffsets(
-            outRect: Rect, view: View, parent: RecyclerView,
-            state: RecyclerView.State
+        outRect: Rect, view: View, parent: RecyclerView,
+        state: RecyclerView.State
                                ) {
         super.getItemOffsets(outRect, view, parent, state)
         

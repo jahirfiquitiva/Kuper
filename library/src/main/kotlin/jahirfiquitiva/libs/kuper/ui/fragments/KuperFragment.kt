@@ -22,31 +22,30 @@ import android.graphics.drawable.Drawable
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
-import ca.allanwang.kau.utils.dimenPixelSize
 import ca.allanwang.kau.utils.dpToPx
-import ca.allanwang.kau.utils.integer
+import ca.allanwang.kau.utils.openLink
 import ca.allanwang.kau.utils.postDelayed
 import ca.allanwang.kau.utils.setPaddingBottom
-import ca.allanwang.kau.utils.startLink
+import ca.allanwang.kau.utils.toast
 import com.bumptech.glide.Glide
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.archhelpers.extensions.lazyViewModel
 import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
-import jahirfiquitiva.libs.frames.helpers.extensions.buildMaterialDialog
 import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
+import jahirfiquitiva.libs.frames.helpers.extensions.mdDialog
 import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
-import jahirfiquitiva.libs.kauextensions.extensions.ctxt
-import jahirfiquitiva.libs.kauextensions.extensions.hasContent
-import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
-import jahirfiquitiva.libs.kauextensions.extensions.showToast
+import jahirfiquitiva.libs.kext.extensions.dimenPixelSize
+import jahirfiquitiva.libs.kext.extensions.hasContent
+import jahirfiquitiva.libs.kext.extensions.int
+import jahirfiquitiva.libs.kext.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
+import jahirfiquitiva.libs.kuper.helpers.utils.KL
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
-import jahirfiquitiva.libs.kuper.helpers.utils.KuperLog
 import jahirfiquitiva.libs.kuper.helpers.utils.ZOOPER_PACKAGE
 import jahirfiquitiva.libs.kuper.providers.viewmodels.KuperViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
@@ -70,7 +69,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 val wm = WallpaperManager.getInstance(it)
                 wm?.fastDrawable ?: ColorDrawable(it.tilesColor)
             } catch (e: Exception) {
-                KuperLog.e { e.message }
+                KL.e(e.message)
                 ColorDrawable(it.tilesColor)
             }
         } ?: { null }()
@@ -96,11 +95,11 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 loadingView = content.findViewById(R.id.loading_view)
                 setLoadingText(R.string.loading_section)
                 
-                val spanCount = context.integer(R.integer.kuper_previews_columns)
+                val spanCount = context.int(R.integer.kuper_previews_columns)
                 val gridLayout = object : GridLayoutManager(
-                        context, spanCount,
-                        GridLayoutManager.VERTICAL,
-                        false) {
+                    context, spanCount,
+                    GridLayoutManager.VERTICAL,
+                    false) {
                     override fun supportsPredictiveItemAnimations(): Boolean = false
                 }
                 
@@ -114,10 +113,10 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 
                 kuperAdapter?.updateSectionTitles(context)
                 addItemDecoration(
-                        SectionedGridSpacingDecoration(
-                                spanCount,
-                                context.dimenPixelSize(R.dimen.wallpapers_grid_spacing), true,
-                                kuperAdapter))
+                    SectionedGridSpacingDecoration(
+                        spanCount,
+                        context.dimenPixelSize(R.dimen.wallpapers_grid_spacing), true,
+                        kuperAdapter))
                 adapter = kuperAdapter
                 
                 setPaddingBottom(64.dpToPx)
@@ -130,7 +129,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         loadDataFromViewModel()
     }
     
-    fun applyFilter(filter: String = "") {
+    fun applyFilter(filter: String = "", closed: Boolean = false) {
         if (filter.hasContent()) {
             recyclerView?.setEmptyImage(R.drawable.no_results)
             recyclerView?.setEmptyText(R.string.search_no_results)
@@ -142,7 +141,8 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
             recyclerView?.setEmptyText(R.string.empty_section)
             kuperAdapter?.setItems(ArrayList(kuperViewModel.getData().orEmpty()))
         }
-        scrollToTop()
+        if (!closed)
+            scrollToTop()
     }
     
     override fun getContentLayout(): Int = R.layout.section_layout
@@ -162,13 +162,13 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                         else -> ""
                     }
                     if (itemPkg.hasContent()) {
-                        contxt.showToast(contxt.getString(R.string.app_not_installed))
-                        contxt.startLink(PLAY_STORE_LINK_PREFIX + itemPkg)
+                        contxt.toast(contxt.getString(R.string.app_not_installed))
+                        contxt.openLink(PLAY_STORE_LINK_PREFIX + itemPkg)
                     }
                 }
             } ?: {
                 if (item.type == KuperKomponent.Type.KOMPONENT) {
-                    contxt.buildMaterialDialog {
+                    contxt.mdDialog {
                         title(R.string.komponents)
                         content(R.string.open_komponents)
                         positiveText(android.R.string.ok)
@@ -179,7 +179,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
     }
     
     override fun loadDataFromViewModel() {
-        kuperViewModel.loadData(ctxt)
+        activity?.let { kuperViewModel.loadData(it) }
     }
     
     override fun autoStartLoad() = false
@@ -210,7 +210,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
             try {
                 postDelayed(10) { kuperAdapter?.wallpaper = wallpaper }
             } catch (e: Exception) {
-                KuperLog.e { e.message }
+                KL.e(e.message)
             }
         }
     }

@@ -19,13 +19,13 @@ import android.support.v7.widget.AppCompatButton
 import android.view.View
 import android.widget.TextView
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
-import jahirfiquitiva.libs.kauextensions.extensions.accentColor
-import jahirfiquitiva.libs.kauextensions.extensions.bind
-import jahirfiquitiva.libs.kauextensions.extensions.getDrawable
-import jahirfiquitiva.libs.kauextensions.extensions.getPrimaryTextColorFor
-import jahirfiquitiva.libs.kauextensions.extensions.primaryTextColor
-import jahirfiquitiva.libs.kauextensions.extensions.secondaryTextColor
-import jahirfiquitiva.libs.kauextensions.ui.widgets.MaterialIconView
+import jahirfiquitiva.libs.kext.extensions.accentColor
+import jahirfiquitiva.libs.kext.extensions.bind
+import jahirfiquitiva.libs.kext.extensions.drawable
+import jahirfiquitiva.libs.kext.extensions.getPrimaryTextColorFor
+import jahirfiquitiva.libs.kext.extensions.primaryTextColor
+import jahirfiquitiva.libs.kext.extensions.secondaryTextColor
+import jahirfiquitiva.libs.kext.ui.widgets.MaterialIconView
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
 
@@ -36,13 +36,13 @@ class SetupViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     private val icon: MaterialIconView? by itemView.bind(R.id.icon)
     
     fun bind(app: KuperApp, listener: (KuperApp) -> Unit) =
-            with(itemView) {
-                title?.setTextColor(context.primaryTextColor)
-                title?.text = app.name
-                description?.setTextColor(context.secondaryTextColor)
-                description?.text = app.desc
-                icon?.setImageDrawable(context.getDrawable(app.icon))
-                button?.setTextColor(context.getPrimaryTextColorFor(context.accentColor, 0.6F))
-                button?.setOnClickListener { listener(app) }
-            }
+        with(itemView) {
+            title?.setTextColor(context.primaryTextColor)
+            title?.text = app.name
+            description?.setTextColor(context.secondaryTextColor)
+            description?.text = app.desc
+            icon?.setImageDrawable(context.drawable(app.icon))
+            button?.setTextColor(context.getPrimaryTextColorFor(context.accentColor, 0.6F))
+            button?.setOnClickListener { listener(app) }
+        }
 }

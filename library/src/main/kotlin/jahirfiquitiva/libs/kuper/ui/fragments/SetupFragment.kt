@@ -19,18 +19,19 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import ca.allanwang.kau.utils.dpToPx
+import ca.allanwang.kau.utils.openLink
 import ca.allanwang.kau.utils.setPaddingBottom
-import ca.allanwang.kau.utils.startLink
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.archhelpers.extensions.lazyViewModel
 import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
-import jahirfiquitiva.libs.kauextensions.extensions.ctxt
-import jahirfiquitiva.libs.kauextensions.extensions.getAppName
-import jahirfiquitiva.libs.kauextensions.extensions.hasContent
-import jahirfiquitiva.libs.kauextensions.extensions.isInPortraitMode
-import jahirfiquitiva.libs.kauextensions.extensions.isLowRamDevice
+import jahirfiquitiva.libs.kext.extensions.context
+import jahirfiquitiva.libs.kext.extensions.ctxt
+import jahirfiquitiva.libs.kext.extensions.getAppName
+import jahirfiquitiva.libs.kext.extensions.hasContent
+import jahirfiquitiva.libs.kext.extensions.isInPortraitMode
+import jahirfiquitiva.libs.kext.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.providers.viewmodels.SetupViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
@@ -68,8 +69,8 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
                 setLoadingText(R.string.loading_section)
                 
                 val layoutManager = GridLayoutManager(
-                        context, if (ctxt.isInPortraitMode) 1 else 2,
-                        GridLayoutManager.VERTICAL, false)
+                    context, if (ctxt.isInPortraitMode) 1 else 2,
+                    GridLayoutManager.VERTICAL, false)
                 
                 setupAdapter = SetupAdapter(WeakReference(ctxt)) { onItemClicked(it, false) }
                 setupAdapter?.setLayoutManager(layoutManager)
@@ -92,11 +93,11 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     
     override fun onItemClicked(item: KuperApp, longClick: Boolean) {
         if (item.packageName.hasContent()) {
-            ctxt { it.startLink(PLAY_STORE_LINK_PREFIX + item.packageName) }
+            context { it.openLink(PLAY_STORE_LINK_PREFIX + item.packageName) }
         } else {
             (activity as? KuperActivity)?.let { actv ->
                 actv.requestStoragePermission(
-                        getString(R.string.permission_request_assets, actv.getAppName())) {
+                    getString(R.string.permission_request_assets, actv.getAppName())) {
                     actv.installAssets()
                 }
             }
@@ -111,7 +112,7 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     
     override fun registerObservers() {
         appsModel.observe(
-                this, {
+            this, {
             if (it.isEmpty()) {
                 (activity as? KuperActivity)?.hideSetup()
             } else {

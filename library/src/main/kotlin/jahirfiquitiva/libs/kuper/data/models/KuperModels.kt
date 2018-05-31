@@ -29,11 +29,11 @@ import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PICKER
 
 data class KuperKomponent(
-        val type: Type,
-        val name: String,
-        val path: String,
-        val previewPath: String,
-        private val previewLandPath: String = ""
+    val type: Type,
+    val name: String,
+    val path: String,
+    val previewPath: String,
+    private val previewLandPath: String = ""
                          ) {
     
     override fun hashCode(): Int {
@@ -47,7 +47,7 @@ data class KuperKomponent(
     override fun equals(other: Any?): Boolean {
         if (other == null) return false
         return other is KuperKomponent && other.type == type && other.name.equals(name, true) &&
-                other.previewPath.equals(previewPath, true)
+            other.previewPath.equals(previewPath, true)
     }
     
     val hasIntent = type == Type.WIDGET || type == Type.LOCKSCREEN || type == Type.WALLPAPER
@@ -65,10 +65,10 @@ data class KuperKomponent(
             val intent = Intent().apply { setComponent(component) }
             try {
                 intent.data = Uri.Builder()
-                        .scheme("kfile")
-                        .authority("${context.packageName}.kustom.provider")
-                        .appendPath(path)
-                        .build()
+                    .scheme("kfile")
+                    .authority("${context.packageName}.kustom.provider")
+                    .appendPath(path)
+                    .build()
             } catch (e: Exception) {
                 intent.data = Uri.parse("kfile://${context.packageName}/$path")
             }
