@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jahirfiquitiva.libs.kuper.data.models
+package jahirfiquitiva.libs.kuper.models
 
 import android.content.ComponentName
 import android.content.Context

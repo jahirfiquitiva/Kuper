@@ -42,7 +42,7 @@ import jahirfiquitiva.libs.kext.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kext.extensions.primaryTextColor
 import jahirfiquitiva.libs.kext.extensions.secondaryTextColor
 import jahirfiquitiva.libs.kuper.R
-import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
+import jahirfiquitiva.libs.kuper.models.KuperKomponent
 import java.io.File
 
 class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {

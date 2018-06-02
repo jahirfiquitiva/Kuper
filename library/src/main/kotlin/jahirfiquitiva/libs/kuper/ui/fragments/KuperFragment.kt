@@ -41,7 +41,7 @@ import jahirfiquitiva.libs.kext.extensions.hasContent
 import jahirfiquitiva.libs.kext.extensions.int
 import jahirfiquitiva.libs.kext.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kuper.R
-import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
+import jahirfiquitiva.libs.kuper.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.helpers.utils.KL
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE

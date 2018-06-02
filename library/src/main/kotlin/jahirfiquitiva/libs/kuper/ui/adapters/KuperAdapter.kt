@@ -26,7 +26,7 @@ import jahirfiquitiva.libs.archhelpers.ui.adapters.presenters.ListAdapterPresent
 import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.ui.adapters.viewholders.SectionedHeaderViewHolder
 import jahirfiquitiva.libs.kuper.R
-import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
+import jahirfiquitiva.libs.kuper.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.ui.adapters.viewholders.KuperViewHolder
 
 class KuperAdapter(

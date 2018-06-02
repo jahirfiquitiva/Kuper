@@ -21,9 +21,8 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import jahirfiquitiva.libs.archhelpers.viewmodels.ListViewModel
 import jahirfiquitiva.libs.frames.helpers.extensions.maxPictureRes
-import jahirfiquitiva.libs.kext.extensions.deleteEverything
 import jahirfiquitiva.libs.kext.extensions.hasContent
-import jahirfiquitiva.libs.kuper.data.models.KuperKomponent
+import jahirfiquitiva.libs.kuper.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.helpers.extensions.clean
 import jahirfiquitiva.libs.kuper.helpers.extensions.copyFromTo
 import jahirfiquitiva.libs.kuper.helpers.utils.KL
