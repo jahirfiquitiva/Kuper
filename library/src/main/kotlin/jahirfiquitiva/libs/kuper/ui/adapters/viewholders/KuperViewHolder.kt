@@ -31,9 +31,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
-import jahirfiquitiva.libs.frames.helpers.extensions.releaseFromGlide
 import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
-import jahirfiquitiva.libs.frames.helpers.utils.GlideRequestCallback
+import jahirfiquitiva.libs.frames.helpers.glide.FramesGlideListener
+import jahirfiquitiva.libs.frames.helpers.glide.releaseFromGlide
 import jahirfiquitiva.libs.kext.extensions.applyColorFilter
 import jahirfiquitiva.libs.kext.extensions.bind
 import jahirfiquitiva.libs.kext.extensions.drawable
@@ -84,8 +84,8 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
                 val man = manager ?: Glide.with(context)
                 man.load(File(rightPreview))
                     .apply(RequestOptions().priority(Priority.HIGH))
-                    .listener(object : GlideRequestCallback<Drawable>() {
-                        override fun onLoadSucceed(resource: Drawable): Boolean {
+                    .listener(object : FramesGlideListener<Drawable>() {
+                        override fun onLoadSucceed(resource: Drawable, model: Any?): Boolean {
                             progress?.gone()
                             return false
                         }
