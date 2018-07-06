@@ -63,6 +63,12 @@
         <license>Apache Software License 2.0</license>
     </notice>
     <notice>
+        <name>AhBottomNavigation</name>
+        <url>https://github.com/aurelhubert/ahbottomnavigation</url>
+        <copyright>Copyright (c) 2018 Aurelien Hubert</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
         <name>KPermissions</name>
         <url>https://github.com/Fondesa/KPermissions</url>
         <copyright>Copyright 2018 Giorgio Antonioli</copyright>
