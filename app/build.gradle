@@ -56,8 +56,8 @@ android {
         applicationId "jahirfiquitiva.apps.kuper.sample"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode 144
-        versionName "1.4.4"
+        versionCode 145
+        versionName "1.4.5"
         vectorDrawables.useSupportLibrary = true
         proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
         consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
@@ -92,7 +92,7 @@ android {
 
 dependencies {
     // Kuper
-    implementation('com.jahirfiquitiva:Kuper:1.4.4@aar') {
+    implementation('com.jahirfiquitiva:Kuper:1.4.5@aar') {
         transitive = true
     }
     // TODO: Remove comment marks to enable
