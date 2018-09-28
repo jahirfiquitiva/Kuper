@@ -33,7 +33,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
 import jahirfiquitiva.libs.frames.helpers.glide.FramesGlideListener
-import jahirfiquitiva.libs.frames.helpers.glide.releaseFromGlide
+import jahirfiquitiva.libs.frames.helpers.glide.clearFromGlide
 import jahirfiquitiva.libs.kext.extensions.applyColorFilter
 import jahirfiquitiva.libs.kext.extensions.bind
 import jahirfiquitiva.libs.kext.extensions.drawable
@@ -85,7 +85,11 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
                 man.load(File(rightPreview))
                     .apply(RequestOptions().priority(Priority.HIGH))
                     .listener(object : FramesGlideListener<Drawable>() {
-                        override fun onLoadSucceed(resource: Drawable, model: Any?): Boolean {
+                        override fun onLoadSucceed(
+                            resource: Drawable,
+                            model: Any?,
+                            isFirst: Boolean
+                                                  ): Boolean {
                             progress?.gone()
                             return false
                         }
@@ -101,7 +105,7 @@ class KuperViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     }
     
     fun unbind() {
-        preview?.releaseFromGlide()
+        preview?.clearFromGlide()
         progress?.visible()
     }
 }
