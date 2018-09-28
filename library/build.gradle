@@ -68,28 +68,46 @@ android {
 }
 
 dependencies {
+    def exclusions = {
+        exclude group: 'com.android.support'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-v4'
+        exclude group: 'com.google.code'
+        exclude group: 'org.jetbrains'
+        exclude group: 'android.arch.core'
+        exclude group: 'android.arch.lifecycle'
+        exclude group: 'android.arch.room'
+        exclude group: 'android.arch.persistence.room'
+        exclude group: 'android.arch.persistence'
+    }
     // Frames
     api(libraries.frames) {
         transitive = true
     }
     // Bottom Navigation
-    api(libraries.bottomNav) {
-        exclude group: 'com.android.support'
-    }
+    api libraries.bottomNav, exclusions
     // Kustom API
-    api(libraries.kustom) {
-        exclude group: 'com.android.support'
-        exclude group: 'com.github.bumptech.glide'
-    }
+    api libraries.kustom, exclusions
 }
 
-configurations {
-    all*.exclude module: 'constraint'
-    all*.exclude module: 'transition'
-    all*.exclude module: 'mediarouter-v7'
-    all*.exclude module: 'support-media-compat'
-    all*.exclude module: 'support-v4'
-    all*.exclude group: 'com.google.code'
+configurations.all {
+    exclude module: 'constraint'
+    exclude module: 'transition'
+    exclude module: 'mediarouter-v7'
+    exclude module: 'support-media-compat'
+    exclude module: 'support-v4'
+    exclude group: 'com.google.code'
+
+    resolutionStrategy {
+        force 'com.android.support:appcompat-v7:' + versions.supportLibs
+        force 'com.android.support:support-v4:' + versions.supportLibs
+        force 'android.arch.core:runtime:' + versions.arch
+        force 'android.arch.core:common:' + versions.arch
+        force 'android.arch.lifecycle:extensions:' + versions.arch
+        force 'android.arch.lifecycle:compiler:' + versions.arch
+        force 'android.arch.persistence.room:runtime:' + versions.arch
+        force 'android.arch.persistence.room:compiler:' + versions.arch
+    }
 }
 
 tasks.whenTaskAdded { task ->

@@ -29,7 +29,9 @@ ext.versions = [
         frames     : '2.5.2',
         bottomNav  : '2.2.0',
         oneSignal  : '3.10.1',
-        kustom     : 'b245924'
+        kustom     : 'b245924',
+        supportLibs: '28.0.0',
+        arch       : '1.1.1'
 ]
 
 ext.gradlePlugins = [
