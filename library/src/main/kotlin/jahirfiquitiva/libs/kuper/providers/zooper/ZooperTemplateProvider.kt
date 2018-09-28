@@ -28,8 +28,9 @@ open class ZooperTemplateProvider : ContentProvider() {
         if (paramUri.pathSegments.size > 0)
             try {
                 if (context == null) return null
-                val name = paramUri.path.substring(1)
-                return context.assets.openFd(name)
+                val name = paramUri.path?.substring(1)
+                name ?: return null
+                return context?.assets?.openFd(name)
             } catch (e: Exception) {
                 return null
             }
@@ -43,11 +44,15 @@ open class ZooperTemplateProvider : ContentProvider() {
         val cursor = MatrixCursor(arrayOf("string"))
         try {
             if (context == null) return cursor
-            val path = paramUri.path.substring(1)
-            val items = context.assets.list(path)
-            for (s in items) {
-                cursor.newRow().add(s)
-                cursor.moveToNext()
+            val path = paramUri.path?.substring(1)
+            path?.let {
+                val items = context?.assets?.list(it)
+                items?.let {
+                    for (s in it) {
+                        cursor.newRow().add(s)
+                        cursor.moveToNext()
+                    }
+                }
             }
             cursor.moveToFirst()
         } catch (e: Exception) {
