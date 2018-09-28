@@ -17,19 +17,19 @@ ext.versions = [
         // Projects
         minSdk     : 16,
         targetSdk  : 28,
-        buildTools : '28.0.1',
+        buildTools : '28.0.3',
         // Gradle Plugins
-        gradle     : '3.1.4',
-        kotlin     : '1.2.60',
+        gradle     : '3.2.0',
+        kotlin     : '1.2.71',
         libs       : '2.1',
         // App Versions:
-        versionCode: 146,
-        versionName: '1.4.6',
+        versionCode: 147,
+        versionName: '1.4.7',
         // Dependencies
-        frames     : '2.5.1',
+        frames     : '2.5.2',
         bottomNav  : '2.2.0',
-        oneSignal  : '3.9.3',
-        kustom     : '9cb7d8d'
+        oneSignal  : '3.10.1',
+        kustom     : 'b245924'
 ]
 
 ext.gradlePlugins = [
@@ -46,5 +46,5 @@ ext.libraries = [
         // OneSignal
         oneSignal: 'com.onesignal:OneSignal:' + versions.oneSignal,
         // Kustom API
-        kustom   : 'com.jahirfiquitiva:KustomAPI:-SNAPSHOT'
+        kustom   : 'com.jahirfiquitiva.KustomAPI:api:' + versions.kustom
 ]
