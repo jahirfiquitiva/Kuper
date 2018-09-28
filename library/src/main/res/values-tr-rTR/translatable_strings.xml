@@ -22,10 +22,10 @@
   <string name="required_apps">Gerekli uygulamalar</string>
   <string name="assets">Varlıklar</string>
   <string name="required_for_templates">Dahil edilen şablonları kullanmak için gerekli</string>
-  <string name="required_for_widgets">Dahil edilen araçları kullanmak için gerekli</string>
-  <string name="required_for_wallpapers">Dahil edilen duvar kağıtlarını kullamak için gerekli</string>
+  <string name="required_for_widgets">Widget\'lari kullanmak için gerekli</string>
+  <string name="required_for_wallpapers">Duvar kağıtlarını kullanmak için gerekli</string>
   <string name="required_for_lockscreens">Dahil edilen kilit ekranlarını kullanmak için gerekli</string>
-  <string name="required_assets">Şablonların düzgün çalışması için gereken varlıklar</string>
+  <string name="required_assets">Şablonların düzgün çalışması için gereken araçlar</string>
   <string name="install">Yükle</string>
   <string name="app_not_installed">Gerekli uygulama yüklü değil</string>
   <string name="template">Şablon</string>
@@ -33,7 +33,7 @@
   <string name="x_templates">%1$s Şablonları</string>
   <string name="assets_installed">Varlıklar zaten yüklü</string>
   <string name="apps_installed">Uygulamalar zaten yüklü</string>
-  <string name="copying_assets">Dosyalar ZooperWidget/%1$s\'e kopyalanıyor</string>
+  <string name="copying_assets">Dosyalar ZooperWidget/%1$s konumuna kopyalanıyor</string>
   <string name="copied_assets_successfully">Varlıklar başarıyla kopyalandı</string>
   <string name="copied_assets_error">Varlıkları kopyalanırken beklenmeyen bir hata oluştu</string>
   <string name="permission_request_assets">%1$s varlıkları yüklemek için saklama alanına erişmek gerekiyor</string>
