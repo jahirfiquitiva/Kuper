@@ -87,7 +87,7 @@ dependencies {
     // Bottom Navigation
     api libraries.bottomNav, exclusions
     // Kustom API
-    api libraries.kustom, exclusions
+    // api libraries.kustom, exclusions
 }
 
 configurations.all {
