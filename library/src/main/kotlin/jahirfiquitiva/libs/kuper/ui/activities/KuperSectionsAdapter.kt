@@ -31,7 +31,7 @@ internal class KuperSectionsAdapter(
     DynamicFragmentsPagerAdapter(manager) {
     
     private val wallpapersSection: Int
-        get() = if (withSetup) 3 else 2
+        get() = if (withSetup) 2 else 1
     
     private val kuperSection: Int
         get() = if (withSetup) 1 else 0
