@@ -46,7 +46,6 @@ import jahirfiquitiva.libs.kext.extensions.primaryColor
 import jahirfiquitiva.libs.kext.extensions.setItemVisibility
 import jahirfiquitiva.libs.kext.extensions.string
 import jahirfiquitiva.libs.kext.extensions.tint
-import jahirfiquitiva.libs.kext.ui.fragments.adapters.FragmentsPagerAdapter
 import jahirfiquitiva.libs.kext.ui.widgets.CustomSearchView
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.extensions.inAssetsAndWithContent
@@ -71,6 +70,8 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     private var searchView: CustomSearchView? = null
     
     private val pager: PseudoViewPager? by bind(R.id.pager)
+    private var pagerAdapter: KuperSectionsAdapter? = null
+    
     private var currentItemId = 0
     private var withSetup = true
     
@@ -120,19 +121,12 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
             getCurrentFragment()?.onDestroy()
         } catch (e: Exception) {
         }
-        (pager?.adapter as? FragmentsPagerAdapter)?.let {
-            try {
-                for (i in 0 until it.count) it.removeItemAt(i)
-            } catch (e: Exception) {
-            }
-        }
-        pager?.adapter = null
-        val adapt = FragmentsPagerAdapter(supportFragmentManager)
-        if (withSetup) adapt.addFragment(SetupFragment())
-        adapt.addFragment(KuperFragment())
-        adapt.addFragment(WallpapersFragment.create(getLicenseChecker() != null))
-        pager?.adapter = adapt
-        pager?.offscreenPageLimit = pager?.adapter?.count ?: 2
+        pagerAdapter = KuperSectionsAdapter(
+            supportFragmentManager,
+            withSetup,
+            string(R.string.json_url).hasContent(),
+            getLicenseChecker() != null)
+        pager?.adapter = pagerAdapter
     }
     
     private fun setupBottomNavigation() {
@@ -233,8 +227,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
                 invalidateOptionsMenu()
                 true
             } else {
-                val activeFragment =
-                    (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
+                val activeFragment = pagerAdapter?.get(pager?.currentItem ?: -1)
                 (activeFragment as? SetupFragment)?.scrollToTop()
                 (activeFragment as? KuperFragment)?.scrollToTop()
                 (activeFragment as? WallpapersFragment)?.scrollToTop()
@@ -267,8 +260,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     private fun doSearch(filter: String = "", closed: Boolean = false) {
         synchronized(lock) {
             postDelayed(200) {
-                val activeFragment =
-                    (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
+                val activeFragment = pagerAdapter?.get(pager?.currentItem ?: -1)
                 if (activeFragment is KuperFragment) {
                     activeFragment.applyFilter(filter, closed)
                 } else if (activeFragment is BaseFramesFragment<*, *>) {
@@ -280,9 +272,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     }
     
     private fun refreshContent() {
-        val activeFragment =
-            (pager?.adapter as? FragmentsPagerAdapter)?.get(pager?.currentItem ?: -1)
-        (activeFragment as? WallpapersFragment)?.reloadData(1)
+        (pagerAdapter?.get(pager?.currentItem ?: -1) as? WallpapersFragment)?.reloadData(1)
     }
     
     fun installAssets() {
@@ -302,8 +292,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
                 cancelable(false)
             }
             dialog?.setOnShowListener {
-                CopyAssetsTask(
-                    WeakReference(this), s, {
+                CopyAssetsTask(WeakReference(this), s) {
                     if (it) count += 1
                     destroyDialog()
                     if (index == actualFolders.size - 1) {
@@ -314,12 +303,12 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
                             Snackbar.LENGTH_LONG)
                         if (count == actualFolders.size) {
                             (getCurrentFragment() as? SetupFragment)?.loadDataFromViewModel() ?: {
-                                ((pager?.adapter as? FragmentsPagerAdapter)?.get(
+                                (pagerAdapter?.get(
                                     currentItemId) as? SetupFragment)?.loadDataFromViewModel()
                             }()
                         }
                     }
-                }).execute()
+                }.execute()
             }
             dialog?.show()
         }
