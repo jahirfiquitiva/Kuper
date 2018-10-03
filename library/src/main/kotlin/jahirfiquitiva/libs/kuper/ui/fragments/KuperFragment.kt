@@ -29,7 +29,7 @@ import ca.allanwang.kau.utils.setPaddingBottom
 import ca.allanwang.kau.utils.toast
 import com.bumptech.glide.Glide
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
-import jahirfiquitiva.libs.archhelpers.extensions.lazyViewModel
+import jahirfiquitiva.libs.archhelpers.extensions.getViewModel
 import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.helpers.extensions.mdDialog
@@ -41,12 +41,12 @@ import jahirfiquitiva.libs.kext.extensions.hasContent
 import jahirfiquitiva.libs.kext.extensions.int
 import jahirfiquitiva.libs.kext.extensions.isLowRamDevice
 import jahirfiquitiva.libs.kuper.R
-import jahirfiquitiva.libs.kuper.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.helpers.utils.KL
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.ZOOPER_PACKAGE
+import jahirfiquitiva.libs.kuper.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.providers.viewmodels.KuperViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
 import jahirfiquitiva.libs.kuper.ui.adapters.KuperAdapter
@@ -56,11 +56,9 @@ import jahirfiquitiva.libs.kuper.ui.decorations.SectionedGridSpacingDecoration
 @Suppress("DEPRECATION")
 class KuperFragment : ViewModelFragment<KuperKomponent>() {
     
-    private val kuperViewModel: KuperViewModel by lazyViewModel()
-    
+    private var kuperViewModel: KuperViewModel? = null
     private var recyclerView: EmptyViewRecyclerView? = null
     private var fastScroller: RecyclerFastScroller? = null
-    
     private var kuperAdapter: KuperAdapter? = null
     
     private val wallpaper: Drawable? by lazy {
@@ -124,23 +122,19 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 fastScroller?.attachRecyclerView(this)
             }
         }
-        
-        recyclerView?.state = EmptyViewRecyclerView.State.LOADING
-        
-        postDelayed(5) { loadDataFromViewModel() }
     }
     
     fun applyFilter(filter: String = "", closed: Boolean = false) {
         if (filter.hasContent()) {
             recyclerView?.setEmptyImage(R.drawable.no_results)
             recyclerView?.setEmptyText(R.string.search_no_results)
-            kuperAdapter?.setItems(ArrayList(kuperViewModel.getData().orEmpty()).jfilter {
+            kuperAdapter?.setItems(ArrayList(kuperViewModel?.getData().orEmpty()).jfilter {
                 it.name.contains(filter, true) || it.type.toString().contains(filter, true)
             })
         } else {
             recyclerView?.setEmptyImage(R.drawable.empty_section)
             recyclerView?.setEmptyText(R.string.empty_section)
-            kuperAdapter?.setItems(ArrayList(kuperViewModel.getData().orEmpty()))
+            kuperAdapter?.setItems(ArrayList(kuperViewModel?.getData().orEmpty()))
         }
         if (!closed)
             scrollToTop()
@@ -179,22 +173,22 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
         }
     }
     
-    override fun loadDataFromViewModel() {
-        activity?.let { kuperViewModel.loadData(it) }
+    override fun initViewModels() {
+        kuperViewModel = getViewModel()
     }
     
-    override fun autoStartLoad() = false
+    override fun loadDataFromViewModel() {
+        activity?.let { kuperViewModel?.loadData(it) }
+    }
+    
+    override fun autoStartLoad() = true
     
     override fun registerObservers() {
-        kuperViewModel.observe(this) {
+        kuperViewModel?.observe(this) {
             recyclerView?.state = EmptyViewRecyclerView.State.NORMAL
             kuperAdapter?.setItems(it)
             (activity as? KuperActivity)?.destroyDialog()
         }
-    }
-    
-    override fun unregisterObservers() {
-        kuperViewModel.destroy(this)
     }
     
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

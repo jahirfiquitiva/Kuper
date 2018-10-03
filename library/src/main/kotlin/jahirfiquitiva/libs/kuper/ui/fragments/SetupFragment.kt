@@ -22,7 +22,7 @@ import ca.allanwang.kau.utils.dpToPx
 import ca.allanwang.kau.utils.openLink
 import ca.allanwang.kau.utils.setPaddingBottom
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
-import jahirfiquitiva.libs.archhelpers.extensions.lazyViewModel
+import jahirfiquitiva.libs.archhelpers.extensions.getViewModel
 import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
@@ -42,11 +42,9 @@ import java.lang.ref.WeakReference
 @Suppress("DEPRECATION")
 class SetupFragment : ViewModelFragment<KuperApp>() {
     
-    private val appsModel: SetupViewModel by lazyViewModel()
-    
+    private var appsModel: SetupViewModel? = null
     private var recyclerView: EmptyViewRecyclerView? = null
     private var fastScroller: RecyclerFastScroller? = null
-    
     private var setupAdapter: SetupAdapter? = null
     
     fun scrollToTop() {
@@ -81,11 +79,7 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
             }
             
             fastScroller?.attachRecyclerView(recyclerView)
-            
-            recyclerView.state = EmptyViewRecyclerView.State.LOADING
         }
-        
-        recyclerView?.state = EmptyViewRecyclerView.State.LOADING
         loadDataFromViewModel()
     }
     
@@ -104,25 +98,24 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
         }
     }
     
+    override fun initViewModels() {
+        appsModel = getViewModel()
+    }
+    
     override fun loadDataFromViewModel() {
-        appsModel.loadData(ctxt, true)
+        appsModel?.loadData(ctxt, true)
     }
     
     override fun autoStartLoad() = true
     
     override fun registerObservers() {
-        appsModel.observe(
-            this, {
+        appsModel?.observe(this) {
             if (it.isEmpty()) {
                 (activity as? KuperActivity)?.hideSetup()
             } else {
                 setupAdapter?.updateApps(it)
             }
-        })
-    }
-    
-    override fun unregisterObservers() {
-        appsModel.destroy(this)
+        }
     }
     
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
