@@ -31,4 +31,9 @@
   <string name="templates">টেমপ্লেটসমূহ</string>
   <string name="x_templates">%1$s টেমপ্লেট</string>
   <string name="assets_installed">সহযোগী ফাইল ইন্সটল হয়ে গেছে</string>
+  <string name="apps_installed">অ্যাপ ইন্সটল হয়ে গেছে</string>
+  <string name="copying_assets">ফাইল কপি হচ্ছে ZooperWidget/%1$s</string>
+  <string name="copied_assets_successfully">সফলভাবে সহযোগী ফাইলসমূহ কপি হয়ে গেছে</string>
+  <string name="copied_assets_error">একটি অপ্রত্যাশিত ত্রুটি হল যখন সহযোগী ফাইলসমূহ কপি করা হচ্ছিল</string>
+  <string name="permission_request_assets">%1$s এর স্টোরেজ ব্যবহার করার ক্ষমতা প্রয়োজন সহযোগী ফাইলসমূহ ইন্সটল করার জন্য</string>
 </resources>
