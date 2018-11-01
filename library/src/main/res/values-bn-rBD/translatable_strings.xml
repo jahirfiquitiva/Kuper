@@ -23,9 +23,12 @@
   <string name="required_for_templates">অন্তর্ভুক্ত টেমপ্লেট ব্যবহার করা আবশ্যক</string>
   <string name="required_for_widgets">অন্তর্ভুক্ত করা উইজেট ব্যবহার করা আবশ্যক</string>
   <string name="required_for_wallpapers">অন্তর্ভুক্ত করা ওয়ালপেপার ব্যবহার করা আবশ্যক</string>
+  <string name="required_for_lockscreens">অন্তর্ভুক্ত করা লক্ স্ক্রিন ব্যবহার করার জন্যে আবশ্যক</string>
+  <string name="required_assets">টেমপ্লেট যথাযথভাবে কাজ করার জন্য সহযোগী ফাইল জরুরি</string>
   <string name="install">ইনস্টল করুন</string>
   <string name="app_not_installed">প্রয়োজনীয় অ্যাপ্লিকেশন ইনস্টল করা নেই</string>
   <string name="template">টেমপ্লেট</string>
   <string name="templates">টেমপ্লেটসমূহ</string>
   <string name="x_templates">%1$s টেমপ্লেট</string>
+  <string name="assets_installed">সহযোগী ফাইল ইন্সটল হয়ে গেছে</string>
 </resources>
