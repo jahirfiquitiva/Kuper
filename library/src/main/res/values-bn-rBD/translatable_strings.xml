@@ -16,6 +16,7 @@
   ~ limitations under the License.
   -->
 <resources>
+  <string name="kuper_dashboard">কুপার ড্যাশবোর্ড</string>
   <string name="setup">সেটআপ</string>
   <string name="widgets">উইজেট</string>
   <string name="required_apps">প্রয়োজনীয় অ্যাপস</string>
