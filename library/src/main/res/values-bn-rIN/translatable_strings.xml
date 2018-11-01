@@ -15,4 +15,28 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources></resources>
+<resources>
+  <string name="kuper_dashboard">কুপার ড্যাশবোর্ড</string>
+  <string name="setup">সেট আপ</string>
+  <string name="widgets">উইজেট সমূহ</string>
+  <string name="required_apps">প্রয়োজনীয় অ্যাপ সমূহ</string>
+  <string name="assets">সহযোগী ফাইলসমূহ</string>
+  <string name="required_for_templates">অন্তর্ভুক্ত টেমপ্লেট ব্যবহার করার জন্যে আবশ্যক</string>
+  <string name="required_for_widgets">অন্তর্ভুক্ত করা উইজেট সমূহ ব্যবহার করার জন্যে আবশ্যক</string>
+  <string name="required_for_wallpapers">অন্তর্ভুক্ত করা ওয়ালপেপার ব্যবহার করার জন্যে আবশ্যক</string>
+  <string name="required_for_lockscreens">অন্তর্ভুক্ত করা লক্ স্ক্রিন ব্যবহার করার জন্যে আবশ্যক</string>
+  <string name="required_assets">টেমপ্লেট যথাযথভাবে কাজ করার জন্য সহযোগী ফাইলসমূহ জরুরি</string>
+  <string name="install">ইনস্টল করুন</string>
+  <string name="app_not_installed">প্রয়োজনীয় অ্যাপ্লিকেশন ইনস্টল করা নেই</string>
+  <string name="template">টেমপ্লেট</string>
+  <string name="templates">টেমপ্লেটসমূহ</string>
+  <string name="x_templates">%1$s টেমপ্লেট</string>
+  <string name="assets_installed">সহযোগী ফাইল ইন্সটল হয়ে গেছে</string>
+  <string name="apps_installed">অ্যাপ সমূহ ইন্সটল হয়ে গেছে</string>
+  <string name="copying_assets">ফাইল কপি হচ্ছে ZooperWidget/%1$s</string>
+  <string name="copied_assets_successfully">সফলভাবে সহযোগী ফাইলসমূহ কপি হয়ে গেছে</string>
+  <string name="copied_assets_error">একটি অপ্রত্যাশিত ত্রুটি হল যখন সহযোগী ফাইলসমূহ কপি করা হচ্ছিল</string>
+  <string name="permission_request_assets">%1$s এর স্টোরেজ ব্যবহার করার ক্ষমতা প্রয়োজন সহযোগী ফাইলসমূহ ইন্সটল করার জন্য</string>
+  <string name="permission_request_wallpaper">%1$s এর স্টোরেজ ব্যবহার করার ক্ষমতা প্রয়োজন আপনাকে আপনার ওয়ালপেপার ও উইজেট প্রদর্শন করানোর জন্য</string>
+  <string name="open_komponents">Komponent যুক্ত করার জন্যে, Kustom খুলে টুলবার এর + চিহ্নতে প্রেস্ করুন, তারপর Komponent -এ প্রেস্ করার পর এই প্যাকটি নির্বাচন করুন ।</string>
+</resources>
