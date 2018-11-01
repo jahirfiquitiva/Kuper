@@ -22,8 +22,8 @@
   <string name="required_apps">প্রয়োজনীয় অ্যাপ সমূহ</string>
   <string name="assets">সহযোগী ফাইলসমূহ</string>
   <string name="required_for_templates">অন্তর্ভুক্ত টেমপ্লেট ব্যবহার করার জন্যে আবশ্যক</string>
-  <string name="required_for_widgets">অন্তর্ভুক্ত করা উইজেট ব্যবহার করা আবশ্যক</string>
-  <string name="required_for_wallpapers">অন্তর্ভুক্ত করা ওয়ালপেপার ব্যবহার করা আবশ্যক</string>
+  <string name="required_for_widgets">অন্তর্ভুক্ত করা উইজেট সমূহ ব্যবহার করার জন্যে আবশ্যক</string>
+  <string name="required_for_wallpapers">অন্তর্ভুক্ত করা ওয়ালপেপার ব্যবহার করার জন্যে আবশ্যক</string>
   <string name="required_for_lockscreens">অন্তর্ভুক্ত করা লক্ স্ক্রিন ব্যবহার করার জন্যে আবশ্যক</string>
   <string name="required_assets">টেমপ্লেট যথাযথভাবে কাজ করার জন্য সহযোগী ফাইল জরুরি</string>
   <string name="install">ইনস্টল করুন</string>
