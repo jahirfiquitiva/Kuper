@@ -15,9 +15,9 @@
  */
 package jahirfiquitiva.libs.kuper.ui.adapters.viewholders
 
-import android.support.v7.widget.AppCompatButton
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import jahirfiquitiva.libs.kext.extensions.accentColor
 import jahirfiquitiva.libs.kext.extensions.bind

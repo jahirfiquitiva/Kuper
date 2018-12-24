@@ -15,15 +15,15 @@
  */
 package jahirfiquitiva.libs.kuper.ui.fragments
 
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ca.allanwang.kau.utils.dpToPx
 import ca.allanwang.kau.utils.openLink
 import ca.allanwang.kau.utils.setPaddingBottom
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.archhelpers.extensions.getViewModel
-import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
 import jahirfiquitiva.libs.kext.extensions.context
@@ -32,6 +32,7 @@ import jahirfiquitiva.libs.kext.extensions.getAppName
 import jahirfiquitiva.libs.kext.extensions.hasContent
 import jahirfiquitiva.libs.kext.extensions.isInPortraitMode
 import jahirfiquitiva.libs.kext.extensions.isLowRamDevice
+import jahirfiquitiva.libs.kext.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.providers.viewmodels.SetupViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
@@ -67,8 +68,7 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
                 setLoadingText(R.string.loading_section)
                 
                 val layoutManager = GridLayoutManager(
-                    context, if (ctxt.isInPortraitMode) 1 else 2,
-                    GridLayoutManager.VERTICAL, false)
+                    context, if (ctxt.isInPortraitMode) 1 else 2, RecyclerView.VERTICAL, false)
                 
                 setupAdapter = SetupAdapter(WeakReference(ctxt)) { onItemClicked(it, false) }
                 setupAdapter?.setLayoutManager(layoutManager)

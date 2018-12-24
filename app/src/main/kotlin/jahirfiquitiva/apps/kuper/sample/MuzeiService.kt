@@ -15,7 +15,6 @@
  */
 package jahirfiquitiva.apps.kuper.sample
 
-import jahirfiquitiva.libs.frames.data.services.FramesArtSource
+import jahirfiquitiva.libs.frames.data.services.FramesArtProvider
 
-// TODO: Use a unique name instead of MyKuperMuzeiService
-class MuzeiService : FramesArtSource("MyKuperMuzeiService")
+class MuzeiService : FramesArtProvider()

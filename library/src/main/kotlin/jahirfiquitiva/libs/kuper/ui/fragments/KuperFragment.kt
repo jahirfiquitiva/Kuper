@@ -19,9 +19,10 @@ import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ca.allanwang.kau.utils.dpToPx
 import ca.allanwang.kau.utils.openLink
 import ca.allanwang.kau.utils.postDelayed
@@ -30,7 +31,6 @@ import ca.allanwang.kau.utils.toast
 import com.bumptech.glide.Glide
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.archhelpers.extensions.getViewModel
-import jahirfiquitiva.libs.archhelpers.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.helpers.extensions.mdDialog
 import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
@@ -40,6 +40,7 @@ import jahirfiquitiva.libs.kext.extensions.dimenPixelSize
 import jahirfiquitiva.libs.kext.extensions.hasContent
 import jahirfiquitiva.libs.kext.extensions.int
 import jahirfiquitiva.libs.kext.extensions.isLowRamDevice
+import jahirfiquitiva.libs.kext.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.helpers.utils.KL
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
@@ -94,12 +95,10 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 setLoadingText(R.string.loading_section)
                 
                 val spanCount = context.int(R.integer.kuper_previews_columns)
-                val gridLayout = object : GridLayoutManager(
-                    context, spanCount,
-                    GridLayoutManager.VERTICAL,
-                    false) {
-                    override fun supportsPredictiveItemAnimations(): Boolean = false
-                }
+                val gridLayout =
+                    object : GridLayoutManager(context, spanCount, RecyclerView.VERTICAL, false) {
+                        override fun supportsPredictiveItemAnimations(): Boolean = false
+                    }
                 
                 kuperAdapter = KuperAdapter(context?.let { Glide.with(it) }) {
                     launchIntentFor(it)
@@ -112,8 +111,7 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 kuperAdapter?.updateSectionTitles(context)
                 addItemDecoration(
                     SectionedGridSpacingDecoration(
-                        spanCount,
-                        context.dimenPixelSize(R.dimen.wallpapers_grid_spacing), true,
+                        spanCount, context.dimenPixelSize(R.dimen.wallpapers_grid_spacing), true,
                         kuperAdapter))
                 adapter = kuperAdapter
                 
@@ -165,8 +163,8 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 if (item.type == KuperKomponent.Type.KOMPONENT) {
                     contxt.mdDialog {
                         title(R.string.komponents)
-                        content(R.string.open_komponents)
-                        positiveText(android.R.string.ok)
+                        message(R.string.open_komponents)
+                        positiveButton(android.R.string.ok)
                     }.show()
                 }
             }()

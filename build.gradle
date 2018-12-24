@@ -19,8 +19,11 @@ apply from: './dependencies.gradle'
 buildscript {
     apply from: './dependencies.gradle'
     repositories {
+        google()
         jcenter()
-        maven { url 'https://maven.google.com' }
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url "https://dl.bintray.com/drummer-aidan/maven/" }
     }
     dependencies {
         classpath gradlePlugins.android
@@ -37,10 +40,11 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         jcenter()
         mavenCentral()
         maven { url 'https://jitpack.io' }
-        maven { url 'https://maven.google.com' }
+        maven { url "https://dl.bintray.com/drummer-aidan/maven/" }
     }
 }
 

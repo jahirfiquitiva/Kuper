@@ -15,8 +15,8 @@
  */
 package jahirfiquitiva.libs.kuper.ui.activities
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import jahirfiquitiva.libs.kext.ui.fragments.adapters.DynamicFragmentsPagerAdapter
 import jahirfiquitiva.libs.kuper.ui.fragments.KuperFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.SetupFragment

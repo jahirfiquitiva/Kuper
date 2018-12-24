@@ -97,17 +97,6 @@ configurations.all {
     exclude module: 'support-media-compat'
     exclude module: 'support-v4'
     exclude group: 'com.google.code'
-
-    resolutionStrategy {
-        force 'com.android.support:appcompat-v7:' + versions.supportLibs
-        force 'com.android.support:support-v4:' + versions.supportLibs
-        force 'android.arch.core:runtime:' + versions.arch
-        force 'android.arch.core:common:' + versions.arch
-        force 'android.arch.lifecycle:extensions:' + versions.arch
-        force 'android.arch.lifecycle:compiler:' + versions.arch
-        force 'android.arch.persistence.room:runtime:' + versions.arch
-        force 'android.arch.persistence.room:compiler:' + versions.arch
-    }
 }
 
 tasks.whenTaskAdded { task ->
