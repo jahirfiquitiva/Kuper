@@ -20,7 +20,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KLCK_PICKER
 import jahirfiquitiva.libs.kuper.helpers.utils.KLWP_PACKAGE

@@ -22,9 +22,9 @@ import ca.allanwang.kau.utils.inflate
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import com.bumptech.glide.RequestManager
-import jahirfiquitiva.libs.archhelpers.ui.adapters.presenters.ListAdapterPresenter
 import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
 import jahirfiquitiva.libs.frames.ui.adapters.viewholders.SectionedHeaderViewHolder
+import jahirfiquitiva.libs.kext.ui.adapters.presenters.ListAdapterPresenter
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.models.KuperKomponent
 import jahirfiquitiva.libs.kuper.ui.adapters.viewholders.KuperViewHolder
@@ -106,9 +106,7 @@ class KuperAdapter(
     
     fun getHeadersBeforePosition(position: Int): Int {
         var headers = 0
-        (0 until position)
-            .filter { isHeader(it) }
-            .forEach { headers += 1 }
+        for (it in (0 until position).filter { isHeader(it) }) headers += 1
         return headers
     }
     

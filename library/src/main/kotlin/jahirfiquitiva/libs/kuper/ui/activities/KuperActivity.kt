@@ -19,14 +19,14 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.IntRange
-import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.IntRange
 import ca.allanwang.kau.utils.postDelayed
 import ca.allanwang.kau.utils.visibleIf
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
+import com.google.android.material.snackbar.Snackbar
 import jahirfiquitiva.libs.frames.helpers.extensions.mdDialog
 import jahirfiquitiva.libs.frames.helpers.extensions.showChanges
 import jahirfiquitiva.libs.frames.ui.activities.base.BaseFramesActivity
@@ -61,7 +61,7 @@ import java.lang.ref.WeakReference
 
 abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     
-    override val configs: KuperKonfigs by lazy { KuperKonfigs(this) }
+    override val prefs: KuperKonfigs by lazy { KuperKonfigs(this) }
     
     private val toolbar: CustomToolbar? by bind(R.id.toolbar)
     private val bottomNavigation: AHBottomNavigation? by bind(R.id.bottom_navigation)
@@ -287,9 +287,9 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
             val dialogContent =
                 string(R.string.copying_assets, CopyAssetsTask.getCorrectFolderName(s))
             dialog = mdDialog {
-                content(dialogContent)
-                progress(true, 0)
+                message(text = dialogContent)
                 cancelable(false)
+                cancelOnTouchOutside(false)
             }
             dialog?.setOnShowListener {
                 CopyAssetsTask(WeakReference(this), s) {
