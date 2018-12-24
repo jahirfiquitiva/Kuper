@@ -20,7 +20,7 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.11.2'
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.12.1'
     }
 }
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
@@ -56,8 +56,8 @@ android {
         applicationId "jahirfiquitiva.apps.kuper.sample"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode 150
-        versionName "1.5.0"
+        versionCode 160
+        versionName "1.6.0"
         vectorDrawables.useSupportLibrary = true
         proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
         consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
@@ -92,7 +92,7 @@ android {
 
 dependencies {
     // Kuper
-    implementation('com.jahirfiquitiva:Kuper:1.5.0@aar') {
+    implementation('com.jahirfiquitiva:Kuper:1.6.0@aar') {
         transitive = true
     }
     // TODO: Remove comment marks to enable
