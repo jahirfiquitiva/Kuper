@@ -19,16 +19,16 @@ ext.versions = [
         targetSdk  : 28,
         buildTools : '28.0.3',
         // Gradle Plugins
-        gradle     : '3.2.1',
-        kotlin     : '1.3.11',
+        gradle     : '3.3.2',
+        kotlin     : '1.3.21',
         libs       : '2.1',
         // App Versions:
-        versionCode: 162,
-        versionName: '1.6.2',
+        versionCode: 163,
+        versionName: '1.6.3',
         // Dependencies
-        frames     : '2.6.1',
-        bottomNav  : '2.3.3',
-        oneSignal  : '3.10.5',
+        frames     : '2.6.4',
+        bottomNav  : '2.3.4',
+        oneSignal  : '3.10.7',
         kustom     : '2846916'
 ]
 

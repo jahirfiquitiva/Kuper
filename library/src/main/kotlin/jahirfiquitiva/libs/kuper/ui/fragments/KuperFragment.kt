@@ -31,8 +31,8 @@ import ca.allanwang.kau.utils.toast
 import com.bumptech.glide.Glide
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller
 import jahirfiquitiva.libs.archhelpers.extensions.getViewModel
+import jahirfiquitiva.libs.archhelpers.extensions.mdDialog
 import jahirfiquitiva.libs.frames.helpers.extensions.jfilter
-import jahirfiquitiva.libs.frames.helpers.extensions.mdDialog
 import jahirfiquitiva.libs.frames.helpers.extensions.tilesColor
 import jahirfiquitiva.libs.frames.helpers.utils.PLAY_STORE_LINK_PREFIX
 import jahirfiquitiva.libs.frames.ui.widgets.EmptyViewRecyclerView
@@ -161,11 +161,11 @@ class KuperFragment : ViewModelFragment<KuperKomponent>() {
                 }
             } ?: {
                 if (item.type == KuperKomponent.Type.KOMPONENT) {
-                    contxt.mdDialog {
+                    activity?.mdDialog {
                         title(R.string.komponents)
                         message(R.string.open_komponents)
                         positiveButton(android.R.string.ok)
-                    }.show()
+                    }?.show()
                 }
             }()
         }

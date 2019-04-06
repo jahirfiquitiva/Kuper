@@ -14,7 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="zooper_widget">Zooper Widget Pro</string>
     <string name="kwgt">KWGT</string>
     <string name="klwp">KLWP</string>
