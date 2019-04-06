@@ -27,8 +27,10 @@
     <string name="required_for_lockscreens">需要使用内置的锁屏</string>
     <string name="required_assets">模板正常工作所需的资源</string>
     <string name="install">安装</string>
+    <string name="app_not_installed">未安装所需应用程序</string>
     <string name="template">模板</string>
     <string name="templates">模板</string>
+    <string name="x_templates">%1$s 个范例</string>
     <string name="assets_installed">资源已经安装</string>
     <string name="apps_installed">应用程序已经安装</string>
     <string name="copying_assets">正在将文件复制到 ZooperWidget/%1$s</string>
