@@ -38,4 +38,5 @@
     <string name="copied_assets_error">एसेट्स कॉपी करते वक्त एक अनअपेक्षित घटना घट गई</string>
     <string name="permission_request_assets">%1$s को आपकी स्टोरेज की आवश्यकता है ताकि वह एसेट्स इंस्टॉल कर पाए</string>
     <string name="permission_request_wallpaper">%1$s विगेट्स पूर्वावलोकन में अपना वॉलपेपर दिखाने में सक्षम होने के लिए संग्रहण की पहुंच की आवश्यकता है</string>
+    <string name="open_komponents">कंपोनेंट ऐड करने के लिए, कस्टम खोले और + ऐडीटर टूलबार दबाएं, उसके बाद कंपोनेंट खोजे ओर चुनिऐ</string>
 </resources>
