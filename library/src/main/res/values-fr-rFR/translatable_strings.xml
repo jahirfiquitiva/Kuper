@@ -16,27 +16,27 @@
   ~ limitations under the License.
   -->
 <resources>
-  <string name="kuper_dashboard">Tableau de bord Kuper</string>
-  <string name="setup">Le programme d\'installation</string>
-  <string name="widgets">Widgets</string>
-  <string name="required_apps">Applications requises</string>
-  <string name="assets">Ressources</string>
-  <string name="required_for_templates">Requis d’utiliser des modèles inclus</string>
-  <string name="required_for_widgets">Requis pour utiliser les widgets inclus</string>
-  <string name="required_for_wallpapers">Requis pour utiliser les fonds d\'écran inclus</string>
-  <string name="required_for_lockscreens">Requis pour utiliser les écrans de verrouillage inclus</string>
-  <string name="required_assets">Ressources requises pour que le travail fonctionne correctement</string>
-  <string name="install">Installer</string>
-  <string name="app_not_installed">L\'application nécessaire n\'est pas installé</string>
-  <string name="template">Modèle de document</string>
-  <string name="templates">Modèle des documents</string>
-  <string name="x_templates">%1$s Thèmes</string>
-  <string name="assets_installed">Matériels déjà installés</string>
-  <string name="apps_installed">Applications déjà installées</string>
-  <string name="copying_assets">Copie des fichiers à ZooperWidget /%1$s</string>
-  <string name="copied_assets_successfully">Fichier copié avec succès</string>
-  <string name="copied_assets_error">Une erreur inattendue s’est produite lors de la copie des éléments d’actif ( matériels )</string>
-  <string name="permission_request_assets">%1$s requiert l’accès au stockage afin d’être en mesure d’installer les matériels</string>
-  <string name="permission_request_wallpaper">%1$s requiert l\'accès au stockage pour pouvoir montrer votre fond d\'écran en avant-premières des widgets</string>
-  <string name="open_komponents">Afin d’ajouter un Komponent, ouvrez Kustom et puis appuyez sur le symbole + sur l’éditeur de barre d’outils, puis sélectionnez Komponent et trouver ce pack.</string>
+    <string name="kuper_dashboard">Tableau de bord Kuper</string>
+    <string name="setup">Le programme d\'installation</string>
+    <string name="widgets">Widgets</string>
+    <string name="required_apps">Applications requises</string>
+    <string name="assets">Ressources</string>
+    <string name="required_for_templates">Requis d’utiliser des modèles inclus</string>
+    <string name="required_for_widgets">Requis pour utiliser les widgets inclus</string>
+    <string name="required_for_wallpapers">Requis pour utiliser les fonds d\'écran inclus</string>
+    <string name="required_for_lockscreens">Requis pour utiliser les écrans de verrouillage inclus</string>
+    <string name="required_assets">Ressources requises pour que le travail fonctionne correctement</string>
+    <string name="install">Installer</string>
+    <string name="app_not_installed">L\'application nécessaire n\'est pas installé</string>
+    <string name="template">Modèle de document</string>
+    <string name="templates">Modèle des documents</string>
+    <string name="x_templates">%1$s Thèmes</string>
+    <string name="assets_installed">Matériels déjà installés</string>
+    <string name="apps_installed">Applications déjà installées</string>
+    <string name="copying_assets">Copie des fichiers à ZooperWidget /%1$s</string>
+    <string name="copied_assets_successfully">Fichier copié avec succès</string>
+    <string name="copied_assets_error">Une erreur inattendue s’est produite lors de la copie des éléments d’actif ( matériels )</string>
+    <string name="permission_request_assets">%1$s requiert l’accès au stockage afin d’être en mesure d’installer les matériels</string>
+    <string name="permission_request_wallpaper">%1$s requiert l\'accès au stockage pour pouvoir montrer votre fond d\'écran en avant-premières des widgets</string>
+    <string name="open_komponents">Afin d’ajouter un Komponent, ouvrez Kustom et puis appuyez sur le symbole + sur l’éditeur de barre d’outils, puis sélectionnez Komponent et trouver ce pack.</string>
 </resources>
