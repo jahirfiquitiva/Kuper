@@ -100,7 +100,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     
     private fun setupContent(withSetup: Boolean = true) {
         this.withSetup = withSetup
-        postDelayed(50) {
+        postDelayed(75) {
             setupBottomNavigation()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 requestStoragePermission(
