@@ -30,6 +30,7 @@ import androidx.viewpager.widget.ViewPager
 import ca.allanwang.kau.utils.gone
 import ca.allanwang.kau.utils.visible
 import jahirfiquitiva.libs.kuper.helpers.utils.KL
+import kotlin.math.abs
 
 class PseudoViewPager : ViewPager {
     
@@ -58,9 +59,13 @@ class PseudoViewPager : ViewPager {
     override fun executeKeyEvent(event: KeyEvent) = false
     
     override fun setAdapter(adapter: PagerAdapter?) {
-        super.setAdapter(adapter)
-        adapter?.let {
-            if (it.count <= 5) offscreenPageLimit = it.count
+        try {
+            super.setAdapter(adapter)
+            adapter?.let {
+                if (it.count <= 5) offscreenPageLimit = it.count
+            }
+        } catch (e: Exception) {
+            KL.e("Error setting adapter", e)
         }
     }
     
@@ -119,7 +124,7 @@ class PseudoViewPager : ViewPager {
         }
     }
     
-    private class FadeTransformer : ViewPager.PageTransformer {
+    private class FadeTransformer : PageTransformer {
         override fun transformPage(page: View, position: Float) {
             if (position <= -1.0F || position >= 1.0F) {
                 page.translationX = page.width * position
@@ -129,7 +134,7 @@ class PseudoViewPager : ViewPager {
                 page.alpha = 1.0F
             } else {
                 page.translationX = page.width * -position
-                page.alpha = 1.0F - Math.abs(position)
+                page.alpha = 1.0F - abs(position)
             }
         }
     }

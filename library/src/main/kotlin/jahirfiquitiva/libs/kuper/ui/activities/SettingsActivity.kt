@@ -23,5 +23,5 @@ import jahirfiquitiva.libs.kuper.ui.fragments.SettingsFragment
 class SettingsActivity : SettingsActivity() {
     override val prefs: KuperKonfigs by lazy { KuperKonfigs(this) }
     override fun settingsFragment(): Fragment = SettingsFragment()
-    override fun getTranslationSite(): String = "http://j.mp/Trnsl8Kuper"
+    override fun getTranslationSite(): String = "https://crowdin.com/project/Kuper/"
 }

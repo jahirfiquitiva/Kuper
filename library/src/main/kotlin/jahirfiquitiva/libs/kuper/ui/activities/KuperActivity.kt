@@ -58,6 +58,7 @@ import jahirfiquitiva.libs.kuper.ui.fragments.SetupFragment
 import jahirfiquitiva.libs.kuper.ui.fragments.WallpapersFragment
 import jahirfiquitiva.libs.kuper.ui.widgets.PseudoViewPager
 import java.lang.ref.WeakReference
+import java.util.Locale
 
 abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     
@@ -104,7 +105,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
             setupBottomNavigation()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 requestStoragePermission(
-                    getString(R.string.permission_request_wallpaper, getAppName()).orEmpty()) {
+                    getString(R.string.permission_request_wallpaper, getAppName())) {
                     if (!kuperKonfigs.permissionRequested) {
                         kuperKonfigs.permissionRequested = true
                         setupBottomNavigation()
@@ -126,7 +127,11 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
             withSetup,
             string(R.string.json_url).hasContent(),
             getLicenseChecker() != null)
-        pager?.adapter = pagerAdapter
+        try {
+            pager?.adapter = pagerAdapter
+        } catch (e: Exception) {
+            KL.e("Error setting pager adapter in KuperActivity", e)
+        }
     }
     
     private fun setupBottomNavigation() {
@@ -186,7 +191,7 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
             
             val hint = bottomNavigation?.getItem(currentItemId)?.getTitle(this).orEmpty()
             searchView?.queryHint =
-                if (hint.hasContent()) getString(R.string.search_x, hint.toLowerCase())
+                if (hint.hasContent()) getString(R.string.search_x, hint.toLowerCase(Locale.ROOT))
                 else string(R.string.search)
             
             searchView?.tint(getPrimaryTextColorFor(primaryColor, 0.6F))
@@ -200,18 +205,15 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
         return super.onCreateOptionsMenu(menu)
     }
     
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        item?.let {
-            val id = it.itemId
-            when (id) {
-                R.id.refresh -> refreshContent()
-                R.id.changelog -> showChanges()
-                R.id.about -> startActivity(Intent(this, CreditsActivity::class.java))
-                R.id.settings ->
-                    startActivityForResult(Intent(this, SettingsActivity::class.java), 22)
-                R.id.donate -> doDonation()
-                android.R.id.home -> finish()
-            }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.refresh -> refreshContent()
+            R.id.changelog -> showChanges()
+            R.id.about -> startActivity(Intent(this, CreditsActivity::class.java))
+            R.id.settings ->
+                startActivityForResult(Intent(this, SettingsActivity::class.java), 22)
+            R.id.donate -> doDonation()
+            android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -240,17 +242,17 @@ abstract class KuperActivity : BaseFramesActivity<KuperKonfigs>() {
     }
     
     @SuppressLint("MissingSuperCall")
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.putInt("current", currentItemId)
-        outState?.putBoolean("withSetup", withSetup)
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("current", currentItemId)
+        outState.putBoolean("withSetup", withSetup)
         super.onSaveInstanceState(outState)
     }
     
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         invalidateOptionsMenu()
-        currentItemId = savedInstanceState?.getInt("current", 0) ?: 0
-        withSetup = savedInstanceState?.getBoolean("withSetup", false) ?: false
+        currentItemId = savedInstanceState.getInt("current", 0)
+        withSetup = savedInstanceState.getBoolean("withSetup", false)
         initPagerAdapter()
         bottomNavigation?.currentItem = currentItemId
         navigateToItem(currentItemId, true)

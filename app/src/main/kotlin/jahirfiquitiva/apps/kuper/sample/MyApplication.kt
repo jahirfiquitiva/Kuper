@@ -15,12 +15,12 @@
  */
 package jahirfiquitiva.apps.kuper.sample
 
-import android.app.Application
+import jahirfiquitiva.libs.kuper.KuperApp
 
 // TODO: Remove comment marks to enable
 // import com.onesignal.OneSignal
 
-class MyApplication : Application() {
+class MyApplication : KuperApp() {
     override fun onCreate() {
         super.onCreate()
         // TODO: Remove comment marks to enable

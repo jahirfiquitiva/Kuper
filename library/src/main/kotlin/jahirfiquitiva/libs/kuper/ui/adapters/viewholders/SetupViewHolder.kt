@@ -27,7 +27,7 @@ import jahirfiquitiva.libs.kext.extensions.primaryTextColor
 import jahirfiquitiva.libs.kext.extensions.secondaryTextColor
 import jahirfiquitiva.libs.kext.ui.widgets.MaterialIconView
 import jahirfiquitiva.libs.kuper.R
-import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
+import jahirfiquitiva.libs.kuper.ui.adapters.ReqKuperApp
 
 class SetupViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     private val title: TextView? by itemView.bind(R.id.app_name)
@@ -35,7 +35,7 @@ class SetupViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     private val button: AppCompatButton? by itemView.bind(R.id.install_button)
     private val icon: MaterialIconView? by itemView.bind(R.id.icon)
     
-    fun bind(app: KuperApp, listener: (KuperApp) -> Unit) =
+    fun bind(app: ReqKuperApp, listener: (ReqKuperApp) -> Unit) =
         with(itemView) {
             title?.setTextColor(context.primaryTextColor)
             title?.text = app.name

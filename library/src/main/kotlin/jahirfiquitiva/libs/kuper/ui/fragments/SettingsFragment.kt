@@ -15,14 +15,15 @@
  */
 package jahirfiquitiva.libs.kuper.ui.fragments
 
-import android.preference.PreferenceCategory
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import jahirfiquitiva.libs.frames.ui.fragments.SettingsFragment
 
 open class SettingsFragment : SettingsFragment() {
     override fun initPreferences() {
         super.initPreferences()
         val storagePrefs = findPreference("storage_settings") as? PreferenceCategory
-        val dbPref = findPreference("clear_database")
+        val dbPref = findPreference<Preference>("clear_database")
         if (dbPref != null) storagePrefs?.removePreference(dbPref)
     }
 }

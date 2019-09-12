@@ -36,12 +36,12 @@ import jahirfiquitiva.libs.kext.ui.fragments.ViewModelFragment
 import jahirfiquitiva.libs.kuper.R
 import jahirfiquitiva.libs.kuper.providers.viewmodels.SetupViewModel
 import jahirfiquitiva.libs.kuper.ui.activities.KuperActivity
-import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
+import jahirfiquitiva.libs.kuper.ui.adapters.ReqKuperApp
 import jahirfiquitiva.libs.kuper.ui.adapters.SetupAdapter
 import java.lang.ref.WeakReference
 
 @Suppress("DEPRECATION")
-class SetupFragment : ViewModelFragment<KuperApp>() {
+class SetupFragment : ViewModelFragment<ReqKuperApp>() {
     
     private var appsModel: SetupViewModel? = null
     private var recyclerView: EmptyViewRecyclerView? = null
@@ -85,7 +85,7 @@ class SetupFragment : ViewModelFragment<KuperApp>() {
     
     override fun getContentLayout(): Int = R.layout.section_layout
     
-    override fun onItemClicked(item: KuperApp, longClick: Boolean) {
+    override fun onItemClicked(item: ReqKuperApp, longClick: Boolean) {
         if (item.packageName.hasContent()) {
             context { it.openLink(PLAY_STORE_LINK_PREFIX + item.packageName) }
         } else {

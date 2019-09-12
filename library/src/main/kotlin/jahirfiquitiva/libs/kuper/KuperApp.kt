@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Jahir Fiquitiva
+ * Copyright (c) 2019. Jahir Fiquitiva
  *
  * Licensed under the CreativeCommons Attribution-ShareAlike
  * 4.0 International License. You may not use this file except in compliance
@@ -13,14 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jahirfiquitiva.libs.kuper.ui.activities
+package jahirfiquitiva.libs.kuper
 
-import jahirfiquitiva.libs.frames.ui.activities.CreditsActivity
-import jahirfiquitiva.libs.kuper.R
-import jahirfiquitiva.libs.kuper.helpers.utils.KuperKonfigs
+import androidx.multidex.MultiDexApplication
 
-class CreditsActivity : CreditsActivity() {
-    override val prefs: KuperKonfigs by lazy { KuperKonfigs(this) }
-    override fun getDashboardTitle(): Int = R.string.kuper_dashboard
-    override fun getTranslationSite(): String = "https://crowdin.com/project/Kuper/"
-}
+open class KuperApp : MultiDexApplication()

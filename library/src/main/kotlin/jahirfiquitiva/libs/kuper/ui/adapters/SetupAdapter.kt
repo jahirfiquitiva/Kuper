@@ -29,13 +29,13 @@ import java.lang.ref.WeakReference
 
 class SetupAdapter(
     private val context: WeakReference<Context>,
-    private val listener: (KuperApp) -> Unit
+    private val listener: (ReqKuperApp) -> Unit
                   ) :
     SectionedRecyclerViewAdapter<SectionedViewHolder>() {
     
-    private val apps = ArrayList<KuperApp>()
+    private val apps = ArrayList<ReqKuperApp>()
     
-    fun updateApps(apps: ArrayList<KuperApp>) {
+    fun updateApps(apps: ArrayList<ReqKuperApp>) {
         this.apps.clear()
         this.apps.addAll(apps)
         notifyDataSetChanged()
@@ -104,7 +104,9 @@ class SetupAdapter(
     override fun onBindFooterViewHolder(holder: SectionedViewHolder?, section: Int) {}
 }
 
-data class KuperApp(
-    val name: String, val desc: String, val icon: String,
+data class ReqKuperApp(
+    val name: String,
+    val desc: String,
+    val icon: String,
     val packageName: String = ""
-                   )
+                      )

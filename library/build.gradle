@@ -15,6 +15,7 @@
  */
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion versions.targetSdk
@@ -40,6 +41,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
         consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -48,6 +50,7 @@ android {
             shrinkResources false
             proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
             consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
+            multiDexKeepProguard file('proguard-rules.pro')
         }
     }
 
@@ -69,6 +72,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 
@@ -93,6 +100,8 @@ dependencies {
     api libraries.bottomNav, exclusions
     // Kustom API
     api libraries.kustom, exclusions
+    // Multidex
+    api libraries.multidex
 }
 
 configurations.all {

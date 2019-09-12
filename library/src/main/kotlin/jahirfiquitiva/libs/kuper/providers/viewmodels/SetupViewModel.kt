@@ -30,16 +30,16 @@ import jahirfiquitiva.libs.kuper.helpers.utils.KOLORETTE_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.KWGT_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.MEDIA_UTILS_PACKAGE
 import jahirfiquitiva.libs.kuper.helpers.utils.ZOOPER_PACKAGE
-import jahirfiquitiva.libs.kuper.ui.adapters.KuperApp
+import jahirfiquitiva.libs.kuper.ui.adapters.ReqKuperApp
 import java.io.File
 
-class SetupViewModel : ListViewModel<Context, KuperApp>() {
-    override fun internalLoad(param: Context): ArrayList<KuperApp> {
-        val apps = ArrayList<KuperApp>()
+class SetupViewModel : ListViewModel<Context, ReqKuperApp>() {
+    override fun internalLoad(param: Context): ArrayList<ReqKuperApp> {
+        val apps = ArrayList<ReqKuperApp>()
         
         if (!param.isAppInstalled(ZOOPER_PACKAGE) && "templates".inAssetsAndWithContent(param)) {
             apps.add(
-                KuperApp(
+                ReqKuperApp(
                     param.getString(R.string.zooper_widget),
                     param.getString(R.string.required_for_widgets),
                     "ic_zooper", ZOOPER_PACKAGE))
@@ -47,7 +47,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         
         if (!param.isAppInstalled(KWGT_PACKAGE) && "widgets".inAssetsAndWithContent(param)) {
             apps.add(
-                KuperApp(
+                ReqKuperApp(
                     param.getString(R.string.kwgt),
                     param.getString(R.string.required_for_widgets),
                     "ic_kustom", KWGT_PACKAGE))
@@ -55,7 +55,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         
         if (!param.isAppInstalled("$KWGT_PACKAGE.pro") && "widgets".inAssetsAndWithContent(param)) {
             apps.add(
-                KuperApp(
+                ReqKuperApp(
                     param.getString(R.string.kwgt_pro),
                     param.getString(R.string.required_for_widgets),
                     "ic_kustom", "$KWGT_PACKAGE.pro"))
@@ -63,7 +63,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         
         if (!param.isAppInstalled(KLWP_PACKAGE) && "wallpapers".inAssetsAndWithContent(param)) {
             apps.add(
-                KuperApp(
+                ReqKuperApp(
                     param.getString(R.string.klwp),
                     param.getString(R.string.required_for_wallpapers),
                     "ic_kustom", KLWP_PACKAGE))
@@ -72,7 +72,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         if (!param.isAppInstalled("$KLWP_PACKAGE.pro") && "wallpapers".inAssetsAndWithContent(
                 param)) {
             apps.add(
-                KuperApp(
+                ReqKuperApp(
                     param.getString(R.string.klwp_pro),
                     param.getString(R.string.required_for_wallpapers),
                     "ic_kustom", "$KLWP_PACKAGE.pro"))
@@ -80,7 +80,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         
         if (!param.isAppInstalled(KLCK_PACKAGE) && "lockscreens".inAssetsAndWithContent(param)) {
             apps.add(
-                KuperApp(
+                ReqKuperApp(
                     param.getString(R.string.klck),
                     param.getString(R.string.required_for_lockscreens),
                     "ic_kustom", KLCK_PACKAGE))
@@ -89,7 +89,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         if (!param.isAppInstalled("$KLCK_PACKAGE.pro") &&
             "lockscreens".inAssetsAndWithContent(param)) {
             apps.add(
-                KuperApp(
+                ReqKuperApp(
                     param.getString(R.string.klck_pro),
                     param.getString(R.string.required_for_lockscreens),
                     "ic_kustom", "$KLCK_PACKAGE.pro"))
@@ -98,7 +98,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         if (!param.isAppInstalled(MEDIA_UTILS_PACKAGE) &&
             param.boolean(R.bool.media_utils_required)) {
             apps.add(
-                KuperApp(
+                ReqKuperApp(
                     param.getString(R.string.media_utils),
                     param.getString(R.string.required_for_widgets),
                     "ic_zooper", MEDIA_UTILS_PACKAGE))
@@ -106,7 +106,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         
         if (!param.isAppInstalled(KOLORETTE_PACKAGE) && param.boolean(R.bool.kolorette_required)) {
             apps.add(
-                KuperApp(
+                ReqKuperApp(
                     param.getString(R.string.kolorette),
                     param.getString(R.string.required_for_templates),
                     "ic_color_palette", KOLORETTE_PACKAGE))
@@ -114,7 +114,7 @@ class SetupViewModel : ListViewModel<Context, KuperApp>() {
         
         if (!areAssetsInstalled(param)) {
             apps.add(
-                KuperApp(
+                ReqKuperApp(
                     param.getString(R.string.widgets),
                     param.getString(R.string.required_assets),
                     "ic_zooper"))
