@@ -12,11 +12,11 @@ Kuper
 A full-of-features, easy-to-customize, free and open source, light-weight, Android dashboard library to create widgets apps with Zooper widgets and/or Kustom assets (Widgets, Wallpapers and Komponents)
 
 <a target="_blank" href="http://j.mp/DLKuperAPK">
-<img src="https://jahirfiquitiva.com/share/download_sample.svg?maxAge=432000" width="200"/>
+<img src="https://jahir.dev/share/download_sample.svg?maxAge=432000" width="200"/>
 </a>
 
-<a target="_blank" href="https://jahirfiquitiva.com/donate/">
-<img src="https://jahirfiquitiva.com/share/support_my_work.svg?maxAge=432000" width="200"/>
+<a target="_blank" href="https://jahir.dev/donate/">
+<img src="https://jahir.dev/share/support_my_work.svg?maxAge=432000" width="200"/>
 </a>
 
 
@@ -118,7 +118,7 @@ Just join our community and make a post. We'll help you as soon as possible. [![
 
 # Developed by
 
-### [Jahir Fiquitiva](https://jahirfiquitiva.com/)
+### [Jahir Fiquitiva](https://jahir.dev/)
 
 [![Follow on GitHub](https://img.shields.io/github/followers/jahirfiquitiva.svg?style=social&label=Follow)](https://github.com/jahirfiquitiva)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jahirfiquitiva.svg?style=social)](https://twitter.com/jahirfiquitiva)
@@ -126,8 +126,8 @@ Just join our community and make a post. We'll help you as soon as possible. [![
 
 If you found this app/library helpful and want to thank me, you can:
 
-<a target="_blank" href="https://jahirfiquitiva.com/donate/">
-<img src="https://jahirfiquitiva.com/share/support_my_work.svg?maxAge=432000" width="200"/>
+<a target="_blank" href="https://jahir.dev/donate/">
+<img src="https://jahir.dev/share/support_my_work.svg?maxAge=432000" width="200"/>
 </a>
 
 **Thanks in advance!** :pray:
