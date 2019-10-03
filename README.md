@@ -121,7 +121,6 @@ Just join our community and make a post. We'll help you as soon as possible. [![
 
 [![Follow on GitHub](https://img.shields.io/github/followers/jahirfiquitiva.svg?style=social&label=Follow)](https://github.com/jahirfiquitiva)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jahirfiquitiva.svg?style=social)](https://twitter.com/jahirfiquitiva)
-[![Google+](https://img.shields.io/badge/Follow-Google%2B-ea4335.svg)](https://plus.google.com/+JahirFiquitivaR)
 
 If you found this app/library helpful and want to thank me, you can:
 
