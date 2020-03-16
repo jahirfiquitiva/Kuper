@@ -18,6 +18,7 @@ import dev.jahir.frames.ui.widgets.EmptyViewRecyclerView
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.Component
 import dev.jahir.kuper.extensions.hasStoragePermission
+import dev.jahir.kuper.ui.activities.KuperActivity
 import dev.jahir.kuper.ui.adapters.ComponentsAdapter
 import dev.jahir.kuper.ui.decorations.SectionedGridSpacingDecoration
 import dev.jahir.kuper.utils.KLCK_PACKAGE
@@ -66,6 +67,10 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
             componentsAdapter.wallpaper = wallpaper
         } catch (e: Exception) {
         }
+    }
+
+    override fun loadData() {
+        (activity as? KuperActivity)?.loadComponents()
     }
 
     private fun onClick(component: Component) {
