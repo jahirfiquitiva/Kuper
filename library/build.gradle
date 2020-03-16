@@ -1,59 +1,31 @@
-// TODO: Remove comment marks to enable
-/*
-buildscript {
-    repositories {
-        maven { url 'https://plugins.gradle.org/m2/' }
-    }
-
-    dependencies {
-        classpath Plugins.oneSignal
-    }
-}
-
-apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
-*/
-
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    signingConfigs {
-        release {
-            keyAlias 'frames'
-            keyPassword 'frames'
-            storeFile file('frames.jks')
-            storePassword 'frames'
-        }
-    }
-
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
-            outputFileName = defaultConfig.applicationId + "-v${variant.versionName}-${variant.name}.apk"
-        }
-    }
+    compileSdkVersion Versions.targetSdk
+    buildToolsVersion Versions.buildTools
 
     lintOptions {
         abortOnError false
         checkReleaseBuilds true
-        disable 'MissingTranslation', 'GoogleAppIndexingWarning'
+        warningsAsErrors true
+        disable 'MissingTranslation',
+                'GoogleAppIndexingWarning',
+                'UnusedResources',
+                'ContentDescription',
+                'RtlSymmetry',
+                'RtlHardcoded',
+                'RtlEnabled'
     }
 
-    compileSdkVersion Versions.targetSdk
-    buildToolsVersion Versions.buildTools
-
     defaultConfig {
-        manifestPlaceholders = [
-                onesignal_app_id               : OneSignal.appId,
-                onesignal_google_project_number: OneSignal.googleProjectNumber
-        ]
-        applicationId Kuper.appId
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
         versionCode Kuper.version
         versionName Kuper.versionName
-        vectorDrawables.useSupportLibrary = true
+        vectorDrawables.useSupportLibrary true
         proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
         consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
 
@@ -69,13 +41,9 @@ android {
 
     buildTypes {
         release {
-            debuggable false
-            zipAlignEnabled true
-            minifyEnabled true
-            shrinkResources false
+            minifyEnabled false
             proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
             consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 
@@ -102,7 +70,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':library')
-    // TODO: Remove comment marks to enable
-    // implementation Libs.oneSignal
+    api Libs.dependencies
 }
+
+apply from: '../lib-artifacts.gradle'

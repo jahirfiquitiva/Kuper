@@ -9,7 +9,7 @@ class MainActivity : FramesActivity() {
      * These things here have the default values. You can delete the ones you don't want to change
      * and/or modify the ones you want to.
      */
-    override val donationsEnabled = true
+    override val billingEnabled = true
 
     override fun amazonInstallsEnabled(): Boolean = false
     override fun checkLPF(): Boolean = true
@@ -29,6 +29,8 @@ class MainActivity : FramesActivity() {
      */
     override fun getLicenseChecker(): PiracyChecker? {
         destroyChecker() // Important
-        return if (BuildConfig.DEBUG) null else super.getLicenseChecker()
+        return null // Just for CI purposes
+        // return if (BuildConfig.DEBUG) null
+        // else super.getLicenseChecker()
     }
 }

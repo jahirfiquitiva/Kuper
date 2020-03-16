@@ -40,7 +40,7 @@ A full-of-features, easy-to-customize, free and open source, light-weight, Andro
 <img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/4.png" height="350"/>
 </p>
 
-### Wallpapers support (Based on [Frames](https://github.com/jahirfiquitiva/Frames))
+### Wallpapers support (Based on [Kuper](https://github.com/jahirfiquitiva/Kuper))
 <p align="center">
 <img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/5.png" height="350"/>
 <img src="https://github.com/jahirfiquitiva/Kuper/raw/master/art/6.png" height="350"/>
