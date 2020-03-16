@@ -12,7 +12,7 @@
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
 
         <activity
-            android:name=".ui.activities.SettingsActivity"
+            android:name=".ui.activities.KuperSettingsActivity"
             android:label="@string/settings">
             <intent-filter>
                 <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
