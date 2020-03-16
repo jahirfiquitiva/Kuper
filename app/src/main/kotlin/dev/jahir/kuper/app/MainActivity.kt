@@ -1,9 +1,9 @@
-package dev.jahir.frames.app
+package dev.jahir.kuper.app
 
 import com.github.javiersantos.piracychecker.PiracyChecker
-import dev.jahir.frames.ui.activities.FramesActivity
+import dev.jahir.kuper.ui.activities.KuperActivity
 
-class MainActivity : FramesActivity() {
+class MainActivity : KuperActivity() {
 
     /**
      * These things here have the default values. You can delete the ones you don't want to change

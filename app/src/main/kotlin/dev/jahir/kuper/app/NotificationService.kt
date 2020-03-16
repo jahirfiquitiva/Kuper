@@ -1,4 +1,4 @@
-package dev.jahir.frames.app
+package dev.jahir.kuper.app
 
 /* TODO: Remove comment marks to enable
 import com.onesignal.NotificationExtenderService

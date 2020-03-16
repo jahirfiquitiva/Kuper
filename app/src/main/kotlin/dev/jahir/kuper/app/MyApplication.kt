@@ -1,4 +1,4 @@
-package dev.jahir.frames.app
+package dev.jahir.kuper.app
 
 import dev.jahir.frames.ui.FramesApplication
 

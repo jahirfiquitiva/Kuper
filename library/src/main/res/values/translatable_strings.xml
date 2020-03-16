@@ -31,4 +31,6 @@
     <string name="permission_request_wallpaper">%1$s requires access to storage in order to be able to show your wallpaper in widgets previews</string>
 
     <string name="open_komponents">In order to add a Komponent, open Kustom and press + on the editor Toolbar, then select Komponent and find this pack.</string>
+
+    <string name="empty_section">Nothing found</string>
 </resources>
