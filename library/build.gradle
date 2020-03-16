@@ -70,6 +70,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api(Libs.frames) {
+        transitive = true
+    }
     api Libs.dependencies
 }
 

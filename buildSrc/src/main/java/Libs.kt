@@ -2,10 +2,14 @@
 
 object Libs {
     // Frames
-    private const val frames = "dev.jahir:Frames:${Versions.frames}@aar"
+    const val frames = "dev.jahir:Frames:${Versions.frames}@aar"
 
     // Kustom API
     private const val kustomApi = "dev.jahir.KustomAPI:api:${Versions.kustomApi}@aar"
 
-    val dependencies = arrayOf(frames, kustomApi)
+    // Lifecycle Scope
+    private const val lifecycleScope =
+        "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleScope}"
+
+    val dependencies = arrayOf(kustomApi, lifecycleScope)
 }

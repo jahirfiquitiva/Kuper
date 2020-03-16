@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="KuperButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/buttons_color</item>
+        <item name="rippleColor">@color/buttons_ripple_color</item>
+    </style>
+
+</resources>

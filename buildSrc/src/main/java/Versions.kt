@@ -16,8 +16,11 @@ object Versions {
     const val buildTools = "29.0.2"
 
     // Frames
-    const val frames = "3.0.2"
+    const val frames = "d171da1"
 
     // Kustom API
     const val kustomApi = "6369c37"
+
+    // Lifecycle Scope
+    const val lifecycleScope = "2.2.0"
 }
