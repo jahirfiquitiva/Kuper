@@ -43,6 +43,7 @@ abstract class KuperActivity : FramesActivity() {
             else -> super.getNextFragment(itemId)
         }
 
+    override fun canShowSearch(itemId: Int): Boolean = itemId != R.id.setup
     override fun canShowFavoritesButton(): Boolean = false
     override fun canModifyFavorites(): Boolean = false
 }
