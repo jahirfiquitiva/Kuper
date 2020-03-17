@@ -4,6 +4,7 @@
     <style name="KuperButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/buttons_color</item>
         <item name="rippleColor">@color/buttons_ripple_color</item>
+        <item name="android:textColor">?colorOnSecondary</item>
     </style>
 
 </resources>

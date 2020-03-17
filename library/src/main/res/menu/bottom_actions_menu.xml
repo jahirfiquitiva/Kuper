@@ -19,4 +19,9 @@
         android:orderInCategory="300"
         android:title="@string/apply"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/favorites"
+        android:title="@string/favorites"
+        android:visible="false"
+        app:showAsAction="never" />
 </menu>

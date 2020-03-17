@@ -4,31 +4,21 @@ import android.content.Context
 import dev.jahir.kuper.utils.CopyAssetsTask
 
 internal fun String.inAssetsAndWithContent(context: Context): Boolean {
-    val folders = context.assets.list("")
+    val folders = context.assets.list("").orEmpty()
     return try {
-        if (folders != null) {
-            if (folders.contains(this)) {
-                return getFilesInAssetsFolder(context).isNotEmpty()
-            } else false
+        if (folders.contains(this)) {
+            return getFilesInAssetsFolder(context).isNotEmpty()
         } else false
     } catch (e: Exception) {
         false
     }
 }
 
-internal fun String.getFilesInAssetsFolder(context: Context): ArrayList<String> {
-    val list = ArrayList<String>()
-    return try {
-        val files = context.assets.list(this)
-        if (files != null) {
-            if (files.isNotEmpty()) {
-                files.forEach {
-                    if (!CopyAssetsTask.filesToIgnore.contains(it)) list.add(it)
-                }
-            }
-        }
-        return list
+internal fun String.getFilesInAssetsFolder(context: Context): ArrayList<String> =
+    try {
+        ArrayList(
+            context.assets.list(this).orEmpty().filter { !CopyAssetsTask.filesToIgnore.contains(it) }
+        )
     } catch (e: Exception) {
-        ArrayList()
+        arrayListOf()
     }
-}

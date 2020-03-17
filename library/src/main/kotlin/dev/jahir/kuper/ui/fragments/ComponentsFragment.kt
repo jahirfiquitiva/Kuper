@@ -63,6 +63,10 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
 
     override fun onResume() {
         super.onResume()
+        updateDeviceWallpaper()
+    }
+
+    internal fun updateDeviceWallpaper() {
         try {
             componentsAdapter.wallpaper = wallpaper
         } catch (e: Exception) {

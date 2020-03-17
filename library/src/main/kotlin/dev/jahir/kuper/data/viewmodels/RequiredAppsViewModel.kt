@@ -57,7 +57,7 @@ class RequiredAppsViewModel : ViewModel() {
                     RequiredApp(
                         context.getString(R.string.zooper_widget),
                         context.getString(R.string.required_for_widgets),
-                        "ic_zooper", ZOOPER_PACKAGE
+                        R.drawable.ic_zooper, ZOOPER_PACKAGE
                     )
                 )
             }
@@ -68,7 +68,7 @@ class RequiredAppsViewModel : ViewModel() {
                     RequiredApp(
                         context.getString(R.string.kwgt),
                         context.getString(R.string.required_for_widgets),
-                        "ic_kustom", KWGT_PACKAGE
+                        R.drawable.ic_kustom, KWGT_PACKAGE
                     )
                 )
             }
@@ -79,7 +79,7 @@ class RequiredAppsViewModel : ViewModel() {
                     RequiredApp(
                         context.getString(R.string.kwgt_pro),
                         context.getString(R.string.required_for_widgets),
-                        "ic_kustom", "$KWGT_PACKAGE.pro"
+                        R.drawable.ic_kustom, "$KWGT_PACKAGE.pro"
                     )
                 )
             }
@@ -89,7 +89,7 @@ class RequiredAppsViewModel : ViewModel() {
                     RequiredApp(
                         context.getString(R.string.klwp),
                         context.getString(R.string.required_for_wallpapers),
-                        "ic_kustom", KLWP_PACKAGE
+                        R.drawable.ic_kustom, KLWP_PACKAGE
                     )
                 )
             }
@@ -100,7 +100,7 @@ class RequiredAppsViewModel : ViewModel() {
                     RequiredApp(
                         context.getString(R.string.klwp_pro),
                         context.getString(R.string.required_for_wallpapers),
-                        "ic_kustom", "$KLWP_PACKAGE.pro"
+                        R.drawable.ic_kustom, "$KLWP_PACKAGE.pro"
                     )
                 )
             }
@@ -111,7 +111,7 @@ class RequiredAppsViewModel : ViewModel() {
                     RequiredApp(
                         context.getString(R.string.klck),
                         context.getString(R.string.required_for_lockscreens),
-                        "ic_kustom", KLCK_PACKAGE
+                        R.drawable.ic_kustom, KLCK_PACKAGE
                     )
                 )
             }
@@ -122,7 +122,7 @@ class RequiredAppsViewModel : ViewModel() {
                     RequiredApp(
                         context.getString(R.string.klck_pro),
                         context.getString(R.string.required_for_lockscreens),
-                        "ic_kustom", "$KLCK_PACKAGE.pro"
+                        R.drawable.ic_kustom, "$KLCK_PACKAGE.pro"
                     )
                 )
             }
@@ -133,7 +133,7 @@ class RequiredAppsViewModel : ViewModel() {
                     RequiredApp(
                         context.getString(R.string.media_utils),
                         context.getString(R.string.required_for_widgets),
-                        "ic_zooper", MEDIA_UTILS_PACKAGE
+                        R.drawable.ic_zooper, MEDIA_UTILS_PACKAGE
                     )
                 )
             }
@@ -144,7 +144,7 @@ class RequiredAppsViewModel : ViewModel() {
                     RequiredApp(
                         context.getString(R.string.kolorette),
                         context.getString(R.string.required_for_templates),
-                        "ic_color_palette", KOLORETTE_PACKAGE
+                        R.drawable.ic_palette, KOLORETTE_PACKAGE
                     )
                 )
             }
@@ -154,7 +154,7 @@ class RequiredAppsViewModel : ViewModel() {
                     RequiredApp(
                         context.getString(R.string.widgets),
                         context.getString(R.string.required_assets),
-                        "ic_zooper"
+                        R.drawable.ic_zooper
                     )
                 )
             }

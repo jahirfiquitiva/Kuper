@@ -19,4 +19,14 @@
         android:orderInCategory="300"
         android:title="@string/wallpapers"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/collections"
+        android:title="@string/collections"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/favorites"
+        android:title="@string/favorites"
+        android:visible="false"
+        app:showAsAction="never" />
 </menu>
