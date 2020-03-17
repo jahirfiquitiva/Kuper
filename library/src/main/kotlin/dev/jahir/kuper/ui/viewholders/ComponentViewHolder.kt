@@ -1,5 +1,6 @@
 package dev.jahir.kuper.ui.viewholders
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -13,6 +14,7 @@ import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import dev.jahir.frames.extensions.context
 import dev.jahir.frames.extensions.findView
 import dev.jahir.frames.extensions.gone
+import dev.jahir.frames.extensions.lower
 import dev.jahir.frames.extensions.visibleIf
 import dev.jahir.frames.utils.tint
 import dev.jahir.kuper.R
@@ -28,6 +30,7 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     private val icon: AppCompatImageView? by itemView.findView(R.id.launch_app_button)
     private val progress: ProgressBar? by itemView.findView(R.id.component_progress)
 
+    @SuppressLint("DefaultLocale")
     fun bind(
         component: Component,
         wallpaper: Drawable?,
@@ -35,7 +38,7 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     ) {
         wall?.setImageDrawable(wallpaper)
         name?.text = component.name.replace("_", " ")
-        app?.text = component.type.toString()
+        app?.text = component.type.toString().lower().capitalize()
         icon?.visibleIf(component.hasIntent)
         if (icon?.isVisible == true) {
             icon?.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_open_app))

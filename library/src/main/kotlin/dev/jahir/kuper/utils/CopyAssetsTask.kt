@@ -13,7 +13,7 @@ import java.io.InputStream
 import java.io.OutputStream
 
 object CopyAssetsTask {
-
+    @Suppress("DEPRECATION")
     private suspend fun internalCopyAssets(context: Context, folder: String): Boolean =
         withContext(IO) {
             try {

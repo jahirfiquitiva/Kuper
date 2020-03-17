@@ -7,6 +7,7 @@ import dev.jahir.frames.extensions.lazyViewModel
 import dev.jahir.frames.ui.activities.FramesActivity
 import dev.jahir.frames.ui.fragments.CollectionsFragment
 import dev.jahir.frames.ui.fragments.WallpapersFragment
+import dev.jahir.frames.utils.postDelayed
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.viewmodels.ComponentsViewModel
 import dev.jahir.kuper.data.viewmodels.RequiredAppsViewModel
@@ -34,7 +35,6 @@ abstract class KuperActivity : FramesActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestStoragePermission()
         requiredAppsViewModel.observe(this) {
             if (it.isNotEmpty()) setupFragment.updateItems(it)
             else hideSetup()
@@ -42,6 +42,7 @@ abstract class KuperActivity : FramesActivity() {
         componentsViewModel.observe(this) { componentsFragment.updateItems(it) }
         loadRequiredApps()
         loadComponents()
+        postDelayed(100) { requestStoragePermission() }
     }
 
     private fun hideSetup() {

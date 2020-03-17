@@ -161,6 +161,7 @@ class RequiredAppsViewModel : ViewModel() {
             apps
         }
 
+    @Suppress("DEPRECATION")
     private fun areAssetsInstalled(context: Context): Boolean {
         val folders = arrayOf("fonts", "iconsets", "bitmaps")
         val actualFolders = ArrayList<String>()
