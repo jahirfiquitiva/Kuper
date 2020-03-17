@@ -29,14 +29,14 @@
 
         <TextView
             android:id="@+id/stat_title"
-            style="@style/TextAppearance.Frames.Subtitle2"
+            style="@style/TextStyle.Frames.Subtitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Zooper Widget Pro" />
 
         <TextView
             android:id="@+id/stat_description"
-            style="@style/TextAppearance.Frames.Caption"
+            style="@style/TextStyle.Frames.Caption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4sp"

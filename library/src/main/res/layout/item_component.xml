@@ -79,7 +79,7 @@
 
                 <TextView
                     android:id="@+id/component_name"
-                    style="@style/TextAppearance.Frames.WallpaperTitle"
+                    style="@style/TextStyle.Frames.WallpaperTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -88,7 +88,7 @@
 
                 <TextView
                     android:id="@+id/component_app"
-                    style="@style/TextAppearance.Frames.WallpaperSubtitle"
+                    style="@style/TextStyle.Frames.WallpaperSubtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
