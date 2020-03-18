@@ -5,9 +5,9 @@ Kuper
 
 ![API](https://img.shields.io/badge/API-16%2B-34bf49.svg)
 [![JitPack](https://jitpack.io/v/com.jahirfiquitiva/Kuper.svg)](https://jitpack.io/#com.jahirfiquitiva/Kuper)
-[![Build Status](https://travis-ci.org/jahirfiquitiva/Kuper.svg?branch=master)](https://travis-ci.org/jahirfiquitiva/Kuper)
+[![Build Status](https://travis-ci.com/jahirfiquitiva/Kuper.svg?branch=master)](https://travis-ci.com/jahirfiquitiva/Kuper)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d8cd40ec4cb400d9091d34026c904e7)](https://www.codacy.com/app/jahirfiquitiva/Kuper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jahirfiquitiva/Kuper&amp;utm_campaign=Badge_Grade)
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/Kuper/localized.svg)](http://j.mp/KuperTranslations)
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/Kuper/localized.svg)](https://crowdin.com/project/Kuper/invite)
 
 A full-of-features, easy-to-customize, free and open source, light-weight, Android dashboard library to create widgets apps with Zooper widgets and/or Kustom assets (Widgets, Wallpapers and Komponents)
 
@@ -99,7 +99,7 @@ dependencies {
     }
 }
 ```
-where `{latest version}` corresponds to published version in   [![JitPack](https://jitpack.io/v/jahirfiquitiva/Kuper.svg)](https://jitpack.io/#jahirfiquitiva/Kuper)
+where `{latest version}` corresponds to published version in   [![JitPack](https://jitpack.io/v/dev.jahir/Kuper.svg)](https://jitpack.io/#dev.jahir/Kuper)
 
 ## How to implement
 :page_with_curl: Everything you need to know can be found in the **[Wiki Docs](https://github.com/jahirfiquitiva/Kuper/wiki/)**
