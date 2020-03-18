@@ -72,6 +72,31 @@
                 android:resource="@xml/file_providers" />
         </provider>
 
+        <!-- TODO: Remove comment marks to enable Zooper
+        <provider
+                android:name=".ZooperProvider"
+                android:authorities="${applicationId}.zwprovider"
+                tools:ignore="ExportedContentProvider"/>
+        -->
+
+
+        <!-- TODO: Remove comment marks to enable Kustom Skins
+        * Remove intent-filter action lines according to your needs.
+		* If you're not going to provide one of the options, remove its respective line.
+        <provider
+                android:name="org.kustom.api.Provider"
+                android:authorities="${applicationId}.kustom.provider"
+                android:exported="true"
+                tools:ignore="ExportedContentProvider">
+            <intent-filter>
+                <action android:name="org.kustom.provider.WALLPAPERS"/>
+                <action android:name="org.kustom.provider.WIDGETS"/>
+                <action android:name="org.kustom.provider.KOMPONENTS"/>
+                <action android:name="org.kustom.provider.LOCKSCREENS"/>
+            </intent-filter>
+        </provider>
+        -->
+
         <!-- OneSignal Notifications Service -->
         <!-- TODO: Remove comment marks to enable
         <service
