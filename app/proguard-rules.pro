@@ -21,6 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class dev.jahir.frames.** { *; }
+-keep class dev.jahir.kuper.** { *; }
 
 -keep class com.google.**
 -keep class autovalue.shaded.com.google.**
