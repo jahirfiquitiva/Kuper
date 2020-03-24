@@ -8,9 +8,6 @@ import dev.jahir.frames.extensions.openLink
 import dev.jahir.frames.ui.activities.base.BaseLicenseCheckerActivity.Companion.PLAY_STORE_LINK_PREFIX
 import dev.jahir.frames.ui.activities.base.BaseStoragePermissionRequestActivity
 import dev.jahir.frames.ui.fragments.base.BaseFramesFragment
-import dev.jahir.frames.ui.widgets.EmptyView
-import dev.jahir.frames.ui.widgets.EmptyViewRecyclerView
-import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.RequiredApp
 import dev.jahir.kuper.ui.activities.KuperActivity
 import dev.jahir.kuper.ui.adapters.RequiredAppsAdapter
@@ -26,7 +23,6 @@ class SetupFragment : BaseFramesFragment<RequiredApp>() {
         recyclerView?.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter = requiredAppsAdapter
-        recyclerView?.state = EmptyViewRecyclerView.State.LOADING
     }
 
     override fun loadData() {
@@ -41,18 +37,9 @@ class SetupFragment : BaseFramesFragment<RequiredApp>() {
         }
     }
 
-    override fun onStateChanged(state: EmptyViewRecyclerView.State, emptyView: EmptyView?) {
-        super.onStateChanged(state, emptyView)
-        if (state == EmptyViewRecyclerView.State.EMPTY) {
-            emptyView?.setImageDrawable(R.drawable.ic_empty_section)
-            emptyView?.setEmpty(context?.getString(R.string.empty_section) ?: "")
-        }
-    }
-
     override fun getFilteredItems(
         originalItems: ArrayList<RequiredApp>,
-        filter: String,
-        closed: Boolean
+        filter: String
     ): ArrayList<RequiredApp> = originalItems
 
     override fun updateItemsInAdapter(items: ArrayList<RequiredApp>) {

@@ -13,8 +13,6 @@ import dev.jahir.frames.extensions.openLink
 import dev.jahir.frames.extensions.toast
 import dev.jahir.frames.ui.activities.base.BaseLicenseCheckerActivity.Companion.PLAY_STORE_LINK_PREFIX
 import dev.jahir.frames.ui.fragments.base.BaseFramesFragment
-import dev.jahir.frames.ui.widgets.EmptyView
-import dev.jahir.frames.ui.widgets.EmptyViewRecyclerView
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.Component
 import dev.jahir.kuper.extensions.hasStoragePermission
@@ -58,7 +56,6 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
         )
         componentsAdapter.wallpaper = wallpaper
         recyclerView?.adapter = componentsAdapter
-        recyclerView?.state = EmptyViewRecyclerView.State.LOADING
     }
 
     override fun onResume() {
@@ -107,18 +104,9 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
         }
     }
 
-    override fun onStateChanged(state: EmptyViewRecyclerView.State, emptyView: EmptyView?) {
-        super.onStateChanged(state, emptyView)
-        if (state == EmptyViewRecyclerView.State.EMPTY) {
-            emptyView?.setImageDrawable(R.drawable.ic_empty_section)
-            emptyView?.setEmpty(context?.getString(R.string.empty_section) ?: "")
-        }
-    }
-
     override fun getFilteredItems(
         originalItems: ArrayList<Component>,
-        filter: String,
-        closed: Boolean
+        filter: String
     ): ArrayList<Component> =
         ArrayList(originalItems.filter { it.name.lower().contains(filter.lower()) })
 
