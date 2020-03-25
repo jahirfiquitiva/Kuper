@@ -3,6 +3,7 @@ package dev.jahir.kuper.ui.activities
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.fondesa.kpermissions.PermissionStatus
+import dev.jahir.frames.extensions.getAppName
 import dev.jahir.frames.extensions.lazyViewModel
 import dev.jahir.frames.ui.activities.FramesActivity
 import dev.jahir.frames.ui.fragments.CollectionsFragment
@@ -70,6 +71,13 @@ abstract class KuperActivity : FramesActivity() {
         (currentFragment as? ComponentsFragment)?.updateDeviceWallpaper()
         loadRequiredApps()
     }
+
+    override fun getPermissionRationaleMessage(): String =
+        when (currentItemId) {
+            R.id.setup -> getString(R.string.permission_request_assets, getAppName())
+            R.id.widgets -> getString(R.string.permission_request_wallpaper, getAppName())
+            else -> super.getPermissionRationaleMessage()
+        }
 
     override fun canShowSearch(itemId: Int): Boolean = itemId != R.id.setup
     override fun canShowFavoritesButton(): Boolean = false
