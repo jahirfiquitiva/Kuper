@@ -6,8 +6,8 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.observe
 import androidx.lifecycle.viewModelScope
 import dev.jahir.frames.extensions.createIfDidNotExist
 import dev.jahir.frames.extensions.deleteEverything
@@ -40,17 +40,11 @@ class ComponentsViewModel : ViewModel() {
     }
 
     fun observe(owner: LifecycleOwner, onUpdated: (ArrayList<Component>) -> Unit = {}) {
-        componentsData.observe(owner) { onUpdated(it) }
+        componentsData.observe(owner, Observer { onUpdated(it) })
     }
 
     fun destroy(owner: LifecycleOwner) {
         componentsData.removeObservers(owner)
-    }
-
-    internal fun repost() {
-        val previousComponents = ArrayList(components)
-        componentsData.postValue(null)
-        componentsData.postValue(previousComponents)
     }
 
     private suspend fun internalLoadComponents(context: Context): ArrayList<Component> {

@@ -51,8 +51,6 @@ class SetupFragment : BaseFramesFragment<RequiredApp>() {
 
         @JvmStatic
         fun create(requiredApps: ArrayList<RequiredApp> = ArrayList()): SetupFragment =
-            SetupFragment().apply {
-                updateItemsInAdapter(requiredApps)
-            }
+            SetupFragment().apply { updateItemsInAdapter(requiredApps) }
     }
 }

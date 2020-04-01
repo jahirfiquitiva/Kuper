@@ -17,7 +17,8 @@ internal fun String.inAssetsAndWithContent(context: Context): Boolean {
 internal fun String.getFilesInAssetsFolder(context: Context): ArrayList<String> =
     try {
         ArrayList(
-            context.assets.list(this).orEmpty().filter { !CopyAssetsTask.filesToIgnore.contains(it) }
+            context.assets.list(this).orEmpty()
+                .filter { !CopyAssetsTask.filesToIgnore.contains(it) }
         )
     } catch (e: Exception) {
         arrayListOf()

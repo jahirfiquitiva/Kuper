@@ -8,7 +8,6 @@ import dev.jahir.frames.extensions.lazyViewModel
 import dev.jahir.frames.ui.activities.FramesActivity
 import dev.jahir.frames.ui.fragments.CollectionsFragment
 import dev.jahir.frames.ui.fragments.WallpapersFragment
-import dev.jahir.frames.utils.postDelayed
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.viewmodels.ComponentsViewModel
 import dev.jahir.kuper.data.viewmodels.RequiredAppsViewModel
@@ -47,16 +46,14 @@ abstract class KuperActivity : FramesActivity() {
 
         bottomNavigation?.setOnNavigationItemSelectedListener {
             val select = changeFragment(it.itemId)
-            if (it.itemId == R.id.widgets) {
-                componentsViewModel.repost()
-                postDelayed(10) { componentsFragment.updateItems(componentsViewModel.components) }
-            }
+            if (it.itemId == R.id.widgets)
+                componentsFragment.updateItems(componentsViewModel.components)
             select
         }
 
         loadRequiredApps()
         loadComponents()
-        postDelayed(100) { requestStoragePermission() }
+        requestStoragePermission()
     }
 
     override fun onDestroy() {

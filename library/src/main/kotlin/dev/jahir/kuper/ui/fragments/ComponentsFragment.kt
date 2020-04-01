@@ -61,6 +61,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
         componentsAdapter.setLayoutManager(gridLayoutManager)
         componentsAdapter.wallpaper = wallpaper
         recyclerView?.adapter = componentsAdapter
+        loadData()
     }
 
     override fun onResume() {
@@ -125,8 +126,6 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
 
         @JvmStatic
         fun create(components: ArrayList<Component> = ArrayList()): ComponentsFragment =
-            ComponentsFragment().apply {
-                updateItems(components)
-            }
+            ComponentsFragment().apply { updateItems(components) }
     }
 }
