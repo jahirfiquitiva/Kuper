@@ -50,6 +50,9 @@ class SetupFragment : BaseFramesFragment<RequiredApp>() {
         internal const val TAG = "RequiredAppsFragment"
 
         @JvmStatic
-        fun create(): SetupFragment = SetupFragment()
+        fun create(requiredApps: ArrayList<RequiredApp> = ArrayList()): SetupFragment =
+            SetupFragment().apply {
+                updateItemsInAdapter(requiredApps)
+            }
     }
 }

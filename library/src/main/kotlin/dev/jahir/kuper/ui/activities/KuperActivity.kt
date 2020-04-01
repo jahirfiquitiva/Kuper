@@ -21,11 +21,13 @@ abstract class KuperActivity : FramesActivity() {
     override val collectionsFragment: CollectionsFragment? = null
     override val favoritesFragment: WallpapersFragment? = null
 
-    private val componentsFragment: ComponentsFragment by lazy { ComponentsFragment.create() }
     private val componentsViewModel: ComponentsViewModel by lazyViewModel()
+    private val componentsFragment: ComponentsFragment by lazy {
+        ComponentsFragment.create(componentsViewModel.components)
+    }
 
-    private val setupFragment: SetupFragment by lazy { SetupFragment.create() }
     private val requiredAppsViewModel: RequiredAppsViewModel by lazyViewModel()
+    private val setupFragment: SetupFragment by lazy { SetupFragment.create(requiredAppsViewModel.apps) }
 
     override val wallpapersFragment: WallpapersFragment? by lazy {
         KuperWallpapersFragment.create(ArrayList(wallpapersViewModel.wallpapers))
@@ -36,14 +38,31 @@ abstract class KuperActivity : FramesActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         requiredAppsViewModel.observe(this) {
             if (it.isNotEmpty()) setupFragment.updateItems(it)
             else hideSetup()
         }
         componentsViewModel.observe(this) { componentsFragment.updateItems(it) }
+
+        bottomNavigation?.setOnNavigationItemSelectedListener {
+            val select = changeFragment(it.itemId)
+            if (it.itemId == R.id.widgets) {
+                componentsViewModel.repost()
+                postDelayed(10) { componentsFragment.updateItems(componentsViewModel.components) }
+            }
+            select
+        }
+
         loadRequiredApps()
         loadComponents()
         postDelayed(100) { requestStoragePermission() }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        componentsViewModel.destroy(this)
+        requiredAppsViewModel.destroy(this)
     }
 
     private fun hideSetup() {

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.observe
 import androidx.lifecycle.viewModelScope
+import dev.jahir.frames.extensions.createIfDidNotExist
 import dev.jahir.frames.extensions.deleteEverything
 import dev.jahir.frames.extensions.hasContent
 import dev.jahir.frames.extensions.lazyMutableLiveData
@@ -30,7 +31,8 @@ class ComponentsViewModel : ViewModel() {
     val components: ArrayList<Component>
         get() = ArrayList(componentsData.value.orEmpty())
 
-    fun loadComponents(context: Context) {
+    fun loadComponents(context: Context?) {
+        context ?: return
         viewModelScope.launch {
             val components = internalLoadComponents(context)
             componentsData.postValue(components)
@@ -45,14 +47,21 @@ class ComponentsViewModel : ViewModel() {
         componentsData.removeObservers(owner)
     }
 
-    private suspend fun internalLoadComponents(context: Context): ArrayList<Component> =
-        withContext(IO) {
+    internal fun repost() {
+        val previousComponents = ArrayList(components)
+        componentsData.postValue(null)
+        componentsData.postValue(previousComponents)
+    }
+
+    private suspend fun internalLoadComponents(context: Context): ArrayList<Component> {
+        return if (components.isNotEmpty()) ArrayList(components)
+        else withContext(IO) {
             val folders = arrayOf("templates", "komponents", "widgets", "lockscreens", "wallpapers")
             val components = ArrayList<Component>()
             val assets = context.assets
             val previewsFolder = File(context.externalCacheDir, "KuperPreviews")
             previewsFolder.deleteEverything()
-            previewsFolder.mkdirs()
+            previewsFolder.createIfDidNotExist()
             folders.forEachIndexed { index, folder ->
                 val files = assets.list(folder)
                 files?.forEach {
@@ -82,6 +91,7 @@ class ComponentsViewModel : ViewModel() {
             }
             components
         }
+    }
 
     private fun getWidgetPreviewsPathFromZip(
         name: String,

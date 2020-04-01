@@ -2,6 +2,7 @@ package dev.jahir.kuper.ui.fragments
 
 import android.annotation.SuppressLint
 import android.app.WallpaperManager
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
@@ -39,6 +40,11 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
             }
         }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        componentsAdapter.updateSectionTitles(context)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val columnsCount =
@@ -46,14 +52,13 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
         val gridLayoutManager =
             GridLayoutManager(context, columnsCount, GridLayoutManager.VERTICAL, false)
         recyclerView?.layoutManager = gridLayoutManager
-        componentsAdapter.updateSectionTitles(context)
-        componentsAdapter.setLayoutManager(gridLayoutManager)
         recyclerView?.addItemDecoration(
             SectionedGridSpacingDecoration(
                 columnsCount,
                 resources.getDimensionPixelSize(R.dimen.grids_spacing)
             )
         )
+        componentsAdapter.setLayoutManager(gridLayoutManager)
         componentsAdapter.wallpaper = wallpaper
         recyclerView?.adapter = componentsAdapter
     }
@@ -112,12 +117,16 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
 
     override fun updateItemsInAdapter(items: ArrayList<Component>) {
         componentsAdapter.components = items
+        recyclerView?.loading = false
     }
 
     companion object {
         internal const val TAG = "ComponentsFragment"
 
         @JvmStatic
-        fun create(): ComponentsFragment = ComponentsFragment()
+        fun create(components: ArrayList<Component> = ArrayList()): ComponentsFragment =
+            ComponentsFragment().apply {
+                updateItems(components)
+            }
     }
 }
