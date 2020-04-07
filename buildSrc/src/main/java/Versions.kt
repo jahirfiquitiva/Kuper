@@ -11,10 +11,10 @@ object Versions {
     const val oneSignal = "3.12.7"
 
     // App
-    const val minSdk = 16
+    const val minSdk = 21
     const val targetSdk = 29
     const val buildTools = "29.0.3"
 
     // Kuper
-    const val kuper = "2.0.6"
+    const val kuper = "2.0.7"
 }
