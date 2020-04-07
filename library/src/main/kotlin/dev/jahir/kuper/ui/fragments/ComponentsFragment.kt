@@ -7,7 +7,10 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
+import dev.jahir.frames.extensions.dimenPixelSize
+import dev.jahir.frames.extensions.dpToPx
 import dev.jahir.frames.extensions.hasContent
+import dev.jahir.frames.extensions.integer
 import dev.jahir.frames.extensions.lower
 import dev.jahir.frames.extensions.mdDialog
 import dev.jahir.frames.extensions.openLink
@@ -47,15 +50,14 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val columnsCount =
-            context?.resources?.getInteger(R.integer.wallpapers_columns_count) ?: 2
+        val columnsCount = context?.integer(R.integer.wallpapers_columns_count, 2) ?: 2
         val gridLayoutManager =
             GridLayoutManager(context, columnsCount, GridLayoutManager.VERTICAL, false)
         recyclerView?.layoutManager = gridLayoutManager
         recyclerView?.addItemDecoration(
             SectionedGridSpacingDecoration(
                 columnsCount,
-                resources.getDimensionPixelSize(R.dimen.grids_spacing)
+                context?.dimenPixelSize(R.dimen.grids_spacing, 8.dpToPx) ?: 8.dpToPx
             )
         )
         componentsAdapter.setLayoutManager(gridLayoutManager)
@@ -94,7 +96,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
                         else -> ""
                     }
                     if (itemPkg.hasContent()) {
-                        contxt.toast(contxt.getString(R.string.app_not_installed))
+                        contxt.toast(R.string.app_not_installed)
                         contxt.openLink(PLAY_STORE_LINK_PREFIX + itemPkg)
                     }
                 }

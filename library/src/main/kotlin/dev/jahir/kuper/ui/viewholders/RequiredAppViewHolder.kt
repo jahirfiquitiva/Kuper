@@ -4,9 +4,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.content.ContextCompat
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import dev.jahir.frames.extensions.context
+import dev.jahir.frames.extensions.drawable
 import dev.jahir.frames.extensions.findView
 import dev.jahir.frames.extensions.resolveColor
 import dev.jahir.frames.utils.tint
@@ -21,8 +21,7 @@ class RequiredAppViewHolder(itemView: View) : SectionedViewHolder(itemView) {
 
     fun bind(app: RequiredApp, listener: (RequiredApp) -> Unit) {
         icon?.setImageDrawable(
-            ContextCompat.getDrawable(context, app.icon)
-                ?.tint(context.resolveColor(R.attr.colorOnSurface))
+            context.drawable(app.icon)?.tint(context.resolveColor(R.attr.colorOnSurface))
         )
         title?.text = app.name
         description?.text = app.description

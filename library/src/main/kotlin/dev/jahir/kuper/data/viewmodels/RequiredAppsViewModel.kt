@@ -7,7 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.observe
 import androidx.lifecycle.viewModelScope
+import dev.jahir.frames.extensions.boolean
 import dev.jahir.frames.extensions.lazyMutableLiveData
+import dev.jahir.frames.extensions.string
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.RequiredApp
 import dev.jahir.kuper.extensions.getFilesInAssetsFolder
@@ -55,8 +57,8 @@ class RequiredAppsViewModel : ViewModel() {
                 && "templates".inAssetsAndWithContent(context)) {
                 apps.add(
                     RequiredApp(
-                        context.getString(R.string.zooper_widget),
-                        context.getString(R.string.required_for_widgets),
+                        context.string(R.string.zooper_widget),
+                        context.string(R.string.required_for_widgets),
                         R.drawable.ic_zooper, ZOOPER_PACKAGE
                     )
                 )
@@ -66,8 +68,8 @@ class RequiredAppsViewModel : ViewModel() {
                 && "widgets".inAssetsAndWithContent(context)) {
                 apps.add(
                     RequiredApp(
-                        context.getString(R.string.kwgt),
-                        context.getString(R.string.required_for_widgets),
+                        context.string(R.string.kwgt),
+                        context.string(R.string.required_for_widgets),
                         R.drawable.ic_kustom, KWGT_PACKAGE
                     )
                 )
@@ -77,8 +79,8 @@ class RequiredAppsViewModel : ViewModel() {
                 && "widgets".inAssetsAndWithContent(context)) {
                 apps.add(
                     RequiredApp(
-                        context.getString(R.string.kwgt_pro),
-                        context.getString(R.string.required_for_widgets),
+                        context.string(R.string.kwgt_pro),
+                        context.string(R.string.required_for_widgets),
                         R.drawable.ic_kustom, "$KWGT_PACKAGE.pro"
                     )
                 )
@@ -87,8 +89,8 @@ class RequiredAppsViewModel : ViewModel() {
             if (!context.isAppInstalled(KLWP_PACKAGE) && "wallpapers".inAssetsAndWithContent(context)) {
                 apps.add(
                     RequiredApp(
-                        context.getString(R.string.klwp),
-                        context.getString(R.string.required_for_wallpapers),
+                        context.string(R.string.klwp),
+                        context.string(R.string.required_for_wallpapers),
                         R.drawable.ic_kustom, KLWP_PACKAGE
                     )
                 )
@@ -98,8 +100,8 @@ class RequiredAppsViewModel : ViewModel() {
                 && "wallpapers".inAssetsAndWithContent(context)) {
                 apps.add(
                     RequiredApp(
-                        context.getString(R.string.klwp_pro),
-                        context.getString(R.string.required_for_wallpapers),
+                        context.string(R.string.klwp_pro),
+                        context.string(R.string.required_for_wallpapers),
                         R.drawable.ic_kustom, "$KLWP_PACKAGE.pro"
                     )
                 )
@@ -109,8 +111,8 @@ class RequiredAppsViewModel : ViewModel() {
                 && "lockscreens".inAssetsAndWithContent(context)) {
                 apps.add(
                     RequiredApp(
-                        context.getString(R.string.klck),
-                        context.getString(R.string.required_for_lockscreens),
+                        context.string(R.string.klck),
+                        context.string(R.string.required_for_lockscreens),
                         R.drawable.ic_kustom, KLCK_PACKAGE
                     )
                 )
@@ -120,30 +122,30 @@ class RequiredAppsViewModel : ViewModel() {
                 && "lockscreens".inAssetsAndWithContent(context)) {
                 apps.add(
                     RequiredApp(
-                        context.getString(R.string.klck_pro),
-                        context.getString(R.string.required_for_lockscreens),
+                        context.string(R.string.klck_pro),
+                        context.string(R.string.required_for_lockscreens),
                         R.drawable.ic_kustom, "$KLCK_PACKAGE.pro"
                     )
                 )
             }
 
             if (!context.isAppInstalled(MEDIA_UTILS_PACKAGE)
-                && context.resources.getBoolean(R.bool.media_utils_required)) {
+                && context.boolean(R.bool.media_utils_required)) {
                 apps.add(
                     RequiredApp(
-                        context.getString(R.string.media_utils),
-                        context.getString(R.string.required_for_widgets),
+                        context.string(R.string.media_utils),
+                        context.string(R.string.required_for_widgets),
                         R.drawable.ic_zooper, MEDIA_UTILS_PACKAGE
                     )
                 )
             }
 
             if (!context.isAppInstalled(KOLORETTE_PACKAGE)
-                && context.resources.getBoolean(R.bool.kolorette_required)) {
+                && context.boolean(R.bool.kolorette_required)) {
                 apps.add(
                     RequiredApp(
-                        context.getString(R.string.kolorette),
-                        context.getString(R.string.required_for_templates),
+                        context.string(R.string.kolorette),
+                        context.string(R.string.required_for_templates),
                         R.drawable.ic_palette, KOLORETTE_PACKAGE
                     )
                 )
@@ -152,8 +154,8 @@ class RequiredAppsViewModel : ViewModel() {
             if (!areAssetsInstalled(context)) {
                 apps.add(
                     RequiredApp(
-                        context.getString(R.string.widgets),
-                        context.getString(R.string.required_assets),
+                        context.string(R.string.widgets),
+                        context.string(R.string.required_assets),
                         R.drawable.ic_zooper
                     )
                 )

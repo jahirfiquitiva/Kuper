@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.fondesa.kpermissions.PermissionStatus
 import dev.jahir.frames.extensions.getAppName
 import dev.jahir.frames.extensions.lazyViewModel
+import dev.jahir.frames.extensions.string
 import dev.jahir.frames.ui.activities.FramesActivity
 import dev.jahir.frames.ui.fragments.CollectionsFragment
 import dev.jahir.frames.ui.fragments.WallpapersFragment
@@ -90,8 +91,8 @@ abstract class KuperActivity : FramesActivity() {
 
     override fun getPermissionRationaleMessage(): String =
         when (currentItemId) {
-            R.id.setup -> getString(R.string.permission_request_assets, getAppName())
-            R.id.widgets -> getString(R.string.permission_request_wallpaper, getAppName())
+            R.id.setup -> string(R.string.permission_request_assets, getAppName())
+            R.id.widgets -> string(R.string.permission_request_wallpaper, getAppName())
             else -> super.getPermissionRationaleMessage()
         }
 

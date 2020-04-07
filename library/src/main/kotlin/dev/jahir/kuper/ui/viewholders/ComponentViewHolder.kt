@@ -7,11 +7,11 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import coil.api.load
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import dev.jahir.frames.extensions.context
+import dev.jahir.frames.extensions.drawable
 import dev.jahir.frames.extensions.findView
 import dev.jahir.frames.extensions.gone
 import dev.jahir.frames.extensions.lower
@@ -41,7 +41,7 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
         app?.text = component.type.toString().lower().capitalize()
         icon?.visibleIf(component.hasIntent)
         if (icon?.isVisible == true) {
-            icon?.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_open_app))
+            icon?.setImageDrawable(context.drawable(R.drawable.ic_open_app))
             icon?.setOnClickListener { listener?.invoke(component) }
         }
         val rightPreview =
