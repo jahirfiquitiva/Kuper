@@ -6,12 +6,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.annotation.ColorInt
-import dev.jahir.kuper.utils.KLCK_PACKAGE
-import dev.jahir.kuper.utils.KLCK_PICKER
-import dev.jahir.kuper.utils.KLWP_PACKAGE
-import dev.jahir.kuper.utils.KLWP_PICKER
-import dev.jahir.kuper.utils.KWGT_PACKAGE
-import dev.jahir.kuper.utils.KWGT_PICKER
+import dev.jahir.kuper.data.KLCK_PACKAGE
+import dev.jahir.kuper.data.KLCK_PICKER
+import dev.jahir.kuper.data.KLWP_PACKAGE
+import dev.jahir.kuper.data.KLWP_PICKER
+import dev.jahir.kuper.data.KWGT_PACKAGE
+import dev.jahir.kuper.data.KWGT_PICKER
 
 data class Component(
     val type: Type,

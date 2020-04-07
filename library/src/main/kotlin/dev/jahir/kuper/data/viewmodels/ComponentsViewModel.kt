@@ -9,10 +9,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.jahir.frames.extensions.createIfDidNotExist
-import dev.jahir.frames.extensions.deleteEverything
-import dev.jahir.frames.extensions.hasContent
-import dev.jahir.frames.extensions.lazyMutableLiveData
+import dev.jahir.frames.extensions.resources.createIfDidNotExist
+import dev.jahir.frames.extensions.resources.deleteEverything
+import dev.jahir.frames.extensions.resources.hasContent
+import dev.jahir.frames.extensions.utils.lazyMutableLiveData
 import dev.jahir.kuper.data.models.Component
 import dev.jahir.kuper.extensions.copyFromTo
 import kotlinx.coroutines.Dispatchers.IO

@@ -3,8 +3,8 @@ package dev.jahir.kuper.ui.adapters
 import android.view.ViewGroup
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
-import dev.jahir.frames.extensions.hasContent
-import dev.jahir.frames.extensions.inflate
+import dev.jahir.frames.extensions.resources.hasContent
+import dev.jahir.frames.extensions.views.inflate
 import dev.jahir.frames.ui.viewholders.SectionHeaderViewHolder
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.RequiredApp

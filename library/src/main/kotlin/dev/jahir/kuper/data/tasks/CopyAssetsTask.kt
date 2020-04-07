@@ -1,4 +1,4 @@
-package dev.jahir.kuper.utils
+package dev.jahir.kuper.data.tasks
 
 import android.content.Context
 import android.os.Environment
@@ -26,7 +26,9 @@ object CopyAssetsTask {
                             ins = context.assets.open("$folder/$it")
                             val outFile = File(
                                 "${Environment.getExternalStorageDirectory()}/" +
-                                        "ZooperWidget/" + getCorrectFolderName(folder), it
+                                        "ZooperWidget/" + getCorrectFolderName(
+                                    folder
+                                ), it
                             )
                             outFile.parentFile?.mkdirs()
                             out = FileOutputStream(outFile)
@@ -50,7 +52,11 @@ object CopyAssetsTask {
     fun copyAssets(activity: FragmentActivity?, folder: String, onFinish: (Boolean) -> Unit = {}) {
         activity ?: return
         activity.lifecycleScope.launch {
-            val success = internalCopyAssets(activity, folder)
+            val success =
+                internalCopyAssets(
+                    activity,
+                    folder
+                )
             onFinish(success)
         }
     }

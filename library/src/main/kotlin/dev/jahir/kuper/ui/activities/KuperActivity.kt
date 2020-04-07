@@ -3,9 +3,9 @@ package dev.jahir.kuper.ui.activities
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.fondesa.kpermissions.PermissionStatus
-import dev.jahir.frames.extensions.getAppName
-import dev.jahir.frames.extensions.lazyViewModel
-import dev.jahir.frames.extensions.string
+import com.github.javiersantos.piracychecker.activities.getAppName
+import dev.jahir.frames.extensions.context.string
+import dev.jahir.frames.extensions.utils.lazyViewModel
 import dev.jahir.frames.ui.activities.FramesActivity
 import dev.jahir.frames.ui.fragments.CollectionsFragment
 import dev.jahir.frames.ui.fragments.WallpapersFragment

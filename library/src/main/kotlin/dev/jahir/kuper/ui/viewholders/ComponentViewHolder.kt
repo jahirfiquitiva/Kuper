@@ -10,16 +10,16 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
 import coil.api.load
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
-import dev.jahir.frames.extensions.context
-import dev.jahir.frames.extensions.drawable
-import dev.jahir.frames.extensions.findView
-import dev.jahir.frames.extensions.gone
-import dev.jahir.frames.extensions.lower
-import dev.jahir.frames.extensions.visibleIf
-import dev.jahir.frames.utils.tint
+import dev.jahir.frames.extensions.context.boolean
+import dev.jahir.frames.extensions.context.drawable
+import dev.jahir.frames.extensions.resources.lower
+import dev.jahir.frames.extensions.resources.tint
+import dev.jahir.frames.extensions.views.context
+import dev.jahir.frames.extensions.views.findView
+import dev.jahir.frames.extensions.views.gone
+import dev.jahir.frames.extensions.views.visibleIf
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.Component
-import dev.jahir.kuper.extensions.isInPortraitMode
 import java.io.File
 
 class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
@@ -45,7 +45,8 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
             icon?.setOnClickListener { listener?.invoke(component) }
         }
         val rightPreview =
-            if (context.isInPortraitMode) component.previewPath else component.rightLandPath
+            if (context.boolean(R.bool.is_landscape)) component.rightLandPath
+            else component.previewPath
         try {
             progress?.indeterminateDrawable?.tint(Color.parseColor("#888"))
         } catch (e: Exception) {

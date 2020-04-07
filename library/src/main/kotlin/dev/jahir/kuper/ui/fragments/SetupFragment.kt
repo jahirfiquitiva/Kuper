@@ -3,8 +3,8 @@ package dev.jahir.kuper.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import dev.jahir.frames.extensions.hasContent
-import dev.jahir.frames.extensions.openLink
+import dev.jahir.frames.extensions.context.openLink
+import dev.jahir.frames.extensions.resources.hasContent
 import dev.jahir.frames.ui.activities.base.BaseLicenseCheckerActivity.Companion.PLAY_STORE_LINK_PREFIX
 import dev.jahir.frames.ui.activities.base.BaseStoragePermissionRequestActivity
 import dev.jahir.frames.ui.fragments.base.BaseFramesFragment

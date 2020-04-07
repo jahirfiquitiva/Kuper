@@ -5,8 +5,8 @@ import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
-import dev.jahir.frames.extensions.inflate
-import dev.jahir.frames.extensions.string
+import dev.jahir.frames.extensions.context.string
+import dev.jahir.frames.extensions.views.inflate
 import dev.jahir.frames.ui.viewholders.SectionHeaderViewHolder
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.Component

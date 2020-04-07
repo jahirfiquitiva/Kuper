@@ -1,7 +1,7 @@
 package dev.jahir.kuper.extensions
 
 import android.content.Context
-import dev.jahir.kuper.utils.CopyAssetsTask
+import dev.jahir.kuper.data.tasks.CopyAssetsTask
 
 internal fun String.inAssetsAndWithContent(context: Context): Boolean {
     val folders = context.assets.list("").orEmpty()

@@ -1,4 +1,4 @@
-package dev.jahir.kuper.utils
+package dev.jahir.kuper.data
 
 const val KWGT_PACKAGE = "org.kustom.widget"
 const val KLWP_PACKAGE = "org.kustom.wallpaper"
