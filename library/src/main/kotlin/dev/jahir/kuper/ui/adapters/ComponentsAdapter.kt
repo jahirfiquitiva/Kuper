@@ -49,12 +49,6 @@ class ComponentsAdapter(private val onClick: (Component) -> Unit) :
         shouldShowFooters(false)
     }
 
-    fun getHeadersBeforePosition(position: Int): Int {
-        var headers = 0
-        for (it in (0 until position).filter { isHeader(it) }) headers += 1
-        return headers
-    }
-
     override fun getItemViewType(
         section: Int,
         relativePosition: Int,

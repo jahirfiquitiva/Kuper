@@ -62,7 +62,8 @@ class RequiredAppsAdapter(private val onClick: (RequiredApp) -> Unit) :
     ) {
         (holder as? SectionHeaderViewHolder)?.bind(
             if (section == 0) R.string.required_apps else R.string.assets,
-            0, section > 0
+            0,
+            section > 0 && getItemCount(0) > 0
         )
     }
 

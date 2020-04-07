@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.jahir.frames.extensions.context.openLink
 import dev.jahir.frames.extensions.resources.hasContent
 import dev.jahir.frames.ui.activities.base.BaseLicenseCheckerActivity.Companion.PLAY_STORE_LINK_PREFIX
-import dev.jahir.frames.ui.activities.base.BaseStoragePermissionRequestActivity
 import dev.jahir.frames.ui.fragments.base.BaseFramesFragment
 import dev.jahir.kuper.data.models.RequiredApp
 import dev.jahir.kuper.ui.activities.KuperActivity
@@ -33,7 +32,7 @@ class SetupFragment : BaseFramesFragment<RequiredApp>() {
         if (requiredApp.packageName.hasContent()) {
             context?.openLink(PLAY_STORE_LINK_PREFIX + requiredApp.packageName)
         } else {
-            (activity as? BaseStoragePermissionRequestActivity<*>)?.requestStoragePermission()
+            (activity as? KuperActivity)?.requestPermissionToInstallAssets()
         }
     }
 

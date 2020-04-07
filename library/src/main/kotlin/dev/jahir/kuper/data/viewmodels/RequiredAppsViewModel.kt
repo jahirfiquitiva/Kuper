@@ -1,7 +1,6 @@
 package dev.jahir.kuper.data.viewmodels
 
 import android.content.Context
-import android.os.Environment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,14 +17,11 @@ import dev.jahir.kuper.data.KWGT_PACKAGE
 import dev.jahir.kuper.data.MEDIA_UTILS_PACKAGE
 import dev.jahir.kuper.data.ZOOPER_PACKAGE
 import dev.jahir.kuper.data.models.RequiredApp
-import dev.jahir.kuper.data.tasks.CopyAssetsTask
-import dev.jahir.kuper.extensions.getFilesInAssetsFolder
-import dev.jahir.kuper.extensions.inAssetsAndWithContent
+import dev.jahir.kuper.data.tasks.KuperAssets
 import dev.jahir.kuper.extensions.isAppInstalled
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.File
 
 class RequiredAppsViewModel : ViewModel() {
 
@@ -53,8 +49,12 @@ class RequiredAppsViewModel : ViewModel() {
         withContext(IO) {
             val apps = ArrayList<RequiredApp>()
 
-            if (!context.isAppInstalled(ZOOPER_PACKAGE)
-                && "templates".inAssetsAndWithContent(context)) {
+            val hasTemplates = KuperAssets.hasAssets(context, "templates")
+            val hasWidgets = KuperAssets.hasAssets(context, "widgets")
+            val hasWallpapers = KuperAssets.hasAssets(context, "wallpapers")
+            val hasLockScreens = KuperAssets.hasAssets(context, "lockscreens")
+
+            if (!context.isAppInstalled(ZOOPER_PACKAGE) && hasTemplates) {
                 apps.add(
                     RequiredApp(
                         context.string(R.string.zooper_widget),
@@ -64,8 +64,7 @@ class RequiredAppsViewModel : ViewModel() {
                 )
             }
 
-            if (!context.isAppInstalled(KWGT_PACKAGE)
-                && "widgets".inAssetsAndWithContent(context)) {
+            if (!context.isAppInstalled(KWGT_PACKAGE) && hasWidgets) {
                 apps.add(
                     RequiredApp(
                         context.string(R.string.kwgt),
@@ -75,8 +74,7 @@ class RequiredAppsViewModel : ViewModel() {
                 )
             }
 
-            if (!context.isAppInstalled("$KWGT_PACKAGE.pro")
-                && "widgets".inAssetsAndWithContent(context)) {
+            if (!context.isAppInstalled("$KWGT_PACKAGE.pro") && hasWidgets) {
                 apps.add(
                     RequiredApp(
                         context.string(R.string.kwgt_pro),
@@ -86,7 +84,7 @@ class RequiredAppsViewModel : ViewModel() {
                 )
             }
 
-            if (!context.isAppInstalled(KLWP_PACKAGE) && "wallpapers".inAssetsAndWithContent(context)) {
+            if (!context.isAppInstalled(KLWP_PACKAGE) && hasWallpapers) {
                 apps.add(
                     RequiredApp(
                         context.string(R.string.klwp),
@@ -96,8 +94,7 @@ class RequiredAppsViewModel : ViewModel() {
                 )
             }
 
-            if (!context.isAppInstalled("$KLWP_PACKAGE.pro")
-                && "wallpapers".inAssetsAndWithContent(context)) {
+            if (!context.isAppInstalled("$KLWP_PACKAGE.pro") && hasWallpapers) {
                 apps.add(
                     RequiredApp(
                         context.string(R.string.klwp_pro),
@@ -107,8 +104,7 @@ class RequiredAppsViewModel : ViewModel() {
                 )
             }
 
-            if (!context.isAppInstalled(KLCK_PACKAGE)
-                && "lockscreens".inAssetsAndWithContent(context)) {
+            if (!context.isAppInstalled(KLCK_PACKAGE) && hasLockScreens) {
                 apps.add(
                     RequiredApp(
                         context.string(R.string.klck),
@@ -118,8 +114,7 @@ class RequiredAppsViewModel : ViewModel() {
                 )
             }
 
-            if (!context.isAppInstalled("$KLCK_PACKAGE.pro")
-                && "lockscreens".inAssetsAndWithContent(context)) {
+            if (!context.isAppInstalled("$KLCK_PACKAGE.pro") && hasLockScreens) {
                 apps.add(
                     RequiredApp(
                         context.string(R.string.klck_pro),
@@ -151,7 +146,7 @@ class RequiredAppsViewModel : ViewModel() {
                 )
             }
 
-            if (!areAssetsInstalled(context)) {
+            if (!KuperAssets.areZooperAssetsInstalled(context)) {
                 apps.add(
                     RequiredApp(
                         context.string(R.string.widgets),
@@ -160,32 +155,7 @@ class RequiredAppsViewModel : ViewModel() {
                     )
                 )
             }
+
             apps
         }
-
-    @Suppress("DEPRECATION")
-    private fun areAssetsInstalled(context: Context): Boolean {
-        val folders = arrayOf("fonts", "iconsets", "bitmaps")
-        val actualFolders = ArrayList<String>()
-        folders.forEach { if (it.inAssetsAndWithContent(context)) actualFolders.add(it) }
-
-        var count = 0
-
-        for (folder in actualFolders) {
-            var filesCount = 0
-            val possibleFiles = folder.getFilesInAssetsFolder(context)
-            possibleFiles.forEach {
-                if (it.contains(".") && !CopyAssetsTask.filesToIgnore.contains(it)) {
-                    val file = File(
-                        "${Environment.getExternalStorageDirectory()}/ZooperWidget/" +
-                                "${CopyAssetsTask.getCorrectFolderName(folder)}/$it"
-                    )
-                    if (file.exists()) filesCount += 1
-                }
-            }
-            if (filesCount == possibleFiles.size) count += 1
-        }
-
-        return count == actualFolders.size
-    }
 }
