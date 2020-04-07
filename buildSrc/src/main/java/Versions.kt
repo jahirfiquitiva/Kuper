@@ -11,12 +11,12 @@ object Versions {
     const val oneSignal = "3.12.7"
 
     // App
-    const val minSdk = 16
+    const val minSdk = 21
     const val targetSdk = 29
     const val buildTools = "29.0.3"
 
     // Frames
-    const val frames = "3.1.1"
+    const val frames = "3.1.2"
 
     // Kustom API
     const val kustomApi = "6369c37"
