@@ -9,7 +9,7 @@ Kuper
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d8cd40ec4cb400d9091d34026c904e7)](https://www.codacy.com/app/jahirfiquitiva/Kuper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jahirfiquitiva/Kuper&amp;utm_campaign=Badge_Grade)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/Kuper/localized.svg)](https://crowdin.com/project/Kuper/invite)
 
-A full-of-features, easy-to-customize, free and open source, light-weight, Android dashboard library to create widgets apps with Zooper widgets and/or Kustom assets (Widgets, Wallpapers and Komponents)
+Free, feature-rich, easily customizable Android dashboard for widgets apps with Zooper widgets and/or Kustom assets (Widgets, Wallpapers and Komponents)
 
 <a target="_blank" href="http://bit.ly/DLKuperAPK">
 <img src="https://jahir.dev/share/download_sample.svg?maxAge=432000" width="200"/>

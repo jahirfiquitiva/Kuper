@@ -3,7 +3,7 @@
 object Versions {
     // Plugins
     const val gradle = "3.6.1"
-    const val kotlin = "1.3.70"
+    const val kotlin = "1.3.71"
     const val jitpack = "2.1"
 
     // OneSignal
@@ -16,5 +16,5 @@ object Versions {
     const val buildTools = "29.0.3"
 
     // Kuper
-    const val kuper = "2.0.0"
+    const val kuper = "2.0.6"
 }
