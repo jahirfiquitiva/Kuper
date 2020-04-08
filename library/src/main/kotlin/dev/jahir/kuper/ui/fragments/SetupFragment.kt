@@ -19,6 +19,7 @@ class SetupFragment : BaseFramesFragment<RequiredApp>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recyclerView?.setFastScrollEnabled(false)
         recyclerView?.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter = requiredAppsAdapter

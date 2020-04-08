@@ -50,6 +50,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recyclerView?.setFastScrollEnabled(false)
         val columnsCount = context?.integer(R.integer.wallpapers_columns_count, 2) ?: 2
         val gridLayoutManager =
             GridLayoutManager(context, columnsCount, GridLayoutManager.VERTICAL, false)
