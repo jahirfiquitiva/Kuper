@@ -2,6 +2,6 @@
 
 object Kuper {
     const val appId = "dev.jahir.kuper.app"
-    const val version = 208
-    const val versionName = "2.0.8"
+    const val version = 209
+    const val versionName = "2.0.9"
 }
