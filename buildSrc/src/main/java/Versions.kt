@@ -2,7 +2,7 @@
 
 object Versions {
     // Plugins
-    const val gradle = "3.6.1"
+    const val gradle = "3.6.2"
     const val kotlin = "1.3.71"
     const val jitpack = "2.1"
 
@@ -16,7 +16,7 @@ object Versions {
     const val buildTools = "29.0.3"
 
     // Frames
-    const val frames = "3.1.8"
+    const val frames = "dbe4c7d"
 
     // Kustom API
     const val kustomApi = "6369c37"

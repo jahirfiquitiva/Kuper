@@ -24,17 +24,21 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.util.zip.ZipFile
 
+@Suppress("RemoveExplicitTypeArguments", "MemberVisibilityCanBePrivate")
 class ComponentsViewModel : ViewModel() {
 
     private val componentsData: MutableLiveData<ArrayList<Component>> by lazyMutableLiveData()
-
     val components: ArrayList<Component>
         get() = ArrayList(componentsData.value.orEmpty())
 
     fun loadComponents(context: Context?) {
         context ?: return
         viewModelScope.launch {
-            val components = internalLoadComponents(context)
+            val components = try {
+                internalLoadComponents(context)
+            } catch (e: Exception) {
+                arrayListOf<Component>()
+            }
             componentsData.postValue(components)
         }
     }
@@ -130,7 +134,6 @@ class ComponentsViewModel : ViewModel() {
                     if (file.exists()) {
                         val zipFile = ZipFile(file)
                         val entries = zipFile.entries()
-
                         while (entries.hasMoreElements()) {
                             val entry = entries.nextElement()
                             if (type == Component.Type.ZOOPER) {

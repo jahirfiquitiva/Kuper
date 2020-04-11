@@ -7,11 +7,16 @@ import java.io.OutputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 
-fun InputStream.copyFilesTo(os: OutputStream) {
-    val buffer = ByteArray(2048)
-    var readInt = 0
-    while ({ readInt = read(buffer);readInt }() != -1) os.write(buffer, 0, readInt)
-    os.flush()
+private fun InputStream.copyFilesTo(os: OutputStream) {
+    try {
+        val buffer = ByteArray(2048)
+        var readInt = 0
+        while ({ readInt = read(buffer);readInt }() != -1) os.write(buffer, 0, readInt)
+    } catch (e: Exception) {
+    } finally {
+        os.flush()
+        os.close()
+    }
 }
 
 fun ZipFile.copyFromTo(from: ZipEntry, to: File?) {
@@ -19,9 +24,10 @@ fun ZipFile.copyFromTo(from: ZipEntry, to: File?) {
     var zipIn: InputStream? = null
     var zipOut: OutputStream? = null
     try {
-        zipIn = getInputStream(from)
         zipOut = FileOutputStream(to)
-        zipIn.copyTo(zipOut, 2048)
+        zipIn = getInputStream(from)
+        zipIn.copyFilesTo(zipOut)
+    } catch (e: Exception) {
     } finally {
         zipIn?.close()
         zipOut?.flush()

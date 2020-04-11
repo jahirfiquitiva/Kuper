@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.fondesa.kpermissions.PermissionStatus
 import com.github.javiersantos.piracychecker.activities.getAppName
 import com.google.android.material.snackbar.Snackbar
+import dev.jahir.frames.data.viewmodels.WallpapersDataViewModel
 import dev.jahir.frames.extensions.context.string
 import dev.jahir.frames.extensions.utils.lazyViewModel
 import dev.jahir.frames.extensions.utils.postDelayed
@@ -14,7 +15,6 @@ import dev.jahir.frames.ui.fragments.CollectionsFragment
 import dev.jahir.frames.ui.fragments.WallpapersFragment
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.tasks.KuperAssets
-import dev.jahir.kuper.data.viewmodels.ComponentsViewModel
 import dev.jahir.kuper.data.viewmodels.RequiredAppsViewModel
 import dev.jahir.kuper.extensions.hasStoragePermission
 import dev.jahir.kuper.ui.fragments.ComponentsFragment
@@ -22,6 +22,8 @@ import dev.jahir.kuper.ui.fragments.KuperWallpapersFragment
 import dev.jahir.kuper.ui.fragments.SetupFragment
 
 abstract class KuperActivity : FramesActivity() {
+
+    override val wallpapersViewModel: WallpapersDataViewModel by lazyViewModel()
 
     override val collectionsFragment: CollectionsFragment? = null
     override val favoritesFragment: WallpapersFragment? = null
@@ -33,10 +35,7 @@ abstract class KuperActivity : FramesActivity() {
     override val initialFragmentTag: String = SetupFragment.TAG
     override val initialItemId: Int = R.id.setup
 
-    private val componentsViewModel: ComponentsViewModel by lazyViewModel()
-    private val componentsFragment: ComponentsFragment by lazy {
-        ComponentsFragment.create(componentsViewModel.components)
-    }
+    private val componentsFragment: ComponentsFragment by lazy { ComponentsFragment() }
 
     private val requiredAppsViewModel: RequiredAppsViewModel by lazyViewModel()
     private val setupFragment: SetupFragment by lazy { SetupFragment.create(requiredAppsViewModel.apps) }
@@ -50,33 +49,19 @@ abstract class KuperActivity : FramesActivity() {
             if (it.isNotEmpty()) setupFragment.updateItems(it)
             else hideSetup()
         }
-        componentsViewModel.observe(this) { componentsFragment.updateItems(it) }
-
-        bottomNavigation?.setOnNavigationItemSelectedListener {
-            val select = changeFragment(it.itemId)
-            if (it.itemId == R.id.widgets)
-                componentsFragment.updateItems(componentsViewModel.components)
-            select
-        }
 
         loadRequiredApps()
-        loadComponents()
         requestStoragePermission()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        componentsViewModel.destroy(this)
         requiredAppsViewModel.destroy(this)
     }
 
     private fun hideSetup() {
         bottomNavigation?.removeItem(R.id.setup)
         if (currentItemId == R.id.setup) bottomNavigation?.selectedItemId = R.id.widgets
-    }
-
-    internal fun loadComponents() {
-        componentsViewModel.loadComponents(this)
     }
 
     internal fun loadRequiredApps() {
@@ -135,4 +120,7 @@ abstract class KuperActivity : FramesActivity() {
             }
         }
     }
+
+    override fun shouldLoadCollections(): Boolean = false
+    override fun shouldLoadFavorites(): Boolean = false
 }

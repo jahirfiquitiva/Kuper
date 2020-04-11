@@ -15,6 +15,7 @@ import dev.jahir.frames.extensions.fragments.mdDialog
 import dev.jahir.frames.extensions.resources.dpToPx
 import dev.jahir.frames.extensions.resources.hasContent
 import dev.jahir.frames.extensions.resources.lower
+import dev.jahir.frames.extensions.utils.lazyViewModel
 import dev.jahir.frames.ui.activities.base.BaseLicenseCheckerActivity.Companion.PLAY_STORE_LINK_PREFIX
 import dev.jahir.frames.ui.fragments.base.BaseFramesFragment
 import dev.jahir.kuper.R
@@ -23,14 +24,15 @@ import dev.jahir.kuper.data.KLWP_PACKAGE
 import dev.jahir.kuper.data.KWGT_PACKAGE
 import dev.jahir.kuper.data.ZOOPER_PACKAGE
 import dev.jahir.kuper.data.models.Component
+import dev.jahir.kuper.data.viewmodels.ComponentsViewModel
 import dev.jahir.kuper.extensions.hasStoragePermission
-import dev.jahir.kuper.ui.activities.KuperActivity
 import dev.jahir.kuper.ui.adapters.ComponentsAdapter
 import dev.jahir.kuper.ui.decorations.SectionedGridSpacingDecoration
 
 @SuppressLint("MissingPermission")
 class ComponentsFragment : BaseFramesFragment<Component>() {
 
+    private val componentsViewModel: ComponentsViewModel by lazyViewModel()
     private val componentsAdapter: ComponentsAdapter by lazy { ComponentsAdapter(::onClick) }
 
     private val wallpaper: Drawable?
@@ -42,6 +44,11 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
                 null
             }
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        componentsViewModel.observe(this) { updateItems(it) }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -72,6 +79,11 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
         updateDeviceWallpaper()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        componentsViewModel.destroy(this)
+    }
+
     internal fun updateDeviceWallpaper() {
         try {
             componentsAdapter.wallpaper = wallpaper
@@ -80,7 +92,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
     }
 
     override fun loadData() {
-        (activity as? KuperActivity)?.loadComponents()
+        componentsViewModel.loadComponents(context)
     }
 
     private fun onClick(component: Component) {
@@ -125,10 +137,9 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
     }
 
     companion object {
-        internal const val TAG = "ComponentsFragment"
+        internal const val TAG = "components_fragment"
 
         @JvmStatic
-        fun create(components: ArrayList<Component> = ArrayList()): ComponentsFragment =
-            ComponentsFragment().apply { updateItems(components) }
+        fun create(): ComponentsFragment = ComponentsFragment()
     }
 }
