@@ -137,9 +137,6 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
     }
 
     companion object {
-        internal const val TAG = "components_fragment"
-
-        @JvmStatic
-        fun create(): ComponentsFragment = ComponentsFragment()
+        const val TAG = "components_fragment"
     }
 }

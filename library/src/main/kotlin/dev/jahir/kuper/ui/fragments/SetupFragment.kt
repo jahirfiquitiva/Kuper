@@ -47,7 +47,7 @@ class SetupFragment : BaseFramesFragment<RequiredApp>() {
     }
 
     companion object {
-        internal const val TAG = "RequiredAppsFragment"
+        const val TAG = "required_apps_fragment"
 
         @JvmStatic
         fun create(requiredApps: ArrayList<RequiredApp> = ArrayList()): SetupFragment =
