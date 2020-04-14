@@ -40,6 +40,10 @@ android {
     }
 
     buildTypes {
+        buildTypes.each {
+            it.buildConfigField("String", "DASHBOARD_NAME", "\"Kuper\"")
+            it.buildConfigField("String", "DASHBOARD_VERSION", "\"$Kuper.versionName\"")
+        }
         release {
             minifyEnabled false
             proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'

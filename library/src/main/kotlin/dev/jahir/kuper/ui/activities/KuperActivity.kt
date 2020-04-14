@@ -1,6 +1,8 @@
 package dev.jahir.kuper.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.fondesa.kpermissions.PermissionStatus
 import com.github.javiersantos.piracychecker.activities.getAppName
@@ -57,6 +59,14 @@ abstract class KuperActivity : FramesActivity() {
     override fun onDestroy() {
         super.onDestroy()
         requiredAppsViewModel.destroy(this)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.settings) {
+            startActivity(Intent(this, KuperSettingsActivity::class.java))
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun hideSetup() {
