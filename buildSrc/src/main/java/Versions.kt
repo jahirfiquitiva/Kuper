@@ -16,7 +16,7 @@ object Versions {
     const val buildTools = "29.0.3"
 
     // Frames
-    const val frames = "d7f1a5b"
+    const val frames = "75d8eeb"
 
     // Kustom API
     const val kustomApi = "6369c37"
