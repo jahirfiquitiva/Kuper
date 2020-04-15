@@ -3,7 +3,7 @@
 Kuper
 ======
 
-![API](https://img.shields.io/badge/API-16%2B-34bf49.svg)
+![API](https://img.shields.io/badge/API-21%2B-34bf49.svg)
 [![JitPack](https://jitpack.io/v/com.jahirfiquitiva/Kuper.svg)](https://jitpack.io/#com.jahirfiquitiva/Kuper)
 [![Build Status](https://travis-ci.com/jahirfiquitiva/Kuper.svg?branch=master)](https://travis-ci.com/jahirfiquitiva/Kuper)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d8cd40ec4cb400d9091d34026c904e7)](https://www.codacy.com/app/jahirfiquitiva/Kuper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jahirfiquitiva/Kuper&amp;utm_campaign=Badge_Grade)
@@ -70,7 +70,7 @@ Free, feature-rich, easily customizable Android dashboard for widgets apps with 
 	- Option to clear app cache.
 - Tablet layouts.
 - Lots of customizations.
-- Works with Android 4.1 and newer.
+- Works with Android 5.0 and newer.
 
 ## Help translating
 :page_facing_up: Help making Kuper available in more languages. [Click here to go to the translation site](https://crowdin.com/project/Kuper/invite)
