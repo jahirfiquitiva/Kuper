@@ -85,6 +85,15 @@ abstract class KuperActivity : FramesActivity() {
             else -> super.getNextFragment(itemId)
         }
 
+    override fun getToolbarTitleForItem(itemId: Int): String? {
+        val setupShown = bottomNavigation?.menu?.findItem(R.id.setup)?.isVisible == true
+        return when (itemId) {
+            R.id.widgets -> if (setupShown) string(R.string.widgets) else getAppName()
+            R.id.wallpapers -> string(R.string.wallpapers)
+            else -> super.getToolbarTitleForItem(itemId)
+        }
+    }
+
     override fun internalOnPermissionsGranted(result: List<PermissionStatus>) {
         super.internalOnPermissionsGranted(result)
         (currentFragment as? ComponentsFragment)?.updateDeviceWallpaper()
