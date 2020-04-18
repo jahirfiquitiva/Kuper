@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="setup">Setup</string>
+    <string name="widgets">Widgets</string>
+    <string name="required_apps">Erforderliche Apps</string>
+    <string name="assets">Ressourcen</string>
+    <string name="required_for_templates">Wird für enthaltene Vorlagen benötigt</string>
+    <string name="required_for_widgets">Wird für enthaltene Widgets benötigt</string>
+    <string name="required_for_wallpapers">Wird für enthaltene Wallpaper benötigt</string>
+    <string name="required_for_lockscreens">Wird für enthaltene Sperrbildschirme benötigt</string>
+    <string name="required_assets">Benötigte Ressourcen, damit Vorlagen ordentlich funktionieren</string>
+    <string name="install">Installieren</string>
+    <string name="app_not_installed">Die benötigte App ist nicht installiert</string>
+    <string name="template">Vorlage</string>
+    <string name="templates">Vorlagen</string>
+    <string name="x_templates">%1$s Vorlagen</string>
+    <string name="assets_installed">Ressourcen bereits installiert</string>
+    <string name="apps_installed">Apps bereits installiert</string>
+    <string name="copying_assets">Kopiere Dateien nach ZooperWidget/%1$s</string>
+    <string name="copied_assets_successfully">Ressourcen erfolgreich kopiert</string>
+    <string name="copied_assets_error">Unerwarteter Fehler beim Kopieren der Ressourcen</string>
+    <string name="permission_request_assets">%1$s benötigt Zugriff auf deinen Speicher, um Ressourcen zu installieren</string>
+    <string name="permission_request_wallpaper">%1$s benötigt Zugriff auf deinen Speicher, um deinen Hintergrund in den Widget-Vorschauen anzuzeigen</string>
+    <string name="open_komponents">Um eine Komponente hinzuzufügen, öffne Kustom und tippe auf das + in der Toolbar, wähle dann Komponente und suche nach diesem Pack.</string>
+</resources>
