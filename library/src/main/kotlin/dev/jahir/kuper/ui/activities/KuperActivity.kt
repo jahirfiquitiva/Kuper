@@ -74,7 +74,10 @@ abstract class KuperActivity : FramesActivity() {
 
     private fun hideSetup() {
         bottomNavigation?.removeItem(R.id.setup)
-        if (currentItemId == R.id.setup) bottomNavigation?.selectedItemId = R.id.widgets
+        if (currentItemId == R.id.setup) {
+            bottomNavigation?.selectedItemId = R.id.widgets
+            postDelayed(10) { componentsFragment.loadData() }
+        }
         updateToolbarTitle(currentItemId)
     }
 
