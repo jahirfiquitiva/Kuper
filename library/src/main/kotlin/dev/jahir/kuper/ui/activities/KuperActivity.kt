@@ -46,14 +46,17 @@ abstract class KuperActivity : FramesActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         requiredAppsViewModel.observe(this) {
             if (it.isNotEmpty()) setupFragment.updateItems(it)
             else hideSetup()
         }
-
         loadRequiredApps()
         requestStoragePermission()
+    }
+
+    override fun shouldShowToolbarLogo(itemId: Int): Boolean {
+        val setupShown = bottomNavigation?.menu?.findItem(R.id.setup)?.isVisible ?: false
+        return itemId == if (setupShown) R.id.setup else R.id.widgets
     }
 
     override fun onDestroy() {
@@ -72,6 +75,7 @@ abstract class KuperActivity : FramesActivity() {
     private fun hideSetup() {
         bottomNavigation?.removeItem(R.id.setup)
         if (currentItemId == R.id.setup) bottomNavigation?.selectedItemId = R.id.widgets
+        updateToolbarTitle(currentItemId)
     }
 
     internal fun loadRequiredApps() {
