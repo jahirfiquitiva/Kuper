@@ -1,18 +1,19 @@
 package dev.jahir.kuper.data.viewmodels
 
-import android.content.Context
+import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.jahir.frames.extensions.resources.createIfDidNotExist
 import dev.jahir.frames.extensions.resources.deleteEverything
 import dev.jahir.frames.extensions.resources.hasContent
+import dev.jahir.frames.extensions.utils.context
 import dev.jahir.frames.extensions.utils.lazyMutableLiveData
+import dev.jahir.frames.extensions.utils.tryToObserve
 import dev.jahir.kuper.data.models.Component
 import dev.jahir.kuper.extensions.copyFromTo
 import kotlinx.coroutines.Dispatchers.IO
@@ -25,17 +26,16 @@ import java.io.OutputStream
 import java.util.zip.ZipFile
 
 @Suppress("RemoveExplicitTypeArguments", "MemberVisibilityCanBePrivate")
-class ComponentsViewModel : ViewModel() {
+class ComponentsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val componentsData: MutableLiveData<ArrayList<Component>> by lazyMutableLiveData()
     val components: ArrayList<Component>
         get() = ArrayList(componentsData.value.orEmpty())
 
-    fun loadComponents(context: Context?) {
-        context ?: return
+    fun loadComponents() {
         viewModelScope.launch {
             val components = try {
-                internalLoadComponents(context)
+                internalLoadComponents()
             } catch (e: Exception) {
                 arrayListOf<Component>()
             }
@@ -44,14 +44,14 @@ class ComponentsViewModel : ViewModel() {
     }
 
     fun observe(owner: LifecycleOwner, onUpdated: (ArrayList<Component>) -> Unit = {}) {
-        componentsData.observe(owner, Observer { onUpdated(it) })
+        componentsData.tryToObserve(owner, onUpdated)
     }
 
     fun destroy(owner: LifecycleOwner) {
         componentsData.removeObservers(owner)
     }
 
-    private suspend fun internalLoadComponents(context: Context): ArrayList<Component> {
+    private suspend fun internalLoadComponents(): ArrayList<Component> {
         return if (components.isNotEmpty()) ArrayList(components)
         else withContext(IO) {
             val folders = arrayOf("templates", "komponents", "widgets", "lockscreens", "wallpapers")
@@ -91,15 +91,15 @@ class ComponentsViewModel : ViewModel() {
         }
     }
 
-    private fun getWidgetPreviewsPathFromZip(
+    private suspend fun getWidgetPreviewsPathFromZip(
         name: String,
         path: String,
         ins: InputStream,
         folder: File,
         file: File,
         type: Component.Type
-    ): Component? {
-        return try {
+    ): Component? = withContext(IO) {
+        try {
             var out: OutputStream? = null
 
             val thumbnails = arrayOf("", "")
@@ -188,14 +188,13 @@ class ComponentsViewModel : ViewModel() {
                 name
             }
 
-            return Component(
-                type, correctName, path, preview.absolutePath ?: "",
-                previewLand?.absolutePath ?: ""
+            Component(
+                type, correctName, path,
+                preview.absolutePath ?: "", previewLand?.absolutePath ?: ""
             )
         } catch (e: Exception) {
             e.printStackTrace()
             null
         }
     }
-
 }
