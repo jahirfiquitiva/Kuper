@@ -4,19 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/cards_corner_size">
+    app:cardPreventCornerOverlap="false">
 
     <dev.jahir.frames.ui.widgets.PortraitImageView
         android:id="@+id/device_wallpaper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        app:heightMultiplier="@dimen/heightMultiplier" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/wallpaper_overlay" />
+        app:heightMultiplier="@dimen/heightMultiplier"
+        app:overlayColor="@color/wallpaper_overlay"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Frames.Wallpapers" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,7 +54,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@drawable/gradient"
             android:baselineAligned="false"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -71,11 +67,8 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                tools:ignore="UselessParent">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/component_name"
@@ -101,9 +94,9 @@
                 android:id="@+id/launch_app_button"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:background="?selectableItemBackgroundBorderless"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="4dp"
+                android:background="?actionBarItemBackground"
                 android:visibility="gone"
                 app:srcCompat="@drawable/ic_open_app"
                 tools:ignore="RtlSymmetry" />

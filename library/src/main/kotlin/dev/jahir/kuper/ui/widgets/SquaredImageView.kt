@@ -8,8 +8,7 @@ open class SquaredImageView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     style: Int = 0
-) :
-    AppCompatImageView(context, attributeSet, style) {
+) : AppCompatImageView(context, attributeSet, style) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)

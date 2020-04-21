@@ -75,7 +75,7 @@ abstract class KuperActivity : FramesActivity() {
     }
 
     internal fun loadRequiredApps() {
-        requiredAppsViewModel.loadApps(this)
+        requiredAppsViewModel.loadApps()
     }
 
     override fun getNextFragment(itemId: Int): Pair<Pair<String?, Fragment?>?, Boolean>? =

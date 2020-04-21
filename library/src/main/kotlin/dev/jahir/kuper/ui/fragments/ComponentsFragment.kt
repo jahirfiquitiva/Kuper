@@ -92,7 +92,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
     }
 
     override fun loadData() {
-        componentsViewModel.loadComponents(context)
+        componentsViewModel.loadComponents()
     }
 
     private fun onClick(component: Component) {
