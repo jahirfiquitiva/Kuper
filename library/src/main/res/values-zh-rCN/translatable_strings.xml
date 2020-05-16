@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="setup">Setup</string>
+    <string name="setup">设定</string>
     <string name="widgets">Widgets</string>
     <string name="required_apps">Required apps</string>
     <string name="assets">Assets</string>
