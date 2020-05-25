@@ -59,6 +59,14 @@ abstract class KuperActivity : FramesActivity() {
         return itemId == if (setupShown) R.id.setup else R.id.widgets
     }
 
+    override fun onBackPressed() {
+        val setupShown = bottomNavigation?.menu?.findItem(R.id.setup)?.isVisible ?: false
+        val actualInitialItemId = if (setupShown) R.id.setup else R.id.widgets
+        if (currentItemId != actualInitialItemId)
+            bottomNavigation?.selectedItemId = actualInitialItemId
+        else supportFinishAfterTransition()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         requiredAppsViewModel.destroy(this)
