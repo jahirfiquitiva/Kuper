@@ -19,37 +19,45 @@ object KuperAssets {
 
     private val zooperFolders = arrayOf("fonts", "iconsets", "bitmaps")
 
-    internal fun listAssets(
+    @Suppress("BlockingMethodInNonBlockingContext", "RemoveExplicitTypeArguments")
+    internal suspend fun listAssets(
         context: Context?,
         path: String = "",
         filterIgnoredFiles: Boolean = true
     ): Array<out String> {
         context ?: return arrayOf()
-        return try {
-            val initialList = context.assets.list(path).orEmpty()
-            if (filterIgnoredFiles) {
-                initialList.filter {
-                    !filesToIgnore.any { ignore -> it.startsWith(ignore) }
-                }.toTypedArray()
-            } else initialList
-        } catch (e: Exception) {
-            arrayOf()
+        return withContext(IO) {
+            try {
+                val initialList = context.assets.list(path).orEmpty()
+                if (filterIgnoredFiles) {
+                    initialList.filter {
+                        !filesToIgnore.any { ignore -> it.startsWith(ignore) }
+                    }.toTypedArray()
+                } else initialList
+            } catch (e: Exception) {
+                arrayOf<String>()
+            }
         }
     }
 
-    internal fun hasAssets(
+    internal suspend fun hasAssets(
         context: Context?,
         path: String = "",
         filterIgnoredFiles: Boolean = true
-    ): Boolean = listAssets(context, path, filterIgnoredFiles).size >= 0
-
-    private fun getZooperAssets(context: Context?): List<Pair<String, String>> {
-        val assets = ArrayList<Pair<String, String>>()
-        zooperFolders.forEach { folder ->
-            assets.addAll(listAssets(context, folder).map { Pair(folder, it) })
-        }
-        return assets.filter { it.second.contains(".") }
+    ): Boolean = withContext(IO) {
+        val assets = listAssets(context, path, filterIgnoredFiles)
+        return@withContext assets.isNotEmpty()
     }
+
+    private suspend fun getZooperAssets(context: Context?): List<Pair<String, String>> =
+        withContext(IO) {
+            val assets = ArrayList<Pair<String, String>>()
+            zooperFolders.forEach { folder ->
+                val files = listAssets(context, folder).map { Pair(folder, it) }
+                assets.addAll(files)
+            }
+            return@withContext assets.filter { it.second.contains(".") }
+        }
 
     private fun zooperAssetPath(asset: Pair<String, String>): String =
         "${asset.first}/${asset.second}"
@@ -65,14 +73,14 @@ object KuperAssets {
     private fun zooperAssetPathOnDevice(asset: Pair<String, String>): String =
         "${Environment.getExternalStorageDirectory()}/ZooperWidget/${getCorrectFolderName(asset.first)}/${asset.second}"
 
-    internal fun areZooperAssetsInstalled(context: Context?): Boolean {
+    internal suspend fun areZooperAssetsInstalled(context: Context?): Boolean = withContext(IO) {
         var installedAssetsCount = 0
         val expectedAssets = getZooperAssets(context)
         expectedAssets.forEach {
             val file = File(zooperAssetPathOnDevice(it))
             if (file.exists()) installedAssetsCount += 1
         }
-        return installedAssetsCount >= expectedAssets.size
+        return@withContext installedAssetsCount >= expectedAssets.size
     }
 
     @Suppress("DEPRECATION")
