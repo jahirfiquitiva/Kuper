@@ -16,6 +16,11 @@
             android:exported="false" />
 
         <activity
+            android:name="dev.jahir.frames.ui.activities.MuzeiSettingsActivity"
+            android:exported="false"
+            tools:replace="android:exported" />
+
+        <activity
             android:name=".ui.activities.KuperViewerActivity"
             android:exported="false" />
 
@@ -27,6 +32,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activities.KuperMuzeiSettingsActivity"
+            android:exported="true" />
 
     </application>
 
