@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="setup">Setup</string>
-    <string name="widgets">Widgets</string>
-    <string name="required_apps">Fehlende App</string>
-    <string name="assets">Ressourcen</string>
+    <string name="setup">Einrichtung</string>
+    <string name="widgets">Widget</string>
+    <string name="required_apps">Fehlende Apps</string>
+    <string name="assets">Vorzüge</string>
     <string name="required_for_templates"> Verwende Vorlagen</string>
     <string name="required_for_widgets">Widgets verwenden</string>
     <string name="required_for_wallpapers">Statt Hintergrundbild</string>
