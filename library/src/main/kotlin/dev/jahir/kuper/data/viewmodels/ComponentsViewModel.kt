@@ -1,3 +1,5 @@
+@file:Suppress("BlockingMethodInNonBlockingContext")
+
 package dev.jahir.kuper.data.viewmodels
 
 import android.app.Application
@@ -131,7 +133,7 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
                     out.flush()
                     out.close()
 
-                    if (file.exists()) {
+                    if (file.exists() && file.length() > 0) {
                         val zipFile = ZipFile(file)
                         val entries = zipFile.entries()
                         while (entries.hasMoreElements()) {

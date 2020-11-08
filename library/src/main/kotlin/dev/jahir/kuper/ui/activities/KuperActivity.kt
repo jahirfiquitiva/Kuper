@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.fondesa.kpermissions.PermissionStatus
-import com.github.javiersantos.piracychecker.activities.getAppName
 import com.google.android.material.snackbar.Snackbar
 import dev.jahir.frames.data.viewmodels.WallpapersDataViewModel
+import dev.jahir.frames.extensions.context.getAppName
 import dev.jahir.frames.extensions.context.string
 import dev.jahir.frames.extensions.utils.lazyViewModel
 import dev.jahir.frames.extensions.utils.postDelayed
