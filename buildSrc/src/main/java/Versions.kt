@@ -2,7 +2,7 @@
 
 object Versions {
     // Plugins
-    const val gradle = "4.1.0"
+    const val gradle = "4.1.1"
     const val kotlin = "1.4.10"
 
     // OneSignal
@@ -12,8 +12,8 @@ object Versions {
     // App
     const val minSdk = 21
     const val targetSdk = 30
-    const val buildTools = "29.0.3"
+    const val buildTools = "30.0.0"
 
     // Kuper
-    const val kuper = "2.2.4"
+    const val kuper = "2.2.5"
 }
