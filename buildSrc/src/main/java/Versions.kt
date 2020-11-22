@@ -15,5 +15,5 @@ object Versions {
     const val buildTools = "30.0.0"
 
     // Kuper
-    const val kuper = "2.2.5"
+    const val kuper = "2.2.6"
 }
