@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="setup">设置</string>
-    <string name="widgets">小部件</string>
+    <string name="setup">安装</string>
+    <string name="widgets">插件</string>
     <string name="required_apps">应用程序缺失</string>
     <string name="assets">资源</string>
     <string name="required_for_templates">使用模板</string>
