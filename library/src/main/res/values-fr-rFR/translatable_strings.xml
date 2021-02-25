@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="setup">Configuration</string>
+    <string name="widgets">Widgets</string>
+    <string name="required_apps">Applications manquantes</string>
+    <string name="assets">Assets</string>
+    <string name="required_for_templates">Use Templates</string>
+    <string name="required_for_widgets">Utilisation des Widgets</string>
+    <string name="required_for_wallpapers">Use Wallpapers</string>
+    <string name="required_for_lockscreens">Use Lock Screens</string>
+    <string name="required_assets">Use Templates</string>
+    <string name="install">Install</string>
+    <string name="app_not_installed">Can’t find suitable app.</string>
+    <string name="template">Template</string>
+    <string name="templates">Templates</string>
+    <string name="x_templates">%1$s Templates</string>
+    <string name="assets_installed">Assets already imported.</string>
+    <string name="apps_installed">Apps already installed.</string>
+    <string name="copying_assets">Importing assets to “ZooperWidget/%1$s”.</string>
+    <string name="copied_assets_successfully">Assets imported.</string>
+    <string name="copied_assets_error">Couldn’t import assets.</string>
+    <string name="permission_request_assets">%1$s uses the Storage permission to import assets.</string>
+    <string name="permission_request_wallpaper">%1$s uses the Storage permission to show the device wallpaper in Widgets.</string>
+    <string name="open_komponents">To add a Komponent, press + in the Kustom editor.</string>
+</resources>
