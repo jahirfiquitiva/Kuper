@@ -35,7 +35,6 @@ val Context.hasReadStoragePermission: Boolean
         false
     }
 
-
 val Context.userWallpaper: Drawable?
     @SuppressLint("MissingPermission")
     get() {

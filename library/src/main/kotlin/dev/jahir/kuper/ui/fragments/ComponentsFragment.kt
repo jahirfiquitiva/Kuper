@@ -53,7 +53,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
                 addListener(object : BasePermissionRequestListener {
                     override fun onPermissionsGranted(result: List<PermissionStatus>) {
                         super.onPermissionsGranted(result)
-                        loadData()
+                        componentsAdapter.wallpaper = wallpaper
                     }
 
                     override fun onPermissionsShouldShowRationale(result: List<PermissionStatus>) {

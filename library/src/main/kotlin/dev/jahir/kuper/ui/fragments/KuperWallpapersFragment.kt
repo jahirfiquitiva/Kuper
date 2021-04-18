@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import dev.jahir.frames.data.models.Wallpaper
-import dev.jahir.frames.ui.activities.base.BaseFavoritesConnectedActivity
 import dev.jahir.frames.ui.fragments.WallpapersFragment
 import dev.jahir.kuper.ui.activities.KuperViewerActivity
 
