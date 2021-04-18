@@ -1,22 +1,30 @@
 package dev.jahir.kuper.ui.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
-import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
+import com.fondesa.kpermissions.PermissionStatus
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.google.android.material.snackbar.Snackbar
+import dev.jahir.frames.data.listeners.BasePermissionRequestListener
 import dev.jahir.frames.extensions.context.dimenPixelSize
+import dev.jahir.frames.extensions.context.getAppName
 import dev.jahir.frames.extensions.context.integer
 import dev.jahir.frames.extensions.context.openLink
 import dev.jahir.frames.extensions.context.toast
 import dev.jahir.frames.extensions.fragments.mdDialog
+import dev.jahir.frames.extensions.fragments.string
 import dev.jahir.frames.extensions.resources.dpToPx
 import dev.jahir.frames.extensions.resources.hasContent
 import dev.jahir.frames.extensions.resources.lower
 import dev.jahir.frames.extensions.utils.lazyViewModel
+import dev.jahir.frames.extensions.views.snackbar
 import dev.jahir.frames.ui.activities.base.BaseLicenseCheckerActivity.Companion.PLAY_STORE_LINK_PREFIX
+import dev.jahir.frames.ui.activities.base.BaseStoragePermissionRequestActivity
 import dev.jahir.frames.ui.fragments.base.BaseFramesFragment
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.KLCK_PACKAGE
@@ -25,7 +33,7 @@ import dev.jahir.kuper.data.KWGT_PACKAGE
 import dev.jahir.kuper.data.ZOOPER_PACKAGE
 import dev.jahir.kuper.data.models.Component
 import dev.jahir.kuper.data.viewmodels.ComponentsViewModel
-import dev.jahir.kuper.extensions.hasStoragePermission
+import dev.jahir.kuper.extensions.userWallpaper
 import dev.jahir.kuper.ui.adapters.ComponentsAdapter
 import dev.jahir.kuper.ui.decorations.SectionedGridSpacingDecoration
 
@@ -36,14 +44,39 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
     private val componentsAdapter: ComponentsAdapter by lazy { ComponentsAdapter(::onClick) }
 
     private val wallpaper: Drawable?
-        get() = activity?.let {
-            try {
-                val wm = WallpaperManager.getInstance(it)
-                if (it.hasStoragePermission) wm?.fastDrawable else null
-            } catch (e: Exception) {
-                null
+        get() = activity?.userWallpaper
+
+    private fun requestStoragePermission() {
+        permissionsBuilder(Manifest.permission.READ_EXTERNAL_STORAGE)
+            .build()
+            .apply {
+                addListener(object : BasePermissionRequestListener {
+                    override fun onPermissionsGranted(result: List<PermissionStatus>) {
+                        super.onPermissionsGranted(result)
+                        loadData()
+                    }
+
+                    override fun onPermissionsShouldShowRationale(result: List<PermissionStatus>) {
+                        super.onPermissionsShouldShowRationale(result)
+                        showPermissionRationale()
+                    }
+                })
+            }
+            .send()
+    }
+
+    private fun showPermissionRationale() {
+        snackbar(
+            string(R.string.permission_request, context?.getAppName()),
+            Snackbar.LENGTH_INDEFINITE,
+            (activity as? BaseStoragePermissionRequestActivity<*>)?.snackbarAnchorId ?: 0
+        ) {
+            setAction(android.R.string.ok) {
+                requestStoragePermission()
+                dismiss()
             }
         }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +86,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         componentsAdapter.updateSectionTitles(context)
+        requestStoragePermission()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

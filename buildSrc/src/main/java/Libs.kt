@@ -9,7 +9,7 @@ object Libs {
 
     // Lifecycle Scope
     private const val lifecycleScope =
-        "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleScope}"
+        "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleRuntimeKtx}"
 
     val dependencies = arrayOf(kustomApi, lifecycleScope)
 }
