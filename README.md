@@ -87,7 +87,7 @@ Kuper is available via JitPack, so getting it as simple as adding it as a depend
 ```gradle
 allprojects {
     repositories {
-	mavenCentral()
+		mavenCentral()
         maven { url 'https://jitpack.io' }
     }
 }
