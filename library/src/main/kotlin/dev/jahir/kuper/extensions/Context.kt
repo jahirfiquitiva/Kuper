@@ -47,9 +47,9 @@ val Context.userWallpaper: Drawable?
             wm?.let { nwm ->
                 return if (hasReadStoragePermission)
                     try {
-                        nwm.peekFastDrawable()
+                        nwm.peekFastDrawable() ?: nwm.fastDrawable
                     } catch (e: Exception) {
-                        nwm.peekDrawable() ?: nwm.builtInDrawable ?: null
+                        nwm.peekDrawable() ?: nwm.builtInDrawable
                     }
                 else {
                     try {
