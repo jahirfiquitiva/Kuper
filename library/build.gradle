@@ -82,7 +82,7 @@ dependencies {
 
 ext {
     PUBLISH_GROUP_ID = 'dev.jahir'
-    PUBLISH_VERSION = Kuper.version
+    PUBLISH_VERSION = Kuper.versionName
     PUBLISH_ARTIFACT_ID = 'Kuper'
 }
 

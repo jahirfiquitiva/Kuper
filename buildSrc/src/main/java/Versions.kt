@@ -9,7 +9,7 @@ object Versions {
 
     // OneSignal
     const val oneSignalPlugin = "0.12.10"
-    const val oneSignal = "4.3.0"
+    const val oneSignal = "4.3.3"
 
     // App
     const val minSdk = 21
@@ -17,7 +17,7 @@ object Versions {
     const val buildTools = "30.0.2"
 
     // Frames
-    const val frames = "3.3.8"
+    const val frames = "3.4.0"
 
     // Kustom API
     const val kustomApi = "6369c37"
