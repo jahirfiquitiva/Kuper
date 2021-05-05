@@ -2,10 +2,10 @@
 
 object Versions {
     // Plugins
-    const val gradle = "4.1.3"
+    const val gradle = "4.2.0"
     const val kotlin = "1.4.32"
     const val jitpack = "2.1"
-    const val sonatype = "1.0.0"
+    const val sonatype = "1.1.0"
 
     // OneSignal
     const val oneSignalPlugin = "0.12.10"
