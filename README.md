@@ -4,7 +4,7 @@ Kuper
 ======
 
 ![API](https://img.shields.io/badge/API-21%2B-34bf49.svg)
-[![GitHub Release](https://img.shields.io/github/v/release/jahirfiquitiva/Kuper?label=Frames&sort=semver)](https://github.com/jahirfiquitiva/Kuper/releases/latest)
+[![GitHub Release](https://img.shields.io/github/v/release/jahirfiquitiva/Kuper?label=Kuper&sort=semver)](https://github.com/jahirfiquitiva/Kuper/releases/latest)
 [![Build Status](https://travis-ci.com/jahirfiquitiva/Kuper.svg?branch=master)](https://travis-ci.com/jahirfiquitiva/Kuper)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d8cd40ec4cb400d9091d34026c904e7)](https://www.codacy.com/app/jahirfiquitiva/Kuper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jahirfiquitiva/Kuper&amp;utm_campaign=Badge_Grade)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/Kuper/localized.svg)](https://crowdin.com/project/Kuper/invite)
@@ -81,9 +81,9 @@ Free, feature-rich, easily customizable Android dashboard for widgets apps with 
 ---
 
 # Including in your project
-Kuper is available via JitPack, so getting it as simple as adding it as a dependency, like this:
+Kuper is available via Maven, so getting it as simple as adding it as a dependency, like this:
 
-1. Add JitPack repository to your root `build.gradle` file
+1. Add `MavenCentral` and `Jitpack` to your root `build.gradle` file
 ```gradle
 allprojects {
     repositories {
@@ -100,7 +100,7 @@ dependencies {
     }
 }
 ```
-where `{latest version}` corresponds to published version in   [![GitHub Release](https://img.shields.io/github/v/release/jahirfiquitiva/Kuper?label=Frames&sort=semver)](https://github.com/jahirfiquitiva/Kuper/releases/latest)
+where `{latest version}` corresponds to published version in   [![GitHub Release](https://img.shields.io/github/v/release/jahirfiquitiva/Kuper?label=Kuper&sort=semver)](https://github.com/jahirfiquitiva/Kuper/releases/latest)
 
 ## How to implement
 :page_with_curl: Everything you need to know can be found in the **[Wiki Docs](https://github.com/jahirfiquitiva/Kuper/wiki/)**
