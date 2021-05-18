@@ -41,14 +41,16 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
         app?.text = component.type.toString().lower().capitalize()
         icon?.visibleIf(component.hasIntent)
         if (icon?.isVisible == true) {
-            icon?.setImageDrawable(context.drawable(R.drawable.ic_open_app))
+            icon?.setImageDrawable(
+                context.drawable(R.drawable.ic_open_app)?.tint(Color.parseColor("#ffffff"))
+            )
             icon?.setOnClickListener { listener?.invoke(component) }
         }
         val rightPreview =
             if (context.boolean(R.bool.is_landscape)) component.rightLandPath
             else component.previewPath
         try {
-            progress?.indeterminateDrawable?.tint(Color.parseColor("#888"))
+            progress?.indeterminateDrawable?.tint(Color.parseColor("#888888"))
         } catch (e: Exception) {
         }
         preview?.load(File(rightPreview)) {
