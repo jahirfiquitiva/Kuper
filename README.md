@@ -5,9 +5,8 @@ Kuper
 
 ![API](https://img.shields.io/badge/API-21%2B-34bf49.svg)
 [![GitHub Release](https://img.shields.io/github/v/release/jahirfiquitiva/Kuper?label=Kuper&sort=semver)](https://github.com/jahirfiquitiva/Kuper/releases/latest)
-[![Build Status](https://travis-ci.com/jahirfiquitiva/Kuper.svg?branch=master)](https://travis-ci.com/jahirfiquitiva/Kuper)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d8cd40ec4cb400d9091d34026c904e7)](https://www.codacy.com/app/jahirfiquitiva/Kuper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jahirfiquitiva/Kuper&amp;utm_campaign=Badge_Grade)
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/Kuper/localized.svg)](https://crowdin.com/project/Kuper/invite)
+[![Build Status](https://github.com/jahirfiquitiva/Kuper/actions/workflows/build.yml/badge.svg?branch=sample)](https://github.com/jahirfiquitiva/Kuper/actions/workflows/build.yml)
+[![Crowdin](https://badges.crowdin.net/Kuper/localized.svg)](https://crowdin.com/project/Kuper/invite)
 
 Free, feature-rich, easily customizable Android dashboard for widgets apps with Zooper widgets and/or Kustom assets (Widgets, Wallpapers and Komponents)
 
