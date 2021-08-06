@@ -21,6 +21,7 @@ import dev.jahir.frames.extensions.views.visibleIf
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.Component
 import java.io.File
+import java.util.*
 
 class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     private val wall: AppCompatImageView? by itemView.findView(R.id.device_wallpaper)
@@ -38,7 +39,11 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
     ) {
         wall?.setImageDrawable(wallpaper)
         name?.text = component.name.replace("_", " ")
-        app?.text = component.type.toString().lower().capitalize()
+        app?.text = component.type.toString().lower()
+            .replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.getDefault())
+                else it.toString()
+            }
         icon?.visibleIf(component.hasIntent)
         if (icon?.isVisible == true) {
             icon?.setImageDrawable(
