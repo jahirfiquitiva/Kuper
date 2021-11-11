@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation,ExtraTranslation">
+    <string name="setup">होम</string>
+    <string name="widgets">विजेट</string>
+    <string name="required_apps">अनुपस्थित ऐप्लिकेशन</string>
+    <string name="assets">सामग्री</string>
+    <string name="required_for_templates">टेम्पलेट का प्रयोग करें</string>
+    <string name="required_for_widgets">विजेट इस्तेमाल करें</string>
+    <string name="required_for_wallpapers">वालपेपर सेट करें</string>
+    <string name="required_for_lockscreens">लोक स्क्रीन में प्रयोग करें</string>
+    <string name="required_assets">टेम्पलेट का प्रयोग करें</string>
+    <string name="install">इंस्टॉल</string>
+    <string name="app_not_installed">संबंधित ऐप्लिकेशन अनुपस्थित</string>
+    <string name="template">टेम्पलेट</string>
+    <string name="templates">टेम्पलेट्स</string>
+    <string name="x_templates">_ टेम्पलेटस</string>
+    <string name="assets_installed">एसेट्स पहले से इंस्टॉल्ड है</string>
+    <string name="apps_installed">ऐप्लिकेशन पहले से इंस्टॉल्ड है</string>
+    <string name="copying_assets">%1$sसामग्री को जुपर मे लेजाऐ</string>
+    <string name="copied_assets_successfully">सामग्री लाई गई</string>
+    <string name="copied_assets_error">आयात नहीं किया जा सकती है %s</string>
+    <string name="permission_request_assets">%1$s को आपकी स्टोरेज की आवश्यकता है ताकि वह वॉलपेपर को अप्लाई और सेव कर सके</string>
+    <string name="permission_request_wallpaper">%1$s स्टोरेज के प्रयोग करने कि अनुमती दे</string>
+    <string name="open_komponents">कंपोनेंट का प्रयोग करने के लिए कस्टम ईडिटर मे + दबाये</string>
+</resources>
