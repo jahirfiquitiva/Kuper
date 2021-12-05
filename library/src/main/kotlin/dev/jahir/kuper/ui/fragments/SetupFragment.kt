@@ -42,7 +42,7 @@ class SetupFragment : BaseFramesFragment<RequiredApp>() {
         filter: String
     ): ArrayList<RequiredApp> = originalItems
 
-    override fun updateItemsInAdapter(items: ArrayList<RequiredApp>) {
+    override fun updateItemsInAdapter(items: List<RequiredApp>) {
         requiredAppsAdapter.apps = items
     }
 

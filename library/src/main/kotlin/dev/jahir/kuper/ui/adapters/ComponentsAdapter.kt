@@ -1,5 +1,6 @@
 package dev.jahir.kuper.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.ViewGroup
@@ -15,16 +16,17 @@ import dev.jahir.kuper.ui.viewholders.ComponentViewHolder
 class ComponentsAdapter(private val onClick: (Component) -> Unit) :
     SectionedRecyclerViewAdapter<SectionedViewHolder>() {
 
-    var components = ArrayList<Component>()
+    var components = listOf<Component>()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
-            field.clear()
-            field.addAll(value)
+            field = value
             notifyDataSetChanged()
         }
 
     private val sectionTitles = ArrayList<String>()
 
     internal var wallpaper: Drawable? = null
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()

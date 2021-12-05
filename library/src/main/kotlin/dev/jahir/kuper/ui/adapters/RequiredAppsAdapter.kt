@@ -1,5 +1,6 @@
 package dev.jahir.kuper.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
@@ -13,10 +14,10 @@ import dev.jahir.kuper.ui.viewholders.RequiredAppViewHolder
 class RequiredAppsAdapter(private val onClick: (RequiredApp) -> Unit) :
     SectionedRecyclerViewAdapter<SectionedViewHolder>() {
 
-    var apps: ArrayList<RequiredApp> = ArrayList()
+    var apps: List<RequiredApp> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
-            field.clear()
-            field.addAll(value)
+            field = value
             notifyDataSetChanged()
         }
 

@@ -147,7 +147,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
                         contxt.openLink(PLAY_STORE_LINK_PREFIX + itemPkg)
                     }
                 }
-            } ?: {
+            } ?: run {
                 if (component.type == Component.Type.KOMPONENT) {
                     activity?.mdDialog {
                         setTitle(R.string.komponents)
@@ -155,7 +155,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
                         setPositiveButton(android.R.string.ok) { _, _ -> }
                     }?.show()
                 }
-            }()
+            }
         }
     }
 
@@ -165,7 +165,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
     ): ArrayList<Component> =
         ArrayList(originalItems.filter { it.name.lower().contains(filter.lower()) })
 
-    override fun updateItemsInAdapter(items: ArrayList<Component>) {
+    override fun updateItemsInAdapter(items: List<Component>) {
         componentsAdapter.components = items
         recyclerView?.loading = false
     }
