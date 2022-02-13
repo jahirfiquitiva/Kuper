@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/cards_corner_size"
     app:cardPreventCornerOverlap="false">
 
     <dev.jahir.frames.ui.widgets.PortraitImageView
