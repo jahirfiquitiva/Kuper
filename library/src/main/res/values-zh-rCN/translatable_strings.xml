@@ -13,7 +13,7 @@
     <string name="app_not_installed">没有找到正确的应用。</string>
     <string name="template">模板</string>
     <string name="templates">模板</string>
-    <string name="x_templates">%1$s 个模板</string>
+    <string name="x_templates">%1$s 模板</string>
     <string name="assets_installed">资源已经导入成功。</string>
     <string name="apps_installed">应用已安装。</string>
     <string name="copying_assets">导入资源到 “ZooperWidget/%1$s”。</string>
