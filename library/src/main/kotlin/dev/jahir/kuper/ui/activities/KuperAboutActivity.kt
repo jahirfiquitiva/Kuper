@@ -4,6 +4,5 @@ import dev.jahir.frames.ui.activities.AboutActivity
 import dev.jahir.kuper.BuildConfig
 
 class KuperAboutActivity : AboutActivity() {
-    override val dashboardName
-    get() = BuildConfig.DASHBOARD_NAME
+    override val dashboardName = BuildConfig.DASHBOARD_NAME
 }
