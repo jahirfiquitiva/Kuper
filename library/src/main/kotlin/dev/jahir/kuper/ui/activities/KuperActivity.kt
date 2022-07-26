@@ -72,12 +72,16 @@ abstract class KuperActivity : FramesActivity() {
         requiredAppsViewModel.destroy(this)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.settings) {
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.settings -> {
             startActivity(Intent(this, KuperSettingsActivity::class.java))
-            return true
+            true
         }
-        return super.onOptionsItemSelected(item)
+        R.id.about -> {
+            startActivity(Intent(this, KuperAboutActivity::class.java))
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private fun hideSetup() {

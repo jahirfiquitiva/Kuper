@@ -37,6 +37,11 @@
         </activity>
 
         <activity
+            android:name=".ui.activities.KuperAboutActivity"
+            android:exported="false"
+            android:label="@string/about" />
+
+        <activity
             android:name=".ui.activities.KuperMuzeiSettingsActivity"
             android:exported="true" />
 
