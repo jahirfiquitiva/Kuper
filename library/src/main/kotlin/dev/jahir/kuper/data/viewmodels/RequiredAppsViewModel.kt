@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import dev.jahir.frames.extensions.context.boolean
 import dev.jahir.frames.extensions.context.string
 import dev.jahir.frames.extensions.utils.context
 import dev.jahir.frames.extensions.utils.lazyMutableLiveData
@@ -12,6 +13,7 @@ import dev.jahir.frames.extensions.utils.tryToObserve
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.KLCK_PACKAGE
 import dev.jahir.kuper.data.KLWP_PACKAGE
+import dev.jahir.kuper.data.KOLORETTE_PACKAGE
 import dev.jahir.kuper.data.KWGT_PACKAGE
 import dev.jahir.kuper.data.models.RequiredApp
 import dev.jahir.kuper.data.tasks.KuperAssets
@@ -105,6 +107,17 @@ class RequiredAppsViewModel(application: Application) : AndroidViewModel(applica
                     context.string(R.string.klck_pro),
                     context.string(R.string.required_for_lockscreens),
                     R.drawable.ic_kustom, "$KLCK_PACKAGE.pro"
+                )
+            )
+        }
+
+        if (!context.isAppInstalled(KOLORETTE_PACKAGE)
+            && context.boolean(R.bool.kolorette_required)) {
+            apps.add(
+                RequiredApp(
+                    context.string(R.string.kolorette),
+                    context.string(R.string.required_for_templates),
+                    R.drawable.ic_palette, KOLORETTE_PACKAGE
                 )
             )
         }

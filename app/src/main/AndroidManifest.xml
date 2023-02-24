@@ -94,13 +94,6 @@
                 android:value="dev.jahir.kuper.ui.activities.KuperMuzeiSettingsActivity" />
         </provider>
 
-        <!-- TODO: Remove comment marks to enable Zooper
-        <provider
-                android:name=".ZooperProvider"
-                android:authorities="${applicationId}.zwprovider"
-                tools:ignore="ExportedContentProvider"/>
-        -->
-
         <!-- TODO: Remove comment marks to enable Kustom Skins
         * Remove intent-filter action lines according to your needs.
 		* If you're not going to provide one of the options, remove its respective line.

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--    Set to 'true' if your app requires Media Utils. 'false' otherwise. -->
-    <bool name="media_utils_required">false</bool>
-
     <!--    Set to 'true' if your app requires Kolorette. 'false' otherwise. -->
     <bool name="kolorette_required">false</bool>
+
+    <!--    Name of the skin to be shown inside the Kustom app -->
+    <string name="kustom_pack_title">@string/app_name</string>
+
+    <!--    A brief description of the pack contents -->
+    <string name="kustom_pack_description" />
 </resources>
