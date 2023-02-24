@@ -30,11 +30,8 @@ class SetupFragment : BaseFramesFragment<RequiredApp>() {
     }
 
     private fun onClick(requiredApp: RequiredApp) {
-        if (requiredApp.packageName.hasContent()) {
+        if (requiredApp.packageName.hasContent())
             context?.openLink(PLAY_STORE_LINK_PREFIX + requiredApp.packageName)
-        } else {
-            (activity as? KuperActivity)?.requestPermissionToInstallAssets()
-        }
     }
 
     override fun getFilteredItems(

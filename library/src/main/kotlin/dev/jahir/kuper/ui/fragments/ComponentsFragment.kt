@@ -24,13 +24,12 @@ import dev.jahir.frames.extensions.resources.lower
 import dev.jahir.frames.extensions.utils.lazyViewModel
 import dev.jahir.frames.extensions.views.snackbar
 import dev.jahir.frames.ui.activities.base.BaseLicenseCheckerActivity.Companion.PLAY_STORE_LINK_PREFIX
-import dev.jahir.frames.ui.activities.base.BaseStoragePermissionRequestActivity
+import dev.jahir.frames.ui.activities.base.BasePermissionsRequestActivity
 import dev.jahir.frames.ui.fragments.base.BaseFramesFragment
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.KLCK_PACKAGE
 import dev.jahir.kuper.data.KLWP_PACKAGE
 import dev.jahir.kuper.data.KWGT_PACKAGE
-import dev.jahir.kuper.data.ZOOPER_PACKAGE
 import dev.jahir.kuper.data.models.Component
 import dev.jahir.kuper.data.viewmodels.ComponentsViewModel
 import dev.jahir.kuper.extensions.userWallpaper
@@ -69,7 +68,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
         snackbar(
             string(R.string.permission_request, context?.getAppName()),
             Snackbar.LENGTH_INDEFINITE,
-            (activity as? BaseStoragePermissionRequestActivity<*>)?.snackbarAnchorId ?: 0
+            (activity as? BasePermissionsRequestActivity<*>)?.snackbarAnchorId ?: 0
         ) {
             setAction(android.R.string.ok) {
                 requestStoragePermission()
@@ -136,7 +135,6 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
                     startActivity(it)
                 } catch (e: Exception) {
                     val itemPkg = when (component.type) {
-                        Component.Type.ZOOPER -> ZOOPER_PACKAGE
                         Component.Type.WALLPAPER -> KLWP_PACKAGE
                         Component.Type.WIDGET -> KWGT_PACKAGE
                         Component.Type.LOCKSCREEN -> KLCK_PACKAGE

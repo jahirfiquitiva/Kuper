@@ -62,21 +62,19 @@ data class Component(
     }
 
     enum class Type {
-        ZOOPER, KOMPONENT, WALLPAPER, WIDGET, LOCKSCREEN, UNKNOWN
+        KOMPONENT, WALLPAPER, WIDGET, LOCKSCREEN, UNKNOWN
     }
 
     companion object {
         fun typeForKey(key: Int): Type = when (key) {
-            0 -> Type.ZOOPER
-            1 -> Type.KOMPONENT
-            2 -> Type.WIDGET
-            3 -> Type.LOCKSCREEN
-            4 -> Type.WALLPAPER
+            0 -> Type.KOMPONENT
+            1 -> Type.WIDGET
+            2 -> Type.LOCKSCREEN
+            3 -> Type.WALLPAPER
             else -> Type.UNKNOWN
         }
 
         fun extensionForType(type: Type) = when (type) {
-            Type.ZOOPER -> ".zw"
             Type.KOMPONENT -> ".komp"
             Type.LOCKSCREEN -> ".klck"
             Type.WALLPAPER -> ".klwp"

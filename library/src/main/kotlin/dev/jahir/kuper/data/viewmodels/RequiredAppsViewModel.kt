@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import dev.jahir.frames.extensions.context.boolean
 import dev.jahir.frames.extensions.context.string
 import dev.jahir.frames.extensions.utils.context
 import dev.jahir.frames.extensions.utils.lazyMutableLiveData
@@ -13,10 +12,7 @@ import dev.jahir.frames.extensions.utils.tryToObserve
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.KLCK_PACKAGE
 import dev.jahir.kuper.data.KLWP_PACKAGE
-import dev.jahir.kuper.data.KOLORETTE_PACKAGE
 import dev.jahir.kuper.data.KWGT_PACKAGE
-import dev.jahir.kuper.data.MEDIA_UTILS_PACKAGE
-import dev.jahir.kuper.data.ZOOPER_PACKAGE
 import dev.jahir.kuper.data.models.RequiredApp
 import dev.jahir.kuper.data.tasks.KuperAssets
 import dev.jahir.kuper.extensions.isAppInstalled
@@ -49,20 +45,9 @@ class RequiredAppsViewModel(application: Application) : AndroidViewModel(applica
     private suspend fun internalLoadApps(): ArrayList<RequiredApp> = withContext(IO) {
         val apps = ArrayList<RequiredApp>()
 
-        val hasTemplates = KuperAssets.hasAssets(context, "templates")
         val hasWidgets = KuperAssets.hasAssets(context, "widgets")
         val hasWallpapers = KuperAssets.hasAssets(context, "wallpapers")
         val hasLockScreens = KuperAssets.hasAssets(context, "lockscreens")
-
-        if (!context.isAppInstalled(ZOOPER_PACKAGE) && hasTemplates) {
-            apps.add(
-                RequiredApp(
-                    context.string(R.string.zooper_widget),
-                    context.string(R.string.required_for_widgets),
-                    R.drawable.ic_zooper, ZOOPER_PACKAGE
-                )
-            )
-        }
 
         if (!context.isAppInstalled(KWGT_PACKAGE) && hasWidgets) {
             apps.add(
@@ -124,37 +109,6 @@ class RequiredAppsViewModel(application: Application) : AndroidViewModel(applica
             )
         }
 
-        if (!context.isAppInstalled(MEDIA_UTILS_PACKAGE)
-            && context.boolean(R.bool.media_utils_required)) {
-            apps.add(
-                RequiredApp(
-                    context.string(R.string.media_utils),
-                    context.string(R.string.required_for_widgets),
-                    R.drawable.ic_zooper, MEDIA_UTILS_PACKAGE
-                )
-            )
-        }
-
-        if (!context.isAppInstalled(KOLORETTE_PACKAGE)
-            && context.boolean(R.bool.kolorette_required)) {
-            apps.add(
-                RequiredApp(
-                    context.string(R.string.kolorette),
-                    context.string(R.string.required_for_templates),
-                    R.drawable.ic_palette, KOLORETTE_PACKAGE
-                )
-            )
-        }
-
-        if (!KuperAssets.areZooperAssetsInstalled(context)) {
-            apps.add(
-                RequiredApp(
-                    context.string(R.string.widgets),
-                    context.string(R.string.required_assets),
-                    R.drawable.ic_zooper
-                )
-            )
-        }
         apps
     }
 }

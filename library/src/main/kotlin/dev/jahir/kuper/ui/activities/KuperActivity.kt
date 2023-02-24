@@ -1,24 +1,21 @@
 package dev.jahir.kuper.ui.activities
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import com.fondesa.kpermissions.PermissionStatus
-import com.google.android.material.snackbar.Snackbar
 import dev.jahir.frames.data.viewmodels.WallpapersDataViewModel
 import dev.jahir.frames.extensions.context.getAppName
 import dev.jahir.frames.extensions.context.string
 import dev.jahir.frames.extensions.utils.lazyViewModel
 import dev.jahir.frames.extensions.utils.postDelayed
-import dev.jahir.frames.extensions.views.snackbar
 import dev.jahir.frames.ui.activities.FramesActivity
+import dev.jahir.frames.ui.activities.base.PermissionsResult
 import dev.jahir.frames.ui.fragments.CollectionsFragment
 import dev.jahir.frames.ui.fragments.WallpapersFragment
 import dev.jahir.kuper.R
-import dev.jahir.kuper.data.tasks.KuperAssets
 import dev.jahir.kuper.data.viewmodels.RequiredAppsViewModel
-import dev.jahir.kuper.extensions.hasStoragePermission
 import dev.jahir.kuper.ui.fragments.ComponentsFragment
 import dev.jahir.kuper.ui.fragments.KuperWallpapersFragment
 import dev.jahir.kuper.ui.fragments.SetupFragment
@@ -41,8 +38,6 @@ abstract class KuperActivity : FramesActivity() {
 
     private val requiredAppsViewModel: RequiredAppsViewModel by lazyViewModel()
     private val setupFragment: SetupFragment by lazy { SetupFragment.create(requiredAppsViewModel.apps) }
-
-    private var shouldInstallAssets = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,51 +108,27 @@ abstract class KuperActivity : FramesActivity() {
         }
     }
 
-    override fun internalOnPermissionsGranted(result: List<PermissionStatus>) {
-        super.internalOnPermissionsGranted(result)
-        (currentFragment as? ComponentsFragment)?.updateDeviceWallpaper()
-        loadRequiredApps()
-        if (shouldInstallAssets) internalInstallAssets()
+    override fun internalOnPermissionsGranted(permission: String?) {
+        super.internalOnPermissionsGranted(permission)
+        if (permission == Manifest.permission.WRITE_EXTERNAL_STORAGE) {
+            (currentFragment as? ComponentsFragment)?.updateDeviceWallpaper()
+            loadRequiredApps()
+        }
     }
 
-    override fun getPermissionRationaleMessage(): String =
-        when (currentItemId) {
-            R.id.setup -> string(R.string.permission_request_assets, getAppName())
-            R.id.widgets -> string(R.string.permission_request_wallpaper, getAppName())
-            else -> super.getPermissionRationaleMessage()
-        }
+    override fun getPermissionRationaleMessage(permissions: PermissionsResult): String {
+        return if (permissions.storage) {
+            when (currentItemId) {
+                R.id.setup -> string(R.string.permission_request_assets, getAppName())
+                R.id.widgets -> string(R.string.permission_request_wallpaper, getAppName())
+                else -> super.getPermissionRationaleMessage(permissions)
+            }
+        } else super.getPermissionRationaleMessage(permissions)
+    }
 
     override fun canShowSearch(itemId: Int): Boolean = itemId != R.id.setup
     override fun canShowFavoritesButton(): Boolean = false
     override fun canModifyFavorites(): Boolean = false
-
-    internal fun requestPermissionToInstallAssets() {
-        if (hasStoragePermission) internalInstallAssets()
-        else {
-            shouldInstallAssets = true
-            requestStoragePermission()
-        }
-    }
-
-    private fun internalInstallAssets() {
-        shouldInstallAssets = false
-        KuperAssets.copyZooperAssets(this) { success ->
-            snackbar(
-                string(
-                    if (success) R.string.copied_assets_successfully
-                    else R.string.copied_assets_error
-                ),
-                Snackbar.LENGTH_LONG
-            ) {
-                addCallback(object : Snackbar.Callback() {
-                    override fun onShown(sb: Snackbar?) {
-                        super.onShown(sb)
-                        postDelayed(100) { loadRequiredApps() }
-                    }
-                })
-            }
-        }
-    }
 
     override fun shouldLoadCollections(): Boolean = false
     override fun shouldLoadFavorites(): Boolean = false

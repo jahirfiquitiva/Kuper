@@ -3,9 +3,6 @@
 package dev.jahir.kuper.data.viewmodels
 
 import android.app.Application
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -56,7 +53,7 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
     private suspend fun internalLoadComponents(): ArrayList<Component> {
         return if (components.isNotEmpty()) ArrayList(components)
         else withContext(IO) {
-            val folders = arrayOf("templates", "komponents", "widgets", "lockscreens", "wallpapers")
+            val folders = arrayOf("komponents", "widgets", "lockscreens", "wallpapers")
             val components = ArrayList<Component>()
             val assets = context.assets
             val previewsFolder = File(context.externalCacheDir, "KuperPreviews")
@@ -108,17 +105,11 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
             if (type == Component.Type.KOMPONENT) {
                 thumbnails[0] = "komponent_thumb"
             } else {
-                if (type != Component.Type.ZOOPER) {
-                    thumbnails[0] = "preset_thumb_portrait"
-                    thumbnails[1] = "preset_thumb_landscape"
-                }
+                thumbnails[0] = "preset_thumb_portrait"
+                thumbnails[1] = "preset_thumb_landscape"
             }
 
-            val preview =
-                File(
-                    folder,
-                    name + if (type == Component.Type.ZOOPER) ".png" else "_port.png"
-                )
+            val preview = File(folder, "${name}_port.png")
             val previewLand =
                 if (type == Component.Type.WIDGET || type == Component.Type.WALLPAPER ||
                     type == Component.Type.LOCKSCREEN) {
@@ -138,20 +129,12 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
                         val entries = zipFile.entries()
                         while (entries.hasMoreElements()) {
                             val entry = entries.nextElement()
-                            if (type == Component.Type.ZOOPER) {
-                                val endsWith = entry.name?.endsWith("screen.png") ?: false
-                                if (endsWith) {
+                            if (!entry.name.contains("/") && entry.name.contains("thumb")) {
+                                if (entry.name.contains(thumbnails[0])) {
                                     zipFile.copyFromTo(entry, preview)
-                                    break
-                                }
-                            } else {
-                                if (!entry.name.contains("/") && entry.name.contains("thumb")) {
-                                    if (entry.name.contains(thumbnails[0])) {
-                                        zipFile.copyFromTo(entry, preview)
-                                    } else if (thumbnails[1].hasContent() &&
-                                        entry.name.contains(thumbnails[1])) {
-                                        zipFile.copyFromTo(entry, previewLand)
-                                    }
+                                } else if (thumbnails[1].hasContent() &&
+                                    entry.name.contains(thumbnails[1])) {
+                                    zipFile.copyFromTo(entry, previewLand)
                                 }
                             }
                         }
@@ -162,30 +145,10 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
                     out?.flush()
                     out?.close()
                 }
-
-                if (type == Component.Type.ZOOPER) {
-                    out = null
-                    try {
-                        val preBitmap: Bitmap? = BitmapFactory.decodeFile(preview.absolutePath)
-                        val bmp: Bitmap? =
-                            Component.clearBitmap(
-                                preBitmap, Color.parseColor("#555555")
-                            )
-                        out = FileOutputStream(preview)
-                        bmp?.compress(Bitmap.CompressFormat.PNG, 30, out)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    } finally {
-                        out?.flush()
-                        out?.close()
-                    }
-                }
             }
 
             val correctName = try {
-                if (type != Component.Type.ZOOPER)
-                    name.substring(0, name.lastIndexOf('.'))
-                else name
+                name.substring(0, name.lastIndexOf('.'))
             } catch (e: Exception) {
                 name
             }

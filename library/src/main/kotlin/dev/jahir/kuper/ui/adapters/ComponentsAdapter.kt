@@ -32,13 +32,11 @@ class ComponentsAdapter(private val onClick: (Component) -> Unit) :
             notifyDataSetChanged()
         }
 
+    @SuppressLint("NotifyDataSetChanged")
     internal fun updateSectionTitles(ctxt: Context?) {
         ctxt ?: return
         if (sectionTitles.isNotEmpty()) return
         sectionTitles.clear()
-        sectionTitles.add(
-            ctxt.string(R.string.x_templates, ctxt.string(R.string.zooper_widget))
-        )
         sectionTitles.add(ctxt.string(R.string.komponents))
         sectionTitles.add(ctxt.string(R.string.x_templates, ctxt.string(R.string.kwgt)))
         sectionTitles.add(ctxt.string(R.string.x_templates, ctxt.string(R.string.klck)))
@@ -58,11 +56,10 @@ class ComponentsAdapter(private val onClick: (Component) -> Unit) :
     ): Int = section
 
     private fun getComponentTypeForSection(section: Int): Component.Type = when (section) {
-        0 -> Component.Type.ZOOPER
-        1 -> Component.Type.KOMPONENT
-        2 -> Component.Type.WIDGET
-        3 -> Component.Type.LOCKSCREEN
-        4 -> Component.Type.WALLPAPER
+        0 -> Component.Type.KOMPONENT
+        1 -> Component.Type.WIDGET
+        2 -> Component.Type.LOCKSCREEN
+        3 -> Component.Type.WALLPAPER
         else -> Component.Type.UNKNOWN
     }
 

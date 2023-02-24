@@ -4,14 +4,23 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.content.Context
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import android.os.Build
 import androidx.core.content.ContextCompat
 
+private fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
+    } else {
+        @Suppress("DEPRECATION") getPackageInfo(packageName, flags)
+    }
+
 fun Context.isAppInstalled(packageName: String): Boolean = try {
-    packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
-    true
-} catch (e: Exception) {
+    val info = packageManager.getPackageInfoCompat(packageName, PackageManager.GET_ACTIVITIES)
+    info.packageName == packageName
+} catch (_: Exception) {
     false
 }
 
