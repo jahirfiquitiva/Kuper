@@ -6,5 +6,5 @@ data class RequiredApp(
     val name: String,
     val description: String,
     @DrawableRes val icon: Int,
-    val packageName: String = ""
+    val packageName: String,
 )

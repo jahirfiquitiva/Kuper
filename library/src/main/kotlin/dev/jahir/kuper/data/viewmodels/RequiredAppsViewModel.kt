@@ -51,64 +51,70 @@ class RequiredAppsViewModel(application: Application) : AndroidViewModel(applica
         val hasWallpapers = KuperAssets.hasAssets(context, "wallpapers")
         val hasLockScreens = KuperAssets.hasAssets(context, "lockscreens")
 
-        if (!context.isAppInstalled(KWGT_PACKAGE) && hasWidgets) {
-            apps.add(
-                RequiredApp(
-                    context.string(R.string.kwgt),
-                    context.string(R.string.required_for_widgets),
-                    R.drawable.ic_kustom, KWGT_PACKAGE
+        if (hasWidgets) {
+            if (!context.isAppInstalled(KWGT_PACKAGE)) {
+                apps.add(
+                    RequiredApp(
+                        context.string(R.string.kwgt),
+                        context.string(R.string.required_for_widgets),
+                        R.drawable.ic_kustom, KWGT_PACKAGE
+                    )
                 )
-            )
+            }
+
+            if (!context.isAppInstalled("$KWGT_PACKAGE.pro")) {
+                apps.add(
+                    RequiredApp(
+                        context.string(R.string.kwgt_pro),
+                        context.string(R.string.required_for_widgets),
+                        R.drawable.ic_kustom, "$KWGT_PACKAGE.pro"
+                    )
+                )
+            }
         }
 
-        if (!context.isAppInstalled("$KWGT_PACKAGE.pro") && hasWidgets) {
-            apps.add(
-                RequiredApp(
-                    context.string(R.string.kwgt_pro),
-                    context.string(R.string.required_for_widgets),
-                    R.drawable.ic_kustom, "$KWGT_PACKAGE.pro"
+        if (hasWallpapers) {
+            if (!context.isAppInstalled(KLWP_PACKAGE)) {
+                apps.add(
+                    RequiredApp(
+                        context.string(R.string.klwp),
+                        context.string(R.string.required_for_wallpapers),
+                        R.drawable.ic_wallpapers, KLWP_PACKAGE
+                    )
                 )
-            )
+            }
+
+            if (!context.isAppInstalled("$KLWP_PACKAGE.pro")) {
+                apps.add(
+                    RequiredApp(
+                        context.string(R.string.klwp_pro),
+                        context.string(R.string.required_for_wallpapers),
+                        R.drawable.ic_wallpapers, "$KLWP_PACKAGE.pro"
+                    )
+                )
+            }
         }
 
-        if (!context.isAppInstalled(KLWP_PACKAGE) && hasWallpapers) {
-            apps.add(
-                RequiredApp(
-                    context.string(R.string.klwp),
-                    context.string(R.string.required_for_wallpapers),
-                    R.drawable.ic_kustom, KLWP_PACKAGE
+        if (hasLockScreens) {
+            if (!context.isAppInstalled(KLCK_PACKAGE)) {
+                apps.add(
+                    RequiredApp(
+                        context.string(R.string.klck),
+                        context.string(R.string.required_for_lockscreens),
+                        R.drawable.ic_klck, KLCK_PACKAGE
+                    )
                 )
-            )
-        }
+            }
 
-        if (!context.isAppInstalled("$KLWP_PACKAGE.pro") && hasWallpapers) {
-            apps.add(
-                RequiredApp(
-                    context.string(R.string.klwp_pro),
-                    context.string(R.string.required_for_wallpapers),
-                    R.drawable.ic_kustom, "$KLWP_PACKAGE.pro"
+            if (!context.isAppInstalled("$KLCK_PACKAGE.pro")) {
+                apps.add(
+                    RequiredApp(
+                        context.string(R.string.klck_pro),
+                        context.string(R.string.required_for_lockscreens),
+                        R.drawable.ic_klck, "$KLCK_PACKAGE.pro"
+                    )
                 )
-            )
-        }
-
-        if (!context.isAppInstalled(KLCK_PACKAGE) && hasLockScreens) {
-            apps.add(
-                RequiredApp(
-                    context.string(R.string.klck),
-                    context.string(R.string.required_for_lockscreens),
-                    R.drawable.ic_kustom, KLCK_PACKAGE
-                )
-            )
-        }
-
-        if (!context.isAppInstalled("$KLCK_PACKAGE.pro") && hasLockScreens) {
-            apps.add(
-                RequiredApp(
-                    context.string(R.string.klck_pro),
-                    context.string(R.string.required_for_lockscreens),
-                    R.drawable.ic_kustom, "$KLCK_PACKAGE.pro"
-                )
-            )
+            }
         }
 
         if (!context.isAppInstalled(KOLORETTE_PACKAGE)

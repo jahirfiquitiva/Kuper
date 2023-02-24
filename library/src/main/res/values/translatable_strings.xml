@@ -20,12 +20,7 @@
 
     <string name="x_templates">%1$s Templates</string>
 
-    <string name="assets_installed">Assets already imported.</string>
     <string name="apps_installed">Apps already installed.</string>
-
-    <string name="copying_assets">Importing assets to “ZooperWidget/%1$s”.</string>
-    <string name="copied_assets_successfully">Assets imported.</string>
-    <string name="copied_assets_error">Couldn’t import assets.</string>
 
     <string name="permission_request_assets">%1$s uses the Storage permission to import assets.</string>
     <string name="permission_request_wallpaper">%1$s uses the Storage permission to show the device wallpaper in Widgets.</string>

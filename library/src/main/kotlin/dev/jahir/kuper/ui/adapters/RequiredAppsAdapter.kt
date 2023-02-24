@@ -2,17 +2,14 @@ package dev.jahir.kuper.ui.adapters
 
 import android.annotation.SuppressLint
 import android.view.ViewGroup
-import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter
-import com.afollestad.sectionedrecyclerview.SectionedViewHolder
-import dev.jahir.frames.extensions.resources.hasContent
+import androidx.recyclerview.widget.RecyclerView
 import dev.jahir.frames.extensions.views.inflate
-import dev.jahir.frames.ui.viewholders.SectionHeaderViewHolder
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.RequiredApp
 import dev.jahir.kuper.ui.viewholders.RequiredAppViewHolder
 
 class RequiredAppsAdapter(private val onClick: (RequiredApp) -> Unit) :
-    SectionedRecyclerViewAdapter<SectionedViewHolder>() {
+    RecyclerView.Adapter<RequiredAppViewHolder>() {
 
     var apps: List<RequiredApp> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -21,53 +18,12 @@ class RequiredAppsAdapter(private val onClick: (RequiredApp) -> Unit) :
             notifyDataSetChanged()
         }
 
-    init {
-        shouldShowHeadersForEmptySections(false)
-        shouldShowFooters(false)
+    override fun onBindViewHolder(holder: RequiredAppViewHolder, position: Int) {
+        (holder as? RequiredAppViewHolder)?.bind(apps[position], onClick)
     }
 
-    override fun getItemViewType(
-        section: Int, relativePosition: Int,
-        absolutePosition: Int
-    ): Int = section
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequiredAppViewHolder =
+        RequiredAppViewHolder(parent.inflate(R.layout.item_setup))
 
-    private fun itemForSection(section: Int, relativePosition: Int): RequiredApp =
-        apps.filter {
-            if (section == 0) it.packageName.hasContent()
-            else !it.packageName.hasContent()
-        }[relativePosition]
-
-    override fun onBindViewHolder(
-        holder: SectionedViewHolder?, section: Int, relativePosition: Int,
-        absolutePosition: Int
-    ) {
-        (holder as? RequiredAppViewHolder)?.bind(itemForSection(section, relativePosition), onClick)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionedViewHolder {
-        return if (viewType >= 0) {
-            RequiredAppViewHolder(parent.inflate(R.layout.item_setup))
-        } else SectionHeaderViewHolder(parent.inflate(R.layout.item_section_header))
-    }
-
-    override fun getItemCount(section: Int): Int =
-        apps.filter {
-            if (section == 0) it.packageName.hasContent()
-            else !it.packageName.hasContent()
-        }.size
-
-    override fun onBindHeaderViewHolder(
-        holder: SectionedViewHolder?,
-        section: Int,
-        expanded: Boolean
-    ) {
-        (holder as? SectionHeaderViewHolder)?.bind(
-            if (section == 0) R.string.required_apps else R.string.assets,
-            0,
-            section > 0 && getItemCount(0) > 0
-        )
-    }
-
-    override fun getSectionCount(): Int = 2
-    override fun onBindFooterViewHolder(holder: SectionedViewHolder?, section: Int) {}
+    override fun getItemCount(): Int = apps.size
 }

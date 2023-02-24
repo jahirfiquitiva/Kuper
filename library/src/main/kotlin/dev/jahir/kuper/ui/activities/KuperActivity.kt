@@ -42,8 +42,12 @@ abstract class KuperActivity : FramesActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requiredAppsViewModel.observe(this) {
-            if (it.isNotEmpty()) setupFragment.updateItems(it)
-            else hideSetup()
+            if (it.isNotEmpty()) {
+                setupFragment.apply {
+                    updateItems(it)
+                    cleanRecyclerViewState()
+                }
+            } else hideSetup()
         }
         loadRequiredApps()
         requestStoragePermission()
@@ -54,7 +58,7 @@ abstract class KuperActivity : FramesActivity() {
         return itemId == if (setupShown) R.id.setup else R.id.widgets
     }
 
-    override fun onBackPressed() {
+    override fun onSafeBackPressed() {
         val setupShown = bottomNavigation?.menu?.findItem(R.id.setup)?.isVisible ?: false
         val actualInitialItemId = if (setupShown) R.id.setup else R.id.widgets
         if (currentItemId != actualInitialItemId)
@@ -119,7 +123,6 @@ abstract class KuperActivity : FramesActivity() {
     override fun getPermissionRationaleMessage(permissions: PermissionsResult): String {
         return if (permissions.storage) {
             when (currentItemId) {
-                R.id.setup -> string(R.string.permission_request_assets, getAppName())
                 R.id.widgets -> string(R.string.permission_request_wallpaper, getAppName())
                 else -> super.getPermissionRationaleMessage(permissions)
             }
