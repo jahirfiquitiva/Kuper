@@ -112,7 +112,7 @@ abstract class KuperActivity : FramesActivity() {
         }
     }
 
-    override fun internalOnPermissionsGranted(permission: String?) {
+    override fun internalOnPermissionsGranted(permission: String) {
         super.internalOnPermissionsGranted(permission)
         if (permission == Manifest.permission.WRITE_EXTERNAL_STORAGE) {
             (currentFragment as? ComponentsFragment)?.updateDeviceWallpaper()
