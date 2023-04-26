@@ -7,6 +7,7 @@ Kuper
 [![GitHub Release](https://img.shields.io/github/v/release/jahirfiquitiva/Kuper?label=Kuper&sort=semver)](https://github.com/jahirfiquitiva/Kuper/releases/latest)
 [![Build Status](https://github.com/jahirfiquitiva/Kuper/actions/workflows/build.yml/badge.svg?branch=sample)](https://github.com/jahirfiquitiva/Kuper/actions/workflows/build.yml)
 [![Crowdin](https://badges.crowdin.net/Kuper/localized.svg)](https://crowdin.com/project/Kuper/invite)
+[![GitHub Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=ff69b4)](https://github.com/sponsors/jahirfiquitiva)
 
 Free, feature-rich, easily customizable Android dashboard for widgets apps with Zooper widgets and/or Kustom assets (Widgets, Wallpapers and Komponents)
 
