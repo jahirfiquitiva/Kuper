@@ -14,11 +14,7 @@
     <string name="template">Szablon</string>
     <string name="templates">Szablony</string>
     <string name="x_templates">Szablony %1$s</string>
-    <string name="assets_installed">Zasoby już zaimportowane.</string>
     <string name="apps_installed">Aplikacje już zainstalowane.</string>
-    <string name="copying_assets">Importowanie aktywów do »ZooperWidget/%1$s«.</string>
-    <string name="copied_assets_successfully">Zasoby zaimportowane.</string>
-    <string name="copied_assets_error">Nie można zaimportować zasobów.</string>
     <string name="permission_request_assets">%1$s używa uprawnień do importu zasobów.</string>
     <string name="permission_request_wallpaper">%1$s używa uprawnień do przechowywania aby wyświetlić tapetę urządzenia w widżetach.</string>
     <string name="open_komponents">Aby dodać Komponent, naciśnij + w edytorze Kustom.</string>
