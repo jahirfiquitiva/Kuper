@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation,ExtraTranslation">
+    <string name="setup">Налаштування</string>
+    <string name="widgets">Віджети</string>
+    <string name="required_apps">Відсутні програми</string>
+    <string name="assets">Асети</string>
+    <string name="required_for_templates">Використовувати шаблони</string>
+    <string name="required_for_widgets">Використовувати віджети</string>
+    <string name="required_for_wallpapers">Використовувати шпалери</string>
+    <string name="required_for_lockscreens">Використовувати екран блокування</string>
+    <string name="required_assets">Використовувати шаблони</string>
+    <string name="install">Встановити</string>
+    <string name="app_not_installed">Неможливо знайти відповідну програму.</string>
+    <string name="template">Шаблон</string>
+    <string name="templates">Шаблони</string>
+    <string name="x_templates">%1$s шаблони</string>
+    <string name="apps_installed">Програми вже встановлено.</string>
+    <string name="permission_request_assets">%1$s використовує дозвіл зберігання для імпорту ресурсів.</string>
+    <string name="permission_request_wallpaper">%1$s використовує дозвіл на доступ до сховища для відображення шпалер пристрою в віджетах.</string>
+    <string name="open_komponents">Щоб додати компонент, натисніть + у редакторі Kustom.</string>
+</resources>
