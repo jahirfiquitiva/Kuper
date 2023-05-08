@@ -14,11 +14,7 @@
     <string name="template">模板</string>
     <string name="templates">模板</string>
     <string name="x_templates">%1$s個模板</string>
-    <string name="assets_installed">資料已導入。</string>
     <string name="apps_installed">軟體已安裝。</string>
-    <string name="copying_assets">導入資料至 “ZooperWidget/%1$s”。</string>
-    <string name="copied_assets_successfully">資料已導入。</string>
-    <string name="copied_assets_error">無法導入資料。</string>
     <string name="permission_request_assets">%1$s使用了存取權限來導入資料。</string>
     <string name="permission_request_wallpaper">%1$s使用了存取權限用以展示組件背景的設備牆紙。</string>
     <string name="open_komponents">在Kustom編輯器中點按“+”來添加一個Komponent組件。</string>
