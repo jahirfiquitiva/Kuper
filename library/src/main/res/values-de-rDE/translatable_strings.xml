@@ -14,11 +14,7 @@
     <string name="template">Vorlage</string>
     <string name="templates">Vorlagen</string>
     <string name="x_templates">%1$s Vorlagen</string>
-    <string name="assets_installed">Ressourcen bereits installiert.</string>
     <string name="apps_installed">Apps bereits installiert.</string>
-    <string name="copying_assets">Importiere Assets nach „ZooperWidget/%1$s“.</string>
-    <string name="copied_assets_successfully">Assets imported.</string>
-    <string name="copied_assets_error">%s konnte nicht importiert werden.</string>
     <string name="permission_request_assets">%1$s nutzt den Zugriff auf den Speicher, um dort Wallpaper zu sichern.</string>
     <string name="permission_request_wallpaper">%1$s nutzt die Speicherberechtigung, um das Hintergrundbild des Geräts in Widgets anzuzeigen.</string>
     <string name="open_komponents">Um einen Komponenten hinzuzufügen, drücken Sie + im Kustom-Editor.</string>

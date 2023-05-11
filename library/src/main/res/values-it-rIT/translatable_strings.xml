@@ -14,11 +14,7 @@
     <string name="template">Modello</string>
     <string name="templates">Modelli</string>
     <string name="x_templates">%1$s Modelli</string>
-    <string name="assets_installed">Risorse già importate.</string>
     <string name="apps_installed">App già installate.</string>
-    <string name="copying_assets">Importazione risorse su “ZooperWidget/%1$s”.</string>
-    <string name="copied_assets_successfully">Risorse importate.</string>
-    <string name="copied_assets_error">Impossibile importare le risorse.</string>
     <string name="permission_request_assets">%1$s utilizza il permesso di archiviazione per importare risorse.</string>
     <string name="permission_request_wallpaper">%1$s utilizza il permesso di archiviazione per mostrare lo sfondo del dispositivo nei widget.</string>
     <string name="open_komponents">Per aggiungere un Komponent, premi + nell\'editor Kustom.</string>

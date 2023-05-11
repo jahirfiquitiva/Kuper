@@ -14,11 +14,7 @@
     <string name="template">Plantilla</string>
     <string name="templates">Plantillas</string>
     <string name="x_templates">%1$s Plantillas</string>
-    <string name="assets_installed">Recursos ya importados.</string>
     <string name="apps_installed">Aplicaciones ya instaladas.</string>
-    <string name="copying_assets">Importando recursos a “ZooperWidget/%1$s”.</string>
-    <string name="copied_assets_successfully">Recursos importados.</string>
-    <string name="copied_assets_error">No se pudo importar activos.</string>
     <string name="permission_request_assets">%1$s utiliza el permiso de almacenamiento para importar recursos.</string>
     <string name="permission_request_wallpaper">%1$s usa el permiso de almacenamiento para mostrar el fondo de pantalla del dispositivo en Widgets.</string>
     <string name="open_komponents">Para añadir un Komponent, presione + en el editor Kustom.</string>

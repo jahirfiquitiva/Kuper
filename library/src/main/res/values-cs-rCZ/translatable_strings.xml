@@ -14,11 +14,7 @@
     <string name="template">Šablona</string>
     <string name="templates">Šablony</string>
     <string name="x_templates">Šablony: %1$s</string>
-    <string name="assets_installed">Aktiva již importována.</string>
     <string name="apps_installed">Aplikace je již nainstalována.</string>
-    <string name="copying_assets">Importuji aktiva do \"ZooperWidget/%1$s\".</string>
-    <string name="copied_assets_successfully">Aktiva importována.</string>
-    <string name="copied_assets_error">Nemohu importovat aktiva.</string>
     <string name="permission_request_assets">%1$s používá oprávnění k úložišti pro import aktiv.</string>
     <string name="permission_request_wallpaper">%1$s používá oprávnění k úložišti pro zobrazení tapet ve widgetech.</string>
     <string name="open_komponents">Chcete-li přidat komponentu, stiskněte + v editoru Kustom.</string>
