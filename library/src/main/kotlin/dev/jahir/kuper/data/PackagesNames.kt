@@ -8,3 +8,4 @@ const val KLWP_PICKER = "org.kustom.lib.editor.WpAdvancedEditorActivity"
 const val KLCK_PICKER = "org.kustom.lib.editor.LockAdvancedEditorActivity"
 
 const val KOLORETTE_PACKAGE = "com.arun.themeutil.kolorette"
+const val RENOIR_PACKAGE = "com.oh1.renoir"

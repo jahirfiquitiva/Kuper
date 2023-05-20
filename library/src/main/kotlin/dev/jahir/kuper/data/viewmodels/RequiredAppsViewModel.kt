@@ -15,6 +15,7 @@ import dev.jahir.kuper.data.KLCK_PACKAGE
 import dev.jahir.kuper.data.KLWP_PACKAGE
 import dev.jahir.kuper.data.KOLORETTE_PACKAGE
 import dev.jahir.kuper.data.KWGT_PACKAGE
+import dev.jahir.kuper.data.RENOIR_PACKAGE
 import dev.jahir.kuper.data.models.RequiredApp
 import dev.jahir.kuper.data.tasks.KuperAssets
 import dev.jahir.kuper.extensions.isAppInstalled
@@ -124,6 +125,17 @@ class RequiredAppsViewModel(application: Application) : AndroidViewModel(applica
                     context.string(R.string.kolorette),
                     context.string(R.string.required_for_templates),
                     R.drawable.ic_palette, KOLORETTE_PACKAGE
+                )
+            )
+        }
+
+        if (!context.isAppInstalled(RENOIR_PACKAGE)
+            && context.boolean(R.bool.renoir_required)) {
+            apps.add(
+                RequiredApp(
+                    context.string(R.string.renoir),
+                    context.string(R.string.required_for_templates),
+                    R.drawable.ic_palette, RENOIR_PACKAGE
                 )
             )
         }
