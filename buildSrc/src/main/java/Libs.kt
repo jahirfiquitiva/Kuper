@@ -5,7 +5,7 @@ object Libs {
     const val frames = "dev.jahir:Frames:${Versions.frames}@aar"
 
     // Kustom API
-    private const val kustomApi = "dev.jahir.KustomAPI:api:${Versions.kustomApi}@aar"
+    private const val kustomApi = "org.bitbucket.frankmonza:kustomapi:${Versions.kustomApi}@aar"
 
     // Lifecycle Scope
     private const val lifecycleScope =
