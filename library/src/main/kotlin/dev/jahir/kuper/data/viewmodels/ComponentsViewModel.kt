@@ -121,20 +121,24 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
                     out = FileOutputStream(file)
                     ins.copyTo(out, 2048)
                     ins.close()
-                    out.flush()
-                    out.close()
 
                     if (file.exists() && file.length() > 0) {
-                        val zipFile = ZipFile(file)
-                        val entries = zipFile.entries()
-                        while (entries.hasMoreElements()) {
-                            val entry = entries.nextElement()
-                            if (!entry.name.contains("/") && entry.name.contains("thumb")) {
-                                if (entry.name.contains(thumbnails[0])) {
-                                    zipFile.copyFromTo(entry, preview)
-                                } else if (thumbnails[1].hasContent() &&
-                                    entry.name.contains(thumbnails[1])) {
-                                    zipFile.copyFromTo(entry, previewLand)
+                        val zipFile = try {
+                            ZipFile(file)
+                        } catch (_: Exception) {
+                            null
+                        }
+                        if (zipFile !== null) {
+                            val entries = zipFile.entries()
+                            while (entries.hasMoreElements()) {
+                                val entry = entries.nextElement()
+                                if (!entry.name.contains("/") && entry.name.contains("thumb")) {
+                                    if (entry.name.contains(thumbnails[0])) {
+                                        zipFile.copyFromTo(entry, preview)
+                                    } else if (thumbnails[1].hasContent() &&
+                                        entry.name.contains(thumbnails[1])) {
+                                        zipFile.copyFromTo(entry, previewLand)
+                                    }
                                 }
                             }
                         }
