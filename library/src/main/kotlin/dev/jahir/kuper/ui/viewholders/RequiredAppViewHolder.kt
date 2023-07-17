@@ -24,7 +24,10 @@ class RequiredAppViewHolder(itemView: View) : SectionedViewHolder(itemView) {
         icon?.setImageDrawable(
             context.drawable(app.icon)
                 ?.tint(
-                    context.resolveColor(R.attr.colorOnSurface, context.color(R.color.onSurface))
+                    context.resolveColor(
+                        com.google.android.material.R.attr.colorOnSurface,
+                        context.color(dev.jahir.frames.R.color.onSurface)
+                    )
                 )
         )
         title?.text = app.name

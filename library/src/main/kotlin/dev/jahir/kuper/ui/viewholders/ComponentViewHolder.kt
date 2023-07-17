@@ -52,11 +52,11 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
             icon?.setOnClickListener { listener?.invoke(component) }
         }
         val rightPreview =
-            if (context.boolean(R.bool.is_landscape)) component.rightLandPath
+            if (context.boolean(dev.jahir.frames.R.bool.is_landscape)) component.rightLandPath
             else component.previewPath
         try {
             progress?.indeterminateDrawable?.tint(Color.parseColor("#888888"))
-        } catch (e: Exception) {
+        } catch (_: Exception) {
         }
         preview?.load(File(rightPreview)) {
             listener { _, _ -> progress?.gone() }

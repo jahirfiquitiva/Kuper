@@ -72,14 +72,16 @@ abstract class KuperActivity : FramesActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.settings -> {
+        dev.jahir.frames.R.id.settings -> {
             startActivity(Intent(this, KuperSettingsActivity::class.java))
             true
         }
-        R.id.about -> {
+
+        dev.jahir.frames.R.id.about -> {
             startActivity(Intent(this, KuperAboutActivity::class.java))
             true
         }
+
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -107,7 +109,7 @@ abstract class KuperActivity : FramesActivity() {
         val setupShown = bottomNavigation?.menu?.findItem(R.id.setup)?.isVisible == true
         return when (itemId) {
             R.id.widgets -> if (setupShown) string(R.string.widgets) else getAppName()
-            R.id.wallpapers -> string(R.string.wallpapers)
+            R.id.wallpapers -> string(dev.jahir.frames.R.string.wallpapers)
             else -> super.getToolbarTitleForItem(itemId)
         }
     }

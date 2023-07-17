@@ -80,7 +80,7 @@ class ComponentsAdapter(private val onClick: (Component) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionedViewHolder {
         return if (viewType >= 0) {
             ComponentViewHolder(parent.inflate(R.layout.item_component))
-        } else SectionHeaderViewHolder(parent.inflate(R.layout.item_section_header))
+        } else SectionHeaderViewHolder(parent.inflate(dev.jahir.frames.R.layout.item_section_header))
     }
 
     override fun getItemCount(section: Int): Int =

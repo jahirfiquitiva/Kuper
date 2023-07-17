@@ -66,7 +66,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
 
     private fun showPermissionRationale() {
         snackbar(
-            string(R.string.permission_request, context?.getAppName()),
+            string(dev.jahir.frames.R.string.permission_request, context?.getAppName()),
             Snackbar.LENGTH_INDEFINITE,
             (activity as? BasePermissionsRequestActivity<*>)?.snackbarAnchorId ?: 0
         ) {
@@ -91,14 +91,16 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView?.setFastScrollEnabled(false)
-        val columnsCount = context?.integer(R.integer.wallpapers_columns_count, 2) ?: 2
+        val columnsCount =
+            context?.integer(dev.jahir.frames.R.integer.wallpapers_columns_count, 2) ?: 2
         val gridLayoutManager =
             GridLayoutManager(context, columnsCount, GridLayoutManager.VERTICAL, false)
         recyclerView?.layoutManager = gridLayoutManager
         recyclerView?.addItemDecoration(
             SectionedGridSpacingDecoration(
                 columnsCount,
-                context?.dimenPixelSize(R.dimen.grids_spacing, 8.dpToPx) ?: 8.dpToPx
+                context?.dimenPixelSize(dev.jahir.frames.R.dimen.grids_spacing, 8.dpToPx)
+                    ?: 8.dpToPx
             )
         )
         componentsAdapter.setLayoutManager(gridLayoutManager)
