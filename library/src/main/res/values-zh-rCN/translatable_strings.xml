@@ -10,11 +10,11 @@
     <string name="required_for_lockscreens">使用锁屏</string>
     <string name="required_assets">使用模板</string>
     <string name="install">安装</string>
-    <string name="app_not_installed">没有找到正确的应用。</string>
+    <string name="app_not_installed">未找到合适的应用</string>
     <string name="template">模板</string>
     <string name="templates">模板</string>
     <string name="x_templates">%1$s 模板</string>
-    <string name="apps_installed">应用已安装。</string>
+    <string name="apps_installed">应用已安装</string>
     <string name="permission_request_assets">%1$s 使用了存储权限来导入资源。</string>
     <string name="permission_request_wallpaper">%1$s 使用了存储权限在组件背景中来展示设备壁纸。</string>
     <string name="open_komponents">若要添加一个 Komponent组件，请在 Kustom 编辑器中点按“+”。</string>
