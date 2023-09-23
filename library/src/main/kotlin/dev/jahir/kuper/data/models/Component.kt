@@ -35,11 +35,10 @@ data class Component(
                 other.previewPath.equals(previewPath, true)
     }
 
-    val hasIntent = type == Type.WIDGET || type == Type.LOCKSCREEN || type == Type.WALLPAPER
-    val rightLandPath = if (hasIntent) previewLandPath else previewPath
+    val rightLandPath = if (type.hasIntent) previewLandPath else previewPath
 
     fun getIntent(context: Context): Intent? {
-        if (hasIntent) {
+        if (type.hasIntent) {
             val component: ComponentName = when (type) {
                 Type.WALLPAPER -> ComponentName(KLWP_PACKAGE, KLWP_PICKER)
                 Type.WIDGET -> ComponentName(KWGT_PACKAGE, KWGT_PICKER)
@@ -62,7 +61,10 @@ data class Component(
     }
 
     enum class Type {
-        KOMPONENT, WALLPAPER, WIDGET, LOCKSCREEN, UNKNOWN
+        KOMPONENT, WALLPAPER, WIDGET, LOCKSCREEN, UNKNOWN;
+
+        val hasIntent: Boolean
+            get() = this == WIDGET || this == LOCKSCREEN || this == WALLPAPER
     }
 
     companion object {
