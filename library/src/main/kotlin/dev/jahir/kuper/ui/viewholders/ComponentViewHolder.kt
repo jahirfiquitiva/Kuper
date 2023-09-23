@@ -7,17 +7,14 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.view.isVisible
 import coil.load
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import dev.jahir.frames.extensions.context.boolean
-import dev.jahir.frames.extensions.context.drawable
 import dev.jahir.frames.extensions.resources.lower
 import dev.jahir.frames.extensions.resources.tint
 import dev.jahir.frames.extensions.views.context
 import dev.jahir.frames.extensions.views.findView
 import dev.jahir.frames.extensions.views.gone
-import dev.jahir.frames.extensions.views.visibleIf
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.Component
 import java.io.File
@@ -44,13 +41,9 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
                 if (it.isLowerCase()) it.titlecase(Locale.getDefault())
                 else it.toString()
             }
-        icon?.visibleIf(component.hasIntent)
-        if (icon?.isVisible == true) {
-            icon?.setImageDrawable(
-                context.drawable(R.drawable.ic_open_app)?.tint(Color.parseColor("#ffffff"))
-            )
-            icon?.setOnClickListener { listener?.invoke(component) }
-        }
+
+        icon?.setOnClickListener { listener?.invoke(component) }
+
         val rightPreview =
             if (context.boolean(dev.jahir.frames.R.bool.is_landscape)) component.rightLandPath
             else component.previewPath
