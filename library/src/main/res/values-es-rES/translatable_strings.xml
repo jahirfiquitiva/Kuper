@@ -10,7 +10,7 @@
     <string name="required_for_lockscreens">Usar pantallas de bloqueo</string>
     <string name="required_assets">Usar Plantillas</string>
     <string name="install">Instalar</string>
-    <string name="app_not_installed">No se puede encontrar la aplicación adecuada.</string>
+    <string name="app_not_installed">No se puede encontrar la aplicación requerida.</string>
     <string name="template">Plantilla</string>
     <string name="templates">Plantillas</string>
     <string name="x_templates">%1$s Plantillas</string>
