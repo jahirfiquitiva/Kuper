@@ -73,7 +73,7 @@ class ComponentsAdapter(private val onClick: (Component) -> Unit) :
         (holder as? ComponentViewHolder)?.bind(
             components.filter { it.type == getComponentTypeForSection(section) }[relativePosition],
             wallpaper,
-            if (section >= 2) onClick else null
+            onClick
         )
     }
 
@@ -97,6 +97,6 @@ class ComponentsAdapter(private val onClick: (Component) -> Unit) :
         )
     }
 
-    override fun getSectionCount(): Int = 5
+    override fun getSectionCount(): Int = Component.Type.entries.size
     override fun onBindFooterViewHolder(holder: SectionedViewHolder?, section: Int) {}
 }
