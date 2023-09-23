@@ -3,6 +3,7 @@
 package dev.jahir.kuper.data.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -15,6 +16,7 @@ import dev.jahir.frames.extensions.utils.lazyMutableLiveData
 import dev.jahir.frames.extensions.utils.tryToObserve
 import dev.jahir.kuper.data.models.Component
 import dev.jahir.kuper.extensions.copyFromTo
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -31,8 +33,13 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
     val components: ArrayList<Component>
         get() = ArrayList(componentsData.value.orEmpty())
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        Log.e("Kuper", "Coroutine Exception", throwable)
+        throwable.printStackTrace()
+    }
+
     fun loadComponents() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineExceptionHandler) {
             val components = try {
                 internalLoadComponents()
             } catch (e: Exception) {
@@ -52,9 +59,9 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
 
     private suspend fun internalLoadComponents(): ArrayList<Component> {
         return if (components.isNotEmpty()) ArrayList(components)
-        else withContext(IO) {
+        else withContext(IO + coroutineExceptionHandler) {
             val folders = arrayOf("komponents", "widgets", "lockscreens", "wallpapers")
-            val components = ArrayList<Component>()
+            val newComponents = ArrayList<Component>()
             val assets = context.assets
             val previewsFolder = File(context.externalCacheDir, "KuperPreviews")
             previewsFolder.deleteEverything()
@@ -77,7 +84,7 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
                                     previewFile,
                                     type
                                 )?.let { preview ->
-                                    components.add(preview)
+                                    newComponents.add(preview)
                                 }
                             } catch (e: Exception) {
                                 e.printStackTrace()
@@ -86,7 +93,7 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
                     }
                 }
             }
-            components
+            newComponents
         }
     }
 
@@ -97,7 +104,7 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
         folder: File,
         file: File,
         type: Component.Type
-    ): Component? = withContext(IO) {
+    ): Component? = withContext(IO + coroutineExceptionHandler) {
         try {
             var out: OutputStream? = null
 
