@@ -17,8 +17,8 @@ android {
         }
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
             outputFileName = defaultConfig.applicationId + "-v${variant.versionName}-${variant.name}.apk"
         }
     }
@@ -29,8 +29,6 @@ android {
         disable 'MissingTranslation', 'GoogleAppIndexingWarning'
     }
 
-    compileSdkVersion Versions.targetSdk
-    buildToolsVersion Versions.buildTools
 
     namespace Kuper.appId
     defaultConfig {
@@ -41,6 +39,7 @@ android {
         ]
         applicationId Kuper.appId
         minSdkVersion Versions.minSdk
+        compileSdk Versions.targetSdk
         targetSdkVersion Versions.targetSdk
         versionCode Kuper.version
         versionName Kuper.versionName
