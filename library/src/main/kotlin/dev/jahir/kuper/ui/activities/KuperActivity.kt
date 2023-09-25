@@ -58,12 +58,18 @@ abstract class KuperActivity : FramesActivity() {
         return itemId == if (setupShown) R.id.setup else R.id.widgets
     }
 
-    override fun onSafeBackPressed() {
+    override fun handleOnBackPressed() {
         val setupShown = bottomNavigation?.menu?.findItem(R.id.setup)?.isVisible ?: false
         val actualInitialItemId = if (setupShown) R.id.setup else R.id.widgets
         if (currentItemId != actualInitialItemId)
             bottomNavigation?.selectedItemId = actualInitialItemId
         else supportFinishAfterTransition()
+    }
+
+    override fun isBackPressedCallbackEnabled(): Boolean {
+        val setupShown = bottomNavigation?.menu?.findItem(R.id.setup)?.isVisible ?: false
+        val actualInitialItemId = if (setupShown) R.id.setup else R.id.widgets
+        return currentItemId != actualInitialItemId
     }
 
     override fun onDestroy() {
@@ -89,7 +95,7 @@ abstract class KuperActivity : FramesActivity() {
         bottomNavigation?.removeItem(R.id.setup)
         if (currentItemId == R.id.setup) {
             bottomNavigation?.selectedItemId = R.id.widgets
-            postDelayed(10) { componentsFragment.loadData() }
+            postDelayed(150) { componentsFragment.loadData() }
         }
         updateToolbarTitle(currentItemId)
     }
