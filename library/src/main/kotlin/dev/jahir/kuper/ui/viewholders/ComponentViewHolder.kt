@@ -15,6 +15,7 @@ import dev.jahir.frames.extensions.resources.tint
 import dev.jahir.frames.extensions.views.context
 import dev.jahir.frames.extensions.views.findView
 import dev.jahir.frames.extensions.views.gone
+import dev.jahir.frames.extensions.views.visibleIf
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.models.Component
 import java.io.File
@@ -42,6 +43,7 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
                 else it.toString()
             }
 
+        icon?.visibleIf(component.type.hasIntent)
         icon?.setOnClickListener { listener?.invoke(component) }
 
         val rightPreview =
