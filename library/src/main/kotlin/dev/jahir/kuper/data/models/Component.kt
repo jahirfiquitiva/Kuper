@@ -64,7 +64,7 @@ data class Component(
         KOMPONENT, WALLPAPER, WIDGET, LOCKSCREEN, UNKNOWN;
 
         val hasIntent: Boolean
-            get() = this == WIDGET || this == LOCKSCREEN || this == WALLPAPER
+            get() = this != UNKNOWN;
     }
 
     companion object {
