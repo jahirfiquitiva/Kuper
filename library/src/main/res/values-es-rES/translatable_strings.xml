@@ -18,4 +18,5 @@
     <string name="permission_request_assets">%1$s utiliza el permiso de almacenamiento para importar recursos.</string>
     <string name="permission_request_wallpaper">%1$s usa el permiso de almacenamiento para mostrar el fondo de pantalla del dispositivo en Widgets.</string>
     <string name="open_komponents">Para añadir un Komponent, presione + en el editor Kustom.</string>
+    <string name="x_app_required">Para abrir este componente se requiere tener instalada la app %1$s.</string>
 </resources>
