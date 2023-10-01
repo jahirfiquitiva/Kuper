@@ -25,4 +25,6 @@
     <string name="permission_request_assets">%1$s uses the Storage permission to import assets.</string>
     <string name="permission_request_wallpaper">%1$s uses the Storage permission to show the device wallpaper in Widgets.</string>
     <string name="open_komponents">To add a Komponent, press + in the Kustom editor.</string>
+
+    <string name="x_app_required">In order to open this component it is required to have the %1$s app installed.</string>
 </resources>

@@ -15,7 +15,6 @@ import dev.jahir.frames.extensions.context.dimenPixelSize
 import dev.jahir.frames.extensions.context.getAppName
 import dev.jahir.frames.extensions.context.integer
 import dev.jahir.frames.extensions.context.openLink
-import dev.jahir.frames.extensions.context.toast
 import dev.jahir.frames.extensions.fragments.mdDialog
 import dev.jahir.frames.extensions.fragments.string
 import dev.jahir.frames.extensions.resources.dpToPx
@@ -136,15 +135,32 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
                 try {
                     startActivity(it)
                 } catch (e: Exception) {
-                    val itemPkg = when (component.type) {
-                        Component.Type.WALLPAPER -> KLWP_PACKAGE
-                        Component.Type.WIDGET -> KWGT_PACKAGE
-                        Component.Type.LOCKSCREEN -> KLCK_PACKAGE
-                        else -> ""
-                    }
-                    if (itemPkg.hasContent()) {
-                        contxt.toast(R.string.app_not_installed)
-                        contxt.openLink(PLAY_STORE_LINK_PREFIX + itemPkg)
+                    if (component.type != Component.Type.UNKNOWN) {
+                        val itemPkg = when (component.type) {
+                            Component.Type.WALLPAPER -> KLWP_PACKAGE
+                            Component.Type.WIDGET -> KWGT_PACKAGE
+                            Component.Type.LOCKSCREEN -> KLCK_PACKAGE
+                            else -> ""
+                        }
+                        if (itemPkg.hasContent()) {
+                            activity?.mdDialog {
+                                setTitle(R.string.required_apps)
+                                setMessage(
+                                    string(
+                                        R.string.x_app_required, when (component.type) {
+                                            Component.Type.WALLPAPER -> "KLWP"
+                                            Component.Type.WIDGET -> "KWGT"
+                                            Component.Type.LOCKSCREEN -> "KLCK"
+                                            else -> ""
+                                        }
+                                    )
+                                )
+                                setPositiveButton(R.string.install) { _, _ ->
+                                    contxt.openLink(PLAY_STORE_LINK_PREFIX + itemPkg)
+                                }
+                                setNegativeButton(android.R.string.cancel) { _, _ -> }
+                            }?.show()
+                        }
                     }
                 }
             } ?: run {
