@@ -35,7 +35,9 @@ data class Component(
                 other.previewPath.equals(previewPath, true)
     }
 
-    val rightLandPath = if (type.hasIntent) previewLandPath else previewPath
+    val rightLandPath =
+        if (type.hasIntent && type != Type.KOMPONENT) previewLandPath
+        else previewPath
 
     fun getIntent(context: Context): Intent? {
         if (type.hasIntent) {
