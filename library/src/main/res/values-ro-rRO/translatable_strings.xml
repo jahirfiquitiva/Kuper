@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation,ExtraTranslation">
+    <string name="setup">Configurează</string>
+    <string name="widgets">Piese</string>
+    <string name="required_apps">Aplicații lipsă</string>
+    <string name="assets">Resursă</string>
+    <string name="required_for_templates">Folosește șablon</string>
+    <string name="required_for_widgets">Folosește piese</string>
+    <string name="required_for_wallpapers">Folosește imagine de fundal</string>
+    <string name="required_for_lockscreens">Folosește ecrane de blocare</string>
+    <string name="required_assets">Folosește șabloane</string>
+    <string name="install">Instalează</string>
+    <string name="app_not_installed">Nu s-a putut găsi aplicația solicitată.</string>
+    <string name="template">Șablon</string>
+    <string name="templates">Șabloane</string>
+    <string name="x_templates">Șabloane %1$s</string>
+    <string name="apps_installed">Aplicații deja instalate.</string>
+    <string name="permission_request_assets">%1$s utilizează permisiunea de stocare pentru a importa resurse.</string>
+    <string name="permission_request_wallpaper">%1$s folosește permisiunea de stocare pentru a afișa imaginea de fundal a dispozitivului în piese.</string>
+    <string name="open_komponents">Pentru a adăuga un Komponent, apasă + în editorul Kustom.</string>
+    <string name="x_app_required">Pentru a deschide această componentă este necesar ca aplicația %1$s să fie instalată.</string>
+</resources>
