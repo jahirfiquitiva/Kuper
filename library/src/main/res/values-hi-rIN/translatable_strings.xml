@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation,ExtraTranslation">
-    <string name="setup">होम</string>
-    <string name="widgets">विजेट</string>
-    <string name="required_apps">अनुपस्थित ऐप्लिकेशन</string>
-    <string name="assets">सामग्री</string>
-    <string name="required_for_templates">टेम्पलेट का प्रयोग करें</string>
-    <string name="required_for_widgets">विजेट इस्तेमाल करें</string>
-    <string name="required_for_wallpapers">वालपेपर सेट करें</string>
-    <string name="required_for_lockscreens">लोक स्क्रीन में प्रयोग करें</string>
-    <string name="required_assets">टेम्पलेट का प्रयोग करें</string>
-    <string name="install">इंस्टॉल</string>
-    <string name="app_not_installed">संबंधित ऐप्लिकेशन अनुपस्थित</string>
+    <string name="setup">सेटअप</string>
+    <string name="widgets">विजेट्स</string>
+    <string name="required_apps">अनुपस्थित ऐप्स</string>
+    <string name="assets">ऐसेट्स</string>
+    <string name="required_for_templates">टेम्प्लेटस का प्रयोग करें</string>
+    <string name="required_for_widgets">विजेट्स इस्तेमाल करें</string>
+    <string name="required_for_wallpapers">वाॅलपेपर्स सेट करें</string>
+    <string name="required_for_lockscreens">लोक स्क्रीनस प्रयोग करें</string>
+    <string name="required_assets">टेम्पलेट्स का प्रयोग करें</string>
+    <string name="install">इंस्टॉल करें</string>
+    <string name="app_not_installed">संबंधित एप्लिकेशन ढूंढने में असफल</string>
     <string name="template">टेम्पलेट</string>
     <string name="templates">टेम्पलेट्स</string>
     <string name="x_templates">_ टेम्पलेटस</string>
@@ -18,4 +18,5 @@
     <string name="permission_request_assets">%1$s को आपकी स्टोरेज की आवश्यकता है ताकि वह वॉलपेपर को अप्लाई और सेव कर सके</string>
     <string name="permission_request_wallpaper">%1$s स्टोरेज के प्रयोग करने कि अनुमती दे</string>
     <string name="open_komponents">कंपोनेंट का प्रयोग करने के लिए कस्टम ईडिटर मे + दबाये</string>
+    <string name="x_app_required">इस कोम्पोनेन्ट को खोलने के लिए %1$s ऐप इंस्टॉल करना आवश्यक है।</string>
 </resources>
