@@ -3,11 +3,13 @@
 package dev.jahir.kuper.data.viewmodels
 
 import android.app.Application
+import android.os.Build
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import dalvik.system.ZipPathValidator
 import dev.jahir.frames.extensions.resources.createIfDidNotExist
 import dev.jahir.frames.extensions.resources.deleteEverything
 import dev.jahir.frames.extensions.resources.hasContent
@@ -130,12 +132,13 @@ class ComponentsViewModel(application: Application) : AndroidViewModel(applicati
                     ins.close()
 
                     if (file.exists() && file.length() > 0) {
-                        val zipFile = try {
-                            ZipFile(file)
+                        try {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                                ZipPathValidator.clearCallback()
+                            }
                         } catch (_: Exception) {
-                            null
                         }
-                        if (zipFile !== null) {
+                        ZipFile(file).let { zipFile ->
                             val entries = zipFile.entries()
                             while (entries.hasMoreElements()) {
                                 val entry = entries.nextElement()
