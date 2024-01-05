@@ -23,6 +23,7 @@
 -keep class dev.jahir.frames.** { *; }
 -keep class dev.jahir.kuper.** { *; }
 
+-keep class androidx.core.app.CoreComponentFactory { *; }
 -keep class com.google.**
 -keep class autovalue.shaded.com.google.**
 -keep class com.android.vending.billing.**
