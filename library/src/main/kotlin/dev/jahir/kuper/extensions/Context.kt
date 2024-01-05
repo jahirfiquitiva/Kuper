@@ -50,13 +50,17 @@ val Context.userWallpaper: Drawable?
                     try {
                         nwm.peekFastDrawable() ?: nwm.fastDrawable
                     } catch (e: Exception) {
-                        nwm.peekDrawable() ?: nwm.builtInDrawable
+                        try {
+                            nwm.peekDrawable() ?: nwm.builtInDrawable
+                        } catch (e: Exception) {
+                            nwm.builtInDrawable
+                        }
                     }
                 else {
                     try {
                         nwm.peekDrawable() ?: nwm.builtInDrawable
                     } catch (e: Exception) {
-                        null
+                        nwm.builtInDrawable
                     }
                 }
             }
