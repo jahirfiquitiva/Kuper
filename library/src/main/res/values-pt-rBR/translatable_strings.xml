@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation,ExtraTranslation">
+    <string name="setup">Configuração</string>
+    <string name="widgets">Widgets</string>
+    <string name="required_apps">Aplicativos faltando</string>
+    <string name="assets">Arquivos</string>
+    <string name="required_for_templates">Usar modelos</string>
+    <string name="required_for_widgets">Usar Widgets</string>
+    <string name="required_for_wallpapers">Usar Planos de fundo</string>
+    <string name="required_for_lockscreens">Usar Telas de Bloqueio</string>
+    <string name="required_assets">Usar modelos</string>
+    <string name="install">Instalar</string>
+    <string name="app_not_installed">Aplicativo necessário não encontrado.</string>
+    <string name="template">Modelo</string>
+    <string name="templates">Modelos</string>
+    <string name="x_templates">%1$s Modelos</string>
+    <string name="apps_installed">Aplicativos já instalados.</string>
+    <string name="permission_request_assets">%1$s usa a permissão de armazenamento para importar conteúdos.</string>
+    <string name="permission_request_wallpaper">%1$s usa a permissão de armazenamento para mostrar o papel de parede do dispositivo em Widgets.</string>
+    <string name="open_komponents">Para adicionar um Komponent, pressione + no editor Kustom.</string>
+    <string name="x_app_required">Para abrir este componente é necessário ter o aplicativo %1$s instalado.</string>
+</resources>
