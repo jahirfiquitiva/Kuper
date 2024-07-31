@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation,ExtraTranslation">
+    <string name="setup">সেটআপ</string>
+    <string name="widgets">উইজেটসমূহ</string>
+    <string name="required_apps">বাদপড়া অ্যাপসমূহ</string>
+    <string name="assets">অ্যাসেট</string>
+    <string name="required_for_templates">টেমপ্লেট ব্যবহার করুন</string>
+    <string name="required_for_widgets">উইজেট ব্যবহার করুন</string>
+    <string name="required_for_wallpapers">ওয়ালপেপার ব্যবহার করুন</string>
+    <string name="required_for_lockscreens">লক স্ক্রিন ব্যবহার করুন</string>
+    <string name="required_assets">টেমপ্লেট ব্যবহার করুন</string>
+    <string name="install">ইনস্টল করুন</string>
+    <string name="app_not_installed">প্রয়োজনীয় অ্যাপ খুঁজে পাওয়া যায়নি।</string>
+    <string name="template">টেমপ্লেট</string>
+    <string name="templates">টেমপ্লেটসমূহ</string>
+    <string name="x_templates">%1$sটি টেমপ্লেট</string>
+    <string name="apps_installed">অ্যাপস ইতোমধ্যেই ইনস্টল করা আছে।</string>
+    <string name="permission_request_assets">%1$s অ্যাসেট আনার জন্য স্টোরেজ অনুমতি ব্যবহার করে।</string>
+    <string name="permission_request_wallpaper">%1$s উইজেটে ডিভাইস ওয়ালপেপার দেখানোর জন্য স্টোরেজ অনুমতি ব্যবহার করে।</string>
+    <string name="open_komponents">একটি Komponent যোগ করতে, Kustom সম্পাদকে + টিপুন।</string>
+    <string name="x_app_required">এই উপাদানটি খোলার জন্য %1$s অ্যাপটি ইনস্টল থাকা প্রয়োজন৷</string>
+</resources>
