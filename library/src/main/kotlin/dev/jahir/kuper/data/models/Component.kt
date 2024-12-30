@@ -101,7 +101,7 @@ data class Component(
             var maxX = -1
             var maxY = -1
 
-            val newBitmap = Bitmap.createBitmap(width, height, bitmap.config)
+            val newBitmap = bitmap.config?.let { Bitmap.createBitmap(width, height, it) }
             var pixel: Int
 
             for (y in 0 until height) {
@@ -120,8 +120,8 @@ data class Component(
                 }
             }
 
-            newBitmap.setPixels(pixels, 0, width, 0, 0, width, height)
-            return Bitmap.createBitmap(newBitmap, minX, minY, maxX - minX + 1, maxY - minY + 1)
+            newBitmap?.setPixels(pixels, 0, width, 0, 0, width, height)
+            return newBitmap?.let { Bitmap.createBitmap(it, minX, minY, maxX - minX + 1, maxY - minY + 1) } ?: bitmap
         }
     }
 }
