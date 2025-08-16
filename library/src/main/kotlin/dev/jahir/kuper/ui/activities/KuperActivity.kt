@@ -16,6 +16,7 @@ import dev.jahir.frames.ui.fragments.CollectionsFragment
 import dev.jahir.frames.ui.fragments.WallpapersFragment
 import dev.jahir.kuper.R
 import dev.jahir.kuper.data.viewmodels.RequiredAppsViewModel
+import dev.jahir.kuper.extensions.removeItem
 import dev.jahir.kuper.ui.fragments.ComponentsFragment
 import dev.jahir.kuper.ui.fragments.KuperWallpapersFragment
 import dev.jahir.kuper.ui.fragments.SetupFragment
