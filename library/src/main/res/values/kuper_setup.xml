@@ -11,4 +11,7 @@
 
     <!--    A brief description of the pack contents -->
     <string name="kustom_pack_description" />
+
+    <!--    A custom color to be used instead of the user's wallpaper -->
+    <color name="kuper_preview_background" />
 </resources>

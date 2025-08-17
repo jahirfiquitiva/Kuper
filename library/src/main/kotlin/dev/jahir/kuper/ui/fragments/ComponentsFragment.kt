@@ -6,11 +6,13 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.GridLayoutManager
 import com.fondesa.kpermissions.PermissionStatus
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.google.android.material.snackbar.Snackbar
 import dev.jahir.frames.data.listeners.BasePermissionRequestListener
+import dev.jahir.frames.extensions.context.color
 import dev.jahir.frames.extensions.context.dimenPixelSize
 import dev.jahir.frames.extensions.context.getAppName
 import dev.jahir.frames.extensions.context.integer
@@ -41,8 +43,11 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
     private val componentsViewModel: ComponentsViewModel by lazyViewModel()
     private val componentsAdapter: ComponentsAdapter by lazy { ComponentsAdapter(::onClick) }
 
-    private val wallpaper: Drawable?
-        get() = activity?.userWallpaper
+    private val wallpaper: Drawable? by lazy {
+        val configuredColor = activity?.color(R.color.kuper_preview_background) ?: 0
+        if (configuredColor != 0) return@lazy configuredColor.toDrawable();
+        return@lazy activity?.userWallpaper
+    }
 
     private fun requestStoragePermission() {
         permissionsBuilder(Manifest.permission.READ_EXTERNAL_STORAGE)
