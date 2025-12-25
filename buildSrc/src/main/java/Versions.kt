@@ -3,24 +3,24 @@
 object Versions {
     // Plugins
     const val gradle = "8.12.0"
-    const val kotlin = "2.2.0"
+    const val kotlin = "2.2.21"
     const val sonatype = "2.0.0"
-    const val ksp = "$kotlin-2.0.2"
+    const val ksp = "2.3.4"
 
     // OneSignal
     const val oneSignal = "4.8.12"
 
     // App
-    const val minSdk = 21
+    const val minSdk = 23
     const val targetSdk = 36
     const val buildTools = "36.0.0"
 
     // Frames
-    const val frames = "3.7.0"
+    const val frames = "3.7.1"
 
     // Kustom API
     const val kustomApi = "21"
 
     // Lifecycle Runtime KTX
-    const val lifecycleRuntimeKtx = "2.9.2"
+    const val lifecycleRuntimeKtx = "2.10.0"
 }
