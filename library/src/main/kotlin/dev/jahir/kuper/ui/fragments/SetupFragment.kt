@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.jahir.frames.extensions.context.openLink
 import dev.jahir.frames.extensions.resources.hasContent
-import dev.jahir.frames.ui.activities.base.BaseLicenseCheckerActivity.Companion.PLAY_STORE_LINK_PREFIX
 import dev.jahir.frames.ui.fragments.base.BaseFramesFragment
 import dev.jahir.kuper.data.models.RequiredApp
+import dev.jahir.kuper.extensions.playStoreLinkWithReferrer
 import dev.jahir.kuper.ui.activities.KuperActivity
 import dev.jahir.kuper.ui.adapters.RequiredAppsAdapter
 
@@ -58,7 +58,7 @@ class SetupFragment : BaseFramesFragment<RequiredApp>() {
 
     private fun onClick(requiredApp: RequiredApp) {
         if (requiredApp.packageName.hasContent())
-            context?.openLink(PLAY_STORE_LINK_PREFIX + requiredApp.packageName)
+            context?.openLink(context?.playStoreLinkWithReferrer(requiredApp.packageName, "required_app"))
     }
 
     override fun getFilteredItems(
