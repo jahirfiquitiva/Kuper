@@ -26,8 +26,7 @@ android {
         versionCode Kuper.version
         versionName Kuper.versionName
         vectorDrawables.useSupportLibrary true
-        proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
-        consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
+        consumerProguardFiles 'proguard-rules.pro'
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -46,8 +45,6 @@ android {
         }
         release {
             minifyEnabled false
-            proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
-            consumerProguardFiles 'proguard-android-optimize.txt', 'proguard-rules.pro'
         }
     }
 
