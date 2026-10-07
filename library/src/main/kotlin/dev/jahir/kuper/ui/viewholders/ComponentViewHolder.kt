@@ -1,12 +1,12 @@
 package dev.jahir.kuper.ui.viewholders
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.graphics.toColorInt
 import coil3.load
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import dev.jahir.frames.extensions.context.boolean
@@ -50,7 +50,7 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
             if (context.boolean(dev.jahir.frames.R.bool.is_landscape)) component.rightLandPath
             else component.previewPath
         try {
-            progress?.indeterminateDrawable?.tint(Color.parseColor("#888888"))
+            progress?.indeterminateDrawable?.tint("#888888".toColorInt())
         } catch (_: Exception) {
         }
         preview?.load(File(rightPreview)) {

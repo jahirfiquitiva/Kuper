@@ -6,6 +6,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.annotation.ColorInt
+import androidx.core.graphics.createBitmap
+import androidx.core.net.toUri
 import dev.jahir.kuper.data.KLCK_PACKAGE
 import dev.jahir.kuper.data.KLCK_PICKER
 import dev.jahir.kuper.data.KLWP_PACKAGE
@@ -56,7 +58,7 @@ data class Component(
                     .appendPath(path)
                     .build()
             } catch (e: Exception) {
-                intent.data = Uri.parse("kfile://${context.packageName}/$path")
+                intent.data = "kfile://${context.packageName}/$path".toUri()
             }
             return intent
         } else return null
@@ -94,7 +96,7 @@ data class Component(
             val width = bitmap.width
             val height = bitmap.height
 
-            val newBitmap = bitmap.config?.let { Bitmap.createBitmap(width, height, it) }
+            val newBitmap = bitmap.config?.let { createBitmap(width, height, it) }
             newBitmap ?: return bitmap
 
             var minX = width

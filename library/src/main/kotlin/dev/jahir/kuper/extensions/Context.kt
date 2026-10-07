@@ -16,16 +16,6 @@ fun Context.isAppInstalled(packageName: String): Boolean = try {
     false
 }
 
-val Context.hasStoragePermission: Boolean
-    get() = try {
-        ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
-    } catch (e: Exception) {
-        false
-    }
-
 val Context.hasReadStoragePermission: Boolean
     get() = try {
         ContextCompat.checkSelfPermission(

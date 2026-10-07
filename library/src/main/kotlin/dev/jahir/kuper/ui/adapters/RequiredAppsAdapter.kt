@@ -19,7 +19,7 @@ class RequiredAppsAdapter(private val onClick: (RequiredApp) -> Unit) :
         }
 
     override fun onBindViewHolder(holder: RequiredAppViewHolder, position: Int) {
-        (holder as? RequiredAppViewHolder)?.bind(apps[position], onClick)
+        holder.bind(apps[position], onClick)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequiredAppViewHolder =

@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.core.graphics.drawable.toDrawable
@@ -50,6 +51,11 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
     }
 
     private fun requestStoragePermission() {
+        // Android 13+ never grants this permission, so read the wallpaper without it
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            componentsAdapter.wallpaper = wallpaper
+            return
+        }
         permissionsBuilder(Manifest.permission.READ_EXTERNAL_STORAGE)
             .build()
             .apply {
