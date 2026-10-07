@@ -100,6 +100,8 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // The fast scroller assumes rows of equal height. Full-width section headers break that,
+        // so its thumb would drift and dragging would land on the wrong component
         recyclerView?.setFastScrollEnabled(false)
         val columnsCount =
             context?.integer(dev.jahir.frames.R.integer.wallpapers_columns_count, 2) ?: 2
