@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
-import coil.load
+import coil3.load
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder
 import dev.jahir.frames.extensions.context.boolean
 import dev.jahir.frames.extensions.resources.lower
@@ -54,7 +54,10 @@ class ComponentViewHolder(itemView: View) : SectionedViewHolder(itemView) {
         } catch (_: Exception) {
         }
         preview?.load(File(rightPreview)) {
-            listener { _, _ -> progress?.gone() }
+            listener(
+                onError = { _, _ -> progress?.gone() },
+                onSuccess = { _, _ -> progress?.gone() },
+            )
         }
     }
 }
