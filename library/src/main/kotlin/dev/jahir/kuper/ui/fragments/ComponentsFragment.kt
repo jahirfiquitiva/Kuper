@@ -25,7 +25,6 @@ import dev.jahir.frames.extensions.resources.hasContent
 import dev.jahir.frames.extensions.resources.lower
 import dev.jahir.frames.extensions.utils.lazyViewModel
 import dev.jahir.frames.extensions.views.snackbar
-import dev.jahir.frames.ui.activities.base.BaseLicenseCheckerActivity.Companion.PLAY_STORE_LINK_PREFIX
 import dev.jahir.frames.ui.activities.base.BasePermissionsRequestActivity
 import dev.jahir.frames.ui.fragments.base.BaseFramesFragment
 import dev.jahir.kuper.R
@@ -34,6 +33,7 @@ import dev.jahir.kuper.data.KLWP_PACKAGE
 import dev.jahir.kuper.data.KWGT_PACKAGE
 import dev.jahir.kuper.data.models.Component
 import dev.jahir.kuper.data.viewmodels.ComponentsViewModel
+import dev.jahir.kuper.extensions.playStoreLinkWithReferrer
 import dev.jahir.kuper.extensions.userWallpaper
 import dev.jahir.kuper.ui.adapters.ComponentsAdapter
 import dev.jahir.kuper.ui.decorations.SectionedGridSpacingDecoration
@@ -169,7 +169,7 @@ class ComponentsFragment : BaseFramesFragment<Component>() {
                                     )
                                 )
                                 setPositiveButton(R.string.install) { _, _ ->
-                                    contxt.openLink(PLAY_STORE_LINK_PREFIX + itemPkg)
+                                    contxt.openLink(contxt.playStoreLinkWithReferrer(itemPkg, "component_dialog"))
                                 }
                                 setNegativeButton(android.R.string.cancel) { _, _ -> }
                             }?.show()
